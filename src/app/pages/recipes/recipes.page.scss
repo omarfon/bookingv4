@@ -1,0 +1,224 @@
+ion-header{
+    height: 200px!important;
+    background: #2E4C6D!important;
+    border-bottom-right-radius: 45px;
+    border-bottom-left-radius: 25px;
+    box-shadow:none ;
+    background: none;
+    margin-bottom:20px;
+  }
+  .toolbar-background{
+    background: #2E4C6D!important;
+  }
+.NombreBienvenida{
+  font-size: 1.4em;
+  color: #fff;
+  font-weight: 200;
+  width:70%;
+  margin-left:15%;
+}
+  ion-content{
+    margin-top:10px!important;
+    background: #EDF5FE!important;
+  }
+ .iconoReceta{
+   text-align: center;
+   border-right: .2px solid #00B6A3;
+  //  height: 90%;
+   h4{
+     color:grey;
+     text-align: center;
+     margin-top:10px;
+   }
+   ion-icon{
+     color:#007198;
+     font-size:3em;
+   }
+ }
+ .dia{
+   font-size:3.5em;
+   font-weight: 600;
+   color:#00B6A3;
+ }
+ .mes{
+
+   color:#00B6A3;
+   font-size:1.1em;
+ }
+ .cuadrados{
+  height: 60px;
+  background:#007198;
+  width:90%;
+  margin-left:5%;
+  color:#ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+    p{
+      // margin-top:-5px;
+      font-weight: 600;
+      font-size:.9em;
+      color:#ffffff;
+      margin-bottom:5px;
+    }
+    .cantidad{
+      color:#fff;
+      font-weight:400;
+      font-size:.9em;
+      margin-top:0;
+
+    }
+  }
+  .nombrePastilla{
+  color:#00B6A3;
+  font-size:.9em;
+  font-weight: 400;
+  margin-top:10px;
+  margin-bottom:5px;
+  text-align: right;
+  margin-right:10px;
+  }
+.cantidadDeDias, .inicio{
+  color:#444D4D;
+}
+.tituloDeLasTomas{
+  color:#00B6A3;
+  font-size:1.1em!important;
+  font-weight:400;
+  text-align: center;
+  margin-bottom:0;
+  margin-top:0;
+}
+img{
+   width:50px!important;
+   height: auto;
+   margin-top:10px;
+}
+.down{
+  margin-bottom: 10px;
+  // border-bottom: .5px solid #DFDFDF;
+}
+.contenedorDatos{
+  height: 120px;
+  margin-bottom:2em;
+}
+
+.especialidad{
+  margin-top:5px;
+  margin-right: 20px;
+  color:#007198;
+  font-weight: 400;
+  font-size:.9em;
+  margin-left:10px;
+}
+#cajaDatosCita{
+  margin-top:15px;
+}
+.resultado{
+  color:#4e4e4e;
+  font-weight: 200;
+  font-size:1.2em;
+  margin-top:-5px;
+  margin-left:10px;
+}
+.top{
+  margin-top:10px;
+}
+.doctor{
+  margin-top:10px;
+}
+.iconoReceta{
+  text-align: center;
+  border-right: .2px solid #444D4D;
+  height: 100px;
+  h4{
+    color:grey;
+    text-align: center;
+    margin-top:10px;
+  }
+  ion-icon{
+    color:#007198;
+    font-size:3em;
+  }
+}
+.dia{
+  margin-top:20px;
+  font-size:4em;
+  font-weight: 600;
+}
+.mes{
+  font-size:1.2em;
+  margin-top:-18px;
+  margin-bottom:20px!important;
+  text-align: center;
+  text-transform: capitalize;
+}
+.cantidadDeDias{
+  margin-top:20px;
+  font-size:3.5em;
+  font-weight: 600;
+  color:#BABCC2;
+  margin-top:0;
+  margin-bottom:0;
+}
+.textoAlternativo{
+    color:#BABCC2;
+    font-size:1em;
+    margin-top:0;
+    margin-bottom:0;
+    text-align: right;
+    margin-right: 10px;
+}
+.containerIconAndDays{
+    // border:1px solid #444D4D;
+    background: #e4e7e7;
+    text-align: center;
+    img{
+      text-shadow: 2px 2px #444D4D;
+    }
+    
+}
+.dias{
+  margin-top:-15px;
+  color:#BABCC2;
+}
+.inicio{
+  color:#444D4D;
+  text-align: right;
+  margin-top:10px;
+  margin-right: 10px;
+}
+ion-card-header{
+  padding:0 16px!important;
+  box-sizing: border-box!important;
+}
+.containerDatosPastilla{
+  box-sizing: border-box;
+  overflow:auto;
+}
+.textoVerReceta{
+  color:#007198;
+}
+
+mat-expansion-panel{
+  background: #edf2f7!important;
+  border-top-right-radius: 30px;
+}
+.norecipes{
+  font-size: 1.4em;
+  color:#287195;
+  text-align: center;
+  margin-top:20vh;
+}
+/* .containerCards{
+  margin-top:150px!important;
+} */
+ion-card{
+  border-radius: 20px!important;
+}
+.cantidadRecetas{
+    color:#fff;
+    font-size: 1.2em;
+}
+

@@ -1,0 +1,127 @@
+
+    .tituloOptions{
+       color:#20668B;
+       font-size:1.2em;
+       text-align: center;
+       width: 70%;
+       margin-left:15%;
+       margin-bottom:20px;
+       margin-top:20px;
+       font-weight: 200;
+    }
+    .contenedorCura{
+     /*  background-image: url(../assets/imgs/options/cura.png); */
+     background: #00ACA0;
+      background-repeat: no-repeat;
+      background-size:cover;
+      width: 90%;
+      margin-left:5%;
+      height: 220px;
+      border-top-right-radius: 30px;
+      margin-bottom:25px;
+      img{
+        width: 180px;
+        /* margin-left:-10px; */
+        }
+    }
+    .contenedorCuida{
+      background: #FB6E54;
+  /*  background-image: url(../assets/imgs/options/cuida.png); */
+      background-repeat: no-repeat;
+      background-size:cover;
+      width: 90%;
+      margin-left:5%;
+      height: 220px;
+      border-top-right-radius: 30px;
+        img{
+          width: 180px;
+      }
+    }
+    .tituloCura{
+      color:#ffffff;
+      font-size:1.3em;
+      margin-left:16px;
+      padding-top:16px!important;
+      font-weight: 600;
+    }
+    .parrafoCura{
+      color:#ffffff;
+      font-size:1.1em;
+      /* text-transform: italic; */
+      font-weight: 200;
+      text-align: left;
+      width: 90%;
+      margin-left:16px!important;
+      margin-top:10px;
+    }
+    .parrafoCuida{
+      color:#ffffff;
+      font-size:1.1em;
+      /* text-transform: italic; */
+      font-weight: 200;
+      text-align: left;
+      width: 90%;
+      margin-left:16px!important;
+      margin-top:10px;
+    }
+    .contenedorIrA{
+      width: 40%;
+      background: #20668B;
+      position: relative;
+      float: right;
+      border-top-left-radius: 15px;
+        p{
+          color:#fff;
+          font-size:1.1em;
+          text-align: right;
+          margin-right:16px;
+          
+        }
+    }
+    .contenedorIrACuida{
+      background: #20668B;
+      width:40%;
+      position: relative;
+      float: right;
+      border-top-left-radius: 15px;
+        p{
+          color:#fff;
+          font-size:1.1em;
+          text-align: right;
+          margin-right:16px;
+        }
+    }
+    .contenedorBoton{
+     height: 120px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    }
+    .contenedorLogo{
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo{
+      width: 80%;
+      margin-left:5%;
+      margin-top:10px;
+      margin-bottom: 10px;
+    }
+    .textoCura{
+      text-align: center;
+      color:#20668B;
+      font-size:.9em;
+      width: 90%;
+      margin-left:5%;
+    }
+    .textoCuida{
+      text-align: center;
+      color:#20668B;
+      font-size:.9em;
+      width: 90%;
+      margin-left:5%;
+    }
+  
+  

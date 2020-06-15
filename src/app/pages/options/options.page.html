@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-title>Cuida / Cura</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <h3 class="tituloOptions">Escoge una de las opciones para poder listar los médicos</h3>
+  <ion-row>
+    <ion-col size="12">
+      <div class="contenedorCura"
+            (click)="goToCardPage()">
+      <!-- <p class="tituloCura">Aviva Cura</p> -->
+      <img  class="logo cura" src="assets/imgs/curaBlanco.png" alt="">
+      <p class="parrafoCura">Atendemos tus problemas de salud y urgencias de una manera integral y eficiente para que vuelvas a estar sano lo antes posible.</p>
+      <div class="contenedorIrA">
+        <p>Registrar Cita</p>
+      </div>
+      </div>
+    </ion-col>
+    <ion-col size="12">
+      <div class="contenedorCuida"
+           (click)="goToCardCuidaPage()">
+           <!-- <p class="tituloCura">Aviva Cuida</p> -->
+           <img  class="logo cuida" src="assets/imgs/cuidaBlanco.png" alt="">
+           <p class="parrafoCuida">Nos esforzamos por mantenerte sano mediante controles y chequeos con especialistas, en un ambiente exclusivo para gente que está sana y quiere mantenerse sana.</p>
+           <div class="contenedorIrACuida">
+             <p>Registrar Cita</p>
+            </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

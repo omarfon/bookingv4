@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mis Recetas</ion-title>
+  </ion-toolbar>
+  <p margin class="NombreBienvenida">Hola {{nameUser}}</p> 
+  <p  margin class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas</p>
+  
+</ion-header>
+<ion-content>
+    <div class="containerCards" *ngIf="recipes; else norecipes">
+      <ion-card *ngFor="let recipe of recipes" >
+          <ion-row>
+            <ion-col size="4">
+              <div class="iconoReceta">
+                <p class="dia">{{recipe.prescripciones[0].fecha_encuentro | date:'dd'}}</p>
+                <p class="mes">{{recipe.prescripciones[0].inicio_prescripcion | date:'MMMM'}}</p>
+              </div>
+            </ion-col>
+            <ion-col size="8" id="cajaDatosCita">
+              <!-- <p class="especialidad doctor">Doctor:</p> -->
+              <p class="resultado top">{{recipe.prescripciones[0].nombre_personal}} {{recipe.prescripciones[0].apellidop_personal}} {{recipe.prescripciones[0].apellidom_personal}}</p>
+              <p class="especialidad"> Medicinas:</p> 
+              <p class="resultado">{{recipe.prescripciones.length}} Medicina</p>
+            </ion-col>
+          </ion-row>
+          <mat-accordion class="accordionNutrition">
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <p class="textoVerReceta">ver receta</p> 
+                  </mat-panel-title>
+                  <!-- <mat-panel-description>
+                        <p class="nutritionTitle">
+                          leer mas
+                        </p>
+                    </mat-panel-description> -->
+              </mat-expansion-panel-header>
+              
+                <div *ngFor="let rec of recipe.prescripciones">
+                    <ion-row>
+                        <ion-col size="3"
+                              class="containerIconAndDays">
+                            <img src="assets/imgs/recipes/{{rec.formasfar_pk}}.png" alt="">
+                            <p class="cantidadDeDias">{{rec.dias_duracion_prescripcion}}</p>
+                            <p class="dias">días de tratamiento</p>
+                        </ion-col>
+                        <ion-col size="9"
+                                 class="containerDatosPastilla">
+                            <h3 class="nombrePastilla"
+                               *ngIf="rec.nombre_generico">
+                               {{rec.nombre_generico}}
+                        </h3>
+                            <p class="textoAlternativo"
+                            *ngIf="rec.marca_comercial">
+                            o puedes encontrarlo como:
+                            </p>
+                            <p class="nombrePastilla"
+                              *ngIf="rec.marca_comercial">
+                              {{rec.marca_comercial}}
+                            </p>
+                              <p class="inicio">Inicio: {{rec.inicio_prescripcion | date: "dd MMMM yyyy"}}</p>
+                              <p class="inicio">Fin: {{rec.fin_prescripcion | date: "dd MMMM yyyy" }}</p>
+                        </ion-col>
+                      </ion-row>
+    
+              <div *ngIf="rec && rec.cada_x_horas == 8"
+                  class="down">
+              <h4 class="tituloDeLasTomas"> tomas de 3 veces por día</h4>
+              <ion-row padding>
+                <ion-col class="cuadrados">
+                  <p> 6-9 am</p>
+                  <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                  </ion-col>
+                <ion-col class="cuadrados">
+                  <p> 2-4 pm</p>
+                  <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                </ion-col>
+                <ion-col class="cuadrados">
+                  <p>10-12 m</p>
+                  <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                </ion-col>
+              </ion-row>
+          </div>
+    
+          <div *ngIf="rec && rec.cada_x_horas == 12"
+                class="down">
+            <p class="tituloDeLasTomas"> tomas de 2 veces por día</p>
+            <ion-row padding>
+              <ion-col class="cuadrados">
+                <p> 6-7 am</p>
+                <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+              </ion-col>
+              <ion-col class="cuadrados">
+                <p>6-7 pm</p>
+                <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+              </ion-col>
+            </ion-row>
+          </div>
+    
+          <div *ngIf="rec && rec.cada_x_horas == 6"
+          class="down">
+              <p class="tituloDeLasTomas"> tomas de 4 veces por día</p>
+              <ion-row padding>
+                <ion-col class="cuadrados">
+                  <p> 6-7 am</p>
+                  <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                </ion-col>
+                <ion-col class="cuadrados">
+                    <p> 12-1 pm</p>
+                    <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                  </ion-col>
+                  <ion-col class="cuadrados">
+                      <p> 6-7 pm</p>
+                      <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                    </ion-col>
+                <ion-col class="cuadrados">
+                  <p>12-1 m</p>
+                  <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                </ion-col>
+              </ion-row>
+            </div>
+    
+            <div *ngIf="rec && rec.cada_x_horas == 24"
+            class="down">
+                <p class="tituloDeLasTomas"> toma de 1 vez por día</p>
+                <ion-row padding>
+                  <ion-col class="cuadrados">
+                    <p> 6-7 am</p>
+                    <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                  </ion-col>
+    
+                </ion-row>
+              </div>
+  
+              <div *ngIf="rec && rec.cada_x_horas == 2"
+            class="down">
+                <p class="tituloDeLasTomas"> toma de 12 veces por día</p>
+                <ion-row padding>
+                  <ion-col class="cuadrados">
+                    <p> 6-7 am</p>
+                    <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                  </ion-col>
+                  <ion-col class="cuadrados">
+                      <p> 8-9 pm</p>
+                      <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                    </ion-col>
+                    <ion-col class="cuadrados">
+                        <p> 10-11 pm</p>
+                        <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                      </ion-col>
+                  <ion-col class="cuadrados">
+                    <p>12-1 m</p>
+                    <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                  </ion-col>
+                  <ion-col class="cuadrados">
+                    <p>2-3 m</p>
+                    <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                  </ion-col>
+                </ion-row>
+              </div>
+                </div>
+                  
+            </mat-expansion-panel>
+          </mat-accordion> 
+      </ion-card>
+    </div>
+    <ng-template #norecipes> 
+        <p class="norecipes"> aun no tienes recetas....</p> 
+      </ng-template>
+</ion-content>

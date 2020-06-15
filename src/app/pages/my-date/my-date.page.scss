@@ -1,0 +1,91 @@
+    ion-content{
+        margin-top:30vh;
+        height: 70vh!important;
+        border-top-right-radius: 90px;
+    }
+    #content {
+        position: relative;
+        margin-top: 15%;
+        background-color: white;
+        padding-top: 2%;
+    }
+    #profile-info {
+        position: absolute;
+        top: -85px;
+        width: 100%;
+        z-index: 2;
+        height: auto;
+        text-align: center;
+    }
+    #profile-description {
+        font-size: 15px;
+        color: #888;
+    }
+    #profile-image {
+        display: block;
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    margin: 30px auto 0;
+    text-align: center;
+        // box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+    }
+    .nombreDoctor {
+        margin-top:40px;
+        margin-bottom: 40px;
+        color: #888;
+        font-weight: 600;
+        width: 80%;
+        margin-left: 10%;
+        font-size: 1.5em;
+        text-transform: capitalize;
+    }
+    ion-label {
+        color: #4A4A4A;
+        font-size: .9em;
+        font-weight: 300;
+    }
+    .blue {
+        color: #062F51;
+        text-align: left;
+        font-size: .9em;
+        font-weight: 400;
+        text-transform: capitalize;
+    }
+    ion-navbar ion-icon{
+      color:#fff;
+    }
+    ion-icon {
+        color: #A7A9AB;
+        font-size: .7em;
+    }
+    .toolbar-md-primary .bar-button-default-md {
+        color: #fff!important;
+    }
+    .toolbar-title,
+    .toolbar-title-md {
+        font-size: 1.3em!important;
+        // text-align: center;
+        font-weight: 400;
+    }
+    .item-inner {
+        margin-left: 5px!important;
+    }
+    .heightNoventa {
+        margin-right: 0!important;
+    }
+   .segment-md-secondary{
+     color:#fff!important;
+   }
+   ion-segment-button .segment-activated{
+     color:#fff!important;
+   }
+   .volverButton{
+       font-size:2em;
+       font-weight:200!important;
+       color:#fff;
+   }
+   .volverTexto{
+       color:#fff;
+       margin-left:15px!important;
+   }

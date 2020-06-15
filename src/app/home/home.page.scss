@@ -1,27 +1,313 @@
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  .down30 {
+      padding-top: 20%;
+  }
+   ion-content {
+      --background: #EDEDF0!important;
+   }
+  .nextDay {
+      border-radius: 0;
+      color: grey;
+      ion-icon {
+          color: grey;
+      }
+  }
+  .history {
+      border-radius: 0;
+      color: grey;
+      ion-icon {
+          color: grey;
+      }
+  }
+  .recipes {
+      border-radius: 0;
+      border-left: 15px solid #92DCE8;
+      color: grey;
+      ion-icon {
+          color: grey;
+      }
+  }
+  .principal {
+      /* background-image: url(../../assets/imgs/reservaButton.png);
+      background-size: cover;
+      z-index:-2; */
+      margin-top:100px!important;
+      background: #0c7b93;
+      color: #fff;
+      border-radius: none!important;
+      border-top-right-radius: 30px;
+      height: 80px;
+      ion-icon {
+          color: #fff;
+      }
+      ion-item {
+          margin-top: 10px;
+          font-size: 1.1em;
+      }
+      .card-ios {
+          --background: #00B6A3!important;
+          border-radius: 0!important;
+          height: 90px;
+      }
+      .item-ios {
+          --background: transparent;
+      }
+      .item-md {
+          --background: transparent;
+      }
+  }
+  .containerNoticias{
+      margin-bottom:30px!important;
+  }
+  .reserve {
+      color: #fff;
+      font-size: 1.3em;
+  }
+  .font11 {
+      font-size: 1.3em;
+      color: #A7A9AC;
+  }
+  mat-expansion-panel-header ion-col {
+      display: flex;
+      align-items: center;
+      // justify-content: center;
+      ion-icon {
+          color: #00B6A3;
+          font-size: 1.3em;
+      }
+  }
+  .mat-expansion-panel-content {
+      --background: #F3F6F6!important;
+  }
+  mat-expansion-panel-header {
+      height: 70px!important;
+      --background: #fff;
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+  }
+  mat-expansion-panel {
+      margin-bottom: 15px;
+      ion-icon {
+          font-size: 1.5em!important;
+      }
+  }
+  .mat-expansion-indicator {
+      color: #A7A9AC!important;
+  }
+  img {
+      width: 90px;
+      border-radius: 10%;
+  }
+  .down10 {
+      padding-top: 30px!important;
+  }
+  .tituloCitas {
+      text-align: right;
+      color: #287195!important;
+      font-size:.9em;
+  }
+  .especialidad {
+      text-align: right;
+      color: #00B6A3;
+      font-size: .8em;
+      margin-top: -5px;
+  }
+  .sede,
+  .day,
+  .hour {
+      text-align: right;
+      color: #A7A9AC;
+      font-size: .9em;
+      margin-top: -8px;
+  }
+  .textoRecetas {
+      text-align: center;
+      color: #287195;
+      width: 80%;
+      margin-left: 10%;
+      padding-top: 20px;
+  }
+  .logueado{
+      font-size:.8em;
+      // text-transform:lowercase;
+      margin-right:10px;
+ /*      background:#00B6A3; */
+      padding:5px;
+      border-radius:10px;
+  }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+  .contenedorIcono img{
+    width:40px;
+  }
+  .contenedorNombrePastilla {
+    text-align:right;
+    p{
+      color:#A7A9AC;
+      font-size:1em;
+      text-align:right;
+    }
+  }
+  .nombreMedicamento{
+    font-weight: 900;
+    color:#00B6A3;
+  }
+  .vecesXdia{
+    color:#287195;
+    font-weight: 500;
+    font-size:.9em;
+  }
+  .contenedorReceta{
+    .item-md{
+      background:transparent!important;
+    }
+  }
+  .nombreDepe{
+    text-align: right;
+    --background: #00B6A3;
+    color:#fff;
+    padding-top:.2em;
+    padding-bottom:.2em;
+    padding-right: 16px;
+  }
+  .inicioDePrescripcion{
+    color:#287195;
+    font-size: .8em;
+  }
+  .diasFaltantes{
+    color:#287195;
+    font-size:.8em;
+    font-weight: 400;
+  }
+  .contenedor{
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 20px;
+  }
+  .cura{
+    --background: #287195;
+  }
+  .cuida{
+    --background: #00ACA0;
+  }
 
-  color: #8c8c8c;
+  /* estilos para IOS */
+  .contenedorDatos{
+      height: 130px;
+      border-bottom-left-radius: 15px!important;
+      border-bottom-right-radius: 15px!important;
+      background: #09a6ce;
+      width: 100%;
+      margin:0!important;
+  }
 
-  margin: 0;
-}
+  ion-nav{
+      --background: transparent!important;
+  }
+  .card-ios{
+      margin:0!important;
+      width:100%!important;
+  }
+/*     ion-card{
+      background: transparent!important;
+  } */
+  .containerRounded{
+      height: 100px;
+      width: 130px;
+      border-radius:10px;
+      --background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+          width:40px;
+       /*    margin-left:calc(50% - 25px);
+          margin-top:15%; */
+      }
+  }
+/*     ion-slide{
+  } */
+  .swiper-container, ion-slides{
+      height: 180px!important;
+  }
+  .textoCard{
+      margin-top:-5px;
+      font-size:.7em;
+  }
+  .containerOptions{
+      width:150px!important;
+      height: 180px!important;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .usuarioImg{
+      height: 50px;
+      width:50px;
+      border-radius: 50%;
+      --background: #fff;
+      border: 1px dashed #b64900;
+      
+  }
+  .containerLogo{
+      img{
+          width:40px;
+          margin-left: 30px;
 
-#container a {
-  text-decoration: none;
-}
+      }
+      margin-bottom:30px;
+  }
+  .nombreUsuario{
+      color:#fff;
+      font-size:1.5em;
+      text-transform: capitalize;
+      font-weight: 400;
+  }
+   .containerDatos{
+      margin-left:20px;
+  }
+  .containerIcon{
+      text-align: center;
+      ion-icon{
+          color:#fff;
+          font-size:1.8em!important;
+          margin-top:10px;
+      }
+  }
+  .cajaContenedora{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  .tituloSliderOpciones{
+      font-size:1.2em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color:#7a7c7c;
+      margin-top:20px!important;
+      margin-left:20px;
+      margin-bottom:10px!important;
+  }
+  .NotiSobreContainer{
+      width:30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top:20px;
+      left: 15px;
+  }
+  ion-badge{
+      position: absolute;
+      float: right!important;
+      margin-left:50px;
+      top:20px;
+  }
+  .padding{
+      padding:20px;
+  }
+

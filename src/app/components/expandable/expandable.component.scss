@@ -1,0 +1,15 @@
+expandable {
+    .expand-wrapper {
+        // height: 0;
+        transition: 0.3s linear;
+/*         background:#519DB9; */
+    }
+    .collapsed {
+        height: 0 !important;
+        //    position: absolute;
+        //    top:20px;
+    }
+    .blue {
+        background: red;
+    }
+}
