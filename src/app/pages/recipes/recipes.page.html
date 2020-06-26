@@ -1,10 +1,12 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Mis Recetas</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+  </ion-buttons>
+    <ion-title>Recetas</ion-title>
   </ion-toolbar>
   <p margin class="NombreBienvenida">Hola {{nameUser}}</p> 
-  <p  margin class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas</p>
-  
+  <p  margin class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas de consulta presencial</p>
 </ion-header>
 <ion-content>
     <div class="containerCards" *ngIf="recipes; else norecipes">
@@ -20,7 +22,8 @@
               <!-- <p class="especialidad doctor">Doctor:</p> -->
               <p class="resultado top">{{recipe.prescripciones[0].nombre_personal}} {{recipe.prescripciones[0].apellidop_personal}} {{recipe.prescripciones[0].apellidom_personal}}</p>
               <p class="especialidad"> Medicinas:</p> 
-              <p class="resultado">{{recipe.prescripciones.length}} Medicina</p>
+              <p class="medicina" *ngIf="recipe.prescripciones.length == 1">{{recipe.prescripciones.length}} medicamento</p>
+              <p class="medicina" *ngIf="recipe.prescripciones.length > 1">{{recipe.prescripciones.length}} medicamentos</p>
             </ion-col>
           </ion-row>
           <mat-accordion class="accordionNutrition">
@@ -37,10 +40,12 @@
               </mat-expansion-panel-header>
               
                 <div *ngFor="let rec of recipe.prescripciones">
-                    <ion-row>
+                    <ion-row class="containerDatosBasicos">
                         <ion-col size="3"
                               class="containerIconAndDays">
-                            <img src="assets/imgs/recipes/{{rec.formasfar_pk}}.png" alt="">
+                              <div class="containerImgIcon">
+                                <img src="assets/imgs/recipes/{{rec.formasfar_pk}}.png" alt="">
+                              </div>
                             <p class="cantidadDeDias">{{rec.dias_duracion_prescripcion}}</p>
                             <p class="dias">días de tratamiento</p>
                         </ion-col>
@@ -54,12 +59,12 @@
                             *ngIf="rec.marca_comercial">
                             o puedes encontrarlo como:
                             </p>
-                            <p class="nombrePastilla"
+                            <p class="nombrePastillaAlterna"
                               *ngIf="rec.marca_comercial">
                               {{rec.marca_comercial}}
                             </p>
-                              <p class="inicio">Inicio: {{rec.inicio_prescripcion | date: "dd MMMM yyyy"}}</p>
-                              <p class="inicio">Fin: {{rec.fin_prescripcion | date: "dd MMMM yyyy" }}</p>
+                              <p class="inicio"><b>Inicio:</b> {{rec.inicio_prescripcion | date: "dd MMMM yyyy"}}</p>
+                              <p class="inicio"><b>Fin:</b> {{rec.fin_prescripcion | date: "dd MMMM yyyy" }}</p>
                         </ion-col>
                       </ion-row>
     

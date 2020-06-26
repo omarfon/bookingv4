@@ -4,9 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RecipePageRoutingModule } from './recipe-routing.module';
-
 import { RecipePage } from './recipe.page';
+import { RecipePageRoutingModule } from './recipe-routing.module';
 
 
 @NgModule({
@@ -14,8 +13,7 @@ import { RecipePage } from './recipe.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RecipePageRoutingModule,
-    
+    RecipePageRoutingModule
   ],
   declarations: [RecipePage]
 })

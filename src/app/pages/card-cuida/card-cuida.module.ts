@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CardCuidaPageRoutingModule } from './card-cuida-routing.module';
 
 import { CardCuidaPage } from './card-cuida.page';
+import { CardCuidaPageRoutingModule } from './card-cuida-routing.module';
+
 
 @NgModule({
   imports: [

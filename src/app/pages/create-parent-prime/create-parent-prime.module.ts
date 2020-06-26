@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +14,8 @@ import { CreateParentPrimePage } from './create-parent-prime.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateParentPrimePageRoutingModule
+    CreateParentPrimePageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [CreateParentPrimePage]
 })

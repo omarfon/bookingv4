@@ -58,7 +58,7 @@ export class CardCuidaPage implements OnInit {
   public conAvailables;
   public doctorList;
   public disponibles: boolean = true;
-  private SERVERImage = API_IMAGES;
+  public SERVERImage = API_IMAGES;
   public doctorsF;
   horasConsulta: any;
   horasTele: any;

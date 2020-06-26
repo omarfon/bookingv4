@@ -17,8 +17,8 @@ declare var Culqi: any;
 export class PayPage implements OnInit {
   myForm: FormGroup;
   currentAppointment = null;
-  private subida;
-  private hour;
+  public subida;
+  public hour;
   public price;
   public pago;
   public depe;

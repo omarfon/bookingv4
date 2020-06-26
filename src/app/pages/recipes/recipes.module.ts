@@ -4,18 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RecipesPageRoutingModule } from './recipes-routing.module';
 
 import { RecipesPage } from './recipes.page';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { RecipesPageRoutingModule } from './recipes-routing.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RecipesPageRoutingModule,
-    MatExpansionModule
+    MatExpansionModule,
+    RecipesPageRoutingModule
   ],
   declarations: [RecipesPage]
 })

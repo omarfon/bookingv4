@@ -22,9 +22,9 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public menu: MenuController,
     public autho: AuthorizationPublicService,
     public router: Router,
+    public menu: MenuController
   ) {
     this.sideMenu();
     this.initializeApp();
@@ -49,17 +49,17 @@ export class AppComponent {
       },
       {
         title : "Mis Citas",
-        url   : "/citas-pendientes",
+        url   : "/citas-dates",
         icon  : "alarm"
       },
       {
         title : "Reservar",
-        url   : "/card",
+        url   : "/options",
         icon  : "analytics"
       },
       {
         title : "Recetas",
-        url   : "/recetas",
+        url   : "/recipes",
         icon  : "clipboard"
       }/* ,
       {

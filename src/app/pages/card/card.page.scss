@@ -42,7 +42,9 @@
     }
     .doctor {
         font-weight: 200;
-        color: green;
+        width:90%;
+        margin-left:5%;
+        color: #00B6A3;
         font-size: 1.5em;
         text-align: right;
         margin-right: 15px;
@@ -264,7 +266,7 @@
         padding-top:15px!important;
     }
      .slide-zoom .ng-star-inserted{
-        height: 35px;
+        height: 40px;
     }
     .turno{
         color:#fff;
@@ -328,4 +330,20 @@
     .contenedorHoras{
         height: 50px;
     }
-
+    .dia{
+        margin-top:10px;
+        width:30px;
+        height: 30px;
+        font-size: .8em;
+    }
+    .diasDoctor{
+        font-size: .9em;
+    }
+    mat-expansion-panel-header{
+        ion-slides{
+            height: 100px;
+        }
+    }
+    .horariosDisponibles{
+        width:100%;
+    }

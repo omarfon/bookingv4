@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar traslucent color="transparent">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button (click)="closeSession()"></ion-back-button>
     </ion-buttons> 
   </ion-toolbar>
 </ion-header> 
@@ -21,7 +21,7 @@
         <ion-row>
           <ion-col>
             <ion-button fill="clear"
-                        color="light">
+                        color="red">
               <ion-icon name="mic-off"
                         (click)="mute()"></ion-icon>
             </ion-button>

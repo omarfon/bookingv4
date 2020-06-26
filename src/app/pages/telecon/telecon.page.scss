@@ -1,0 +1,43 @@
+ion-card{
+    height:auto;
+}
+ion-card-title{
+    color:#1b6ca8;
+    margin-top:10px;
+    margin-left: 10px;
+    font-weight: 400;
+}
+.fecha{
+    text-align: right;
+    padding-bottom:20px!important;
+    margin-left: 10px;
+}
+.anamnesis{
+    margin-left: 10px;
+}
+.title{
+    background:#79bbee;
+    color:#000;
+}
+.final{
+    border-bottom:2px solid #1b6ca8;
+}
+.inicio{
+    background: #1b6ca8;
+    color:#fff;
+    padding: .5em .5em;
+    border-radius:10px;
+}
+mat-expansion-panel{
+    background: #edf2f7!important;
+    border-top-right-radius: 30px;
+  }
+  .titlePrincipal{
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: 400;
+      margin-top:10px;
+  }
+  .center{
+      text-align: center;
+  }

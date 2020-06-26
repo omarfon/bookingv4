@@ -23,6 +23,9 @@ import { environment } from 'src/environments/environment';
 import { NgxAgoraModule } from 'ngx-agora';
 registerLocaleData(localeEs, 'es');
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ComponentsModule } from './components/components.module';
 
 
 
@@ -32,10 +35,13 @@ registerLocaleData(localeEs, 'es');
   imports: [BrowserModule, IonicModule.forRoot(), 
     AppRoutingModule, 
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
+    ComponentsModule,
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
     ],
   providers: [

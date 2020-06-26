@@ -31,7 +31,8 @@
       /* background-image: url(../../assets/imgs/reservaButton.png);
       background-size: cover;
       z-index:-2; */
-      margin-top:100px!important;
+      /* margin-top:20px!important; */
+      border-top-right-radius: 45px!important;
       background: #0c7b93;
       color: #fff;
       border-radius: none!important;
@@ -212,15 +213,15 @@
       background: transparent!important;
   } */
   .containerRounded{
-      height: 100px;
-      width: 130px;
-      border-radius:10px;
+      height: 120px;
+      width: 150px;
+      border-radius:15px;
       --background: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       img{
-          width:40px;
+          width:60px;
        /*    margin-left:calc(50% - 25px);
           margin-top:15%; */
       }
@@ -232,7 +233,7 @@
   }
   .textoCard{
       margin-top:-5px;
-      font-size:.7em;
+      font-size:.9em;
   }
   .containerOptions{
       width:150px!important;
@@ -302,6 +303,8 @@
       left: 15px;
   }
   ion-badge{
+      width:25px;
+      height: 25px;
       position: absolute;
       float: right!important;
       margin-left:50px;

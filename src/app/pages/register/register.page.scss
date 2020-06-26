@@ -8,10 +8,10 @@
       padding-top:20px;
     }
     ion-content{
-      background:#d4d7dd!important;
+      --background:#d4d7dd!important;
     }
     ion-item {
-      background: transparent!important;
+      --background: transparent!important;
     }
     ion-input{
       background:#fff;
@@ -22,7 +22,7 @@
     .contenedorTextoInicial{
       background: #1BABA0;
       height: 70px;
-      margin-top:-16px!important;
+      /* margin-top:-16px!important; */
       color:#fff;
      /*  border-bottom-left-radius: 15px; */
       border-bottom-right-radius: 45px;
@@ -31,11 +31,14 @@
       font-size:.8em;
     }
     .formulario{
-      margin-top:-10px!important;
+      margin-top:5px!important;
     }
     .alto50{
       height: 50px;
       margin-top:15px;
+      --background:#1BABA0;
+      width:90%;
+      margin-left: 5%;
     }
     .bajas{
       text-transform: lowercase;

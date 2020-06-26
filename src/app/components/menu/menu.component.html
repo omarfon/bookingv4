@@ -1,0 +1,32 @@
+<ion-menu side="start" menuId="first" contentId="principal" >
+  <ion-header>
+    <ion-toolbar color="transparent">
+      <ion-title>Aviva Booking</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list lines="none">
+      <ion-item button (click)="goToHome()">
+        <ion-icon name="home" slot="start"></ion-icon>
+        Home</ion-item>
+      <ion-item button (click)="goToTele()">
+        <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
+        Resumen Teleconsulta</ion-item>
+      <ion-item button (click)="goToReserve()">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        Reservar cita</ion-item>
+      <ion-item button (click)="goToMydates()">
+        <ion-icon name="medkit-outline" slot="start"></ion-icon>
+        Citas Pendientes</ion-item>
+      <ion-item button (click)="goToRecipes()">
+        <ion-icon name="reader-outline" slot="start"></ion-icon>
+        Recetas</ion-item>
+      <ion-item button (click)="goToMyparents()">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        Dependientes</ion-item>
+      <ion-item button (click)="closeSesion()">
+        <ion-icon name="close-outline" slot="start"></ion-icon>
+        Cerrar Sesión</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

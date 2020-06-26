@@ -8,8 +8,10 @@ import { AuthorizationPublicService } from '../services/authorization-public.ser
 import { DependensService } from '../services/dependens.service';
 import { RecipesService } from '../services/recipes.service';
 
+
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { GetDatesTeleService } from '../services/get-dates-tele.service';
 
 
 
@@ -26,16 +28,16 @@ export class HomePage implements OnInit {
   cardthree: any = [];
   itemExpanded: boolean = true;
   itemExpandHeight: number = 100;
-  private citapendiente;
-  private lastAppointment;
+  public citapendiente;
+  public lastAppointment;
 
   public tasks : any =[] ;
   public _tasks;
   public ensenar;
   public nombre;
   public recipes;
-  private recipendiente;
-  private lastRecipe;
+  public recipendiente;
+  public lastRecipe;
 
   public misCitas;
   public depesCitas ;
@@ -49,14 +51,17 @@ export class HomePage implements OnInit {
     slidesPerView: 1,
     speed: 400
     }
+  public consultas;
+  public cantConsultas;
 
   constructor(
-    private autho : AuthorizationPublicService,
-    private alertCtrl: AlertController,
-    private recipesPvr: RecipesService,
+    public autho : AuthorizationPublicService,
+    public alertCtrl: AlertController,
+    public recipesPvr: RecipesService,
     public appointmentProvider : AppoinmentService,
     public dependensProvider: DependensService,
-    public router: Router) {}
+    public router: Router,
+    public tcs: GetDatesTeleService) {}
 
      ngOnInit() {
       let nombrePatient = localStorage.getItem('patientName');
@@ -68,6 +73,7 @@ export class HomePage implements OnInit {
     console.log("seguir normal es invitado")
   }
   this.getDependens();
+  this.getDatesTele();
   const authorization = localStorage.getItem('authorization');
   if( !authorization ){
     this.autho.getKey().subscribe((data:any) =>{
@@ -87,6 +93,36 @@ export class HomePage implements OnInit {
         this.obtenerUltimaFecha()
       }
   }
+    }
+    ionViewWillEnter(){
+      let nombrePatient = localStorage.getItem('patientName');
+      let separador = " ";
+      if(nombrePatient){
+        /* this.nombre = nombrePatient.split(separador ,  1); */
+        this.nombre = nombrePatient;
+      }else{
+        console.log("seguir normal es invitado")
+      }
+      this.getDependens();
+      const authorization = localStorage.getItem('authorization');
+      if( !authorization ){
+        this.autho.getKey().subscribe((data:any) =>{
+          localStorage.setItem('authorization', data.authorization);
+          // localStorage.setItem('idTokenUser', data.patientId);
+          localStorage.setItem('role', data.role);
+          if(data.role == 'public'){
+          }else{
+            this.obtenerUltimaFecha()
+          }
+        },(err:any)=>{
+              this.nored();
+        });
+      }else{
+        let rol = localStorage.getItem("role");
+        if(rol && rol == 'user' ){
+            this.obtenerUltimaFecha()
+          }
+      }
     }
 
     async nored(){
@@ -187,6 +223,9 @@ goToOptions(){
   goToAppointments(){
     this.router.navigate(['my-dates']);
   }
+goToTele(){
+  this.router.navigate(['telecon'])
+}
 
   goToDates(){
     console.log('ir a mis recetas');
@@ -199,6 +238,17 @@ goToOptions(){
   }
   goToData(){
     this.router.navigate(['profile']);
+  }
+  getDatesTele(){
+    let idUser = localStorage.getItem('idTokenUser');
+    this.tcs.getDatesConsulta(idUser).subscribe(data => {
+      this.consultas = data;
+      if(this.consultas.length > 0){
+          this.cantConsultas = this.consultas.length;
+      }else{
+        this.cantConsultas = 0;
+      }
+    })
   }
 
 }

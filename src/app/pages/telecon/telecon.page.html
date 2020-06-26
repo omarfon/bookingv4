@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+  </ion-buttons>
+    <ion-title>telecon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="center">
+    <h3 class="titlePrincipal">Consultas Teleorientación</h3>
+  </div>
+  <ion-row>
+    <ion-col size="12">
+      <ion-card *ngFor="let c of consultas" class="padding">
+        <ion-card-title >
+            <h3>{{c.nombreUsuario}} {{c.apellidopUsuario}} {{c.apellidomUsuario}}</h3>
+        </ion-card-title>
+        <ion-card-body>
+          <ion-row>
+            <ion-col size="12">
+             <p class="anamnesis"> {{c.datosConsulta.anamnesis}}</p>
+            </ion-col>
+            <ion-col size="12"></ion-col>
+            <ion-col size="11">
+              <b class="fecha">{{c.datetime | date:'short'}}</b>
+            </ion-col>
+              <ion-col size="12">
+                <mat-accordion  *ngIf="c.datosConsulta.medicines">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        receta
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let m of c.datosConsulta.medicines">
+                      <ion-row>
+                        <ion-col size="12">
+                          <p class="title inicio">Nombre Generico</p>
+                          {{m.activeprinciple}}
+                        </ion-col>
+                        <ion-col size="12">
+                          <p class="title">Marca</p>
+                          {{m.marc}}
+                        </ion-col>
+                        <ion-col size="4">
+                          <p class="title">Cantidad</p>
+                          {{m.dosis}}
+                        </ion-col>
+                        <ion-col size="4">
+                          <p class="title">cada</p>
+                          {{m.frecuencia}}
+                        </ion-col>
+                        <ion-col size="4">
+                          <p class="title">Dias</p>
+                          {{m.duration}}
+                        </ion-col>
+                        <ion-col size="12">
+                          <p class="title">
+                            indicaciones
+                          </p>
+                          {{m.anotations}}
+                        </ion-col>
+                      </ion-row>
+                      <hr>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </ion-col>
+         
+          </ion-row> 
+        </ion-card-body>
+      </ion-card>
+      <p *ngIf="consultas == []" class="sinConsultas">
+        Aún no tienes ninguna cita realizada por Teleorientación, cuando tengas alguna aparecera aquí...
+      </p>
+    </ion-col>
+  </ion-row> 
+</ion-content>

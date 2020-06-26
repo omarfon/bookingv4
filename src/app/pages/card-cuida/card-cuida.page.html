@@ -1,10 +1,8 @@
 <ion-header>
   <ion-toolbar hideBackButton="true" persistent="true">
     <ion-buttons slot="start">
-      <ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+      <ion-menu-button menu="first"></ion-menu-button>
+  </ion-buttons>
       <ion-title>
         <img
         class="logoCuida"
@@ -111,23 +109,24 @@
                                           </ion-slides>
                               </mat-expansion-panel-header>
                               <div class="row">
-                                        <div class="horariosDisponibles">
-                                              <ion-row>
-                                                  <div *ngFor="let hora of horas" class="contenedorHoras">
-                                                      <ion-col size="3" *ngIf="hora.hour" (click)="goToFinancer(doctor,hora)" class="hora">
-                                                        <div class="horas">
-                                                          <p>{{hora.hour | slice:0:5}}</p>
-                                                        </div>
-                                                        </ion-col>
-            
-                                                        <div *ngIf="!horas"
-                                                             class="sinHorarioDisponible">
-                                                             no hay horarios disponibles
-                                                        </div>
-                                                    </div>
-                                              </ion-row>
-                                          </div>
-                                </div>
+                                <div class="horariosDisponibles">
+                                          <ion-col size="12">
+                                            <ion-row>
+                                              <ion-col size="3"   *ngFor="let hora of horas" class="contenedorHoras" (click)="goToFinancer(doctor,hora)" class="hora">
+                                                <div class="horas" *ngIf="hora.hour">
+                                                  <p>{{hora.hour | slice:0:5}}</p>
+                                                </div>
+                                                </ion-col>
+                                            </ion-row> 
+    
+                                                <div *ngIf="!horas"
+                                                     class="sinHorarioDisponible">
+                                                     no hay horarios disponibles
+                                                </div>
+                                              </ion-col>
+                                     
+                                  </div>
+                        </div>
                       </mat-expansion-panel> 
                   </mat-accordion>  
                     </ion-col>

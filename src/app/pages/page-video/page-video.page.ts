@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppoinmentService } from 'src/app/services/appoinment.service';
 import { NavController } from '@ionic/angular';
 import * as moment from 'moment';
+import { PermissionsVideoService } from 'src/app/services/permissions-video.service';
+
 
 @Component({
   selector: 'app-page-video',
@@ -11,84 +13,99 @@ import * as moment from 'moment';
   styleUrls: ['./page-video.page.scss'],
 })
 export class PageVideoPage implements OnInit {
-  @Input ('date') date
+  @Input('date') date
   topVideoFrame = 'partner-video';
   userId: string;
-  partnerId: string ;
+  partnerId: string;
   myEl: HTMLMediaElement;
   partnerEl: HTMLMediaElement;
-  hora ;
+  hora;
 
   title = 'angular-video';
-  localCallId = 'agora_local';
-  remoteCalls:  string[] = [];
+  public localCallId;
+  remoteCalls: string[] = [];
+  public channel;
+  public token;
 
-  private client: AgoraClient;
-  private localStream: Stream;
-  private uid: number;
-  private dates;
-  private nombreDoctor;
-  private idDoctor;
+  public client: AgoraClient;
+  public localStream: Stream;
+  public uid;
+  public dates;
+  public nombreDoctor;
+  public idDoctor;
   public time;
 
+  public dataPermissions;
+
   constructor(
-    private elRef: ElementRef,
-    private router: Router,
-    private ngxAgoraService: NgxAgoraService,
-    private activateRoute: ActivatedRoute,
-    private appointmetSrv: AppoinmentService,
-    private nav: NavController) { }
+    public elRef: ElementRef,
+    public router: Router,
+    public ngxAgoraService: NgxAgoraService,
+    public activateRoute: ActivatedRoute,
+    public appointmetSrv: AppoinmentService,
+    public nav: NavController,
+    public routes: ActivatedRoute,
+    public permissionSrv: PermissionsVideoService) {
+
+    const data = this.routes.snapshot.paramMap.get('data');
+    this.dataPermissions = JSON.parse(data);
+    console.log('dataPermissions:', this.dataPermissions);
+    if (data) {
+      this.getPermissionVideo();
+    }
+  }
 
   ngOnInit() {
     this.crhono();
-
     this.nombreDoctor = localStorage.getItem('doctor');
     this.idDoctor = localStorage.getItem('idDoctor')
+  }
 
+  getPermissionVideo() {
+    let patientId = this.dataPermissions.appointmentId;
+    this.permissionSrv.getPermissionsVideo(patientId).subscribe(data => {
+      console.log('data', data);
+      this.channel = data.channel;
+      this.token = data.token;
+      this.localCallId = data.uid.toString();
+      this.uid = data.uid;
+      this.initVideo();
+    }, err => {
+      console.log(err)
+    })
+  }
+
+  initVideo() {
     this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
     this.assignClientHandlers();
 
     this.localStream = this.ngxAgoraService.createStream({ streamID: this.uid, audio: true, video: true, screen: false });
     this.assignLocalStreamHandlers();
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
+    this.localStream.setVideoProfile('720p_3');
   }
 
-  crhono(){
-    setInterval(() =>{
+  crhono() {
+    setInterval(() => {
       this.updateTime();
     }, 1000)
   }
 
-  updateTime(){
+  updateTime() {
     this.time = moment().format('hh:mm:ss');
   }
- /*  init() {
-    this.myEl = this.elRef.nativeElement.querySelector('#my-video');
-    this.partnerEl = this.elRef.nativeElement.querySelector('#partner-video');
-    this.webRTC.init(this.userId, this.myEl, this.partnerEl);
+
+
+  join(onSuccess?: (uid: number | string) => void, onFailure?: (error: Error) => void): void {
+    this.client.join(this.token, this.channel, this.uid, onSuccess, onFailure);
   }
 
-  call() {
-    this.webRTC.call(this.partnerId);
-    this.swapVideo('my-video');
+  /**
+   * Attempts to upload the created local A/V stream to a joined chat room.
+   */
+  publish(): void {
+    this.client.publish(this.localStream, err => console.log('Publish local stream error: ' + err));
   }
-
-  swapVideo(topVideo: string) {
-    this.topVideoFrame = topVideo;
-  } */
-   /**
- * Attempts to connect to an online chat room where users can host and receive A/V streams.
- */
-join(onSuccess?: (uid: number | string) => void, onFailure?: (error: Error) => void): void {
-  this.client.join(null, 'foo-bar', this.uid, onSuccess, onFailure);
-}
-
-/**
- * Attempts to upload the created local A/V stream to a joined chat room.
- */
-publish(): void {
-  this.client.publish(this.localStream, err => console.log('Publish local stream error: ' + err));
-}
 
   private assignLocalStreamHandlers(): void {
     this.localStream.on(StreamEvent.MediaAccessAllowed, () => {
@@ -101,18 +118,20 @@ publish(): void {
     });
   }
 
-private initLocalStream(onSuccess?: () => any): void {
-  this.localStream.init(
-    () => {
-       // The user has granted access to the camera and mic.
-       this.localStream.play(this.localCallId);
-       if (onSuccess) {
-         onSuccess();
-       }
-    },
-    err => console.error('getUserMedia failed', err)
-  );
-}
+  private initLocalStream(onSuccess?: () => any): void {
+    this.localStream.init(
+      () => {
+        // The user has granted access to the camera and mic.
+        console.log(this.localCallId);
+        this.localStream.play(this.localCallId);
+
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      err => console.error('getUserMedia failed', err)
+    );
+  }
 
   private assignClientHandlers(): void {
     this.client.on(ClientEvent.LocalStreamPublished, evt => {
@@ -169,14 +188,14 @@ private initLocalStream(onSuccess?: () => any): void {
     return `agora_remote-${stream.getId()}`;
   }
 
-  closePage(){
-      this.nav.back();
-      this.client.leave(() => {
-        console.log("Leavel channel successfully");
-      }, (err) => {
-        console.log("Leave channel failed");
-      });
-      this.localStream.close();
+  closePage() {
+    this.nav.back();
+    this.client.leave(() => {
+      console.log("Leavel channel successfully");
+    }, (err) => {
+      console.log("Leave channel failed");
+    });
+    this.localStream.close();
   }
 
   leave() {
@@ -190,31 +209,45 @@ private initLocalStream(onSuccess?: () => any): void {
   }
 
   mute() {
-    console.log('cerrando video');
-    };
-  
+    this.client.on(ClientEvent.RemoveVideoMuted, evt => {
+      console.log('video desactivado');
+    })
 
- /*  dejar(){
+    this.client.on(ClientEvent.PeerLeave, () => {
+      console.log('eliminar a otro usuario');
+    })
+  };
 
-    this.ngxAgoraService.client.on('peer-leave', (evt) => {
-      const stream = evt.stream;
-      if (stream) {
+
+  /*  dejar(){
+ 
+     this.client.on('peer-leave', (evt) => {
+       const stream = evt.stream;
+       if (stream) {
+         stream.stop();
+         this.remoteCalls = this.remoteCalls.filter(call => call === `#agora_remote${stream.getId()}`);
+         console.log(`${evt.uid} left from this channel`);
+       }
+     });
+   }*/
+  /*   remove(){
+      this.ngxAgoraService.client.on( "stream-removed" () ,(evt) => {
+        const stream = evt.stream;
         stream.stop();
         this.remoteCalls = this.remoteCalls.filter(call => call === `#agora_remote${stream.getId()}`);
-        console.log(`${evt.uid} left from this channel`);
-      }
-    });
-  }-
-  remove(){
-    this.ngxAgoraService.client.on('stream-removed', (evt) => {
-      const stream = evt.stream;
-      stream.stop();
-      this.remoteCalls = this.remoteCalls.filter(call => call === `#agora_remote${stream.getId()}`);
-      console.log(`Remote stream is removed ${stream.getId()}`);
-    });
-  } */
-  removeVideo(){
+        console.log(`Remote stream is removed ${stream.getId()}`);
+      });
+    }  */
 
+  closeSession() {
+    this.localStream.on(StreamEvent.MediaAccessDenied, () => {
+      console.log('access Denied');
+    });
+    this.localStream.stop();
+    this.client.leave();
+    this.client.off;
+
+    console.log('cerrar localStream');
   }
 
 }

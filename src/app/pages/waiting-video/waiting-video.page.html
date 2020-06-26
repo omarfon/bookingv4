@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button slot="start"></ion-back-button> -->
+      <ion-icon name="arrow-back" slot="start" (click)="goToBack()" class="iconoback">volver</ion-icon>
+    </ion-buttons>
+    <ion-title>Volver</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides>
+    <ion-slide
+      style="background-image:url({{SERVERImage}}{{dataDoctor.professional.id}}.png); background-repeat: no-repeat; background-size:cover; height: 100vh;">
+      <ion-row>
+        <ion-col size="6">
+          <h1>En Espera...</h1>
+        </ion-col>
+        <ion-col size="6"></ion-col>
+        <ion-col size="6">
+          <p>En este momento el doctor <b>{{dataDoctor.professional.name}}</b> aún no puede atenderte, espera aqui y
+            cuando el
+            doctor este listo , iniciará el
+            video.</p>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

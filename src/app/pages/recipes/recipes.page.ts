@@ -19,7 +19,8 @@ export class RecipesPage implements OnInit {
     public router: Router) { }
 
   ngOnInit() {
-    this.nameUser = localStorage.getItem('patientName');
+    let data = JSON.parse(localStorage.getItem('PacienteData'));
+    this.nameUser = data.name;
     this.recipesPvr.getAllRecipes().subscribe(data =>{
       this.recipes = data;
       console.log('this.recipes',this.recipes);

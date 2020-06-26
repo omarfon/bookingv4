@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary" hideBackButton="true" persistent="true">
-      <ion-buttons>
-        <ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </ion-button>
+      <ion-buttons slot="start">
+          <ion-menu-button menu="first"></ion-menu-button>
       </ion-buttons>
       <ion-buttons *ngIf="nombre"
                         slot="end">
@@ -31,53 +29,69 @@
 
 <ion-content padding >
 <h4 class="tituloSliderOpciones">Funcionalidades Booking</h4>
-<ion-slides>
+<!-- <ion-slides>
   <ion-slide class="containerOptions"
-              (click)="goToAppointments()">
+              >
+      
+  </ion-slide>
+
+    <ion-slide class="containerOptions"
+              >
+      
+  </ion-slide>
+
+  <ion-slide class="containerOptions"
+              >
+      
+  </ion-slide>
+
+</ion-slides> -->
+<ion-row>
+  <ion-col>
+    <div>
       <div class="cajaContenedora">
-        <ion-card class="containerRounded">
+        <ion-card class="containerRounded" (click)="goToAppointments()">
           <img src="assets/imgs/intro/appointments.svg" alt="">
         </ion-card>
         <ion-badge *ngIf="citapendiente" color="danger" item-end>{{citapendiente}}</ion-badge>
         <p class="textoCard">Citas</p>
       </div>
-  </ion-slide>
-
-    <ion-slide class="containerOptions"
-              (click)="goToDates()">
+    </div>
+  </ion-col>
+  <ion-col>
+    <div>
       <div class="cajaContenedora">
-        <ion-card class="containerRounded">
+        <ion-card class="containerRounded" (click)="goToDates()">
           <img src="assets/imgs/intro/medicines.svg" alt="">
         </ion-card>
-        <ion-badge *ngIf="recipendiente" color="danger" item-end>{{recipendiente}}</ion-badge>
+        <ion-badge *ngIf="recipendiente" item-end>{{recipendiente}}</ion-badge>
         <p class="textoCard">Recetas</p>
-     </div>
-  </ion-slide>
-
-  <ion-slide class="containerOptions"
-              (click)="goToParents()">
+    </div>
+  </div>
+</ion-col>
+  <ion-col>
+    <div >
       <div class="cajaContenedora">
-        <ion-card class="containerRounded">
+        <ion-card class="containerRounded" (click)="goToParents()">
           <img src="assets/imgs/intro/parents.png" alt="">
         </ion-card>
         <ion-badge *ngIf="recipendiente" slot="start">{{dependens}}</ion-badge>
         <p class="textoCard">Parientes</p>
      </div>
-  </ion-slide>
-
-<!--     <ion-slide class="containerOptions"
-              (click)="goToNotifications()">
-    <div class="cajaContenedora">
-      
-        <ion-card class="containerRounded">
-          <img src="assets/imgs/intro/notifications.png" alt="">
-        </ion-card> 
-    
     </div>
-    <p class="textoCard">Mis Notificaciones</p>
-  </ion-slide> -->
-
-</ion-slides>
+  </ion-col>
+  <ion-col>
+    <div >
+      <div class="cajaContenedora">
+        <ion-card class="containerRounded" (click)="goToTele()">
+          <img src="assets/imgs/intro/tele.png" alt="">
+        </ion-card>
+        <ion-badge *ngIf="recipendiente" slot="start">{{cantConsultas}}</ion-badge>
+        <p class="textoCard">Teleconsultas</p>
+     </div>
+    </div>
+  </ion-col>
+</ion-row>
 
 <!-- <h4 class="tituloSliderOpciones">Lo nuevo en Aviva</h4>
 <ion-slides class="containerNoticias" [options]="slideOpts">
@@ -106,112 +120,9 @@
   <ion-button class="principal" 
               size="large"
               expand="block"
+              color="secondary"
   (click)="goToOptions()">
       reservar cita
     </ion-button>
 </div>
-
-  <!-- <div >
-      <mat-accordion padding>
-
-          <mat-expansion-panel >
-              <mat-expansion-panel-header>
-                  <ion-col col-2>
-                      <ion-icon name="alarm"></ion-icon>
-                  </ion-col>
-                  <ion-col col-8>
-                      <p class="font11">Próxima Cita</p>
-                    </ion-col>
-                    <ion-col col-2>
-                        <ion-badge *ngIf="citapendiente"
-                                    class="badgeIcon"
-                                    color="notifi" item-end>C
-                        </ion-badge>
-                  </ion-col>
-              </mat-expansion-panel-header >
-              <div class="containerExpand" >
-                <div *ngIf="tasks; else notasks">
-                  <div *ngFor="let task of tasks; first as isFirst">
-                    <ion-row class="down10" *ngIf="isFirst">
-                      <ion-col col-3>
-                        <ion-avatar item-start>
-                          <img src="{{SERVERImage}}{{task.professional.id}}.png" onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';"
-                          >
-                        </ion-avatar>
-                      </ion-col>
-                      <ion-col col-9 >
-                        <h3 class="tituloCitas" [ngClass]="{celeste:''}">{{task.professional.fullName | slice:0:25 | uppercase}}</h3>
-                        <p class="especialidad">{{ task.service.basicService.description | lowercase }} / {{ task.service.center.name }}</p>
-                        <p class="day">{{ task.appointmentDateTime | date:'mediumDate' : 'es' }} - {{ task.appointmentDateTime | date: 'HH:mm' }} </p>
-                      </ion-col>
-                    </ion-row>
-                  </div>
-                    <div *ngIf="citasDepes">
-                        <ion-row class="down10" >
-                          <ion-col col-3>
-                            <ion-avatar item-start>
-                              <img src="{{SERVERImage}}{{citasDepes.professional.id}}.png" onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
-                            </ion-avatar>
-                          </ion-col>
-                          <ion-col col-9 >
-                            <p class="nombreDepe">cita para: {{citasDepes.patient.name}}</p>
-                            <h3 class="tituloCitas" [ngClass]="{celeste:''}"> {{citasDepes.professional.fullName | slice:0:25 | uppercase}}</h3>
-                            <p class="especialidad">{{ citasDepes.service.basicService.description | lowercase }} / {{ citasDepes.service.center.name }}</p>
-                            <p class="day">{{ citasDepes.appointmentDateTime | date:'mediumDate' : 'es' }} - {{ citasDepes.appointmentDateTime | date: 'HH:mm' }} </p>
-                          </ion-col>
-                        </ion-row>
-                      </div>
-                </div>
-              </div>
-                    <div *ngIf="!citapendiente">
-                      <p  class="textoRecetas">En este momento no tienes citas proximas...</p>
-                    </div>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                  <ion-col col-2>
-                      <ion-icon name="medkit"></ion-icon>
-                  </ion-col>
-                  <ion-col col-8>
-                      <p class="font11">Recetas y Medicamentos</p>
-                  </ion-col>
-                  <ion-col col-2>
-                      <ion-badge *ngIf="recipendiente"
-                                    class="badgeIcon"
-                                    color="verde" item-end>1
-                        </ion-badge>
-                  </ion-col>
-              </mat-expansion-panel-header>
-              <div class="containerExpand">
-                  <div *ngIf="recipes">
-                    <div  *ngFor="let recipe of recipes; index as i; last as isLast">
-                         <div>
-                                <ion-list class="contenedorReceta">
-                                  <ion-item *ngFor="let receta of recipe.prescripciones">
-                                    <ion-row>
-                                      <ion-col col-3 class="contenedorIcono">
-                                          <img src="assets/imgs/recipes/{{receta.formasfar_pk}}.png" alt="">
-                                      </ion-col>
-                                      <ion-col col-9 class="contendorNombrePastilla">
-                                          <p class="nombreMedicamento">{{receta.nombre_generico}}</p>
-                                          <p class="vecesXdia"> {{ 24 / receta.cada_x_horas}} veces por día</p>
-                                          <p class="inicioDePrescripcion"> inicio: {{receta.inicio_prescripcion | date}}</p>
-                                          <p class="diasFaltantes"> quedan {{diasFaltantes}} dias de tratamiento.</p>
-                                      </ion-col>
-                                    </ion-row>
-                                  </ion-item>
-                                </ion-list>
-                         </div>
-                    </div>
-                  </div>
-                  <div *ngIf="mensaje == false ">
-                      <p class="textoRecetas">Puede que no tengas recetas o no estés validado, cuando esto ocurra aparecerán aqui tus recetas</p>
-                  </div>
-                  
-              </div>
-          </mat-expansion-panel>
-      </mat-accordion>
-
-  </div> -->
 </ion-content>

@@ -3,14 +3,14 @@ export const environment = {
   agora: {
     appId: 'b75a830a11a84a0bbb812fc81aa60860'
   },
-  firebaseConfig :{
-    apiKey: "AIzaSyBdrl12eZO2vJSQRcNeIEpg2ncE_3UP51Y",
-    authDomain: "bookingv4.firebaseapp.com",
-    databaseURL: "https://bookingv4.firebaseio.com",
-    projectId: "bookingv4",
-    storageBucket: "bookingv4.appspot.com",
-    messagingSenderId: "707019936317",
-    appId: "1:707019936317:web:51e0e6df58f2a5e61b1054"
+  firebaseConfig : {
+    apiKey: "AIzaSyDzPQPjYiipYkBF3z4J7iJlmhgpAgAMSu8",
+    authDomain: "doctorestele.firebaseapp.com",
+    databaseURL: "https://doctorestele.firebaseio.com",
+    projectId: "doctorestele",
+    storageBucket: "doctorestele.appspot.com",
+    messagingSenderId: "172467271749",
+    appId: "1:172467271749:web:3b7e5deb0109aba21acb2c"
   }
 };
 

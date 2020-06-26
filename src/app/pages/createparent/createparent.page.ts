@@ -23,7 +23,7 @@ export class CreateparentPage implements OnInit {
   public hora;
   public price;
   public depe;
-  private desabilitadobutton = true;
+  public desabilitadobutton = true;
 
   constructor(
             public router: Router,

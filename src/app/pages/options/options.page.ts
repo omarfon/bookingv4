@@ -19,7 +19,7 @@ export class OptionsPage implements OnInit {
    /*  this.navCtrl.push(CardPage); */
   }
   goToCardCuidaPage(){
-    this.router.navigate(['cardcuida']);
+    this.router.navigate(['card-cuida']);
   }
   
 }

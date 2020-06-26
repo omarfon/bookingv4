@@ -12,12 +12,12 @@
         /* background-image: url('../../../assets/imgs/card/'); */
     }
     .parrafoFinanciador {
-        color: #062F51;
+        color: #4A4A4A;
         text-align: center;
         margin-bottom: 2em;
-        font-size: 1.1em;
-        font-weight: 300;
-        padding-top: 1em;
+        font-size: 1.2em;
+        font-weight: 400;
+        padding-top: 1.5em;
         width: 90%;
         margin-left: 5%;
     }
@@ -175,16 +175,6 @@
             text-align: center;
             }
     }
-    .cuadrado{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-        button{
-          height: 50px;
-          width:90%;
-          border-top-right-radius:20px;
-        }
-    }
     .me, .fam{
       display: flex;
       justify-content: center;
@@ -263,7 +253,7 @@
        }
     }
     .contenedorPagadores{
-        background: rgba(255, 255, 255, 0.9);
+        --background: rgba(255, 255, 255, 0.9);
         width: 90%;                                                                                      
         margin-left: 5%;
         margin-bottom:20px;
@@ -273,6 +263,7 @@
         text-align: center;
         color:#007198;
         margin-top:50px;
+        font-weight: 400;
     }
     .nombrePago{
         color:#007198;
@@ -317,3 +308,9 @@
           width:90%;
           margin-left:5%;
       }
+.pading{
+    padding:15px;
+}
+ion-list{
+    background:transparent!important;
+}

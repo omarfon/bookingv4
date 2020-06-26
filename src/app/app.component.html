@@ -1,5 +1,7 @@
 <ion-app>
-   <ion-menu toggle="true" side="start" menuId="first" contentId="content1" >
+   <!-- <ion-router-outlet></ion-router-outlet> -->
+  
+ <!--   <ion-menu toggle="true" side="start" menuId="first" contentId="content1" >
       <ion-content>
         <div class="cabecera" >
           <div class="circulo" style="background-image: url('assets/imgs/noname.svg'); background-repeat: no-repeat; background-size: cover;"></div>
@@ -18,6 +20,8 @@
             </ion-item>
         </ion-list>
       </ion-content>
-    </ion-menu>
-  <ion-router-outlet id="content1"></ion-router-outlet>
+    </ion-menu> -->
+
+    <app-menu></app-menu>
+  <ion-router-outlet id="principal"></ion-router-outlet>
 </ion-app>

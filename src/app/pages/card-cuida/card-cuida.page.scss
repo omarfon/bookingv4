@@ -101,6 +101,7 @@
       background: #FF634C;
       height: 30px;
       width: 30px;
+      margin-top: 10px;
       border-radius: 50%;
       margin-left: 5px;
       display: flex;
@@ -249,9 +250,23 @@
   .title-ios{
       margin-left:-45px!important;
   }
-/* .diasColor{
-    
-        background: #007198;
-        color:#fff;
-} */
-  
+  .dia{
+    margin-top:10px;
+    width:30px;
+    height: 30px;
+    font-size: .8em;
+}
+.diasDoctor{
+    font-size: .9em;
+}
+mat-expansion-panel-header{
+    ion-slides{
+        height: 100px;
+    }
+}
+.horariosDisponibles{
+    width:100%;
+}
+.contenedorHoras{
+    height: 50px;
+}

@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   public msg;
-  private pageFrom;
-  private hora;
-  private doctor;
-  private available;
-  private authPublic;
+  public pageFrom;
+  public hora;
+  public doctor;
+  public available;
+  public authPublic;
   public change = false;
   public datos;
   password_type: string = 'password';
@@ -66,6 +66,7 @@ export class LoginPage implements OnInit {
         }else{ */
           console.log('data:', data);
         this.msg = "";
+        localStorage.setItem('PacienteData', JSON.stringify(data));
         localStorage.setItem('idTokenUser', data.patientId);
         localStorage.setItem('emailUser', formulario.value.email);
         localStorage.setItem('authorization', data.authorization);
@@ -133,7 +134,8 @@ export class LoginPage implements OnInit {
                   this.datos = data;
                   console.log('this.datos:', this.datos);
                   if(this.datos.result == 'ok'){
-                    this.router.navigate(['recovery', this.datos]);
+                    let data = JSON.stringify(this.datos)
+                    this.router.navigate(['recovery', data]);
                    /*  this.navCtrl.push(RecoverycodePage , {
                       datos:this.datos
                 }); */

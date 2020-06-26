@@ -1,5 +1,5 @@
 ion-header{
-    height: 200px!important;
+    height: 180px!important;
     background: #2E4C6D!important;
     border-bottom-right-radius: 45px;
     border-bottom-left-radius: 25px;
@@ -13,9 +13,12 @@ ion-header{
 .NombreBienvenida{
   font-size: 1.4em;
   color: #fff;
-  font-weight: 200;
+  font-weight: 600;
   width:70%;
-  margin-left:15%;
+  float: right;
+  margin-right:10%;
+  margin-top:10px;
+  text-align: right;
 }
   ion-content{
     margin-top:10px!important;
@@ -41,7 +44,7 @@ ion-header{
    color:#00B6A3;
  }
  .mes{
-
+  margin-top:20px;
    color:#00B6A3;
    font-size:1.1em;
  }
@@ -55,6 +58,7 @@ ion-header{
   justify-content: center;
   align-items: center;
   flex-direction:column;
+  border-radius: 20px;
     p{
       // margin-top:-5px;
       font-weight: 600;
@@ -71,32 +75,43 @@ ion-header{
     }
   }
   .nombrePastilla{
-  color:#00B6A3;
+  color:#2E4C6D;
   font-size:.9em;
-  font-weight: 400;
-  margin-top:10px;
+  font-weight: 600;
   margin-bottom:5px;
   text-align: right;
   margin-right:10px;
+  line-height: 1.2em;
   }
+  .nombrePastillaAlterna{
+    color:#00B6A3;
+    font-size:.8em;
+    font-weight: 400;
+    margin-top:10px;
+    margin-bottom:5px;
+    text-align: right;
+    margin-right:10px;
+    }
 .cantidadDeDias, .inicio{
   color:#444D4D;
+  font-size:.8em;
 }
 .tituloDeLasTomas{
-  color:#00B6A3;
+  color:#444D4D;
   font-size:1.1em!important;
   font-weight:400;
   text-align: center;
-  margin-bottom:0;
+  margin-bottom:5px;
   margin-top:0;
 }
 img{
-   width:50px!important;
+   width:45px!important;
    height: auto;
    margin-top:10px;
+   margin-bottom:10px;
 }
 .down{
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   // border-bottom: .5px solid #DFDFDF;
 }
 .contenedorDatos{
@@ -116,11 +131,17 @@ img{
   margin-top:15px;
 }
 .resultado{
-  color:#4e4e4e;
-  font-weight: 200;
+  color:#444D4D;
+  font-weight: 400;
   font-size:1.2em;
   margin-top:-5px;
   margin-left:10px;
+}
+.medicina{
+  color:#BABCC2;
+  margin-left:10px;
+  font-size:1em;
+  margin-top:-5px;
 }
 .top{
   margin-top:10px;
@@ -149,14 +170,14 @@ img{
 }
 .mes{
   font-size:1.2em;
-  margin-top:-18px;
+  margin-top:10px;
   margin-bottom:20px!important;
   text-align: center;
   text-transform: capitalize;
 }
 .cantidadDeDias{
-  margin-top:20px;
-  font-size:3.5em;
+  margin-top:35px;
+  font-size:3em;
   font-weight: 600;
   color:#BABCC2;
   margin-top:0;
@@ -174,13 +195,18 @@ img{
     // border:1px solid #444D4D;
     background: #e4e7e7;
     text-align: center;
-    img{
-      text-shadow: 2px 2px #444D4D;
+    .containerImgIcon{
+      height: 70px;
+      min-height: 70px;
+      img{
+        text-shadow: 2px 2px #444D4D;
+      }
     }
-    
 }
 .dias{
-  margin-top:-15px;
+  margin-top:15px;
+  font-size: .8em;
+  line-height: normal;
   color:#BABCC2;
 }
 .inicio{
@@ -215,10 +241,21 @@ mat-expansion-panel{
   margin-top:150px!important;
 } */
 ion-card{
-  border-radius: 20px!important;
+  border-bottom-right-radius: 30px!important;
 }
 .cantidadRecetas{
     color:#fff;
     font-size: 1.2em;
+    float: right;
+    width:80%;
+    margin-right: 10%;
+    text-align: right;
+    font-weight: 200;
+}
+.containerDatosBasicos{
+  margin-bottom:20px;
+}
+ion-toolbar{
+  background: #2E4C6D!important;
 }
 

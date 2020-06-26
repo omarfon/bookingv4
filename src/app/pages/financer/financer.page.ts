@@ -19,9 +19,9 @@ export class FinancerPage implements OnInit {
   public _price;
   isAndroid: boolean = false;
 
-  private doctor; //doctor seleccionado//
-  private available; //fecha seleccionada//
-  private hora; // fecha seleccionada
+  public doctor; //doctor seleccionado//
+  public available; //fecha seleccionada//
+  public hora; // fecha seleccionada
 
 
   myEnsuranceName: string;
@@ -231,14 +231,13 @@ async showDetailCreateParents(){
 
 acceptFinancer(plan){
   this.plan = plan;
+  this.nomark = true;
+  this.financer = true; 
+  this.paquete = false;
+  this.desabilitado = true;
+  this.plan = plan;
+  this.price =  plan.precio[0].total ;
   console.log('el plan:', plan);
-    this.nomark = true;
-    this.financer = true; 
-    this.paquete = false;
-    this.desabilitado = true;
-    this.plan = plan;
-    this.price =  plan.precio[0].total ;
-    this.nomark = true;
 }
 
 // función para ir a pagos
