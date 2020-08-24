@@ -9,13 +9,15 @@ import { CardCuidaPage } from './card-cuida.page';
 import { CardCuidaPageRoutingModule } from './card-cuida-routing.module';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CardCuidaPageRoutingModule
+    CardCuidaPageRoutingModule,
   ],
-  declarations: [CardCuidaPage]
+  declarations: [CardCuidaPage],
+
 })
-export class CardCuidaPageModule {}
+export class CardCuidaPageModule { }

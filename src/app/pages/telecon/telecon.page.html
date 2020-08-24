@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
-  </ion-buttons>
+    </ion-buttons>
     <ion-title>telecon</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,67 +14,99 @@
   <ion-row>
     <ion-col size="12">
       <ion-card *ngFor="let c of consultas" class="padding">
-        <ion-card-title >
-            <h3>{{c.nombreUsuario}} {{c.apellidopUsuario}} {{c.apellidomUsuario}}</h3>
+        <ion-card-title>
+          <h3 class="nombrePaciente">{{c.newConsulta.nombreUsuario}} {{c.newConsulta.apellidopUsuario}}
+            {{c.newConsulta.apellidomUsuario}}</h3>
+          <p class="horaStyle"><span>Día:</span> {{c.newConsulta.date | date:'d MMMM'}}</p>
+          <p class="horaStyle"><span>Hora:</span> {{c.newConsulta.datetime | date:'shortTime'}}</p>
         </ion-card-title>
         <ion-card-body>
+
           <ion-row>
             <ion-col size="12">
-             <p class="anamnesis"> {{c.datosConsulta.anamnesis}}</p>
+              <p class="diagnostic"> <span>Diagnostico :</span>{{c.newConsulta.datosConsulta.diagnostic}}</p>
             </ion-col>
             <ion-col size="12"></ion-col>
             <ion-col size="11">
-              <b class="fecha">{{c.datetime | date:'short'}}</b>
+              <b class="fecha">El día: {{c.newConsulta.datetime | date:'short'}}</b>
             </ion-col>
-              <ion-col size="12">
-                <mat-accordion  *ngIf="c.datosConsulta.medicines">
-                  <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        receta
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div *ngFor="let m of c.datosConsulta.medicines">
-                      <ion-row>
+            <ion-col size="12">
+
+              <mat-accordion *ngIf="c.newConsulta.prescription">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Datos de Consulta
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-tab-group>
+                    <mat-tab label="Recetas">
+                      <div *ngFor="let m of c.newConsulta.prescription">
+                        <ion-row>
+                          <ion-col size="12">
+                            <p class="title inicio">Nombre Generico</p>
+                            {{m.principioActivo}}
+                          </ion-col>
+                          <ion-col size="12">
+                            <p class="title">Marca</p>
+                            {{m.productoSugerido}}
+                          </ion-col>
+                          <ion-col size="4">
+                            <p class="title">Cantidad</p>
+                            {{m.indicacionesDosis}}
+                          </ion-col>
+                          <ion-col size="4">
+                            <p class="title">cada</p>
+                            {{m.frecuencia}}
+                          </ion-col>
+                          <ion-col size="4">
+                            <p class="title">Dias</p>
+                            {{m.indicacionesTiempo}}
+                          </ion-col>
+                          <ion-col size="12">
+                            <p class="title">
+                              indicaciones
+                            </p>
+                            {{m.indicacionesNota}}
+                          </ion-col>
+                        </ion-row>
+                        <hr>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Exámenes / Procedimientos">
+                      <div>
                         <ion-col size="12">
-                          <p class="title inicio">Nombre Generico</p>
-                          {{m.activeprinciple}}
+                          <p class="exams">Exámenes</p>
+                          <p *ngIf="c.newConsulta.datosConsulta.examaux.length > 0">
+                            {{c.newConsulta.datosConsulta.examaux}} </p>
+                          <p *ngIf="c.newConsulta.datosConsulta.examaux.length < 1" class="notexam">No hay ningun exámen
+                            solicitado
+                            para este
+                            control </p>
                         </ion-col>
                         <ion-col size="12">
-                          <p class="title">Marca</p>
-                          {{m.marc}}
+                          <p class="exams">Procedimientos</p>
+                          <p *ngIf="c.newConsulta.datosConsulta.proced.length > 0">
+                            {{c.newConsulta.datosConsulta.proced}} </p>
+                          <p *ngIf="c.newConsulta.datosConsulta.proced.length < 1" class="notexam">No hay ningun
+                            procedimiento
+                            solicitado
+                            para este
                         </ion-col>
-                        <ion-col size="4">
-                          <p class="title">Cantidad</p>
-                          {{m.dosis}}
-                        </ion-col>
-                        <ion-col size="4">
-                          <p class="title">cada</p>
-                          {{m.frecuencia}}
-                        </ion-col>
-                        <ion-col size="4">
-                          <p class="title">Dias</p>
-                          {{m.duration}}
-                        </ion-col>
-                        <ion-col size="12">
-                          <p class="title">
-                            indicaciones
-                          </p>
-                          {{m.anotations}}
-                        </ion-col>
-                      </ion-row>
-                      <hr>
-                    </div>
-                  </mat-expansion-panel>
-                </mat-accordion>
-              </ion-col>
-         
-          </ion-row> 
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </ion-col>
+
+          </ion-row>
         </ion-card-body>
       </ion-card>
       <p *ngIf="consultas == []" class="sinConsultas">
         Aún no tienes ninguna cita realizada por Teleorientación, cuando tengas alguna aparecera aquí...
       </p>
     </ion-col>
-  </ion-row> 
+  </ion-row>
 </ion-content>

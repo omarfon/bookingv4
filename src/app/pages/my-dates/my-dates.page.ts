@@ -30,6 +30,7 @@ export class MyDatesPage implements OnInit {
   public conCitas;
   public _conCitas;
   public SERVERImage = API_IMAGES;
+  public nombrePatient;
 
   constructor(
     public alertCtrl: AlertController,
@@ -41,20 +42,16 @@ export class MyDatesPage implements OnInit {
     public loadingCtrl: LoadingController,
     public popoverCtrl: PopoverController,
     public router: Router,
-  ) { }
+  ) {
+    const nombrePatient = localStorage.getItem('patientName');
+  }
 
   ngOnInit() {
-    /*   let loading = this.loadingCtrl.create({
-       content:'actualiando datos...'
-     })
-     loading.present(); */
-    /* this.viewCtrl.dismiss(); */
-
-    const nombrePatient = localStorage.getItem('patientName');
+    this.nombrePatient = localStorage.getItem('patientName');
     const separador = " ";
-    if (nombrePatient) {
-      this.nombre = nombrePatient.split(separador, 1);
-      this.nombreCortado = nombrePatient.slice(0, 1);
+    if (this.nombrePatient) {
+      this.nombre = this.nombrePatient.split(separador, 1);
+      this.nombreCortado = this.nombrePatient.slice(0, 1);
     } else {
       console.log("seguir normal es invitado")
     }
@@ -66,13 +63,11 @@ export class MyDatesPage implements OnInit {
     });
 
     // CON ESTA LLAMADA LAS CITAS DEL USUARIO PRINCIPAL
-    this.appointmentProvider.getAppointmentsPeruser().subscribe((data: any) => {
+    this.appointmentProvider.getAppointmentsPast().subscribe((data: any) => {
       this.citas = 'miscitas';
       this.tasks = data;
       console.log('los tasks:', this.tasks);
       this.mostrar = this.tasks.length;
-      // console.log('mis citas:',this.tasks);
-      // console.log('tasks:', this.tasks);
     },
       err => {
         console.error('algo fallo')
@@ -97,14 +92,12 @@ export class MyDatesPage implements OnInit {
   }
 
 
+  errorHandler(event) {
+    event.target.src = "https://1.bp.blogspot.com/-p8EFlkXywyE/UDZvWTyr1bI/AAAAAAAAEU0/xL8pmKN1KOY/s1600/facebook.png"
+  }
+
 
   ionViewWillEnter() {
-    /*   let loading = this.loadingCtrl.create({
-                  content:'actualiando datos...'
-                })
-                loading.present(); */
-    /* this.viewCtrl.dismiss(); */
-
     const nombrePatient = localStorage.getItem('patientName');
     const separador = " ";
     if (nombrePatient) {
@@ -121,18 +114,15 @@ export class MyDatesPage implements OnInit {
     });
 
     // CON ESTA LLAMADA LAS CITAS DEL USUARIO PRINCIPAL
-    this.appointmentProvider.getAppointmentsPeruser().subscribe(data => {
+    this.appointmentProvider.getAppointmentsPast().subscribe(data => {
       this.citas = 'miscitas';
       this.tasks = data;
-      console.log('los tasks:', this.tasks);
+      console.log('los tasks usuario principal:', this.tasks);
       this.mostrar = this.tasks.length;
-      // console.log('mis citas:',this.tasks);
-      // console.log('tasks:', this.tasks);
     },
       err => {
         console.error('algo fallo')
       });
-
 
     // CON ESTA LLAMADA TENEMOS LAS CITAS PASADAS DE LOS DEPENDIENTES
     this.dependentsProvider.getOldDependetsDay().subscribe((data: any) => {
@@ -152,31 +142,19 @@ export class MyDatesPage implements OnInit {
   }
 
   gotoDetails(task) {
-    /* this.navCtrl.push(MyDateModalPage, { task:task}); */
     console.log('task datos:', task);
+    task.familiar = true;
     let datos = JSON.stringify(task);
     this.router.navigate(['my-date', datos]);
     console.log(task.appointmentId);
-    /*   console.log('task de familiar  que van a details:', task);
-      let modal = this.modalCtrl.create(MyDateModalPage, {
-        task:task
-      },
-      {showBackdrop:true, enableBackdropDismiss: true}
-      );
-      modal.present(); */
   }
 
   goToDetailsTask(task) {
     console.log('task datos:', task);
+    task.familiar = false;
     let datos = JSON.stringify(task);
     this.router.navigate(['my-date', datos]);
     console.log(task.appointmentId);
-    /* this.navCtrl.push(MyDateModalPage, {task:task}); */
-    /*  let modal = this.modalCtrl.create(MyDateModalPage, 
-       {task:task},
-       {showBackdrop:true, enableBackdropDismiss: true}
-     );
-     modal.present(); */
   }
 
   goToRecipe(citaspa) {
@@ -188,7 +166,6 @@ export class MyDatesPage implements OnInit {
       const datos = JSON.stringify(this.recipe);
       console.log('this.recipe:', this.recipe);
       this.router.navigate(['recipe', datos])
-      /* this.navCtrl.push (RecipePage, {recipe: this.recipe}) */
     });
   }
 
@@ -209,12 +186,10 @@ export class MyDatesPage implements OnInit {
       console.log('citas de dependientes jalada:', this.$citaspasadas);
       this.citaspasadas = this.$citaspasadas[0].encuentros;
     })
-    // console.log('conseguir los datos del los dependientes', this.citaspasadas);
   }
 
   openVideo() {
     this.router.navigate(['page-video']);
-    /* this.navCtrl.push(PagesVideoPage); */
   }
 
 }

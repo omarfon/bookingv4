@@ -5,9 +5,9 @@
     </ion-buttons>
     <ion-title> Mi citas </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="openVideo()">
+      <!--  <ion-button (click)="openVideo()">
         <ion-icon name="videocam" color="danger"></ion-icon>
-      </ion-button>
+      </ion-button> -->
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary">
@@ -33,18 +33,19 @@
           <ion-row>
             <ion-col size="4">
               <ion-avatar item-start>
-                <img src="{{SERVERImage}}{{task.professional.id}}.png"
-                  onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
+                <img src="{{SERVERImage}}{{task.professionalId}}.png" (error)="errorHandler($event)">
               </ion-avatar>
             </ion-col>
             <ion-col size="8" (click)="goToDetailsTask(task)">
               <ion-col size="12" class="nombrePrincipalBox">
-                <p>Cita para: {{task.patient.name}}</p>
+                <p>Cita para: {{nombre}}</p>
               </ion-col>
-              <h3 class="tituloCitas" text-wrap>{{task.professional.fullName | slice:0:25 | lowercase}}</h3>
+              <h3 class="tituloCitas" text-wrap>{{task.professionalName}} {{task.professionalLastName1}}
+                {{task.professionalLastName2}}</h3>
               <p class="especialidad" text-wrap> <span>Especialidad:</span>
-                {{ task.service.basicService.description | lowercase }}</p>
-              <p class="sede">Sede: {{ task.service.center.name | lowercase }}</p>
+                {{ task.basicServiceDescription | lowercase }}</p>
+              <p class="sede" *ngIf="task.provisionId === 44">Sede: {{ task.centerName | lowercase }}</p>
+              <p class="sede" *ngIf="task.provisionId === 845337">Sede: Teleconsulta</p>
             </ion-col>
             <ion-col size="12" class="gris">
               <ion-row>
@@ -66,38 +67,37 @@
       </ion-list>
       <div>
         <div *ngIf="conCitas">
-          <ion-list *ngFor='let task of conCitas'>
+          <ion-list *ngFor='let task of conCitas[0].appointments'>
             <ion-card class="bordeDerecho">
               <ion-card-content>
                 <ion-row class="nopadding">
                   <ion-col size="4">
                     <ion-avatar item-start>
-                      <img src="{{SERVERImage}}{{task.appointments[0].professional.id}}.png"
-                        onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
+                      <img src="{{SERVERImage}}{{task.professionalId}}.png" (error)="errorHandler($event)">
                     </ion-avatar>
                   </ion-col>
-                  <ion-col size="8" (click)="gotoDetails(task.appointments[0])">
+                  <ion-col size="8" (click)="gotoDetails(task)">
                     <ion-row>
                       <ion-col size="12" class="nombreFamiliarBox">
-                        <p class="nombreFamiliar">Cita para: {{task.appointments[0].patient.name}}</p>
+                        <p class="nombreFamiliar">Cita para: {{task.patientName}}</p>
                       </ion-col>
                       <ion-col size="12">
                         <h3 class="tituloCitas" text-wrap>
-                          {{task.appointments[0].professional.fullName | slice:0:30 | lowercase}}</h3>
-                        <p class="especialidad">{{ task.appointments[0].service.basicService.description | lowercase }}
+                          {{task.professionalName}} {{task.professionalLastName1}} {{task.professionalLastName2}}</h3>
+                        <p class="especialidad">{{ task.basicServiceDescription | lowercase }}
                         </p>
-                        <p class="sede">{{ task.appointments[0].service.center.name | lowercase }}</p>
+                        <p class="sede">{{ task.centerName | lowercase }}</p>
                       </ion-col>
                     </ion-row>
                   </ion-col>
                   <ion-col size="12" class="gris">
                     <ion-row>
                       <ion-col size="5" class="diaCita">
-                        <p class="day">{{ task.appointments[0].appointmentDateTime | date:'EEEE d , MMMM ' : 'es' }}
+                        <p class="day">{{ task.appointmentDateTime | date:'EEEE d , MMMM ' : 'es' }}
                         </p>
                       </ion-col>
                       <ion-col size="5" class="hourCita">
-                        <p class="hour">{{ task.appointments[0].appointmentDateTime | date: 'HH:mm' }}</p>
+                        <p class="hour">{{ task.appointmentDateTime | date: 'HH:mm' }}</p>
                       </ion-col>
                       <ion-col size="1"></ion-col>
                       <!-- <ion-col size="1">
@@ -143,8 +143,7 @@
             <ion-row>
               <ion-col size="4">
                 <ion-avatar item-start>
-                  <img src="{{SERVERImage}}{{citaspa.codigo_personal}}.png"
-                    onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
+                  <img src="{{SERVERImage}}{{citaspa.codigo_personal}}.png" (error)="errorHandler($event)">
 
                 </ion-avatar>
               </ion-col>

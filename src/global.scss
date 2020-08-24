@@ -26,9 +26,17 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .my-custom-class .modal-wrapper {
-    width:90%;
-    height: 75%;
-    margin-top: 5%;
-    background: #222;
-    border-top-right-radius: 40px;
-  }
+  width: 90%;
+  height: 75%;
+  margin-top: 5%;
+  background: #222;
+  border-top-right-radius: 40px;
+}
+
+.my-custom-classParets .modal-wrapper {
+  width: 90%;
+  height: 75%;
+  margin-top: 5%;
+  background: #222;
+  border-top-right-radius: 40px;
+}

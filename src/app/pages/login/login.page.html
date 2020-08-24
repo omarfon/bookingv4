@@ -1,76 +1,61 @@
-
-<ion-content padding class="gris" no-bounce >
+<ion-content padding class="gris" no-bounce>
   <div class="contenedorCabecera">
     <img src="assets/imgs/login/logoWhite.svg" alt="">
-  </div> 
-      <!-- <h5 class="bajar textoAzul" text-center> Ahora necesitamos tus datos para iniciar una reserva. Si no tienes cuenta aún, registrate ¡es súper fácil!</h5> -->
-  
-  
-      <!-- <div class="white">
+  </div>
+  <h5 class="textoAzul" text-center> ¡Hola! <br />Estas en el paso 1 de 5 para tu consulta virtual con un
+    pediatra, <span> haz login o registrate es sencillo!!!!</span></h5>
+
+
+  <!-- <div class="white">
           <div padding>
               <button ion-button (click)="registrarUsuario()" full color="primary" class="alto50">Registrarse</button>
           </div>
   
       </div> -->
-  
-      <div class="containerInputs">
-          <!-- <p style="text-align: center">{{msg}}</p> -->
-  
-          <form #formulario="ngForm">
-  
-              <ion-item nolines>
-                  <!-- <ion-label floating>Email</ion-label> -->
-                  <ion-input type="text"
-                             required
-                             name="email"
-                             placeholder="Email"
-                             ngModel>
-                    </ion-input>
-              </ion-item>
-  
-              <ion-item >
-                 <!--  <ion-label floating>Contraseña</ion-label> -->
-                  <ion-input [type]="password_type"
-                              nolines
-                             name="password"
-                             placeholder="Contraseña"
-                             ngModel>
-                            <!--  <button slot="end">
+
+  <div class="containerInputs">
+    <!-- <p style="text-align: center">{{msg}}</p> -->
+
+    <form #formulario="ngForm">
+
+      <ion-item lines="none">
+        <!-- <ion-label floating>Email</ion-label> -->
+        <ion-input type="text" required name="email" placeholder="Email" ngModel>
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <!--  <ion-label floating>Contraseña</ion-label> -->
+        <ion-input [type]="password_type" name="password" placeholder="Contraseña" ngModel>
+          <!--  <button slot="end">
                                <ion-icon slot="end" (click)="changeType()" color="secondary" name="eye"></ion-icon>
                              </button> -->
-                            </ion-input>
-              </ion-item>
-          </form>
-          <ion-button (click)="startSesion(formulario)" block class="inicioSesion">iniciar Sesión</ion-button>
-      </div>
-      <p (click)="goToRecovery()"
-          class="textoOlvido">Olvidé la contraseña
-      </p>
-  
-            <ion-row padding class="containerBotones">
-              <ion-col size="12" class="center">
-                <ion-button
-                class="register"
-                (click)="registrarUsuario()">
-                registrarme
-              </ion-button>
-            </ion-col>
-<!--             <ion-col size="6" class="center">
+        </ion-input>
+      </ion-item>
+    </form>
+    <ion-button (click)="startSesion(formulario)" block class="inicioSesion">iniciar Sesión</ion-button>
+  </div>
+  <p (click)="goToRecovery()" class="textoOlvido">Olvidé la contraseña
+  </p>
+
+  <ion-row padding class="containerBotones">
+    <ion-col size="12" class="center">
+      <ion-button class="register" (click)="registrarUsuario()">
+        registrarme
+      </ion-button>
+    </ion-col>
+    <!--             <ion-col size="6" class="center">
               <ion-button
               class="registerFacebook"
               (click)="registrarUsuarioFacebook()">
               Facebook
             </ion-button>
           </ion-col> -->
-          </ion-row>
-            <ion-col size="12" class="centrarInvitado">
-              <ion-button
-                      fill="outline"
-                      *ngIf="this.hora == undefined"
-                      class="noLogin"
-                (click)="goToHome()">Ingresar como invitado
-              </ion-button>
-            </ion-col>
-  
-  </ion-content>
-  
+  </ion-row>
+  <ion-col size="12" class="centrarInvitado">
+    <ion-button fill="outline" *ngIf="this.hora == undefined" class="noLogin" (click)="goToHome()">Ingresar como
+      invitado
+    </ion-button>
+  </ion-col>
+
+</ion-content>

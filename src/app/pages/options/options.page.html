@@ -1,10 +1,9 @@
-
 <ion-header>
 
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button ></ion-menu-button>
-  </ion-buttons>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Cuida / Cura</ion-title>
   </ion-toolbar>
 
@@ -16,25 +15,29 @@
   <h3 class="tituloOptions">Escoge una de las opciones para poder listar los médicos</h3>
   <ion-row>
     <ion-col size="12">
-      <div class="contenedorCura"
-            (click)="goToCardPage()">
-      <!-- <p class="tituloCura">Aviva Cura</p> -->
-      <img  class="logo cura" src="assets/imgs/curaBlanco.png" alt="">
-      <p class="parrafoCura">Atendemos tus problemas de salud y urgencias de una manera integral y eficiente para que vuelvas a estar sano lo antes posible.</p>
-      <div class="contenedorIrA">
-        <p>Registrar Cita</p>
-      </div>
+      <div class="contenedorCura" (click)="goToCardPage()">
+        <!-- <p class="tituloCura">Aviva Cura</p> -->
+        <img class="logo cura" src="assets/imgs/curaBlanco.png" alt="">
+        <p class="parrafoCura">Atendemos tus problemas de salud y urgencias de una manera integral y eficiente para que
+          vuelvas a estar sano lo antes posible.</p>
       </div>
     </ion-col>
     <ion-col size="12">
-      <div class="contenedorCuida"
-           (click)="goToCardCuidaPage()">
-           <!-- <p class="tituloCura">Aviva Cuida</p> -->
-           <img  class="logo cuida" src="assets/imgs/cuidaBlanco.png" alt="">
-           <p class="parrafoCuida">Nos esforzamos por mantenerte sano mediante controles y chequeos con especialistas, en un ambiente exclusivo para gente que está sana y quiere mantenerse sana.</p>
-           <div class="contenedorIrACuida">
-             <p>Registrar Cita</p>
-            </div>
+      <div class="contenedorCuida" (click)="goToCardCuidaPage()">
+        <!-- <p class="tituloCura">Aviva Cuida</p> -->
+        <img class="logo cuida" src="assets/imgs/cuidaBlanco.png" alt="">
+        <p class="parrafoCuida">Nos esforzamos por mantenerte sano mediante controles y chequeos con especialistas,
+          en
+          un ambiente exclusivo para gente que está sana y quiere mantenerse sana.</p>
+      </div>
+    </ion-col>
+
+    <ion-col size="12">
+      <div class="contenedorTele" (click)="goToCardPageTele()" size="small" color="tertiary">
+        <!-- <p class="tituloCura">Aviva Cuida</p> -->
+        <img class="logo cuida" src="assets/imgs/avivatele.png" alt="">
+        <p class="parrafoTele">Teleconsulta con un doctor desde la comodidad de tu hogar, recibe tus recetas por correo
+          y revisalas tambien en la aplicación</p>
       </div>
     </ion-col>
   </ion-row>

@@ -1,37 +1,46 @@
     ion-content {
-        --background: rgb(231, 231, 231)!important;
+        --background: rgb(231, 231, 231) !important;
         height: 100vh;
     }
+
     .list-md {
-        background: #F9FBFB!important;
+        background: #F9FBFB !important;
     }
+
     .item-md {
-        background: transparent!important;
+        background: transparent !important;
     }
+
     #busqueda {
-        margin-top:10px;
+        margin-top: 10px;
         width: 95%;
-        margin-left:2.5%;
+        margin-left: 2.5%;
         // border-radius:10px;
-        height:200px;
+        height: 200px;
     }
+
     .swiper-slide {
-        width: 60px!important;
+        width: 60px !important;
         height: auto;
     }
+
     .dentroExpandable {
         height: 60px;
+
         p {
             margin-top: -15px,
         }
     }
+
     .swiper-container {
-        height: 55px!important;
+        height: 55px !important;
         width: 95%;
         margin-left: 2.5%;
     }
+
     .centerItemsDays {
         text-align: center;
+
         // display: flex;
         // flex-direction: column;
         // align-content: center;
@@ -40,10 +49,11 @@
             color: #4A4A4A;
         }
     }
+
     .doctor {
         font-weight: 200;
-        width:90%;
-        margin-left:5%;
+        width: 90%;
+        margin-left: 5%;
         color: #00B6A3;
         font-size: 1.5em;
         text-align: right;
@@ -52,25 +62,29 @@
         margin-top: 10px;
         text-transform: capitalize;
     }
+
     .especialidad {
         text-align: right;
         color: grey;
         margin-right: 15px;
         font-size: 1.2em;
         font-weight: lighter;
-        margin-top: 0!important;
+        margin-top: 0 !important;
         text-transform: capitalize;
     }
+
     .centro {
         text-align: right;
         margin-right: 15px;
-        font-size:1.2em;
+        font-size: 1.2em;
         color: grey;
         font-weight: 300;
     }
+
     .diasLibres {
         // margin-bottom: 0!important;
         text-align: center;
+
         h6 {
             font-size: 1.1em;
             color: grey;
@@ -78,16 +92,19 @@
             // margin-right: 10px;
         }
     }
+
     .imageSlider {
         width: 150px;
-        margin-left: calc( 50% - 75px);
+        margin-left: calc(50% - 75px);
         margin-top: 1em;
         border-radius: 50%;
     }
+
     .cardSlider {
         text-align: center;
         width: 250px;
     }
+
     .tituloSlider {
         color: #00B6A3;
         font-size: 1.4em;
@@ -96,12 +113,13 @@
         width: 80%;
         margin: 8%;
     }
+
     a {
         background: #20668B;
         height: 40px;
         width: 40px;
         border-radius: 50%;
-       /*  margin-left: 15px; */
+        /*  margin-left: 15px; */
         display: flex;
         text-align: center;
         justify-content: space-around;
@@ -110,18 +128,20 @@
         font-size: 1.1em;
         font-weight: 400;
     }
-   
+
     .imageDoctor img {
         border-radius: 15px;
         margin-top: 1em;
         margin-left: 1em;
         // box-shadow: 0px 2px 3px #A7A9AC;
     }
+
     .containerDays {
         width: 90%;
         margin-left: 5%;
         transition: cubic-bezier(0.075, 0.82, 0.165, 1);
     }
+
     .item-label-stacked .select-md,
     .item-label-floating .select-md,
     .item-input-has-focus .label-md[floating],
@@ -129,9 +149,10 @@
     .item-input-has-value .label-md[floating],
     .input-has-value .label-md[floating] {
         color: #287195;
-   
+
     }
-/*     .horas {
+
+    /*     .horas {
         font-size: 1em;
         display: flex;
         justify-content: center;
@@ -148,45 +169,53 @@
     .horas {
         font-size: 1em;
         text-align: center;
+
         // display: flex;
         // justify-content: center;
         // align-items: center;
-          p {
+        p {
             background: #fff;
             border-radius: 5px;
             padding: .2em .6em;
             color: #20668B;
             border: 1px solid #20668B;
             font-weight: 400;
-            margin-left:10px;
-          }
-      }
+            margin-left: 10px;
+        }
+    }
+
     .icono {
         margin-top: 15px;
         color: grey;
     }
+
     .textoCitas {
         color: blue;
         margin-top: 50px;
         text-align: center;
     }
+
     .gris {
         background: red;
     }
+
     .mat-expansion-indicator {
-        color: #007198!important;
+        color: #007198 !important;
     }
+
     a:focus {
-        background: #00B6A3!important;
-        opacity: .9!important;
+        background: #00B6A3 !important;
+        opacity: .9 !important;
     }
-    .triangulo{
-        font-size:1em;
+
+    .triangulo {
+        font-size: 1em;
         background: none;
-        color:#20668B;
-        margin-top:-10px;
+        color: #20668B;
+        margin-top: -10px;
     }
- /*    a:after{
+
+    /*    a:after{
         content:'';
         border-style: solid;
         border-width:0 25px 25px 25px;
@@ -197,153 +226,202 @@
         z-index: 100;
     } */
 
-    a:hover:after{
-        display:block;
+    a:hover:after {
+        display: block;
     }
-    a:hover{
-        background: #f74f35!important;
+
+    a:hover {
+        background: #f74f35 !important;
     }
-    a:active{
-        background: #f74f35!important;
+
+    a:active {
+        background: #f74f35 !important;
     }
 
     .list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child,
     .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child {
-        border-bottom-color: #dedede!important;
-        box-shadow: none!important;
+        border-bottom-color: #dedede !important;
+        box-shadow: none !important;
     }
-    .normal{
-      width: 100%!important;
-      .swiper-slide{
-        width:100%!important;
-      }
-      .swiper-container{
-        height: auto!important;
-      }
+
+    .normal {
+        width: 100% !important;
+
+        .swiper-slide {
+            width: 100% !important;
+        }
+
+        .swiper-container {
+            height: auto !important;
+        }
     }
- /*    .slide-zoom .ng-star-inserted{
+
+    /*    .slide-zoom .ng-star-inserted{
       height: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
     } */
-    .borrar{
-      display: none!important;
+    .borrar {
+        display: none !important;
     }
-    .cabecera{
-      --background: #287195;
+
+    .cabecera {
+        --background: #287195;
         color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    .grid{
-      margin-left:40px;
+
+    .grid {
+        margin-left: 40px;
     }
-    .tarjeta{
-      border-top-right-radius: 20px;
-      margin-top:0!important;
-      margin-bottom:3px;
-      /* background:#F7FBFB; */
+
+    .tarjeta {
+        border-top-right-radius: 20px;
+        margin-top: 0 !important;
+        margin-bottom: 3px;
+        /* background:#F7FBFB; */
     }
-    .logoCura{
-      width: 150px;
-      height: auto;
+
+    .logoCura {
+        width: 150px;
+        height: auto;
     }
-    .alignVertical{
+
+    .alignVertical {
         display: flex;
         justify-content: center;
         align-items: center;
-        ion-icon{
-            color:#4A4A4A;
-            font-size:1.4em!important;
+
+        ion-icon {
+            color: #4A4A4A;
+            font-size: 1.4em !important;
         }
     }
-    .swiper-pagination{
-        margin-top:15px!important;
+
+    .swiper-pagination {
+        margin-top: 15px !important;
     }
-    .swiper-container-horizontal > .swiper-pagination-bullets{
-        padding-top:15px!important;
+
+    .swiper-container-horizontal>.swiper-pagination-bullets {
+        padding-top: 15px !important;
     }
-     .slide-zoom .ng-star-inserted{
+
+    .slide-zoom .ng-star-inserted {
         height: 40px;
     }
-    .turno{
-        color:#fff;
+
+    .turno {
+        color: #fff;
     }
-    .textoSalva{
-        color:#20668B;
+
+    .textoSalva {
+        color: #20668B;
         text-align: center;
         width: 80%;
-        margin-left:10%;
-        margin-top:100px;
-        font-size:1.1em;
+        margin-left: 10%;
+        margin-top: 100px;
+        font-size: 1.1em;
     }
-    
-      .slider .slider-pager {
+
+    .slider .slider-pager {
         text-align: right;
-     } 
-     .logoIrACuida{
-         width: 100px;
-     }
-     .title-ios{
-        margin-left:-45px!important;
     }
-    .consulta{
+
+    .logoIrACuida {
+        width: 100px;
+    }
+
+    .title-ios {
+        margin-left: -45px !important;
+    }
+
+    .consulta {
         background: #20668B;
-        .horas{
-            p{
+
+        .horas {
+            p {
                 background: #052F51;
-                color:#fff;
+                color: #fff;
             }
         }
     }
-    .teleconsulta{
-        background: #519DB9!important;
-          .horas{
-            p{
-              background: #f74f35;
-              color:#fff!important;
+
+    .teleconsulta {
+        background: #519DB9 !important;
+
+        .horas {
+            p {
+                background: #f74f35;
+                color: #fff !important;
             }
-          }
-      }
-    .sinPadding{
-        padding: 0!important;
+        }
     }
-    .divisor{
-        margin-top:5px;
+
+    .sinPadding {
+        padding: 0 !important;
     }
-    .iconoFlag{
+
+    .divisor {
+        margin-top: 5px;
+    }
+
+    .iconoFlag {
         display: flex;
         justify-content: center;
         align-items: center;
-        img{
-            width:35px;
+
+        img {
+            width: 35px;
         }
     }
-    ion-label{
-        color:#20668B!important;
+
+    ion-label {
+        color: #20668B !important;
     }
-    .select-text{
-        color:#20668B!important;
+
+    .select-text {
+        color: #20668B !important;
     }
-    .contenedorHoras{
+
+    .contenedorHoras {
         height: 50px;
+        margin-top: -10px;
     }
-    .dia{
-        margin-top:10px;
-        width:30px;
+
+    .dia {
+        margin-top: 15px;
+        width: 30px;
         height: 30px;
         font-size: .8em;
     }
-    .diasDoctor{
+
+    .diasDoctor {
         font-size: .9em;
     }
-    mat-expansion-panel-header{
-        ion-slides{
+
+    mat-expansion-panel-header {
+        ion-slides {
             height: 100px;
         }
     }
-    .horariosDisponibles{
-        width:100%;
+
+    .horariosDisponibles {
+        width: 100%;
+    }
+
+    .mat-expansion-panel {
+        background-color: #fff;
+        min-height: 60px;
+        box-shadow: none;
+    }
+
+    mat-form-field {
+        color: red !important;
+    }
+
+    mat-datepicker {
+        color: #287195;
     }

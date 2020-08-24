@@ -2,17 +2,15 @@
   <ion-toolbar color="primary" hideBackButton="true" persistent="true">
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
-      </ion-buttons>
+    </ion-buttons>
     <ion-title>
       <img class="logoCura" src="assets/imgs/curaBlanco.png" alt="">
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="goToCuida()"
-              slot="end"
-              clear >
-        <img  class="logoIrACuida" src="assets/imgs/logoCuidaWhite.png" alt="">
+    <!--    <ion-buttons slot="end">
+      <ion-button (click)="goToCuida()" slot="end" clear>
+        <img class="logoIrACuida" src="assets/imgs/logoCuidaWhite.png" alt="">
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 
 </ion-header>
@@ -22,41 +20,50 @@
   <div [scrollArea]="mycontent">
     <div id="busqueda">
       <ion-list padding>
-        <ion-item >
+        <ion-item>
           <ion-label position="floating">Busca por especialidad</ion-label>
-          <ion-select [(ngModel)]="id"
-                      #specialty (ionChange)="onChangueSpecialty(specialty.value)">
+          <ion-select [(ngModel)]="id" #specialty (ionChange)="onChangueSpecialty(specialty.value)">
             <ion-select-option [value]="specialty.id" *ngFor="let specialty of servicios">{{specialty.description}}
             </ion-select-option>
           </ion-select>
         </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Busca por doctor</ion-label>
+
+        <ion-searchbar showCancelButton="never" (keyup)="buscarDoctor()" [(ngModel)]="search"
+          placeholder="Busca por nombre">
+        </ion-searchbar>
+        <!-- <ion-item>
+           <ion-label position="floating">Busca por doctor</ion-label>
           <ion-input type="text" (keyup)="buscarDoctor()" [(ngModel)]="search"></ion-input>
-        </ion-item> 
-        
-     <!--    <mat-form-field>
+        </ion-item> -->
+
+
+        <!--    <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Busca por fecha">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field> -->
-  
+        <!-- <mat-form-field>
+          <mat-label>Busca por fecha</mat-label>
+          <input matInput [matDatepicker]="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field> -->
+
         <ion-item>
           <ion-label position="floating">Busca por fecha</ion-label>
           <ion-input type="date" (ionChange)="getDoctorsPerDay()" [(ngModel)]="fromDate"></ion-input>
         </ion-item>
-  
+
       </ion-list>
     </div>
   </div>
-  
+
   <div *ngIf="doctors ; else nohay">
     <ion-card *ngFor="let doctor of doctorsF " class="tarjeta">
-      <div [ngStyle]="{'display': doctor.hasAvailable ? 'block' : 'none'}">
+      <div [ngStyle]="{'display': doctor.isAvailable ? 'block' : 'none'}">
         <ion-row>
           <ion-col size="4" class="imageDoctor">
-            <img src="{{SERVERImage}}{{doctor.id}}.png" alt="">
+            <img src="{{SERVERImage}}{{doctor.id}}.png" (error)="errorHandler($event)" alt="">
           </ion-col>
           <ion-col size="8" right>
             <p class="doctor">{{ doctor.fullName | lowercase}}</p>
@@ -70,45 +77,46 @@
           <ion-col size="12">
             <mat-accordion>
               <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                              <ion-slides>
-                                      <ion-slide *ngFor="let available of doctor.availables">
-                                          <div class="centerItemsDays">
-                                              <a class="dia" (click)="expandedItem(doctor, available)">{{ available.date | date:'fullDate' :'es' | slice:0:3}}</a>
-                                              <p class="diasDoctor">{{ available.date | date:'dd':'es'}}</p>
-                                          </div>
-                                      </ion-slide>
-                                  </ion-slides>
-                      </mat-expansion-panel-header>
-                      <div class="row">
-                                <div class="horariosDisponibles">
-                                          <ion-col size="12">
-                                            <ion-row>
-                                              <ion-col size="3"   *ngFor="let hora of horas" class="contenedorHoras" (click)="goToFinancer(doctor,hora)" class="hora">
-                                                <div class="horas" *ngIf="hora.hour">
-                                                  <p>{{hora.hour | slice:0:5}}</p>
-                                                </div>
-                                                </ion-col>
-                                            </ion-row> 
-    
-                                                <div *ngIf="!horas"
-                                                     class="sinHorarioDisponible">
-                                                     no hay horarios disponibles
-                                                </div>
-                                              </ion-col>
-                                     
-                                  </div>
-                        </div>
-              </mat-expansion-panel> 
-          </mat-accordion>  
+                <mat-expansion-panel-header>
+                  <ion-slides>
+                    <ion-slide *ngFor="let available of doctor.availables">
+                      <div class="centerItemsDays">
+                        <a class="dia"
+                          (click)="expandedItem(doctor, available)">{{ available.date | date:'fullDate' :'es' | slice:0:3}}</a>
+                        <p class="diasDoctor">{{ available.date | date:'dd':'es'}}</p>
+                      </div>
+                    </ion-slide>
+                  </ion-slides>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="horariosDisponibles">
+                    <ion-col size="12">
+                      <ion-row>
+                        <ion-col size="3" *ngFor="let hora of horas" class="contenedorHoras"
+                          (click)="goToFinancer(doctor,hora)" class="hora">
+                          <div class="horas" *ngIf="hora.hour">
+                            <p>{{hora.hour | slice:0:5}}</p>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+
+                      <div *ngIf="!horas" class="sinHorarioDisponible">
+                        no hay horarios disponibles
+                      </div>
+                    </ion-col>
+
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
           </ion-col>
         </ion-row>
       </div>
     </ion-card>
   </div>
-      <div *ngIf="!doctors && doctors.length < 1">
-        <div>
-          <p class="textoSalva">No hay doctores disponibles para esta especialidad en este momento.... </p>
-        </div>
-      </div> 
+  <div *ngIf="!doctors && doctors.length < 1">
+    <div>
+      <p class="textoSalva">No hay doctores disponibles para esta especialidad en este momento.... </p>
+    </div>
+  </div>
 </ion-content>

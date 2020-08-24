@@ -10,11 +10,11 @@ export class GetDatesTeleService {
 
   constructor(public afs: AngularFirestore) {
     this.consultas = afs.collection<any>('consultas');
-   }
+  }
 
 
-  getDatesConsulta(idUser){
+  getDatesConsulta(idUser) {
     let id = parseInt(idUser);
-      return this.afs.collection('consultas', ref => ref.where('idUsuaio' ,'==', id)).valueChanges();
+    return this.afs.collection('consultas', ref => ref.where('uid', '==', id)).valueChanges();
   }
 }

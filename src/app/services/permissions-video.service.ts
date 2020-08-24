@@ -10,6 +10,7 @@ export class PermissionsVideoService {
 
   private SERVER = API_ENDPOINT;
   private url = `${this.SERVER}ebooking/token-paciente?appointmentid=`;
+  private urlAutho = `${this.SERVER}ebooking/token-paciente-contacto?patientid=`;
   //https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/ebooking/token-paciente?appointmentid=1251481
 
   constructor(public http: HttpClient) { }
@@ -26,4 +27,30 @@ export class PermissionsVideoService {
               }) */
     )
   }
+
+
+  getPermissionsVideoParent(appointmentid, autho) {
+    const authorization = localStorage.getItem('authorization');
+    let headers = new HttpHeaders({ "Authorization": authorization });
+
+    return this.http.get(this.url + appointmentid, { headers }).pipe(
+      map((resp: any) => {
+        return resp
+      })/* .catch(e =>{
+                console.log('error desde el servidor:',e);
+              }) */
+    )
+  }
+
+  getAuthoParent(patientId, appointmentid) {
+    const authorization = localStorage.getItem('authorization');
+    let headers = new HttpHeaders({ "Authorization": authorization });
+
+    return this.http.get(this.urlAutho + `${appointmentid}&appointmentid=${patientId}`, { headers }).pipe(
+      map((resp: any) => {
+        return resp
+      })
+    )
+  }
+
 }

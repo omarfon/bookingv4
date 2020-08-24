@@ -4,31 +4,37 @@
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>Detalle Cita</ion-title>
-        <ion-buttons slot="secondary">
-            <ion-button slot="end" clear (click)="getpermissions()">
-                <ion-icon name="videocam" color="danger"></ion-icon>
+        <ion-buttons slot="end">
+            <ion-button (click)="getpermissions()">
+                <ion-icon name="videocam" color="danger" class="iconSize"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content has-header="true">
     <ion-list>
-        <img id="profile-image" src="{{SERVERImage}}{{task.professional.id}}.png"
-            onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
-        <h3 class="nombreDoctor" text-center>{{ task.professional.fullName | lowercase }} </h3>
+        <img id="profile-image" src="{{SERVERImage}}{{task.professionalId}}.png" (error)="errorHandler($event)">
+        <h3 class="nombreDoctor text-center">{{ task.professionalName }} {{ task.professionalLastName1 }}
+            {{ task.professionalLastName2 }} </h3>
 
 
-        <ion-item>
+        <ion-item *ngIf="task.provisionId === 44">
             <ion-icon item-start><i class="fa fa-hospital-o" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Sede:</ion-label>
-            <ion-label *ngIf="task" class="blue"> {{ task.service.center.name | lowercase }}</ion-label>
+            <ion-label *ngIf="task" class="blue"> {{ task.centerName | lowercase }}</ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="task.provisionId === 845337">
+            <ion-icon item-start><i class="fa fa-hospital-o" aria-hidden="true"></i></ion-icon>
+            <ion-label class="heightNoventa">Consulta tipo:</ion-label>
+            <ion-label *ngIf="task" class="blue"> Teleorientación</ion-label>
         </ion-item>
 
         <ion-item>
             <ion-icon item-start><i class="fa fa-heartbeat" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Especialidad:</ion-label>
             <!-- <ion-label *ngIf="taskpa" class="blue"> {{ taskpa.service.basicService.description | lowercase }}</ion-label> -->
-            <ion-label *ngIf="task" class="blue"> {{ task.service.basicService.description | lowercase }}</ion-label>
+            <ion-label *ngIf="task" class="blue"> {{ task.basicServiceDescription | lowercase }}</ion-label>
         </ion-item>
 
         <ion-item>
@@ -50,7 +56,7 @@
             <ion-icon item-start><i class="fa fa-universal-access" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Seguro:</ion-label>
             <!-- <ion-label *ngIf="taskpa" class="blue"> {{ taskpa.plan.description | lowercase }}</ion-label> -->
-            <ion-label *ngIf="task" class="blue"> {{ task.plan.description | lowercase }}</ion-label>
+            <ion-label *ngIf="task" class="blue"> {{ task.planDescription | lowercase }}</ion-label>
         </ion-item>
     </ion-list>
     <ion-row padding>
@@ -59,8 +65,14 @@
         </ion-col>
         <ion-col>
             <ion-button (click)="back()" color="primary" expand="full">
-                <p class="volverTexto">VOLVER</p>
+                VOLVER
             </ion-button>
         </ion-col>
     </ion-row>
+    <ion-col *ngIf="task.provisionId === 845337">
+        <p class="teleconsultaText">
+            Recuerda conectarte unos minutos antes de tu consulta, dandole click a la cámara , luego entraras a espera
+            unos segundos.
+        </p>
+    </ion-col>
 </ion-content>

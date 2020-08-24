@@ -133,6 +133,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
+    path: 'register/:data',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
     path: 'my-dates',
     loadChildren: () => import('./pages/my-dates/my-dates.module').then(m => m.MyDatesPageModule)
   },

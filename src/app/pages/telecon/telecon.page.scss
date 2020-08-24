@@ -1,43 +1,90 @@
-ion-card{
-    height:auto;
+ion-card {
+    height: auto;
 }
-ion-card-title{
-    color:#1b6ca8;
-    margin-top:10px;
+
+ion-card-title {
+    color: #1b6ca8;
+    margin-top: 10px;
     margin-left: 10px;
     font-weight: 400;
 }
-.fecha{
+
+.fecha {
     text-align: right;
-    padding-bottom:20px!important;
+    padding-bottom: 20px !important;
     margin-left: 10px;
 }
-.anamnesis{
+
+.nombrePaciente {
+    font-weight: 600;
+    width: 80%;
+    font-size: size 1.1em;
+}
+
+.horaStyle {
+    font-size: .8em;
+    color: #1b6ca8;
+
+    span {
+        font-weight: 400;
+        color: #07487a;
+    }
+}
+
+.exams {
+    color: #07487a;
+}
+
+.notexam {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    color: #7c7c7c;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+.diagnostic {
     margin-left: 10px;
+
+    span {
+        background-color: #07487a;
+        width: 35%;
+        display: block;
+        padding: .2em .5em;
+        border-radius: 5px;
+        color: #fff;
+    }
 }
-.title{
-    background:#79bbee;
-    color:#000;
+
+.title {
+    background: #79bbee;
+    color: #000;
 }
-.final{
-    border-bottom:2px solid #1b6ca8;
+
+.final {
+    border-bottom: 2px solid #1b6ca8;
 }
-.inicio{
+
+.inicio {
     background: #1b6ca8;
-    color:#fff;
+    color: #fff;
     padding: .5em .5em;
-    border-radius:10px;
+    border-radius: 10px;
 }
-mat-expansion-panel{
-    background: #edf2f7!important;
+
+mat-expansion-panel {
+    background: #edf2f7 !important;
     border-top-right-radius: 30px;
-  }
-  .titlePrincipal{
-      text-align: center;
-      font-size: 1.3em;
-      font-weight: 400;
-      margin-top:10px;
-  }
-  .center{
-      text-align: center;
-  }
+}
+
+.titlePrincipal {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.center {
+    text-align: center;
+}

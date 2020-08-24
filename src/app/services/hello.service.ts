@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { API_ENDPOINT } from 'src/environments/environment';
 
 @Injectable({
@@ -12,48 +12,49 @@ export class HelloService {
   doctores: any[] = [];
 
   private SERVER = API_ENDPOINT;
- private apiUrl = `${this.SERVER}graphql`;
- private apiUrlOne = `${this.SERVER}`;
+  private apiUrl = `${this.SERVER}graphql`;
+  private apiUrlOne = `${this.SERVER}`;
 
   constructor(public http: HttpClient) { }
 
-  getServicios(){
+  getServicios() {
     const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    let headers = new HttpHeaders({ "Authorization": authorization });
     const center_id = 1;
-    return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services`, {headers}).pipe(
-              map((resp:any)=>{
-                return resp;
-            })
+    return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services`, { headers }).pipe(
+      map((resp: any) => {
+        return resp;
+      })
     )
-}
-
-
-  getDoctorsPerId(id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
-    const center_id = 1;
-
-    return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services/${id}/professionals` ,  {headers}).pipe(
-                    map((resp:any)=>{
-                    this.doctores = resp.centers[0].services[0].professionals;
-                    return this.doctores;
-                    })
-            )
   }
 
-  getAvailablesPerDoctor(id, serviceId, fromDate, toDate){
- /*    console.log('datos en el provider:', id ,serviceId, fromDate); */
+
+  getDoctorsPerId(id) {
     const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    let headers = new HttpHeaders({ "Authorization": authorization });
+    const center_id = 1;
+
+    return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services/${id}/professionals`, { headers }).pipe(
+      map((resp: any) => {
+        this.doctores = resp.centers[0].services[0].professionals;
+        return this.doctores;
+      })
+    )
+  }
+
+  getAvailablesPerDoctor(id, escogido, serviceId, fromDate, toDate) {
+    /*    console.log('datos en el provider:', id ,serviceId, fromDate); */
+    const authorization = localStorage.getItem('authorization');
+    let headers = new HttpHeaders({ "Authorization": authorization });
 
     const center_id = 1;
-    return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services/${serviceId}/professionals/${id}/availables?from_date=${fromDate}&to_date=${toDate}`,  {headers}).pipe(
-            map((resp:any)=>{
-                return resp.centers[0].services[0].professionals[0].availables;
-              })
+    return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/basicservices/${serviceId}/professionals/${id}/provision/${escogido}/availables?from_date=${fromDate}&to_date=${toDate}`, { headers }).pipe(
+      /* return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services/${serviceId}/professionals/${id}/availables?from_date=${fromDate}&to_date=${toDate}`,  {headers}).pipe( */
+      map((resp: any) => {
+        return resp.centers[0].services[0].professionals[0].availables;
+      })
 
-           )
+    )
   }
 
 }

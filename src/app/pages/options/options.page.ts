@@ -14,12 +14,25 @@ export class OptionsPage implements OnInit {
   ngOnInit() {
   }
 
-  goToCardPage(){
-    this.router.navigate(['/card']);
-   /*  this.navCtrl.push(CardPage); */
+  goToCardPage() {
+    const datos = {
+      escogido: 44
+    }
+    const data = JSON.stringify(datos);
+    this.router.navigate(['/card', data]);
+    /*  this.navCtrl.push(CardPage); */
   }
-  goToCardCuidaPage(){
+
+  goToCardPageTele() {
+    const datos = {
+      escogido: 845337
+    }
+    const data = JSON.stringify(datos);
+    this.router.navigate(['card', data])
+  }
+
+  goToCardCuidaPage() {
     this.router.navigate(['card-cuida']);
   }
-  
+
 }

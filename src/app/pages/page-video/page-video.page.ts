@@ -62,17 +62,29 @@ export class PageVideoPage implements OnInit {
   }
 
   getPermissionVideo() {
-    let patientId = this.dataPermissions.appointmentId;
-    this.permissionSrv.getPermissionsVideo(patientId).subscribe(data => {
-      console.log('data', data);
-      this.channel = data.channel;
-      this.token = data.token;
-      this.localCallId = data.uid.toString();
-      this.uid = data.uid;
-      this.initVideo();
-    }, err => {
-      console.log(err)
-    })
+    let appoinmentid = this.dataPermissions.appointmentId;
+    let patientId = this.dataPermissions.patientId;
+    if (this.dataPermissions.familiar === true) {
+      this.permissionSrv.getAuthoParent(patientId, appoinmentid).subscribe(async data => {
+        console.log('data', data);
+        this.channel = data.channel;
+        this.token = data.token;
+        this.localCallId = data.uid.toString();
+        this.uid = data.uid;
+        this.initVideo();
+      });
+    } else {
+      this.permissionSrv.getPermissionsVideo(appoinmentid).subscribe(data => {
+        console.log('data', data);
+        this.channel = data.channel;
+        this.token = data.token;
+        this.localCallId = data.uid.toString();
+        this.uid = data.uid;
+        this.initVideo();
+      }, err => {
+        console.log(err)
+      })
+    }
   }
 
   initVideo() {
@@ -243,8 +255,8 @@ export class PageVideoPage implements OnInit {
     this.localStream.on(StreamEvent.MediaAccessDenied, () => {
       console.log('access Denied');
     });
-    this.localStream.stop();
     this.client.leave();
+    this.localStream.stop();
     this.client.off;
 
     console.log('cerrar localStream');

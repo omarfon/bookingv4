@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { TeleconPageRoutingModule } from './telecon-routing.module';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { TeleconPage } from './telecon.page';
 
@@ -15,8 +16,9 @@ import { TeleconPage } from './telecon.page';
     FormsModule,
     IonicModule,
     TeleconPageRoutingModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
   declarations: [TeleconPage]
 })
-export class TeleconPageModule {}
+export class TeleconPageModule { }

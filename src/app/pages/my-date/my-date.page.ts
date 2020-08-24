@@ -14,6 +14,7 @@ export class MyDatePage implements OnInit {
   public task;
   public tasks;
   public SERVERImage = API_IMAGES;
+  public appointmentid;
 
   constructor(
     public toastCtrl: ToastController,
@@ -29,12 +30,17 @@ export class MyDatePage implements OnInit {
 
     let data = this.routes.snapshot.paramMap.get('datos');
     this.task = JSON.parse(data);
-    /* console.log(this.dataArmada); */
+    console.log('task en ', this.task);
     /* this.date = this.dataArmada.appointmentId; */
   }
 
   ngOnInit() {
   }
+
+  errorHandler(event) {
+    event.target.src = "https://1.bp.blogspot.com/-p8EFlkXywyE/UDZvWTyr1bI/AAAAAAAAEU0/xL8pmKN1KOY/s1600/facebook.png"
+  }
+
 
   async desactivateTask(task) {
     const confirm = await this.alertCtrl.create({
@@ -46,7 +52,7 @@ export class MyDatePage implements OnInit {
           handler: data => {
             const idPrin = localStorage.getItem('idTokenUser');
             console.log(localStorage.getItem('idTokenUser'));
-            if (this.task.patient.id == idPrin) {
+            if (this.task.familiar === false) {
               this.appointmentProvider.destroyAppointment(task).subscribe(data => {
                 this.router.navigate(['my-dates']);
                 /* this.navCtrl.push(MyDatesPage); */
@@ -72,22 +78,66 @@ export class MyDatePage implements OnInit {
   }
 
   getpermissions() {
-    const appointmentid = this.task.appointmentId;
-    this.permissionSrv.getPermissionsVideo(appointmentid).subscribe((data: any) => {
+    this.appointmentid = this.task.appointmentId;
+    if (this.task.familiar === true) {
+      this.permissionSrv.getAuthoParent(this.appointmentid, this.task.patientId).subscribe(async data => {
+        console.log('data', data);
+        if (data.token === "") {
+          const data = JSON.stringify(this.task);
+          this.router.navigate(['waiting-video', data])
+          console.log('enviar a pagina de espera');
+        }
+        else if (data.token === 'finalizado') {
+          const alert = await this.alertCtrl.create({
+            header: 'Cita Terminada',
+            subHeader: 'Esta cita ya ha finalizado',
+            buttons: [
+              {
+                text: 'ok'
+              }
+            ]
+          });
+          await alert.present();
+          this.router.navigate(['home']);
+        } else {
+          const data = JSON.stringify(this.task);
+          this.router.navigate(['page-video', data])
+        }
+      })
+    } else {
+      this.permisions();
+    }
+  }
+
+  permisions() {
+    this.permissionSrv.getPermissionsVideo(this.appointmentid).subscribe(async (data: any) => {
       console.log('data pedida desde my-date:', data);
-      if (data.token != "") {
-        const data = JSON.stringify(this.task);
-        this.router.navigate(['page-video', data])
-      } else {
+      if (data.token === "") {
         const data = JSON.stringify(this.task);
         this.router.navigate(['waiting-video', data])
         console.log('enviar a pagina de espera');
+      }
+      else if (data.token === 'finalizado') {
+        const alert = await this.alertCtrl.create({
+          header: 'Cita Terminada',
+          subHeader: 'Esta cita ya ha finalizado',
+          buttons: [
+            {
+              text: 'ok'
+            }
+          ]
+        });
+        await alert.present();
+        this.router.navigate(['home']);
+      } else {
+        const data = JSON.stringify(this.task);
+        this.router.navigate(['page-video', data])
       }
     })
   }
 
   back() {
-    this.router.navigate(['my-dates']);
+    this.router.navigate(['home']);
   }
 
 }
