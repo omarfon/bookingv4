@@ -4,15 +4,6 @@
       border-top-left-radius: 45px;
     }
 
-    /* --background:rgba(0 0 0 .5); */
-    // ion-content{
-    //   width:90%;
-    //   margin-left:5%;
-    //   margin-top:30px;
-    //   height: 90%;
-    //   text-align:center;
-    //   border-radius:10px;
-    // }
     .tituloFamiliar {
       color: #00B6A3;
       text-align: left;
@@ -35,13 +26,11 @@
       height: 28px;
       text-align: right;
       width: 25px;
-
-      ion-icon {
-        color: #fff;
-      }
     }
 
     .contenedorButton {
+      margin-top: 10px;
+      font-weight: 400;
       text-align: right;
     }
 

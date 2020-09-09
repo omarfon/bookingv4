@@ -69,7 +69,7 @@ export class CreateparentPage implements OnInit {
     console.log('modal controler dismiss');
   }
 
-  saveData() {
+  async saveData() {
     this.desabilitadobutton = false;
     if (this.formFamily.valid) {
       let datos = this.formFamily.value;
@@ -92,8 +92,6 @@ export class CreateparentPage implements OnInit {
         },
         documentNumber: datos.dni
       }
-
-
       this.crudPvr.createParent(data).subscribe(async data => {
         const loading = await this.loadingCtrl.create({
           message: 'Guardando datos de familiar.'

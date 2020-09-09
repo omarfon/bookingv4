@@ -11,7 +11,7 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content has-header="true">
+<ion-content has-header="true" class="padding">
     <ion-list>
         <img id="profile-image" src="{{SERVERImage}}{{task.professionalId}}.png" (error)="errorHandler($event)">
         <h3 class="nombreDoctor text-center">{{ task.professionalName }} {{ task.professionalLastName1 }}
@@ -60,10 +60,15 @@
         </ion-item>
     </ion-list>
     <ion-row padding>
-        <ion-col>
-            <ion-button *ngIf="task" expand="full" color="warning" (click)='desactivateTask(task)'>ELIMINAR</ion-button>
+        <ion-col size="8">
+            <ion-button *ngIf="task.provisionId !== 845337" expand="full" color="warning"
+                (click)='desactivateTask(task)'>ELIMINAR</ion-button>
         </ion-col>
-        <ion-col>
+        <ion-col size="8">
+            <ion-button *ngIf="task.provisionId === 845337" expand="full" color="warning"
+                (click)='desactivateTask(task)'>CITA NO CANCELABLE</ion-button>
+        </ion-col>
+        <ion-col size="4">
             <ion-button (click)="back()" color="primary" expand="full">
                 VOLVER
             </ion-button>

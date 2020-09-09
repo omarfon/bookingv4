@@ -85,6 +85,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/myparents/myparents.module').then(m => m.MyparentsPageModule)
   },
   {
+    path: 'myparents/:data',
+    loadChildren: () => import('./pages/myparents/myparents.module').then(m => m.MyparentsPageModule)
+  },
+  {
     path: 'options',
     loadChildren: () => import('./pages/options/options.module').then(m => m.OptionsPageModule)
   },
@@ -102,6 +106,10 @@ const routes: Routes = [
   },
   {
     path: 'recipe',
+    loadChildren: () => import('./pages/recipe/recipe.module').then(m => m.RecipePageModule)
+  },
+  {
+    path: 'recipe/:data',
     loadChildren: () => import('./pages/recipe/recipe.module').then(m => m.RecipePageModule)
   },
   {

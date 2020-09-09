@@ -1,35 +1,34 @@
 <ion-header>
   <ion-toolbar color="primary" hideBackButton="true" persistent="true">
-      <ion-buttons slot="start">
-          <ion-menu-button menu="first"></ion-menu-button>
-      </ion-buttons>
-      <ion-buttons *ngIf="nombre"
-                        slot="end">
-      </ion-buttons>
-    </ion-toolbar>
-    <div class="contenedorDatos">
-      <div>
-        <ion-row class="containerDatos">
-          <ion-col size="7" class="nombreUsuario">
-            {{nombre}}
-          </ion-col>
-      <!--     <ion-col size="2" class="containerIcon">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="nombre" slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="contenedorDatos">
+    <div>
+      <ion-row class="containerDatos">
+        <ion-col size="7" class="nombreUsuario">
+          {{nombre}}
+        </ion-col>
+        <!--     <ion-col size="2" class="containerIcon">
             <ion-icon name="notifications"></ion-icon>  
             <ion-badge color="danger">4</ion-badge>
           </ion-col> -->
-          <ion-col size="2"></ion-col> 
-          <ion-col size="2" (click)="goToData()">
-            <div class="usuarioImg"></div>
-          </ion-col> 
-        </ion-row>  
-      </div>
+        <ion-col size="2"></ion-col>
+        <ion-col size="2" (click)="goToData()">
+          <div class="usuarioImg"></div>
+        </ion-col>
+      </ion-row>
     </div>
+  </div>
 
 </ion-header>
 
-<ion-content padding >
-<h4 class="tituloSliderOpciones">Funcionalidades Booking</h4>
-<!-- <ion-slides>
+<ion-content padding>
+  <h4 class="tituloSliderOpciones">Funcionalidades Booking</h4>
+  <!-- <ion-slides>
   <ion-slide class="containerOptions"
               >
       
@@ -46,54 +45,55 @@
   </ion-slide>
 
 </ion-slides> -->
-<ion-row>
-  <ion-col>
-    <div>
-      <div class="cajaContenedora">
-        <ion-card class="containerRounded" (click)="goToAppointments()">
-          <img src="assets/imgs/intro/appointments.svg" alt="">
-        </ion-card>
-        <ion-badge *ngIf="citapendiente" color="danger" item-end>{{citapendiente}}</ion-badge>
-        <p class="textoCard">Citas</p>
+  <ion-row>
+    <ion-col>
+      <div>
+        <div class="cajaContenedora">
+          <ion-card class="containerRounded" (click)="goToAppointments()">
+            <img src="assets/imgs/intro/appointments.svg" alt="">
+          </ion-card>
+          <ion-badge *ngIf="citapendiente" color="danger" item-end>{{citapendiente}}</ion-badge>
+          <p class="textoCard">Citas</p>
+        </div>
       </div>
-    </div>
-  </ion-col>
-  <ion-col>
-    <div>
-      <div class="cajaContenedora">
-        <ion-card class="containerRounded" (click)="goToDates()">
-          <img src="assets/imgs/intro/medicines.svg" alt="">
-        </ion-card>
-        <ion-badge *ngIf="recipendiente" item-end>{{recipendiente}}</ion-badge>
-        <p class="textoCard">Recetas</p>
-    </div>
-  </div>
-</ion-col>
-  <ion-col>
-    <div >
-      <div class="cajaContenedora">
-        <ion-card class="containerRounded" (click)="goToParents()">
-          <img src="assets/imgs/intro/parents.png" alt="">
-        </ion-card>
-        <ion-badge *ngIf="recipendiente" slot="start">{{dependens}}</ion-badge>
-        <p class="textoCard">Parientes</p>
-     </div>
-    </div>
-  </ion-col>
-  <ion-col>
-    <div >
-      <div class="cajaContenedora">
-        <ion-card class="containerRounded" (click)="goToTele()">
-          <img src="assets/imgs/intro/tele.png" alt="">
-        </ion-card>
-        <ion-badge *ngIf="recipendiente" slot="start">{{cantConsultas}}</ion-badge>
-        <p class="textoCard">Teleconsultas</p>
-     </div>
-    </div>
-  </ion-col>
-</ion-row>
+    </ion-col>
+    <ion-col>
+      <div>
+        <div class="cajaContenedora">
+          <ion-card class="containerRounded" (click)="goToDates()">
+            <img src="assets/imgs/intro/medicines.svg" alt="">
+          </ion-card>
+          <ion-badge *ngIf="recipendiente" item-end>{{recipendiente}}</ion-badge>
+          <p class="textoCard">Recetas</p>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        <div class="cajaContenedora">
+          <ion-card class="containerRounded" (click)="goToParents()">
+            <img src="assets/imgs/intro/parents.png" alt="">
+          </ion-card>
+          <ion-badge *ngIf="recipendiente" slot="start">{{dependens}}</ion-badge>
+          <p class="textoCard">Parientes</p>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        <div class="cajaContenedora">
+          <ion-card class="containerRounded" (click)="goToTele()">
+            <!-- <ion-card class="containerRounded" (click)="openVideo()"> -->
+            <img src="assets/imgs/intro/tele.png" alt="">
+          </ion-card>
+          <ion-badge *ngIf="recipendiente" slot="start">{{cantConsultas}}</ion-badge>
+          <p class="textoCard">Teleconsultas</p>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
 
-<!-- <h4 class="tituloSliderOpciones">Lo nuevo en Aviva</h4>
+  <!-- <h4 class="tituloSliderOpciones">Lo nuevo en Aviva</h4>
 <ion-slides class="containerNoticias" [options]="slideOpts">
   <ion-slide>
     <ion-card >
@@ -116,13 +116,9 @@
   </ion-slide>
 </ion-slides>   -->
 
-<div size="12" class="padding">
-  <ion-button class="principal" 
-              size="large"
-              expand="block"
-              color="secondary"
-  (click)="goToOptions()">
+  <div size="12" class="padding">
+    <ion-button class="principal" size="large" expand="block" color="secondary" (click)="goToOptions()">
       reservar cita
     </ion-button>
-</div>
+  </div>
 </ion-content>

@@ -31,6 +31,7 @@ import { NgxAgoraModule } from 'ngx-agora';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ComponentsModule } from './components/components.module';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
 
@@ -51,13 +52,15 @@ import { ComponentsModule } from './components/components.module';
     MatIconModule,
     MatInputModule,
     ComponentsModule,
+
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: LOCALE_ID, useValue: 'es' },
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    InAppBrowser,
   ],
   bootstrap: [AppComponent]
 })

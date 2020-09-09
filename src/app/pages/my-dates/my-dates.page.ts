@@ -53,13 +53,13 @@ export class MyDatesPage implements OnInit {
       this.nombre = this.nombrePatient.split(separador, 1);
       this.nombreCortado = this.nombrePatient.slice(0, 1);
     } else {
-      console.log("seguir normal es invitado")
+      /* console.log("seguir normal es invitado") */
     }
 
     // CON ESTA LLAMADA JALAMOS A LOS FAMILIARES
     this.dependentsPvr.getDependens().subscribe(data => {
       this.dependens = data;
-      console.log('los dependientes:', this.dependens);
+      /* console.log('los dependientes:', this.dependens); */
     });
 
     // CON ESTA LLAMADA LAS CITAS DEL USUARIO PRINCIPAL
@@ -70,7 +70,7 @@ export class MyDatesPage implements OnInit {
       this.mostrar = this.tasks.length;
     },
       err => {
-        console.error('algo fallo')
+        /* console.error('algo fallo') */
       });
 
 
@@ -78,16 +78,16 @@ export class MyDatesPage implements OnInit {
     this.dependentsProvider.getOldDependetsDay().subscribe((data: any) => {
       this.citaspasadas = data;
       this.sinpasadas = this.citaspasadas.length;
-      console.log('citas pasadas:', this.citaspasadas);
+      /* console.log('citas pasadas:', this.citaspasadas); */
     });
 
     // AQUI LLAMAMOS A LAS CITAS PENDIENTES DE LOS FAMILIARES- AQUI VIENEN TODOS LOS FAMILIARES TENGAN CITAS PENDIENTES O  NO
     this.dependentsProvider.getdependesDay().subscribe((data: any) => {
       this.tasksParents = data;
-      console.log('las citas de los familiares:', this.tasksParents);
+      /* console.log('las citas de los familiares:', this.tasksParents); */
 
       this.conCitas = this.tasksParents.filter(t => t.appointments.length > 0);
-      console.log('conCitas', this.conCitas);
+      /* console.log('conCitas', this.conCitas); */
     });
   }
 
@@ -104,20 +104,20 @@ export class MyDatesPage implements OnInit {
       this.nombre = nombrePatient.split(separador, 1);
       this.nombreCortado = nombrePatient.slice(0, 1);
     } else {
-      console.log("seguir normal es invitado")
+      /* console.log("seguir normal es invitado") */
     }
 
     // CON ESTA LLAMADA JALAMOS A LOS FAMILIARES
     this.dependentsPvr.getDependens().subscribe(data => {
       this.dependens = data;
-      console.log('los dependientes:', this.dependens);
+      /* console.log('los dependientes:', this.dependens); */
     });
 
     // CON ESTA LLAMADA LAS CITAS DEL USUARIO PRINCIPAL
     this.appointmentProvider.getAppointmentsPast().subscribe(data => {
       this.citas = 'miscitas';
       this.tasks = data;
-      console.log('los tasks usuario principal:', this.tasks);
+      /* console.log('los tasks usuario principal:', this.tasks); */
       this.mostrar = this.tasks.length;
     },
       err => {
@@ -128,16 +128,16 @@ export class MyDatesPage implements OnInit {
     this.dependentsProvider.getOldDependetsDay().subscribe((data: any) => {
       this.citaspasadas = data;
       this.sinpasadas = this.citaspasadas.length;
-      console.log('citas pasadas:', this.citaspasadas);
+      /* console.log('citas pasadas:', this.citaspasadas); */
     });
 
     // AQUI LLAMAMOS A LAS CITAS PENDIENTES DE LOS FAMILIARES- AQUI VIENEN TODOS LOS FAMILIARES TENGAN CITAS PENDIENTES O  NO
     this.dependentsProvider.getdependesDay().subscribe((data: any) => {
       this.tasksParents = data;
-      console.log('las citas de los familiares:', this.tasksParents);
+      /* console.log('las citas de los familiares:', this.tasksParents); */
 
       this.conCitas = this.tasksParents.filter(t => t.appointments.length > 0);
-      console.log('conCitas', this.conCitas);
+      /* console.log('conCitas', this.conCitas); */
     });
   }
 
@@ -146,7 +146,7 @@ export class MyDatesPage implements OnInit {
     task.familiar = true;
     let datos = JSON.stringify(task);
     this.router.navigate(['my-date', datos]);
-    console.log(task.appointmentId);
+    /*    console.log(task.appointmentId); */
   }
 
   goToDetailsTask(task) {
@@ -154,17 +154,17 @@ export class MyDatesPage implements OnInit {
     task.familiar = false;
     let datos = JSON.stringify(task);
     this.router.navigate(['my-date', datos]);
-    console.log(task.appointmentId);
+    /* console.log(task.appointmentId); */
   }
 
   goToRecipe(citaspa) {
-    console.log('citaspa', citaspa);
+    /* console.log('citaspa', citaspa); */
     let id = citaspa.encuentro;
-    console.log('id:', id);
+    /*  console.log('id:', id); */
     this.recipePvr.getRecipes(id).subscribe((data: any) => {
       this.recipe = data;
       const datos = JSON.stringify(this.recipe);
-      console.log('this.recipe:', this.recipe);
+      /* console.log('this.recipe:', this.recipe); */
       this.router.navigate(['recipe', datos])
     });
   }
@@ -175,7 +175,7 @@ export class MyDatesPage implements OnInit {
       this._citaspasadas = data;
       this.citaspasadas = this._citaspasadas;
       this.sinpasadas = this.citaspasadas.length;
-      console.log('citas pasadas:', this.citaspasadas);
+      /* console.log('citas pasadas:', this.citaspasadas); */
     });
   }
 
@@ -183,7 +183,7 @@ export class MyDatesPage implements OnInit {
     const id = dep.patientId;
     this.dependentsProvider.getDependentDay(id).subscribe(data => {
       this.$citaspasadas = data;
-      console.log('citas de dependientes jalada:', this.$citaspasadas);
+      /* console.log('citas de dependientes jalada:', this.$citaspasadas); */
       this.citaspasadas = this.$citaspasadas[0].encuentros;
     })
   }

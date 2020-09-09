@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AppoinmentService } from 'src/app/services/appoinment.service';
-import { API_IMAGES } from 'src/environments/environment';
+import { API_IMAGES, environment } from 'src/environments/environment';
 import { ToastController, AlertController, ModalController, ActionSheetController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PermissionsVideoService } from 'src/app/services/permissions-video.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { OPENTELE } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-date',
@@ -15,6 +17,7 @@ export class MyDatePage implements OnInit {
   public tasks;
   public SERVERImage = API_IMAGES;
   public appointmentid;
+  permisionsData: any;
 
   constructor(
     public toastCtrl: ToastController,
@@ -24,7 +27,8 @@ export class MyDatePage implements OnInit {
     public modalCtrl: ModalController,
     public router: Router,
     public routes: ActivatedRoute,
-    public permissionSrv: PermissionsVideoService) {
+    public permissionSrv: PermissionsVideoService,
+    public iab: InAppBrowser) {
 
 
 
@@ -81,10 +85,11 @@ export class MyDatePage implements OnInit {
     this.appointmentid = this.task.appointmentId;
     if (this.task.familiar === true) {
       this.permissionSrv.getAuthoParent(this.appointmentid, this.task.patientId).subscribe(async data => {
+        this.permisionsData = data;
         console.log('data', data);
         if (data.token === "") {
           const data = JSON.stringify(this.task);
-          this.router.navigate(['waiting-video', data])
+          this.router.navigate(['waiting-video', data]);
           console.log('enviar a pagina de espera');
         }
         else if (data.token === 'finalizado') {
@@ -100,8 +105,9 @@ export class MyDatePage implements OnInit {
           await alert.present();
           this.router.navigate(['home']);
         } else {
-          const data = JSON.stringify(this.task);
-          this.router.navigate(['page-video', data])
+          /* const data = JSON.stringify(this.task);
+          this.router.navigate(['page-video', data]) */
+          this.openVideo();
         }
       })
     } else {
@@ -112,15 +118,16 @@ export class MyDatePage implements OnInit {
   permisions() {
     this.permissionSrv.getPermissionsVideo(this.appointmentid).subscribe(async (data: any) => {
       console.log('data pedida desde my-date:', data);
+      this.permisionsData = data;
       if (data.token === "") {
         const data = JSON.stringify(this.task);
-        this.router.navigate(['waiting-video', data])
-        console.log('enviar a pagina de espera');
+        this.router.navigate(['waiting-video', data]);
+        /* console.log('enviar a pagina de espera'); */
       }
       else if (data.token === 'finalizado') {
         const alert = await this.alertCtrl.create({
           header: 'Cita Terminada',
-          subHeader: 'Esta cita ya ha finalizado',
+          subHeader: 'Esta cita ya ha finalizado, puedes ver el resumen en teleconsultas',
           buttons: [
             {
               text: 'ok'
@@ -131,10 +138,28 @@ export class MyDatePage implements OnInit {
         this.router.navigate(['home']);
       } else {
         const data = JSON.stringify(this.task);
-        this.router.navigate(['page-video', data])
+        this.openVideo();
       }
     })
   }
+
+  openVideo() {
+    this.permisionsData;
+    const url = OPENTELE;
+    const appId = encodeURIComponent(this.task.appointmentId);
+    const professional = encodeURIComponent(this.task.professionalId);
+    const professionalName = encodeURIComponent(this.task.professionalName);
+    const professionalLastName1 = encodeURIComponent(this.task.professionalLastName1);
+    const professionalLastName2 = encodeURIComponent(this.task.professionalLastName2);
+    const basicServiceDescription = encodeURIComponent(this.task.basicServiceDescription);
+    const patientId = encodeURIComponent(this.task.patientId);
+    const channel = encodeURIComponent(this.permisionsData.channel);
+    console.log('resultado de la data para permisos:', this.permisionsData);
+    let options = "location=yes,hidden=yes,beforeload=yes";
+    const browser = this.iab.create(`${url}/telecon/%7B"appointmentId":${appId},"basicServiceDescription":"${basicServiceDescription}","professionalId":${professional},"professionalName":"${professionalName}","professionalLastName1":"${professionalLastName1}","professionalLastName2":"${professionalLastName2}","patientId":${patientId},"channel":"${channel}"%7D`, '_system', options);
+
+  }
+
 
   back() {
     this.router.navigate(['home']);

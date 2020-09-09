@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { API_IMAGES } from 'src/environments/environment';
 import { NavController, AlertController } from '@ionic/angular';
 import { PermissionsVideoService } from 'src/app/services/permissions-video.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { OPENTELE } from 'src/environments/environment';
 
 
 @Component({
@@ -16,12 +18,14 @@ export class WaitingVideoPage implements OnInit {
   public SERVERImage = API_IMAGES;
   token: any;
   resultado;
+  public permisionsData: any;
 
   constructor(public routes: ActivatedRoute,
     public router: Router,
     public nav: NavController,
     public permissionSrv: PermissionsVideoService,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public iab: InAppBrowser) {
     const data = this.routes.snapshot.paramMap.get('data');
     this.dataDoctor = JSON.parse(data);
     console.log('thisdataDoctor:', this.dataDoctor);
@@ -44,6 +48,22 @@ export class WaitingVideoPage implements OnInit {
     event.target.src.style = "background-image:url(https://1.bp.blogspot.com/-p8EFlkXywyE/UDZvWTyr1bI/AAAAAAAAEU0/xL8pmKN1KOY/s1600/facebook.png); background-repeat: no-repeat; background-size:cover; height: 100vh;"
   }
 
+  openVideo() {
+    console.log('resultado de la data para permisos:', this.permisionsData, this.dataDoctor);
+    const url = OPENTELE;
+    const appId = encodeURIComponent(this.dataDoctor.appointmentId);
+    const professional = encodeURIComponent(this.dataDoctor.professionalId);
+    const professionalName = encodeURIComponent(this.dataDoctor.professionalName);
+    const professionalLastName1 = encodeURIComponent(this.dataDoctor.professionalLastName1);
+    const professionalLastName2 = encodeURIComponent(this.dataDoctor.professionalLastName2);
+    const basicServiceDescription = encodeURIComponent(this.dataDoctor.basicServiceDescription);
+    const patientId = encodeURIComponent(this.dataDoctor.patientId);
+    const channel = encodeURIComponent(this.permisionsData.channel);
+    let options = "location=yes,hidden=yes,beforeload=yes,hideurlbar=yes";
+    const browser = this.iab.create(`${url}/telecon/%7B"appointmentId":${appId},"basicServiceDescription":"${basicServiceDescription}","professionalId":${professional},"professionalName":"${professionalName}","professionalLastName1":"${professionalLastName1}","professionalLastName2":"${professionalLastName2}","patientId":${patientId},"channel":"${channel}"%7D`, '_system', options);
+
+  }
+
 
   getPermissionVideo() {
     let patientId = this.dataDoctor.patientId;
@@ -51,6 +71,7 @@ export class WaitingVideoPage implements OnInit {
     if (this.dataDoctor.familiar === true) {
       this.permissionSrv.getAuthoParent(appoinmentid, patientId).subscribe(async data => {
         this.token = data.token
+        this.permisionsData = data;
         if (this.token === "") {
           console.log('aun no llega token');
         }
@@ -71,8 +92,9 @@ export class WaitingVideoPage implements OnInit {
         else {
           /*  clearInterval(this.resultado); */
           const data = JSON.stringify(this.dataDoctor);
-          this.router.navigate(['page-video', data]);
+          this.openVideo();
           clearInterval(this.resultado);
+          this.goToBack();
         }
         console.log(data);
       }, err => {
@@ -80,6 +102,7 @@ export class WaitingVideoPage implements OnInit {
       })
     } else {
       this.permissionSrv.getPermissionsVideo(appoinmentid).subscribe(async data => {
+        this.permisionsData = data;
         this.token = data.token
         if (this.token === "") {
           console.log('aun no llega token');
@@ -100,9 +123,9 @@ export class WaitingVideoPage implements OnInit {
         }
         else {
           /*  clearInterval(this.resultado); */
-          const data = JSON.stringify(this.dataDoctor);
-          this.router.navigate(['page-video', data]);
+          this.openVideo();
           clearInterval(this.resultado);
+          this.goToBack();
         }
         console.log(data);
       }, err => {

@@ -13,114 +13,132 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-parent-prime.page.scss'],
 })
 export class CreateParentPrimePage implements OnInit {
-  private desabilitadobutton = true;
+  public desabilitadobutton = true;
   public formFamily: FormGroup;
   public createParents;
   public _parents;
   public actual;
+  public doctor;
+  public available;
+  public hora;
+  public price;
+  public depe;
 
   constructor(public router: Router,
-              public fb: FormBuilder,
-              public dependentsPvr: DependensService,
-              public loadingCtrl: LoadingController,
-              public crudPvr: CrudparentService,
-              public alertCtrl: AlertController,
-              public modalCtrl: ModalController) {
-                this.actual = moment().format('YYYY-MM-DD');
-    
+    public fb: FormBuilder,
+    public dependentsPvr: DependensService,
+    public loadingCtrl: LoadingController,
+    public crudPvr: CrudparentService,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController) {
+
+  }
+
+  ngOnInit() {
+    this.actual = moment().format('YYYY-MM-DD');
+
     this.formFamily = this.fb.group({
-      name            : ['', [ Validators.required ]],
-      paternal_surname: ['', [ Validators.required ]],
-      maternal_surname: ['', [ Validators.required ]],
-      gender          : ['',[ Validators.required ]],
-      date_of_birth   : ['',[ Validators.required ]],
-      type_document   : ['', [ Validators.required ]],
-      dni             : ['', [ Validators.required, Validators.minLength(8), Validators.maxLength(8) ]],
-      // user_id         : [ localStorage.getItem('idTokenUser') ],
-      kindred         : ['',[ Validators.required ]]
-      // email           : [ String(Math.floor(Math.random() * 9e15)) + '@ipsum.com' ],
-      // password        : [ String(Math.floor(Math.random() * 9e15)) ]
+      name: ['', [Validators.required]],
+      paternal_surname: ['', [Validators.required]],
+      maternal_surname: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      date_of_birth: ['', [Validators.required]],
+      type_document: ['', [Validators.required]],
+      dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      kindred: ['', [Validators.required]]
     });
 
     console.log('la data de formulario:', this.formFamily);
-              }
-
-  ngOnInit() {
   }
 
-  closeModal(){
-    this.modalCtrl.dismiss({
-      'dismissed': true
-    });
+  closeModal() {
+    this.modalCtrl.dismiss();
   }
 
 
 
-  async saveData(){
+  async saveData() {
     this.desabilitadobutton = false;
-    if(this.formFamily.valid){
+    if (this.formFamily.valid) {
 
-      const loading = await this.loadingCtrl.create({
-        message: 'Guardando datos de familiar.'
-      });
+      /*       const loading = await this.loadingCtrl.create({
+              message: 'Guardando datos de familiar.'
+            }); */
       let datos = this.formFamily.value;
-      let data:any ={
-          relation :{
-            id : 4,
-            name : datos.kindred
-          },
-          name : datos.name,
-          surname1 : datos.paternal_surname,
-          surname2 : datos.maternal_surname,
-          birthdate : moment(datos.date_of_birth).format('YYYY-MM-DD'),
-          gender : {
-            id :2,
-            name: datos.gender
-          },
-          documentType : {
-            id: 1,
-            name:datos.type_document
-          },
-          documentNumber : datos.dni
-        }
-        await loading.present();
-      this.crudPvr.createParent(data).subscribe(data =>{
+      let data: any = {
+        relation: {
+          id: 4,
+          name: datos.kindred
+        },
+        name: datos.name,
+        surname1: datos.paternal_surname,
+        surname2: datos.maternal_surname,
+        birthdate: moment(datos.date_of_birth).format('YYYY-MM-DD'),
+        gender: {
+          id: 2,
+          name: datos.gender
+        },
+        documentType: {
+          id: 1,
+          name: datos.type_document
+        },
+        documentNumber: datos.dni
+      }
+      /*       await loading.present(); */
+      this.crudPvr.createParent(data).subscribe(async data => {
+        const loading = await this.loadingCtrl.create({
+          message: 'Guardando datos de familiar.'
+        });
         this.createParents = data;
-        this.dependentsPvr.getDependens().subscribe(dat =>{
-            this._parents = dat;
-            
-           /* this.navCtrl.push(MyparentsPage) */
-          });
+        await loading.present();
+        this.dependentsPvr.getDependens().subscribe(dat => {
+          this._parents = dat;
+          let datos =
+          {
+            parents: this._parents,
+            doctor: this.doctor,
+            available: this.available,
+            proposedate: this.available,
+            hora: this.hora,
+            depe: this.depe,
+            price: this.price
+          }
+          let dataArmada = JSON.stringify(datos)
+          this.router.navigate(['myparents', dataArmada])
+          this.modalCtrl.dismiss();
           loading.dismiss();
-          this.router.navigate(['home']);
-          this.closeModal();
+        });
       });
-    }else{
+    } else {
       this.errorCreation();
       this.desabilitadobutton = true;
     }
-   
+
   }
 
-  async errorCreation(){
-    const alert = await this.alertCtrl.create({
-      header:'Error en Creación',
+  async errorCreation() {
+    let alert = await this.alertCtrl.create({
+      header: 'Error en Creación',
       message: 'talvez faltan datos en el formulario o no estan todos los campos llenos',
-      buttons:[
+      buttons: [
         {
-          text:'reintentar',
-          role:'cancel'
-        },{
+          text: 'reintentar',
+          role: 'cancel'
+        }, {
           text: 'salir',
-          handler:()=>{
-            this.router.navigate(['myparents']);
-            /* this.navCtrl.setRoot(MyparentsPage); */
+          handler: () => {
+            this.router.navigate(['home']);
+            /* this.navCtrl.setRoot(HomePage); */
           }
         }
-      
+
       ]
     });
     await alert.present();
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad CreateparentPage');
   }
 
 }

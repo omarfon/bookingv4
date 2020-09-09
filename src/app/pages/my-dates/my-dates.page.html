@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary" hideBackButton="true">
+  <ion-toolbar color="tertiary" hideBackButton="true">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -10,13 +10,13 @@
       </ion-button> -->
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar color="primary">
-    <ion-segment [(ngModel)]="citas" color="secondary">
+  <ion-toolbar color="tertiary">
+    <ion-segment scrollable [(ngModel)]="citas" color="secondary">
       <ion-segment-button value="miscitas">
-        <p>Proximas citas</p>
+        <label>Proximas citas</label>
       </ion-segment-button>
       <ion-segment-button value="citaspasadas">
-        <p>Citas Pasadas</p>
+        <label>Citas Pasadas</label>
       </ion-segment-button>
       <!-- <ion-segment-button value="citasfamiliares">
         <p>citas familiares</p>
@@ -30,7 +30,7 @@
     <div *ngSwitchCase="'miscitas'">
       <ion-list *ngFor='let task of tasks'>
         <ion-card class="bordeDerecho" *ngIf="task; else notasks">
-          <ion-row>
+          <ion-row class="nopadding">
             <ion-col size="4">
               <ion-avatar item-start>
                 <img src="{{SERVERImage}}{{task.professionalId}}.png" (error)="errorHandler($event)">
@@ -44,21 +44,18 @@
                 {{task.professionalLastName2}}</h3>
               <p class="especialidad" text-wrap> <span>Especialidad:</span>
                 {{ task.basicServiceDescription | lowercase }}</p>
-              <p class="sede" *ngIf="task.provisionId === 44">Sede: {{ task.centerName | lowercase }}</p>
-              <p class="sede" *ngIf="task.provisionId === 845337">Sede: Teleconsulta</p>
+              <p class="sede" *ngIf="task.provisionDescription !== 'TELEORIENTACION'">Sede:
+                {{ task.centerName | lowercase }}</p>
+              <p class="sede" *ngIf="task.provisionDescription === 'TELEORIENTACION'">TELECONSULTA</p>
             </ion-col>
             <ion-col size="12" class="gris">
               <ion-row>
-                <ion-col size="5" class="diaCita">
-                  <p class="day">{{ task.appointmentDateTime | date:'EEEE d , MMMM ' : 'es-ES' }} </p>
+                <ion-col size="9" class="diaCita">
+                  <p class="day">{{ task.appointmentDateTime | date:'d MMMM ' : 'es-ES' }} </p>
                 </ion-col>
-                <ion-col size="5" class="hourCita">
+                <ion-col size="3" class="hourCita">
                   <p class="hour">{{ task.appointmentDateTime | date: 'HH:mm' }}</p>
                 </ion-col>
-                <ion-col size="1"></ion-col>
-                <!--     <ion-col size="1">
-                    <ion-icon name="videocam"></ion-icon>
-                  </ion-col> -->
               </ion-row>
 
             </ion-col>
@@ -67,9 +64,9 @@
       </ion-list>
       <div>
         <div *ngIf="conCitas">
-          <ion-list *ngFor='let task of conCitas[0].appointments'>
-            <ion-card class="bordeDerecho">
-              <ion-card-content>
+          <div *ngFor="let citas of conCitas">
+            <ion-list *ngFor='let task of citas.appointments'>
+              <ion-card class="bordeDerecho">
                 <ion-row class="nopadding">
                   <ion-col size="4">
                     <ion-avatar item-start>
@@ -86,29 +83,26 @@
                           {{task.professionalName}} {{task.professionalLastName1}} {{task.professionalLastName2}}</h3>
                         <p class="especialidad">{{ task.basicServiceDescription | lowercase }}
                         </p>
-                        <p class="sede">{{ task.centerName | lowercase }}</p>
+                        <p class="sede" *ngIf="task.provisionDescription !== 'TELEORIENTACION'">
+                          {{ task.centerName | lowercase }}</p>
+                        <p class="sede" *ngIf="task.provisionDescription === 'TELEORIENTACION'">TELECONSULTA</p>
                       </ion-col>
                     </ion-row>
                   </ion-col>
                   <ion-col size="12" class="gris">
                     <ion-row>
-                      <ion-col size="5" class="diaCita">
-                        <p class="day">{{ task.appointmentDateTime | date:'EEEE d , MMMM ' : 'es' }}
-                        </p>
+                      <ion-col size="9" class="diaCita">
+                        <p class="day">{{ task.appointmentDateTime | date:'d MMMM ' : 'es-ES' }} </p>
                       </ion-col>
-                      <ion-col size="5" class="hourCita">
+                      <ion-col size="3" class="hourCita">
                         <p class="hour">{{ task.appointmentDateTime | date: 'HH:mm' }}</p>
                       </ion-col>
-                      <ion-col size="1"></ion-col>
-                      <!-- <ion-col size="1">
-                        <ion-icon color="danger" name="videocam"></ion-icon>
-                      </ion-col> -->
                     </ion-row>
                   </ion-col>
                 </ion-row>
-              </ion-card-content>
-            </ion-card>
-          </ion-list>
+              </ion-card>
+            </ion-list>
+          </div>
         </div>
       </div>
       <div *ngIf="conCitas < 1 && tasks.length < 1" class="contenedorSinCitas">
@@ -122,68 +116,74 @@
     <div *ngSwitchCase="'citaspasadas'">
       <ion-slides class="containerDepends">
         <ion-slide>
-          <ion-button class="botonConImagen" (click)="getDatesUser()">
-            <img src="" alt="">
-            {{nombreCortado}}
-          </ion-button>
-          <p class="principalName">{{nombre}}</p>
+          <div class="row">
+            <ion-col size="12">
+              <div class="botonConImagen" (click)="getDatesUser()">
+                <p>{{nombreCortado}}</p>
+              </div>
+            </ion-col>
+            <ion-col size="12">
+              <p class="principalName">{{nombre}}</p>
+            </ion-col>
+          </div>
         </ion-slide>
 
         <ion-slide *ngFor="let dep of dependens">
-          <ion-button color="secondary" class="botonConImagen" (click)="getDatesDepends(dep)">
-            <p>{{dep.name | slice:0:1}}</p>
-            <img src="" alt="">
-          </ion-button>
-          <p class="nombreUsuarios">{{dep.name}}</p>
+          <div class="row">
+            <ion-col>
+              <div color="secondary" class="botonConImagenParent" (click)="getDatesDepends(dep)">
+                <p>{{dep.name | slice:0:1}}</p>
+              </div>
+            </ion-col>
+            <ion-col>
+              <p class="nombreUsuarios">{{dep.name}}</p>
+            </ion-col>
+          </div>
         </ion-slide>
       </ion-slides>
       <ion-list *ngFor='let citaspa of citaspasadas'>
         <ion-card class="bordeDerecho" *ngIf="citaspasadas ">
-          <ion-item>
-            <ion-row>
-              <ion-col size="4">
-                <ion-avatar item-start>
-                  <img src="{{SERVERImage}}{{citaspa.codigo_personal}}.png" (error)="errorHandler($event)">
+          <ion-row class="nopadding">
+            <ion-col size="4">
+              <ion-avatar item-start>
+                <img src="{{SERVERImage}}{{citaspa.codigo_personal}}.png" (error)="errorHandler($event)">
 
-                </ion-avatar>
-              </ion-col>
-              <ion-col size="8">
-                <h3 class="tituloCitas" text-wrap>{{citaspa.apellido1 | lowercase}} {{citaspa.apellido2 | lowercase}}
-                  {{citaspa.nombre | lowercase}}</h3>
-                <p class="especialidad" text-wrap>CMP: {{ citaspa.codigo_colegiado | lowercase }}</p>
-                <p class="especialidad" text-wrap>{{ citaspa.servicio_basico | lowercase }}</p>
-                <p class="sede">Sede: {{ citaspa.nombre_centro | lowercase }}</p>
-              </ion-col>
-              <ion-grid>
-                <ion-row *ngIf="citaspa.tiene_receta == 1">
-                  <ion-col size="10" class="centrado">
-                    <p>receta para esta cita:</p>
-                  </ion-col>
-                  <ion-col size="2">
-                    <ion-button clear class="iconoDerecha">
-                      <ion-icon name="attach" (click)="goToRecipe(citaspa)">
-                      </ion-icon>
-                    </ion-button>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <ion-col size="12" class="gris">
-                <ion-row>
-                  <ion-col class="diaCita">
-                    <p class="day">{{ citaspa.date | slice:0:10 | date:'EEEE d , MMMM ' : 'es' }} </p>
-                  </ion-col>
-                  <ion-col class="hourCita">
-                    <p class="hour">{{ citaspa.hora | slice:11:16}}</p>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-            </ion-row>
-          </ion-item>
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="8">
+              <h3 class="tituloCitasPasadas" text-wrap>{{citaspa.apellido1 | lowercase}}
+                {{citaspa.apellido2 | lowercase}}
+                {{citaspa.nombre | lowercase}}</h3>
+              <p class="especialidad" text-wrap>CMP: {{ citaspa.codigo_colegiado | lowercase }}</p>
+              <p class="especialidad" text-wrap>{{ citaspa.servicio_basico | lowercase }}</p>
+              <p class="sede">Sede: {{ citaspa.nombre_centro | lowercase }}</p>
+            </ion-col>
+            <ion-grid>
+              <!--     <ion-row *ngIf="citaspa.tiene_receta == 1">
+                <ion-col size="10" class="centrado">
+                  <p>receta para esta cita:</p>
+                </ion-col>
+                <ion-col size="2">
+                  <ion-button clear class="iconoDerecha" (click)="goToRecipe(citaspa)">
+                    <ion-icon name="attach">
+                    </ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row> -->
+            </ion-grid>
+            <ion-col size="12" class="gris">
+              <ion-row>
+                <ion-col class="diaCita">
+                  <p class="day">{{ citaspa.date | slice:0:10 | date:'d MMMM ' : 'es' }} </p>
+                </ion-col>
+                <ion-col class="hourCita">
+                  <p class="hour">{{ citaspa.hora | slice:11:16}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
         </ion-card>
         <div *ngIf="!citaspasadas.encuentros && !citaspasadas">
-          <!-- <div class="imagenSinCitas">
-              <img src="assets/imgs/sinCitas.png" alt="">
-            </div> -->
           <p class="textoCitasNulo">No tienes citas pasadas</p>
         </div>
       </ion-list>

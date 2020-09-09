@@ -313,12 +313,14 @@ export class PayPage implements OnInit {
         if (culqiObj['closeEvent'] != null) {
           console.log('Formulario culqi cerrado', culqiObj['closeEvent']);
           clearInterval(this.i);
+          clearInterval(this.check);
           loadingPago.dismiss();
         }
         if (culqiObj['error'] != undefined) {
           console.log('Formulario culqi error', culqiObj['error']);
           /* this.deleteDate(); */
           clearInterval(this.i);
+          clearInterval(this.check);
           this.loadingCtrl.dismiss();
         }
       }, 30000);
@@ -454,7 +456,6 @@ export class PayPage implements OnInit {
                 handler: () => {
                   this.payCulqiCharges = true;
                   this.desactivadoBoton = true;
-                  this.i
                   this.router.navigate(['options']);
                 }
               },
@@ -481,7 +482,6 @@ export class PayPage implements OnInit {
                 handler: () => {
                   this.payCulqiCharges = true;
                   this.desactivadoBoton = true;
-                  this.i
                   this.router.navigate(['options']);
                 }
               },
