@@ -19,18 +19,18 @@ export const environment = {
   }
 };
 
-export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2/";
+/* export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2/";
 export const API_NOTAS = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2/mama/";
 export const API_IMAGES = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/img/professionals/";
 export const TOKENCULQI = "pk_test_e85SD7RVrWlW0u7z";
-export const OPENTELE = "https://dev.aviva.pe";
+export const OPENTELE = "https://dev.aviva.pe"; */
 
 
-/* export const API_IMAGES = "https://api.aviva.pe/middleware2/img/professionals/";
+export const API_IMAGES = "https://api.aviva.pe/middleware2/img/professionals/";
 export const API_ENDPOINT = "https://api.aviva.pe/middleware2/api/v2/";
 export const API_NOTAS = "https://api.aviva.pe/middleware2/api/v2/mama";
 export const TOKENCULQI = "pk_live_CyArY9ygzb0d7oZb";
-export const OPENTELE = "https://aviva.pe";*/
+export const OPENTELE = "https://aviva.pe";
 
 /*
  * For easier debugging in development mode, you can import the following file

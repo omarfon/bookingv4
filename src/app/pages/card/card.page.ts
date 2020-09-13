@@ -69,6 +69,8 @@ export class CardPage implements OnInit {
   mostrar: boolean = true;
   tipoConsulta;
   escogido: any;
+  public boxID: any;
+  public boxCaID: any;
 
   constructor(
     public modalCtrl: ModalController,
@@ -122,6 +124,7 @@ export class CardPage implements OnInit {
     });
 
   }
+
 
   errorHandler(event) {
     event.target.src = "https://1.bp.blogspot.com/-p8EFlkXywyE/UDZvWTyr1bI/AAAAAAAAEU0/xL8pmKN1KOY/s1600/facebook.png"
@@ -204,6 +207,13 @@ export class CardPage implements OnInit {
       return isOk;
     });
 
+  }
+
+  stateShow(item: any, index, items) {
+    console.log(item, index, items);
+    this.boxID = item;
+    this.boxCaID = index;
+    this.selectedDay = items;
   }
 
   async expandedItem(doctor, available) {
