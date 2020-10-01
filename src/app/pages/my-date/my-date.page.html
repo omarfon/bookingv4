@@ -59,7 +59,7 @@
             <ion-label *ngIf="task" class="blue"> {{ task.planDescription | lowercase }}</ion-label>
         </ion-item>
     </ion-list>
-    <ion-row padding *ngIf="task.provisionId !== 845337">
+    <ion-row padding *ngIf="task.pagado === 'no'">
         <ion-col size="6">
             <ion-button expand="full" color="warning" (click)='desactivateTask(task)'>ELIMINAR</ion-button>
         </ion-col>
@@ -69,9 +69,9 @@
             </ion-button>
         </ion-col>
     </ion-row>
-    <ion-row padding *ngIf="task.provisionId === 845337">
+    <ion-row padding *ngIf="task.pagado === 'yes'">
         <ion-col size="8">
-            <ion-button expand="full" color="warning">CITA NO CANCELABLE</ion-button>
+            <ion-button (click)="openModalData()" expand="full" color="warning">CITA NO CANCELABLE</ion-button>
         </ion-col>
         <ion-col size="4">
             <ion-button (click)="back()" color="primary" expand="full">
@@ -79,12 +79,12 @@
             </ion-button>
         </ion-col>
     </ion-row>
-    <ion-col *ngIf="task.provisionId !== 845337">
+    <ion-col *ngIf="task.pagado === 'no'">
         <p class="teleconsultaText">
             Recuerda llegar 30 minutos antes para que puedas hacer tu preconsulta y tener una consulta puntual.
         </p>
     </ion-col>
-    <ion-col *ngIf="task.provisionId === 845337">
+    <ion-col *ngIf="task.pagado === 'yes'">
         <p class="teleconsultaText">
             Recuerda conectarte unos minutos antes de tu consulta, dandole click a la cámara , luego entraras a espera
             unos segundos.

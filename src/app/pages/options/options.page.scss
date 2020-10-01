@@ -6,7 +6,8 @@
   margin-left: 15%;
   margin-bottom: 10px;
   margin-top: 10px;
-  font-weight: 200;
+  font-weight: 400;
+  line-height: 1.1em;
 }
 
 .contenedorCura {
@@ -24,6 +25,10 @@
     width: 180px;
     /* margin-left:-10px; */
   }
+}
+
+ion-content {
+  --background: #f1f3f8;
 }
 
 .contenedorCuida {

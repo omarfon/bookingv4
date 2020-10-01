@@ -45,6 +45,18 @@ export class MyDatePage implements OnInit {
     event.target.src = "https://1.bp.blogspot.com/-p8EFlkXywyE/UDZvWTyr1bI/AAAAAAAAEU0/xL8pmKN1KOY/s1600/facebook.png"
   }
 
+  async openModalData() {
+    let alert = await this.alertCtrl.create({
+      header: 'Esta cita no se puede eliminar',
+      subHeader: 'para mayor información comunicate a nuestro call center al número (01) 7154600 y te ayudaremos al respecto',
+      buttons: [
+        {
+          text: 'Entiendo'
+        }
+      ]
+    });
+    await alert.present();
+  }
 
   async desactivateTask(task) {
     const confirm = await this.alertCtrl.create({

@@ -1,261 +1,304 @@
-ion-header{
-    height: 180px!important;
-    background: #2E4C6D!important;
-    border-bottom-right-radius: 45px;
-    border-bottom-left-radius: 25px;
-    box-shadow:none ;
-    background: none;
-    margin-bottom:20px;
-  }
-  .toolbar-background{
-    background: #2E4C6D!important;
-  }
-.NombreBienvenida{
+ion-header {
+  height: 180px !important;
+  background: #2E4C6D !important;
+  border-bottom-right-radius: 45px;
+  border-bottom-left-radius: 25px;
+  box-shadow: none;
+  background: none;
+/*   margin-bottom: 20px; */
+}
+
+.toolbar-background {
+  background: #2E4C6D !important;
+}
+
+.NombreBienvenida {
   font-size: 1.4em;
   color: #fff;
   font-weight: 600;
-  width:70%;
+  width: 70%;
   float: right;
-  margin-right:10%;
-  margin-top:10px;
+  margin-right: 10%;
+  margin-top: 10px;
   text-align: right;
 }
-  ion-content{
-    margin-top:10px!important;
-    background: #EDF5FE!important;
-  }
- .iconoReceta{
-   text-align: center;
-   border-right: .2px solid #00B6A3;
+
+ion-content {
+  /* margin-top: 10px !important; */
+  --background: #f1f3f8 !important;
+}
+
+.iconoReceta {
+  text-align: center;
+  border-right: .2px solid #00B6A3;
+
   //  height: 90%;
-   h4{
-     color:grey;
-     text-align: center;
-     margin-top:10px;
-   }
-   ion-icon{
-     color:#007198;
-     font-size:3em;
-   }
- }
- .dia{
-   font-size:3.5em;
-   font-weight: 600;
-   color:#00B6A3;
- }
- .mes{
-  margin-top:20px;
-   color:#00B6A3;
-   font-size:1.1em;
- }
- .cuadrados{
+  h4 {
+    color: grey;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  ion-icon {
+    color: #007198;
+    font-size: 3em;
+  }
+}
+
+.dia {
+  font-size: 3.5em;
+  font-weight: 600;
+  color: #00B6A3;
+}
+
+.mes {
+  margin-top: 20px;
+  color: #00B6A3;
+  font-size: 1.1em;
+}
+
+.cuadrados {
   height: 60px;
-  background:#007198;
-  width:90%;
-  margin-left:5%;
-  color:#ffffff;
+  background: #007198;
+  width: 90%;
+  margin-left: 5%;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction:column;
+  flex-direction: column;
   border-radius: 20px;
-    p{
-      // margin-top:-5px;
-      font-weight: 600;
-      font-size:.9em;
-      color:#ffffff;
-      margin-bottom:5px;
-    }
-    .cantidad{
-      color:#fff;
-      font-weight:400;
-      font-size:.9em;
-      margin-top:0;
 
-    }
+  p {
+    // margin-top:-5px;
+    font-weight: 600;
+    font-size: .9em;
+    color: #ffffff;
+    margin-bottom: 5px;
   }
-  .nombrePastilla{
-  color:#2E4C6D;
-  font-size:.9em;
-  font-weight: 600;
-  margin-bottom:5px;
-  text-align: right;
-  margin-right:10px;
-  line-height: 1.2em;
-  }
-  .nombrePastillaAlterna{
-    color:#00B6A3;
-    font-size:.8em;
+
+  .cantidad {
+    color: #fff;
     font-weight: 400;
-    margin-top:10px;
-    margin-bottom:5px;
-    text-align: right;
-    margin-right:10px;
-    }
-.cantidadDeDias, .inicio{
-  color:#444D4D;
-  font-size:.8em;
+    font-size: .9em;
+    margin-top: 0;
+
+  }
 }
-.tituloDeLasTomas{
-  color:#444D4D;
-  font-size:1.1em!important;
-  font-weight:400;
+
+.nombrePastilla {
+  color: #2E4C6D;
+  font-size: .9em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: right;
+  margin-right: 10px;
+  line-height: 1.2em;
+}
+
+.nombrePastillaAlterna {
+  color: #00B6A3;
+  font-size: .8em;
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.cantidadDeDias,
+.inicio {
+  color: #444D4D;
+  font-size: .8em;
+}
+
+.tituloDeLasTomas {
+  color: #444D4D;
+  font-size: 1.1em !important;
+  font-weight: 400;
   text-align: center;
-  margin-bottom:5px;
-  margin-top:0;
+  margin-bottom: 5px;
+  margin-top: 0;
 }
-img{
-   width:45px!important;
-   height: auto;
-   margin-top:10px;
-   margin-bottom:10px;
+
+img {
+  width: 45px !important;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-.down{
+
+.down {
   margin-bottom: 20px;
   // border-bottom: .5px solid #DFDFDF;
 }
-.contenedorDatos{
+
+.contenedorDatos {
   height: 120px;
-  margin-bottom:2em;
+  margin-bottom: 2em;
 }
 
-.especialidad{
-  margin-top:5px;
+.especialidad {
+  margin-top: 5px;
   margin-right: 20px;
-  color:#007198;
+  color: #007198;
   font-weight: 400;
-  font-size:.9em;
-  margin-left:10px;
+  font-size: .9em;
+  margin-left: 10px;
 }
-#cajaDatosCita{
-  margin-top:15px;
+
+#cajaDatosCita {
+  margin-top: 15px;
 }
-.resultado{
-  color:#444D4D;
+
+.resultado {
+  color: #444D4D;
   font-weight: 400;
-  font-size:1.2em;
-  margin-top:-5px;
-  margin-left:10px;
+  font-size: 1.2em;
+  margin-top: -5px;
+  margin-left: 10px;
 }
-.medicina{
-  color:#BABCC2;
-  margin-left:10px;
-  font-size:1em;
-  margin-top:-5px;
+
+.medicina {
+  color: #BABCC2;
+  margin-left: 10px;
+  font-size: 1em;
+  margin-top: -5px;
 }
-.top{
-  margin-top:10px;
+
+.top {
+  margin-top: 10px;
 }
-.doctor{
-  margin-top:10px;
+
+.doctor {
+  margin-top: 10px;
 }
-.iconoReceta{
+
+.iconoReceta {
   text-align: center;
   border-right: .2px solid #444D4D;
   height: 100px;
-  h4{
-    color:grey;
+
+  h4 {
+    color: grey;
     text-align: center;
-    margin-top:10px;
+    margin-top: 10px;
   }
-  ion-icon{
-    color:#007198;
-    font-size:3em;
+
+  ion-icon {
+    color: #007198;
+    font-size: 3em;
   }
 }
-.dia{
-  margin-top:20px;
-  font-size:4em;
+
+.dia {
+  margin-top: 20px;
+  font-size: 4em;
   font-weight: 600;
 }
-.mes{
-  font-size:1.2em;
-  margin-top:10px;
-  margin-bottom:20px!important;
+
+.mes {
+  font-size: 1.2em;
+  margin-top: 10px;
+  margin-bottom: 20px !important;
   text-align: center;
   text-transform: capitalize;
 }
-.cantidadDeDias{
-  margin-top:35px;
-  font-size:3em;
+
+.cantidadDeDias {
+  margin-top: 35px;
+  font-size: 3em;
   font-weight: 600;
-  color:#BABCC2;
-  margin-top:0;
-  margin-bottom:0;
-}
-.textoAlternativo{
-    color:#BABCC2;
-    font-size:1em;
-    margin-top:0;
-    margin-bottom:0;
-    text-align: right;
-    margin-right: 10px;
-}
-.containerIconAndDays{
-    // border:1px solid #444D4D;
-    background: #e4e7e7;
-    text-align: center;
-    .containerImgIcon{
-      height: 70px;
-      min-height: 70px;
-      img{
-        text-shadow: 2px 2px #444D4D;
-      }
-    }
-}
-.dias{
-  margin-top:15px;
-  font-size: .8em;
-  line-height: normal;
-  color:#BABCC2;
-}
-.inicio{
-  color:#444D4D;
-  text-align: right;
-  margin-top:10px;
-  margin-right: 10px;
-}
-ion-card-header{
-  padding:0 16px!important;
-  box-sizing: border-box!important;
-}
-.containerDatosPastilla{
-  box-sizing: border-box;
-  overflow:auto;
-}
-.textoVerReceta{
-  color:#007198;
+  color: #BABCC2;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-mat-expansion-panel{
-  background: #edf2f7!important;
+.textoAlternativo {
+  color: #BABCC2;
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.containerIconAndDays {
+  // border:1px solid #444D4D;
+  background: #e4e7e7;
+  text-align: center;
+
+  .containerImgIcon {
+    height: 70px;
+    min-height: 70px;
+
+    img {
+      text-shadow: 2px 2px #444D4D;
+    }
+  }
+}
+
+.dias {
+  margin-top: 15px;
+  font-size: .8em;
+  line-height: normal;
+  color: #BABCC2;
+}
+
+.inicio {
+  color: #444D4D;
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+ion-card-header {
+  padding: 0 16px !important;
+  box-sizing: border-box !important;
+}
+
+.containerDatosPastilla {
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.textoVerReceta {
+  color: #007198;
+}
+
+mat-expansion-panel {
+  background: #edf2f7 !important;
   border-top-right-radius: 30px;
 }
-.norecipes{
+
+.norecipes {
   font-size: 1.4em;
-  color:#287195;
+  color: #287195;
   text-align: center;
-  margin-top:20vh;
+  margin-top: 20vh;
 }
+
 /* .containerCards{
   margin-top:150px!important;
 } */
-ion-card{
-  border-bottom-right-radius: 30px!important;
-}
-.cantidadRecetas{
-    color:#fff;
-    font-size: 1.2em;
-    float: right;
-    width:80%;
-    margin-right: 10%;
-    text-align: right;
-    font-weight: 200;
-}
-.containerDatosBasicos{
-  margin-bottom:20px;
-}
-ion-toolbar{
-  background: #2E4C6D!important;
+ion-card {
+  border-bottom-right-radius: 30px !important;
 }
 
+.cantidadRecetas {
+  color: #fff;
+  font-size: 1.2em;
+  float: right;
+  width: 80%;
+  margin-right: 10%;
+  text-align: right;
+  font-weight: 200;
+}
+
+.containerDatosBasicos {
+  margin-bottom: 20px;
+}
+
+ion-toolbar {
+  background: #2E4C6D !important;
+}

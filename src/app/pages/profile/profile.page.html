@@ -1,9 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Mis datos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label><span>Nombre:</span><br>{{datosPaciente.nombre}} {{datosPaciente.apellido1}}
+        {{datosPaciente.apellido2}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><span>Email:</span><br>{{datosPaciente.email}} </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <span>Documento:</span>
+        <br>{{datosPaciente.numeroDocumento}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <span>Fecha Nacimiento:</span>
+        <br>{{datosPaciente.fecha_nac}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <span>Telefono:</span>
+        <br>{{datosPaciente.telefono1}}</ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

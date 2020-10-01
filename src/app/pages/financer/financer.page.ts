@@ -6,6 +6,7 @@ import { AppoinmentService } from 'src/app/services/appoinment.service';
 import { DependensService } from 'src/app/services/dependens.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateparentPage } from '../createparent/createparent.page';
+import { CrudparentService } from 'src/app/services/crudparent.service';
 
 
 @Component({
@@ -79,10 +80,12 @@ export class FinancerPage implements OnInit {
     public loadingCtrl: LoadingController,
     public dependentsPvr: DependensService,
     public router: Router,
-    public routes: ActivatedRoute) {
+    public routes: ActivatedRoute,
+    public crudPrv: CrudparentService) {
     const data = this.routes.snapshot.paramMap.get('data');
     this.dataArmada = JSON.parse(data);
     this.available = this.dataArmada.proposedate;
+    this.prestacion = this.dataArmada.prestacion[0];
     console.log(data);
   }
 
@@ -137,13 +140,18 @@ export class FinancerPage implements OnInit {
   }
 
 
-  planesPaciente() {
+  async planesPaciente() {
+    const loading = await this.loadingCtrl.create({
+      message: 'cargando financiadores'
+    });
+    await loading.present()
     let centerId = this.hora.params.centerId;
     let servicio_id = this.hora.params.serviceId;
     let prestacion_id = this.hora.params.provisionId;
     let medico_id = this.doctor.id;
     this.financierProvider.getPlanesPaciente(centerId, servicio_id, prestacion_id, medico_id, this.available).subscribe(data => {
       this.planes = data;
+      loading.dismiss();
       console.log('this.planes:', this.planes);
     });
   }
@@ -224,11 +232,52 @@ export class FinancerPage implements OnInit {
     await modal.present();
   }
 
-  acceptFinancer(plan) {
+  async acceptFinancer(plan) {
+    if (plan.siteds === 1) {
+      this.paquete = true;
+      this.financer = false
+      const alert = await this.alertCtrl.create({
+        header: 'Reserva con seguro',
+        subHeader: 'podrás registrar tu cita y pagar en local, el monto a cobrar será el copago de tu aseguradora',
+        buttons: [
+          {
+            text: 'entiendo'
+          }
+        ]
+      });
+      alert.present();
+    } else {
+      this.paquete = false;
+      this.financer = true;
+    }
     this.plan = plan;
     this.nomark = true;
-    this.financer = true;
-    this.paquete = false;
+    this.desabilitado = true;
+    this.plan = plan;
+    this.price = plan.precio[0].total;
+    console.log('el plan:', plan);
+  }
+
+  async acceptFinancerPaquete(plan) {
+    if (plan.codigo_garante_pk === 1) {
+      this.paquete = true;
+      this.financer = false
+      const alert = await this.alertCtrl.create({
+        header: 'Reserva con plan materno',
+        subHeader: 'Podras registrar tu consulta con los beneficios de tu plan seleccionado.',
+        buttons: [
+          {
+            text: 'entiendo'
+          }
+        ]
+      });
+      alert.present();
+    } else {
+      this.paquete = false;
+      this.financer = true;
+    }
+    this.plan = plan;
+    this.nomark = true;
     this.desabilitado = true;
     this.plan = plan;
     this.price = plan.precio[0].total;
@@ -299,8 +348,151 @@ export class FinancerPage implements OnInit {
 
   doSubmitData() {
     let data = this.parents
-    /* this.viewCtrl.dismiss(data); */
     console.log('la data pasado por el modal:', data);
   }
+
+
+  next() {
+    if (this.prestacion == 44) {
+      let provisionId = this.prestacion;
+      console.log(provisionId);
+      this.appointmentProvider.createAppointment(this.subida, provisionId).subscribe(async (data: any) => {
+        console.log('data devuelta:', data);
+        let appointmentId = data.appointmentId;
+        this.confirmCreate(appointmentId);
+        if (data.ok == false) {
+          this.problemReserva(data);
+        } else {
+          const loading = await this.loadingCtrl.create({
+            message: "creando cita"
+          });
+          await loading.present();
+          this.createCita();
+          loading.dismiss();
+          this.router.navigate(['home']);
+        }
+      }, async err => {
+        if (this.prestacion === 44) {
+          const alert = await this.alertCtrl.create({
+            header: "Error de Creación",
+            subHeader: `Su cita no ha podido crearse por, ${err.error.help}`,
+            buttons: [
+              {
+                text: 'Ok entiendo',
+                handler: () => {
+                  this.router.navigate(['home']);
+                }
+              },
+              {
+                text: 'Pagar en clínica',
+                handler: () => {
+                  this.router.navigate(['/']);
+                }
+              }
+            ]
+          })
+          await alert.present();
+          console.log('err', err);
+        } else {
+          const alert = await this.alertCtrl.create({
+            header: "Error de Creación",
+            subHeader: `Su cita no ha podido crearse por, ${err.error.help}`,
+            buttons: [
+              {
+                text: 'Ok entiendo',
+                handler: () => {
+                  this.router.navigate(['home']);
+                }
+              },
+              {
+                text: 'buscar nueva',
+                handler: () => {
+                  this.router.navigate(['options']);
+                }
+              }
+
+            ]
+          })
+          await alert.present();
+          console.log('err', err);
+        }
+      });
+    } else {
+      return
+    }
+  }
+  confirmCreate(appointmentId: any) {
+    console.log('confirmaci')
+  }
+
+  /*  nextDepe() {
+     this.crudPrv.createParentDate(this.subida, id, this.encuentro).subscribe(async data => {
+       const appointmentId = data.appointmentId;
+       const patientId = data.patient.id;
+       const loading = await this.loadingCtrl.create({
+         message: "creando cita"
+       });
+       await loading.present();
+       this.createCita();
+       this.router.navigate(['home']);
+       loading.dismiss();
+       if (data) {
+         this.confirmCreateParent(patientId, appointmentId);
+       }
+     }, async err => {
+       console.log('error en la creación:', err);
+       const alert = await this.alertCtrl.create({
+         header: "Error de Creación",
+         subHeader: `Su cita no ha podido crearse por, ${err.error.help}`,
+         buttons: [
+           {
+             text: 'Ok entiendo',
+             handler: () => {
+               this.router.navigate(['home'])
+             }
+           },
+           {
+             text: 'buscar nueva',
+             handler: () => {
+               this.router.navigate(['options'])
+             }
+           }
+         ]
+       })
+       await alert.present();
+       console.log('err', err);
+ 
+     });
+   } */
+
+  async problemReserva(data) {
+    const alert = await this.alertCtrl.create({
+      header: "Problema de reserva",
+      message: `${data.error.help}`,
+      buttons: [
+        {
+          text: 'Buscar otro horario',
+          handler: () => {
+            this.router.navigate(['card']);
+            /* this.navCtrl.push(CardPage); */
+          }
+        }, {
+          text: 'cancelar',
+          handler: () => {
+            this.router.navigate(['home']);
+            /* this.navCtrl.push(HomePage); */
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  confirmCreateParent(patientId, appointmentId) {
+    this.appointmentProvider.confirmDateParent(patientId, appointmentId).subscribe(confirm => {
+      console.log({ confirm })
+    })
+  }
+
 
 }

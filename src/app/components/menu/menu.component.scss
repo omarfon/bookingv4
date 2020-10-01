@@ -1,11 +1,17 @@
-ion-item{
-    color:#888888;
-    margin-bottom:10px;
+ion-item {
+    color: #8d93ab;
+    margin-bottom: 10px;
 }
-ion-list{
-    margin-top:50px;
-    margin-left:15px;
+
+ion-item:active {
+    color: #0f3057;
 }
-ion-title{
-    color:#050e8b;
+
+ion-list {
+    margin-top: 50px;
+    margin-left: 15px;
+}
+
+ion-title {
+    color: #050e8b;
 }

@@ -10,10 +10,12 @@ import { RecipesService } from '../services/recipes.service';
 
 
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { GetDatesTeleService } from '../services/get-dates-tele.service';
 //inappbrowser
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ProfilePage } from '../pages/profile/profile.page';
+
 
 
 
@@ -63,7 +65,8 @@ export class HomePage implements OnInit {
     public dependensProvider: DependensService,
     public router: Router,
     public tcs: GetDatesTeleService,
-    private iab: InAppBrowser) { }
+    private iab: InAppBrowser,
+    public popoverCtrl: PopoverController) { }
 
   ngOnInit() {
     let nombrePatient = localStorage.getItem('patientName');
@@ -197,16 +200,8 @@ export class HomePage implements OnInit {
         }
       });
     });
-
-    //     if(this.tasks > 1){
-    //     const citasAll = {...this.tasks, ...this.depesCitas};
-    //     console.log('todas las citas, incluidas las de principal:', citasAll);
-    // }else{
-    //     const citasAll = {...this.depesCitas};
-    //     console.log('citas solo los dependientes', citasAll);
-    // }
-
   }
+
   getDependens() {
     this.dependensProvider.getDependens().subscribe(data => {
       this.dependens = data
@@ -255,6 +250,15 @@ export class HomePage implements OnInit {
         this.cantConsultas = 0;
       }
     })
+  }
+  async openMydata(ev: any) {
+    console.log('open modal datos paciente');
+    const popover = await this.popoverCtrl.create({
+      component: ProfilePage,
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
   }
 
 }

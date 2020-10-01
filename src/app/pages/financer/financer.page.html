@@ -17,7 +17,7 @@
   <div>
     <ion-row class="pading">
       <ion-col size="6" class="cuadrado">
-        <ion-button color="primary" expand="full" size="default" [ngClass]="{verde:vcolor == true}"
+        <ion-button color="primary" expand="full" size="default" [ngClass]="{'verde':vcolor === true}"
           (click)="passFinancer()">
           <ion-icon slot="start" name="person"></ion-icon>
           para mi
@@ -26,7 +26,7 @@
 
       <ion-col size="6" class="cuadrado">
         <ion-button (click)="openParents()" expand="full" size="default" color="secondary"
-          [ngClass]="{verde:ccolor == true}">
+          [ngClass]="{'verde': ccolor === true}">
           <ion-icon slot="start" name="people"></ion-icon>
           un familiar
         </ion-button>
@@ -37,16 +37,8 @@
         <ion-col size="6" *ngFor="let depe of parents">
           <ion-card (click)="passFinancerParent(depe)" class="tarjetaDepes">
             <ion-row no-padding no-margin>
-              <!-- <ion-col col-3>
-            <ion-avatar>
-              <img src="../assets/imgs/avatars/nino.png" alt="">
-            </ion-avatar>
-          </ion-col> -->
               <ion-col>
                 <h3 class="nombrePariente">{{depe.name}}</h3>
-                <!-- <p *ngIf="depe.relation"
-                  class="parentesco">{{depe.relation.name}}</p>
-              <p class="edad">{{depe.birthdate | date:"y"}}</p> -->
               </ion-col>
 
             </ion-row>
@@ -63,19 +55,8 @@
           Agregar Familiar
         </ion-button>
       </ion-col>
-      <!-- <ion-card (click)="showDetailCreateParents()" class="buttonAddFamily">
-        <div class="row">
-          <div size="4">
-            <ion-icon name="add" color="secondary" slot="start"></ion-icon>
-          </div>
-          <div size="8">
-            <p>Agregar Familiar</p>
-          </div>
-        </div>
-      </ion-card> -->
     </ion-row>
 
-    <!-- template que muestra los familiares que estan ya adjuntos -->
 
   </div>
   <!-- fin del template de los familiares adjuntos -->
@@ -106,35 +87,67 @@
       <ion-list>
         <ion-radio-group>
           <div *ngFor="let plan of planes">
-            <ion-card *ngIf="plan.es_paquete_propio == 0 && plan.es_plan_propio == 0 ">
+            <ion-card *ngIf="plan.es_paquete_propio === 0 && plan.es_plan_propio === 0 ">
               <ion-item>
 
-                <ion-label>{{plan.plan_desc}}</ion-label>
+                <ion-label *ngIf="plan.siteds === 0">{{plan.plan_desc}}</ion-label>
+                <ion-label *ngIf="plan.siteds === 1">{{plan.Financiador}}</ion-label>
                 <ion-radio slot="start" (click)="acceptFinancer(plan)"></ion-radio>
                 <span item-right>
-                  <p>S/. {{plan.precio[0].total}}</p>
+                  <p *ngIf="plan.siteds === 0">S/. {{plan.precio[0].total}}</p>
                 </span>
               </ion-item>
             </ion-card>
 
-            <ion-card *ngIf="plan.es_paquete_propio == 0 && plan.es_plan_propio == 1 ">
+            <ion-card *ngIf="plan.es_paquete_propio === 0 && plan.es_plan_propio === 1 ">
               <ion-item>
                 <ion-radio slot="start" (click)="acceptFinancer(plan)"></ion-radio>
-                <ion-label>{{plan.plan_desc}}</ion-label>
+                <ion-label *ngIf="plan.siteds === 0">{{plan.plan_desc}}</ion-label>
+                <ion-label *ngIf="plan.siteds === 1">{{plan.Financiador}}</ion-label>
                 <span item-right>
-                  <p>S/. {{plan.precio[0].total}}</p>
+                  <p *ngIf="plan.siteds === 1">S/. {{plan.precio[0].total}}</p>
                 </span>
               </ion-item>
             </ion-card>
+          </div>
+          <div *ngFor="let plan of planes">
+            <ion-list *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0 && plan.beneficios < 1" no-lines>
+              <h4 *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0" class="tituloPlanes">
+                {{plan.plan_desc}}</h4>
+              <ion-card>
+                <ion-item class="bloques" no-lines>
+                  <ion-radio [disabled]="disabled" slot="start" (click)="acceptFinancer(plan)"></ion-radio>
+                  <ion-label>{{plan.plan_desc}}</ion-label>
+                  <span item-right>
+                    <p>S/. {{plan.precio[0].total}}</p>
+                  </span>
+                </ion-item>
+                <ion-row *ngIf=" plan.cuotas[0].countCuotas> 0">
+                  <ion-col size="10">
+                    <p> este beneficio no se puede usar </p>
+                  </ion-col>
+                  <ion-col size="2">
+                    <ion-icon name="information-circle" (click)="openModalInfo()"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-card>
+            </ion-list>
 
-            <ion-list *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0" no-lines>
-              <h4 class="tituloPlanes">{{plan.plan_desc}}</h4>
+          </div>
+          <div *ngFor="let plan of planes">
+            <ion-list *ngIf="plan.es_paquete_propio === 1 && plan.es_plan_propio === 0  && plan.beneficios" no-lines>
+              <h4 *ngIf="plan.es_paquete_propio === 1 && plan.es_plan_propio === 0 && plan.beneficios.length > 0"
+                class="tituloPlanes">
+                {{plan.plan_desc}}</h4>
               <ion-card *ngFor="let beneficio of plan.beneficios">
                 <ion-item class="bloques" no-lines>
                   <ion-radio [disabled]="disabled" slot="start" (click)="acceptFinancerPaquete(plan)"></ion-radio>
                   <ion-label>{{beneficio.beneficio_paquete}}</ion-label>
-                  <span item-right>
+                  <span item-right *ngIf="beneficio.beneficio_paquete">
                     <p>{{beneficio.cantidad_veces}} / {{beneficio.cantidad_max}}</p>
+                  </span>
+                  <span item-right>
+                    <p *ngIf="plan.siteds === 1">S/. {{plan.precio[0].total}}</p>
                   </span>
                 </ion-item>
                 <ion-row *ngIf="plan.cuotas[0].countCuotas > 0">
@@ -149,6 +162,7 @@
             </ion-list>
 
           </div>
+
         </ion-radio-group>
       </ion-list>
     </div>

@@ -17,8 +17,10 @@
             <ion-badge color="danger">4</ion-badge>
           </ion-col> -->
         <ion-col size="2"></ion-col>
-        <ion-col size="2" (click)="goToData()">
-          <div class="usuarioImg"></div>
+        <ion-col size="2">
+          <div class="usuarioImg" (click)="openMydata($event)">
+            <p>{{nombre | slice:0:1}}</p>
+          </div>
         </ion-col>
       </ion-row>
     </div>

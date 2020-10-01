@@ -64,6 +64,8 @@ export class CardCuidaPage implements OnInit {
   horasTele: any;
   mostrar: boolean = true;
   public escogido = 44;
+  public boxID: any;
+  public boxCaID: any;
 
   constructor(public modalCtrl: ModalController,
     public helloPvr: HelloService,
@@ -144,7 +146,7 @@ export class CardCuidaPage implements OnInit {
     /* console.log('basicServiceId' ,basicServiceId); */
     this.helloPvr.getDoctorsPerId(this.id).subscribe(doctors => {
       this.disponibles = false;
-      if (doctors.length == 0) {
+      if (doctors.length === 0) {
         this.disponibles = true;
         return null;
       }
@@ -155,16 +157,12 @@ export class CardCuidaPage implements OnInit {
         this.helloPvr.getAvailablesPerDoctor(doctor.id, this.escogido, doctor.service.id, this.fromDate, this.toDate).subscribe((availables: any) => {
           if (availables && availables.length > 0) {
             doctor.availables = availables;
-            doctor.hasAvailable = true;
+            doctor.isAvailable = true;
             doctor.expanded = false;
           }
         })
       }
       this.doctorsF = this.doctors;
-
-      // console.log('filtro con horas', this.listDoctorsHoras);
-      // console.log('this._doctors',this._doctors);
-      // console.log('this.doctors', this.doctors);
       console.log('this.doctors:', this.doctorsF);
     });
     // loading.dismiss();
@@ -199,6 +197,13 @@ export class CardCuidaPage implements OnInit {
       return isOk;
     });
 
+  }
+  stateShow(item: any, index, items) {
+    console.log(item
+      , index, items);
+    this.boxID = item;
+    this.boxCaID = index;
+    this.selectedDay = items;
   }
 
   async expandedItem(doctor, available) {

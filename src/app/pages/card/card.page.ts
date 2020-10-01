@@ -152,7 +152,6 @@ export class CardPage implements OnInit {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando Doctores...',
       spinner: 'dots',
-      duration: 4000
     })
     await loading.present();
     this.helloPvr.getDoctorsPerId(this.id).subscribe(doctors => {
@@ -175,6 +174,7 @@ export class CardPage implements OnInit {
       }
       this.doctorsF = this.doctors;
       console.log('this.doctors:', this.doctorsF);
+      loading.dismiss();
     });
   }
 
@@ -210,7 +210,8 @@ export class CardPage implements OnInit {
   }
 
   stateShow(item: any, index, items) {
-    console.log(item, index, items);
+    console.log(item
+      , index, items);
     this.boxID = item;
     this.boxCaID = index;
     this.selectedDay = items;

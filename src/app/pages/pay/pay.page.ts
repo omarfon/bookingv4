@@ -4,7 +4,7 @@ import { AlertController, LoadingController, ModalController, ActionSheetControl
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrudparentService } from 'src/app/services/crudparent.service';
 import { CulqiService } from 'src/app/services/culqi.service';
-import { API_IMAGES, TOKENCULQI } from 'src/environments/environment';
+import { API_IMAGES } from 'src/environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { interval } from 'rxjs';
 import { timeout } from 'rxjs/operators';
@@ -47,7 +47,6 @@ export class PayPage implements OnInit {
   /* private culqiData; */
   private prestacion;
   private SERVERImage = API_IMAGES;
-  private tokenCulqi = TOKENCULQI;
   private plan;
   public desactivadoBoton = true;
   public desactivadoBotonLocal = true;

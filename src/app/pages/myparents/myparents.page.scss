@@ -1,90 +1,110 @@
-    .nombrePariente{
-      color:#336E81;
-      font-size:1.1em;
+    ion-content {
+      --background: #f1f3f8;
+    }
+
+    .nombrePariente {
+      color: #336E81;
+      font-size: 1.1em;
       font-weight: 400;
       text-align: left;
       margin-left: 10px;
-      margin-top:10px;
-      margin-bottom:-10px;
+      margin-top: 10px;
+      margin-bottom: -10px;
     }
-    .parentesco{
-      color:#336E81;
+
+    .parentesco {
+      color: #336E81;
       font-weight: 600;
       text-align: left;
-      margin-left:10px;
+      margin-left: 10px;
     }
-    .edad{
+
+    .edad {
       text-align: left;
-      margin-left:10px;
-      color:#336E81;
+      margin-left: 10px;
+      color: #336E81;
     }
-    .center{
+
+    .center {
       text-align: center;
-      margin-top:30px;
+      margin-top: 30px;
     }
-    .down20{
-      margin-top:30px;
+
+    .down20 {
+      margin-top: 30px;
     }
-  
-    .tituloFamiliar{
-      color:#336E81;
+
+    .tituloFamiliar {
+      color: #336E81;
       /* margin-bottom:10px; */
-  /*     margin-top:10px!important; */
+      /*     margin-top:10px!important; */
     }
-    .cienPorCiento{
+
+    .cienPorCiento {
       display: flex;
       justify-content: flex-end;
-      align-items:center;
+      align-items: center;
     }
-    .buttonClose{
-      border-radius:50%!important;
-      margin-top:0;
+
+    .buttonClose {
+      border-radius: 50% !important;
+      margin-top: 0;
       height: 28px;
       width: 25px;
-        ion-icon{
-          color:#fff;
-        }
+
+      ion-icon {
+        color: #fff;
+      }
     }
-    .contenedorButton{
+
+    .contenedorButton {
       text-align: left;
     }
-    ion-button{
+
+    ion-button {
       text-align: left;
     }
-    ion-label{
-      font-size:.8em!important;
-      color:#336E81!important;
-      padding-top:15px!important;
+
+    ion-label {
+      font-size: .8em !important;
+      color: #336E81 !important;
+      padding-top: 15px !important;
     }
-    .guardaryContinuar{
-      margin-top:-25px;
+
+    .guardaryContinuar {
+      margin-top: -25px;
     }
-    ion-avatar img{
+
+    ion-avatar img {
       width: 70px;
     }
-    .cardParent{
+
+    .cardParent {
       height: 160px;
-      border-top-left-radius: 20px;
-      background:#f5f5f5;
-      width:100%;
+      border-top-left-radius: 30px;
+      background: #fff;
+      width: 95%;
     }
-    .botonEliminarParent{
-      color:#fff;
-      border-radius:50%;
- /*      background:#f06e5a; */
+
+    .botonEliminarParent {
+      color: #fff;
+      border-radius: 50%;
+      /*      background:#f06e5a; */
     }
-    .eliminar{
-      margin-top:-20px;
+
+    .eliminar {
+      margin-top: -20px;
     }
-    .contenidoDatos{
-      margin-top:-20px;
+
+    .contenidoDatos {
+      margin-top: -20px;
     }
-    .botonCrear{
-      width:90%!important;
-      margin-left:5%;
+
+    .botonCrear {
+      width: 90% !important;
+      margin-left: 5%;
     }
-    .padding{
-      margin:10px;
+
+    .padding {
+      margin: 10px;
     }
-   
-  

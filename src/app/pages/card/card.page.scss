@@ -1,6 +1,8 @@
     ion-content {
-        --background: rgb(231, 231, 231) !important;
+        --background: #f1f3f8;
         height: 100vh;
+        padding-bottom: 220px !important;
+        margin-bottom: 150px !important;
     }
 
     .list-md {
@@ -286,7 +288,7 @@
     }
 
     .logoCura {
-        width: 150px;
+        width: 110px;
         height: auto;
     }
 
@@ -427,6 +429,11 @@
     }
 
     //stilos card nuevo
+    .bax-main-content:last-child {
+        padding-bottom: 100px !important;
+        padding-bottom: 90px;
+    }
+
     .box-main-content {
         width: 92%;
         margin-left: 4%;
@@ -473,13 +480,15 @@
                             color: #fff;
                         }
 
-                        span {
-                            color: #4A4A4A;
-                            margin-top: 15px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
+                    }
+
+                    span {
+                        color: #052F51;
+                        margin-top: 5px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-right: 15px;
                     }
                 }
             }
@@ -496,6 +505,8 @@
 
 
             .box-hour {
+                margin-bottom: 50px;
+
                 .p-hour-dispo {
                     text-align: center;
                     color: #fff;
@@ -515,8 +526,26 @@
                         border-radius: 5px;
                         text-align: center;
                     }
+
+                    .desactive {
+                        background: #919191;
+                        color: #fff;
+                        padding: .2em 0;
+                        width: 80%;
+                        margin-left: 10%;
+                        border-radius: 5px;
+                        text-align: center;
+                        pointer-events: none;
+                    }
                 }
 
             }
+        }
+    }
+
+    .desactive {
+        .hourdispo {
+            background-color: #4A4A4A;
+            color: #fff;
         }
     }

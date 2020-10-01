@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title>telecon</ion-title>
+    <ion-title size="small">Teleconsulta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="center">
-    <h3 class="titlePrincipal">Consultas Teleorientación</h3>
+    <h3 class="titlePrincipal"> Resumen de Teleconsultas</h3>
   </div>
   <ion-row>
     <ion-col size="12">
@@ -26,7 +26,11 @@
             <ion-col size="12">
               <p class="diagnostic"> <span>Diagnostico :</span>{{c.newConsulta.datosConsulta.diagnostic}}</p>
             </ion-col>
-            <ion-col size="12"></ion-col>
+            <ion-col size="12">
+              <a href="{{url}}ebooking/teleconsulta-pdf?id={{c.newConsulta.appointmentId}}&token=secret"
+                target="_blank">Descarga
+                la receta</a>
+            </ion-col>
             <ion-col size="11">
               <b class="fecha">El día: {{c.newConsulta.datetime | date:'short'}}</b>
             </ion-col>
@@ -81,8 +85,8 @@
                             {{c.newConsulta.datosConsulta.examaux}} </p>
                           <p *ngIf="c.newConsulta.datosConsulta.examaux.length < 1" class="notexam">No hay ningun exámen
                             solicitado
-                            para este
-                            control </p>
+                            para esta
+                            teleconsulta </p>
                         </ion-col>
                         <ion-col size="12">
                           <p class="exams">Procedimientos</p>
@@ -91,7 +95,7 @@
                           <p *ngIf="c.newConsulta.datosConsulta.proced.length < 1" class="notexam">No hay ningun
                             procedimiento
                             solicitado
-                            para este
+                            para esta teleconsulta
                         </ion-col>
                       </div>
                     </mat-tab>
