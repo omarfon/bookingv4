@@ -13,7 +13,7 @@
     </ion-row>
   </div>
 
-  <form [formGroup]="formFamily" (ngSubmit)="saveData(formFamily.value)" novalidate>
+  <form [formGroup]="formFamily" (ngSubmit)="saveData()" novalidate>
     <ion-list class="padding">
       <ion-grid>
         <ion-row>
@@ -51,13 +51,13 @@
           <ion-col size="6">
             <ion-item>
               <ion-label position="floating"> Nº Documento:</ion-label>
-              <ion-input *ngIf="change === 'D.N.I'" type="tel" formControlName="dni" name="dni" minlength="8"
-                maxlength="8" position="floating"></ion-input>
-              <ion-input *ngIf="change === 'carne_extranjeria'" type="tel" formControlName="dni" name="dni"
+              <ion-input" type="tel" formControlName="dni" name="dni" minlength="8" maxlength="8" position="floating">
+                </ion-input>
+                <!--  <ion-input *ngIf="change === 'carne_extranjeria'" type="tel" formControlName="dni" name="dni"
                 minlength="12" maxlength="12" position="floating"></ion-input>
               <ion-input *ngIf="change === 'pasaporte'" type="tel" formControlName="dni" name="dni" minlength="12"
-                maxlength="12" position="floating"></ion-input>
-              <!-- <p color="danger" ion-text *ngIf="registerForm.get('dni').hasError('required')">DNI requerido</p> -->
+                maxlength="12" position="floating"></ion-input> -->
+                <!-- <p color="danger" ion-text *ngIf="registerForm.get('dni').hasError('required')">DNI requerido</p> -->
             </ion-item>
           </ion-col>
           <ion-col size="6">
