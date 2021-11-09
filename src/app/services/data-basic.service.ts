@@ -14,9 +14,8 @@ export class DataBasicService {
   constructor(public http: HttpClient) { }
 
   getGenders(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
-
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.autorization});
     return this.http.get(this.apiUrl + 'genders', {headers}).pipe(
                      map(data =>{
                       return data;
@@ -26,8 +25,8 @@ export class DataBasicService {
   }
 
   getDocuments(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiUrl + 'documenttypes', {headers}).pipe(
                   map(data =>{

@@ -18,8 +18,8 @@ export class DependensService {
   constructor(public http: HttpClient) { }
 
   getDependens(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiUrl, {headers}).pipe(
           map(data =>{
@@ -30,9 +30,8 @@ export class DependensService {
 
   // con esta llamada estamos trayendo las citas de todos los dependientes
   getdependesDay(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
-
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.get(this.apiDatesParents, {headers}).pipe(
                   map(data =>{
                     return data;
@@ -42,9 +41,8 @@ export class DependensService {
   }
 
   getDependentDay(id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
-
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.get(this.apiDatesParentsv2 + `/${id}`, {headers}).pipe(
                   map(data =>{
                     return data;
@@ -54,9 +52,8 @@ export class DependensService {
 
   // con esta llamada se esta trayendo las citas pasadas del usuario validado
   getOldDependetsDay(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
-
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.get(this.apiOldDates, {headers}).pipe(
                   map(data =>{
                     return data;
@@ -66,9 +63,8 @@ export class DependensService {
 
   // con esta llamada estamos eliminando de mi lista a los dependientes...
   deleteDepend(id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
-
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.delete(this.apiDelete + `${id}`, {headers}).pipe(
                     map(data =>{
                       return data;

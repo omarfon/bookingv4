@@ -3,8 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { HomePage } from './home/home.page';
-import { LoginPage } from './pages/login/login.page';
 import { AuthorizationPublicService } from './services/authorization-public.service';
 import { Router } from '@angular/router';
 

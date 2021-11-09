@@ -20,7 +20,11 @@ export class RecipesPage implements OnInit {
 
   ngOnInit() {
     let data = JSON.parse(localStorage.getItem('PacienteData'));
-    this.nameUser = data.name;
+    if(data){
+      this.nameUser = data.name;
+    }else{
+      this.nameUser = "Bienvenido usuario";
+    }
     this.recipesPvr.getAllRecipes().subscribe(data =>{
       this.recipes = data;
       console.log('this.recipes',this.recipes);

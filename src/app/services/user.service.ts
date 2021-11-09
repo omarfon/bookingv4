@@ -26,8 +26,8 @@ export class UserService {
 
   doSignIn(email, password){
     let params = {email:email, password: password }
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     // let params = {email:email, password: shajs('sha256').update(password).digest('hex') }
     return this.http.post(this.apiUrl + 'login', params, {headers}).pipe(
                     map(data => {
@@ -66,8 +66,8 @@ export class UserService {
 
   sendValidation(email){
     let params = {email: email};
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     console.log('params:', params);
     return this.http.post(this.apiUrl + 'validate-email/recovery', params, {headers}).pipe(
                     map(data =>{
@@ -78,8 +78,8 @@ export class UserService {
 
   recoveryLogin(datos){
     let params = {code: datos.code, email: datos.email, id: datos.id, password: datos.password, app: 'ebooking'};
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.post(this.apiUrl + 'login-recovery', params, {headers}).pipe(
                     map(data => {
                       return data
@@ -91,8 +91,8 @@ export class UserService {
   changePassword(password, passwordNew){
     let params = {password: password, passwordNew: passwordNew };
     // console.log('los paramasque cambian la contraseña:', params);
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.put(this.apiUrl + 'update-password', params, {headers}).pipe(
                     map(data => {
                       return data
@@ -101,8 +101,8 @@ export class UserService {
   }
 
   getDatosPaciente(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.get(this.apiUrlDatos + `datos-paciente`, {headers}).pipe(
                     map(data => {
                       return data
@@ -112,8 +112,8 @@ export class UserService {
   }
   createNewUser(datos){
     // console.log('los datos de register:', datos)
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = datos;
     // console.log('los datos de register:', datos)
     // params.provisions = [{"tipoPrestacion":"CONSULTA", "instructions":"", "name":"CONSULTA AMBULATORIA POR MEDICO ESPECIALISTA", "default":false, "id":44}]

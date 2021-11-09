@@ -64,27 +64,26 @@ export class HomePage implements OnInit {
     public tcs: GetDatesTeleService) {}
 
      ngOnInit() {
-      let nombrePatient = localStorage.getItem('patientName');
-  let separador = " ";
-  if(nombrePatient){
-    /* this.nombre = nombrePatient.split(separador ,  1); */
-    this.nombre = nombrePatient;
-  }else{
-    console.log("seguir normal es invitado")
-  }
-  this.getDependens();
-  this.getDatesTele();
-  const authorization = localStorage.getItem('authorization');
-  if( !authorization ){
-    this.autho.getKey().subscribe((data:any) =>{
-      localStorage.setItem('authorization', data.authorization);
-      // localStorage.setItem('idTokenUser', data.patientId);
-      localStorage.setItem('role', data.role);
-      if(data.role == 'public'){
-      }else{
-        this.obtenerUltimaFecha()
-      }
-    },(err:any)=>{
+      let dataLocal = JSON.parse(localStorage.getItem('authorization'));
+      const nombrePatient = dataLocal.patientName;
+      let separador = " ";
+        if(nombrePatient){
+            this.nombre = nombrePatient;
+        }else{
+          
+        }
+        this.getDependens();
+          const authorization = localStorage.getItem('authorization');
+          if( !authorization ){
+            this.autho.getKey().subscribe((data:any) =>{
+              console.log(data);
+            localStorage.setItem('authorization', JSON.stringify(data));
+              if(data.role == 'public'){
+              }else{
+                return
+              }
+          },(err:any)=>{
+            console.log(err)
           this.nored();
     });
   }else{
@@ -93,37 +92,8 @@ export class HomePage implements OnInit {
         this.obtenerUltimaFecha()
       }
   }
-    }
-    ionViewWillEnter(){
-      let nombrePatient = localStorage.getItem('patientName');
-      let separador = " ";
-      if(nombrePatient){
-        /* this.nombre = nombrePatient.split(separador ,  1); */
-        this.nombre = nombrePatient;
-      }else{
-        console.log("seguir normal es invitado")
-      }
-      this.getDependens();
-      const authorization = localStorage.getItem('authorization');
-      if( !authorization ){
-        this.autho.getKey().subscribe((data:any) =>{
-          localStorage.setItem('authorization', data.authorization);
-          // localStorage.setItem('idTokenUser', data.patientId);
-          localStorage.setItem('role', data.role);
-          if(data.role == 'public'){
-          }else{
-            this.obtenerUltimaFecha()
-          }
-        },(err:any)=>{
-              this.nored();
-        });
-      }else{
-        let rol = localStorage.getItem("role");
-        if(rol && rol == 'user' ){
-            this.obtenerUltimaFecha()
-          }
-      }
-    }
+}
+
 
     async nored(){
       const alert = await this.alertCtrl.create({
@@ -140,7 +110,6 @@ export class HomePage implements OnInit {
     }
 
     obtenerUltimaFecha(){
-      // citas del usuario principal
     this.appointmentProvider.getAppointmentsPeruser().subscribe((data:any) =>{
         if(data.ok == false){
           this.tasks = [];
@@ -150,6 +119,7 @@ export class HomePage implements OnInit {
           this.citapendiente = this.tasks.length;
           console.log('this.tasks:', this.tasks);
       });
+
       //llamadas en la carga las recetas mas recientes
           this.recipesPvr.getAllRecipes().subscribe((data:any) =>{
             
@@ -191,14 +161,6 @@ export class HomePage implements OnInit {
         }
       });
     });
-
-  //     if(this.tasks > 1){
-  //     const citasAll = {...this.tasks, ...this.depesCitas};
-  //     console.log('todas las citas, incluidas las de principal:', citasAll);
-  // }else{
-  //     const citasAll = {...this.depesCitas};
-  //     console.log('citas solo los dependientes', citasAll);
-  // }
 
   }
   getDependens(){

@@ -3,42 +3,30 @@
   <div class="contenedorCabecera">
     <img src="assets/imgs/login/logoWhite.svg" alt="">
   </div> 
-      <!-- <h5 class="bajar textoAzul" text-center> Ahora necesitamos tus datos para iniciar una reserva. Si no tienes cuenta aún, registrate ¡es súper fácil!</h5> -->
-  
-  
-      <!-- <div class="white">
-          <div padding>
-              <button ion-button (click)="registrarUsuario()" full color="primary" class="alto50">Registrarse</button>
-          </div>
-  
-      </div> -->
-  
       <div class="containerInputs">
-          <!-- <p style="text-align: center">{{msg}}</p> -->
-  
           <form #formulario="ngForm">
-  
               <ion-item nolines>
-                  <!-- <ion-label floating>Email</ion-label> -->
-                  <ion-input type="text"
-                             required
-                             name="email"
-                             placeholder="Email"
-                             ngModel>
-                    </ion-input>
+                  <ion-label>tipo de documento</ion-label>
+                  <ion-select placeholder="Selecciona tipo de documento" name="typeDocument" [(ngModel)]="typeDocument" (ionChange)="selectTypeDocument($event)">
+                    <ion-select-option value="f">tipo de documento</ion-select-option>
+                    <ion-select-option value="{{doc.name}}" *ngFor="let doc of documents">{{doc.name}}</ion-select-option>
+                  </ion-select>
               </ion-item>
-  
+              <ion-item nolines>
+                <ion-input type="text"
+                           required
+                           name="dni"
+                           placeholder="dni"
+                           [(ngModel)]="dni">
+                </ion-input>
+            </ion-item>
               <ion-item >
-                 <!--  <ion-label floating>Contraseña</ion-label> -->
-                  <ion-input [type]="password_type"
+                  <ion-input type="password"
                               nolines
                              name="password"
                              placeholder="Contraseña"
-                             ngModel>
-                            <!--  <button slot="end">
-                               <ion-icon slot="end" (click)="changeType()" color="secondary" name="eye"></ion-icon>
-                             </button> -->
-                            </ion-input>
+                             [(ngModel)]="password">
+                  </ion-input>
               </ion-item>
           </form>
           <ion-button (click)="startSesion(formulario)" block class="inicioSesion">iniciar Sesión</ion-button>
@@ -55,22 +43,6 @@
                 registrarme
               </ion-button>
             </ion-col>
-<!--             <ion-col size="6" class="center">
-              <ion-button
-              class="registerFacebook"
-              (click)="registrarUsuarioFacebook()">
-              Facebook
-            </ion-button>
-          </ion-col> -->
           </ion-row>
-            <ion-col size="12" class="centrarInvitado">
-              <ion-button
-                      fill="outline"
-                      *ngIf="this.hora == undefined"
-                      class="noLogin"
-                (click)="goToHome()">Ingresar como invitado
-              </ion-button>
-            </ion-col>
-  
   </ion-content>
   
