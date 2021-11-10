@@ -18,8 +18,8 @@ export class HelloService {
   constructor(public http: HttpClient) { }
 
   getServicios(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     const center_id = 1;
     return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services`, {headers}).pipe(
               map((resp:any)=>{
@@ -30,8 +30,8 @@ export class HelloService {
 
 
   getDoctorsPerId(id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     const center_id = 1;
 
     return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services/${id}/professionals` ,  {headers}).pipe(
@@ -44,8 +44,8 @@ export class HelloService {
 
   getAvailablesPerDoctor(id, serviceId, fromDate, toDate){
  /*    console.log('datos en el provider:', id ,serviceId, fromDate); */
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+ const authorization = JSON.parse(localStorage.getItem('authorization'));
+ let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     const center_id = 1;
     return this.http.get(this.apiUrlOne + `ebooking/fmt-centers/${center_id}/services/${serviceId}/professionals/${id}/availables?from_date=${fromDate}&to_date=${toDate}`,  {headers}).pipe(

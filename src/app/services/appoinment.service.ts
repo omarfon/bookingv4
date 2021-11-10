@@ -15,8 +15,8 @@ export class AppoinmentService {
   constructor(public http: HttpClient) { }
 
   createAppointment(subida, provisionId){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = JSON.parse(subida);
     params.provisions = [{"default":false, "id":`${provisionId}`}]
 
@@ -29,8 +29,8 @@ export class AppoinmentService {
   }
 
   getAppointmentsPeruser(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiUrl + 'appointments/patient', {headers}).pipe(
       map((resp:any) =>{
@@ -40,8 +40,8 @@ export class AppoinmentService {
   }
 
   destroyAppointment(appointment) {
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     // appointment.email = localStorage.getItem('emailUser'); appointment.password = localStorage.getItem('passUser');
 
     return this.http.delete(this.apiUrl + `appointments/${appointment.appointmentId}`, {headers}).pipe(
@@ -55,8 +55,8 @@ export class AppoinmentService {
     const patientId = appointment.patient.id;
     const appointmentId = appointment.appointmentId;
     console.log('lo que se va a eliminar cita fmiliar', patientId, appointmentId);
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     // appointment.email = localStorage.getItem('emailUser'); appointment.password = localStorage.getItem('passUser');
 
     return this.http.delete(this.apiUrl + `appointments/patient-contacts/${patientId}/${appointmentId}/`, {headers}).pipe(

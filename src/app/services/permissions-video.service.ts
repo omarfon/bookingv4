@@ -15,8 +15,8 @@ export class PermissionsVideoService {
   constructor(public http: HttpClient) { }
 
   getPermissionsVideo(appointmentid) {
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({ "Authorization": authorization });
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.url + appointmentid, { headers }).pipe(
       map((resp: any) => {

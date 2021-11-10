@@ -211,10 +211,10 @@ public _documenType;
         surname1       : data.surname1,
         surname2       : data.surname2,
         birthdate      : data.birthdate,
-        gender         :{
+     /*    gender         :{
             id         : this._gender.id,
             name       :this._gender.name
-        },
+        }, */
         documentType   :{
             id         : this._documenType.id,
             name       : this._documenType.name
