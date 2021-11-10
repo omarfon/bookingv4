@@ -32,3 +32,23 @@
     background: #222;
     border-top-right-radius: 40px;
   }
+
+  @font-face {
+    font-family: avenir-light;
+    src: url(assets/fonts/AvenirLTStd-Book.ttf);
+  }
+  
+
+  @font-face {
+    font-family: avenir;
+    src: url(assets/fonts/AvenirLT95-Black.ttf);
+  }
+  
+  @font-face {
+    font-family: avenir-bold;
+    src: url(assets/fonts/Avenir-LT-Std-85-Heavy_5177.ttf);
+  }
+
+  *{
+    font-family:'avenir-light';
+  }

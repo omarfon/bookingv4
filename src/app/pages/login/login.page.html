@@ -1,41 +1,54 @@
 
-<ion-content padding class="gris" no-bounce >
+<ion-content>
   <div class="contenedorCabecera">
     <img src="assets/imgs/login/logoWhite.svg" alt="">
+    <h3 class="disclaimer">Recuerda que tu cuenta  aviva funcionan en todas nuestras apps</h3>
   </div> 
       <div class="containerInputs">
           <form #formulario="ngForm">
-              <ion-item nolines>
-                  <ion-label>tipo de documento</ion-label>
-                  <ion-select placeholder="Selecciona tipo de documento" name="typeDocument" [(ngModel)]="typeDocument" (ionChange)="selectTypeDocument($event)">
-                    <ion-select-option value="f">tipo de documento</ion-select-option>
-                    <ion-select-option value="{{doc.name}}" *ngFor="let doc of documents">{{doc.name}}</ion-select-option>
-                  </ion-select>
-              </ion-item>
-              <ion-item nolines>
-                <ion-input type="text"
-                           required
-                           name="dni"
-                           placeholder="dni"
-                           [(ngModel)]="dni">
-                </ion-input>
-            </ion-item>
-              <ion-item >
-                  <ion-input type="password"
-                              nolines
-                             name="password"
-                             placeholder="Contraseña"
-                             [(ngModel)]="password">
-                  </ion-input>
-              </ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-label position="stacked">Tipo de documento</ion-label>
+                  <ion-item nolines>
+                      <ion-select name="typeDocument" [(ngModel)]="typeDocument" (ionChange)="selectTypeDocument($event)">
+                        <ion-select-option value="{{doc.name}}" *ngFor="let doc of documents">{{doc.name}}</ion-select-option>
+                      </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-label position="floating">N° de documento</ion-label>
+                  <ion-item nolines>
+                    <ion-input type="text"
+                               required
+                               name="dni"
+                               placeholder="dni"
+                               [(ngModel)]="dni">
+                    </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-item >
+                    <ion-input type="password"
+                                nolines
+                               name="password"
+                               placeholder="Contraseña"
+                               [(ngModel)]="password">
+                    </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            </ion-grid>
           </form>
-          <ion-button (click)="startSesion(formulario)" block class="inicioSesion">iniciar Sesión</ion-button>
+          <ion-button (click)="startSesion()" block class="inicioSesion">iniciar Sesión</ion-button>
       </div>
       <p (click)="goToRecovery()"
           class="textoOlvido">Olvidé la contraseña
       </p>
   
             <ion-row padding class="containerBotones">
+              <p>si aún no tienes una cuenta</p>
               <ion-col size="12" class="center">
                 <ion-button
                 class="register"

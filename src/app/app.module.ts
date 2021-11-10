@@ -26,11 +26,12 @@ registerLocaleData(localeEs, 'es');
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ComponentsModule } from './components/components.module';
+import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, OnboardingComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
     AppRoutingModule, 

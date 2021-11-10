@@ -24,10 +24,10 @@ export class LoginPage implements OnInit {
   public datos;
   public password;
   public documents: Object[] = [];
-  public document: number = 1;
-  public dni: string;
-  public typeDocument;
-  public documentId;
+  public document: number = null;
+  public dni: string ;
+  public typeDocument ;
+  public documentId ;
   constructor(
     public userService: UserService,
     public alertCtrl: AlertController,
@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
     }else{
       this.getDocuments();
     }
-    this.getDocuments();
+/*     this.getDocuments(); */
   }
 
   public getDocuments(){
@@ -86,6 +86,9 @@ export class LoginPage implements OnInit {
         this.msg = "";
         localStorage.setItem('authorization', JSON.stringify(data));
         this.router.navigate(['home']);
+        this.documentId = null;
+        this.dni = " ";
+        this.password = " ";
       }, async err =>{
         console.log(err);
         this.msg = err.error.message;

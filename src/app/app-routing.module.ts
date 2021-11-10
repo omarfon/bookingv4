@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { OnboardingComponent } from './pages/onboarding/onboarding.component';
+
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    component:OnboardingComponent,
     pathMatch: 'full'
   },
   {
@@ -164,7 +166,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })
