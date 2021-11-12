@@ -1,10 +1,10 @@
 
-  .down30 {
-      padding-top: 20%;
+  ion-content{
+      --background:#F6F9FE;
   }
-   ion-content {
-      --background: #EDEDF0!important;
-   }
+  ion-toolbar{
+    --background:#F6F9FE;
+  }
   .nextDay {
       border-radius: 0;
       color: grey;
@@ -28,16 +28,18 @@
       }
   }
   .principal {
-      /* background-image: url(../../assets/imgs/reservaButton.png);
-      background-size: cover;
-      z-index:-2; */
-      /* margin-top:20px!important; */
+      margin-top:80px;
       border-top-right-radius: 45px!important;
-      background: #0c7b93;
+      --background:url(../../assets/imgs/fondoOnboarding.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
       color: #fff;
       border-radius: none!important;
       border-top-right-radius: 30px;
       height: 80px;
+      p{
+          font-family: 'avenir-bold';
+      }
       ion-icon {
           color: #fff;
       }
@@ -185,23 +187,15 @@
     align-items: center;
     border-top-right-radius: 20px;
   }
-  .cura{
-    --background: #287195;
-  }
-  .cuida{
-    --background: #00ACA0;
-  }
 
-  /* estilos para IOS */
   .contenedorDatos{
-      height: 130px;
-      border-bottom-left-radius: 15px!important;
-      border-bottom-right-radius: 15px!important;
-      background: #09a6ce;
-      width: 100%;
-      margin:0!important;
+      padding-bottom:30px;
+      background:#F6F9FE;
   }
-
+  .textHelp{
+      color:#a9aaaa;
+      margin-left:32px;
+  }
   ion-nav{
       --background: transparent!important;
   }
@@ -209,31 +203,27 @@
       margin:0!important;
       width:100%!important;
   }
-/*     ion-card{
-      background: transparent!important;
-  } */
+
   .containerRounded{
-      height: 120px;
-      width: 150px;
-      border-radius:15px;
+      height: 110px;
+      width: 110px;
+      border-radius:12px;
       --background: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       img{
-          width:60px;
-       /*    margin-left:calc(50% - 25px);
-          margin-top:15%; */
+          margin-top:10px;
+          width:40px;
       }
   }
-/*     ion-slide{
-  } */
   .swiper-container, ion-slides{
-      height: 180px!important;
+      height: 130px!important;
   }
   .textoCard{
       margin-top:-5px;
       font-size:.9em;
+      font-family: 'avenir-light';
   }
   .containerOptions{
       width:150px!important;
@@ -260,13 +250,12 @@
       margin-bottom:30px;
   }
   .nombreUsuario{
-      color:#fff;
+      color:#000;
       font-size:1.5em;
+      font-family:'avenir-bold';
       text-transform: capitalize;
-      font-weight: 400;
-  }
-   .containerDatos{
-      margin-left:20px;
+      margin-top:30px;
+      margin-left:30px;
   }
   .containerIcon{
       text-align: center;
@@ -284,12 +273,10 @@
   }
   .tituloSliderOpciones{
       font-size:1.2em;
-      font-weight: 600;
-      text-transform: uppercase;
-      color:#7a7c7c;
-      margin-top:20px!important;
-      margin-left:20px;
-      margin-bottom:10px!important;
+      color:#000;
+      margin-top:50px!important;
+      margin-left:30px;
+      font-family: 'avenir-bold';
   }
   .NotiSobreContainer{
       width:30px;
@@ -313,4 +300,23 @@
   .padding{
       padding:20px;
   }
-
+.especialidades{
+    box-shadow: none;
+    width:100%!important;
+    border-radius:5px;
+    height: 80px;
+    margin-inline:5px;
+    img{
+        width:19px;
+        margin-top:15px;
+    }
+    p{  
+        width:90%;
+        margin-left:5%;
+        margin-top:10px;
+        font-size:.7em;
+        text-transform: lowercase;
+        line-height: .9em;
+        color:#000;
+    }
+}

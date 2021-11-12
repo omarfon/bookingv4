@@ -99,7 +99,7 @@ export class CardPage implements OnInit {
       this.servicios = servicios.centers[0].services.filter(x => x.block == 'cura');
       console.log('this.servicios:',this.servicios);
       if (this.servicios.length > 0) {
-        this.id = this.servicios[0].id;
+        this.id = this.helloPvr.especialidad;
         this.getDoctorsList();
       }
       if (servicios.length == 0) {

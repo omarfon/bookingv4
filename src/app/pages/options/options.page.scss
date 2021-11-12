@@ -1,4 +1,7 @@
 
+     ion-content{
+      --background:#F6F9FE;
+  }
     .tituloOptions{
        color:#20668B;
        font-size:1.2em;
@@ -123,5 +126,42 @@
       width: 90%;
       margin-left:5%;
     }
-  
-  
+    ion-card{
+      margin-inline:5px;
+      box-shadow: none;
+      width:100%;
+      background:#fff;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      ion-row{
+        p{
+          font-size:.7em;
+          line-height:1em;
+          font-family: 'avenir-bold';
+          text-transform: lowercase;
+        }
+      }
+    }
+
+/*     .imagenEspecialidad{
+      img{
+        width:22px!important;
+        height: 22px;
+      }
+    } */
+    .textoEspecialidad{
+      display: flex;
+      justify-content: start;
+      align-items:center;
+    }
+    .cuida{
+      color:#FB6E54
+    }
+    .cura{
+      color:#20668B;
+    }
+    p{
+      margin-bottom:0!important;
+    }

@@ -11,9 +11,10 @@ export class HelloService {
   servicios: any[] = [];
   doctores: any[] = [];
 
-  private SERVER = API_ENDPOINT;
+ private SERVER = API_ENDPOINT;
  private apiUrl = `${this.SERVER}graphql`;
  private apiUrlOne = `${this.SERVER}`;
+ public especialidad;
 
   constructor(public http: HttpClient) { }
 
@@ -26,6 +27,14 @@ export class HelloService {
                 return resp;
             })
     )
+}
+
+getSpecialtys() {
+  console.log('data')
+  const authorization = JSON.parse(localStorage.getItem('authorization'));
+  let headers = new HttpHeaders({ "Authorization": authorization.authorization });
+  return this.http
+    .get(this.SERVER + 'ebooking/fmt-centers/all/services', {headers});
 }
 
 

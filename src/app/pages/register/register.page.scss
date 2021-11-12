@@ -1,14 +1,16 @@
     .registroDeUsuarioTitulo{
       color:#ffffff;
       text-align: left;
-      width:80%;
+      width:85%;
       margin-left:10%;
       font-size:1.1em;
-      font-weight: 200;
+      font-family: 'avenir-bold';
       padding-top:20px;
     }
     ion-content{
-      --background:#F4F9F9!important;
+      --background:url(../../../assets/imgs/fondoOnboarding.svg);
+      background-size: cover;
+      background-repeat: no-repeat;
     }
   /*   ion-item {
       --background: transparent!important;
@@ -20,9 +22,10 @@
       border-bottom:none!important; 
    }
     .contenedorTextoInicial{
-      background: #1BABA0;
-      height: 70px;
-      /* margin-top:-16px!important; */
+      background:url(../../../assets/imgs/fondoOnboarding.svg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 90px;
       color:#fff;
      /*  border-bottom-left-radius: 15px; */
       border-bottom-right-radius: 45px;
@@ -31,12 +34,14 @@
       font-size:.8em;
     }
     .formulario{
-      margin-top:5px!important;
+      margin-top:20px!important;
+      padding:15px;
     }
     .alto50{
       height: 50px;
       margin-top:15px;
-      --background:#1BABA0;
+      --background:#061175;
+      color:#fff;
       width:90%;
       margin-left: 5%;
     }
@@ -109,4 +114,9 @@
       .select-text {
         color:#000!important;
       }
-  
+  .botonBusquedaDatos{
+    height: 45px;
+    --background:#061175;
+    color:#fff;
+
+  }

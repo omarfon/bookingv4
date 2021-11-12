@@ -30,11 +30,18 @@
         border-bottom:transparent!important;
     }
     ion-select{
-        color:#000!important;
+        /* color:#000!important;
         height: 50px;
         border-bottom:transparent!important;
         width: 100%;
-        justify-content: center;
+        justify-content: center; */
+         width: 100%!important;
+          min-width:100%;
+          background:#fff;
+          font-size:.8em;
+          color:#061175!important;
+          height:50px;
+  
     }
     ion-item{
         /* background:rgba(255,255,255,0.6); */
@@ -137,11 +144,6 @@
       align-items: center;
       padding: 20px;
     }
-  /*   .center{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-    } */
     .ojo{
         padding-top:15px!important;
         font-size:1.2em!important;

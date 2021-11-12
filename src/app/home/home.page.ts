@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-
-
 //cambiando servicios
 import { AppoinmentService } from '../services/appoinment.service';
 import { AuthorizationPublicService } from '../services/authorization-public.service';
 import { DependensService } from '../services/dependens.service';
 import { RecipesService } from '../services/recipes.service';
-
-
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { GetDatesTeleService } from '../services/get-dates-tele.service';
+import { HelloService } from 'src/app/services/hello.service';
+import { API_ENDPOINTIMG } from 'src/environments/environment';
 
 
 
@@ -43,12 +41,18 @@ export class HomePage implements OnInit {
   public depesCitas ;
   public citasDepes;
   public diasFaltantes;
+  public specialtyes;
+  public urlBase = API_ENDPOINTIMG;
  /*  private SERVERImage = Constants.IMAGESDOCTORS; */
   public mensaje:boolean = false;
   dependens: any;
 
   public slideOpts = {
-    slidesPerView: 1,
+    slidesPerView: 3,
+    speed: 400
+    }
+    public slideOptsEspecialtyes = {
+      slidesPerView: 5,
     speed: 400
     }
   public consultas;
@@ -61,11 +65,13 @@ export class HomePage implements OnInit {
     public appointmentProvider : AppoinmentService,
     public dependensProvider: DependensService,
     public router: Router,
+    public helloSrv: HelloService,
     public tcs: GetDatesTeleService) {}
 
      ngOnInit() {
+       this.getAllSpecialtys();
       let dataLocal = JSON.parse(localStorage.getItem('authorization'));
-      const nombrePatient = dataLocal.patientName;
+      const nombrePatient = dataLocal.name;
       let separador = " ";
         if(nombrePatient){
             this.nombre = nombrePatient;
@@ -210,6 +216,13 @@ goToTele(){
       }else{
         this.cantConsultas = 0;
       }
+    })
+  }
+
+  async getAllSpecialtys(){
+    this.helloSrv.getSpecialtys().subscribe((data:any) => {
+      this.specialtyes = data.centers[0].services;
+      console.log(this.specialtyes)
     })
   }
 

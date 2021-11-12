@@ -86,7 +86,7 @@ export class CardCuidaPage implements OnInit {
     } else {
       console.log("no trae data, seguir con el proceso normal");
     }
-    this.id = 38;
+    this.id = this.helloPvr.especialidad;
     this.fromDate = moment().format("YYYY-MM-DD");
     this.toDate = moment().add(this.numDays, "day").format("YYYY-MM-DD");
     this.disponibles = true;
@@ -96,7 +96,7 @@ export class CardCuidaPage implements OnInit {
       this.servicios = servicios.centers[0].services.filter(x => x.block == 'cuida');
       console.log('this.servicios:',this.servicios);
       if (this.servicios.length > 0) {
-        this.id = this.servicios[0].id;
+        this.id = this.helloPvr.especialidad;
         this.getDoctorsList();
       }
       if (servicios.length == 0) {

@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
   public getDocuments(){
     this.dataPvr.getDocuments().subscribe((documents:any) => {
          this.documents = documents;
-         console.log('this.documents:', this.documents);
+         /* console.log('this.documents:', this.documents); */
      });
   }
 
@@ -87,8 +87,8 @@ export class LoginPage implements OnInit {
         localStorage.setItem('authorization', JSON.stringify(data));
         this.router.navigate(['home']);
         this.documentId = null;
-        this.dni = " ";
-        this.password = " ";
+        this.dni = "";
+        this.password = "";
       }, async err =>{
         console.log(err);
         this.msg = err.error.message;

@@ -1,11 +1,37 @@
 ion-item{
-    color:#888888;
-    margin-bottom:10px;
+    color:#fff;
+    margin-bottom:14px;
+    --background:transparent!important;
 }
 ion-list{
     margin-top:50px;
     margin-left:15px;
+    --background:transparent!important;
+}
+.list-md{
+    background:transparent!important;
 }
 ion-title{
-    color:#050e8b;
+    color:#fff;
+     font-family:'avenir-bold';
+     font-size:1.6em;
+     margin-top:20px;
+     margin-left:30px;
+}
+ion-menu{
+    --background:url(../../../assets/imgs/fondoOnboarding.svg);
+}
+ion-content{
+    --background:url(../../../assets/imgs/fondoOnboarding.svg);
+}
+ion-icon{
+    color:#fff;
+}
+.red{
+    color:red;
+}
+img{
+    width:80px;
+    margin-top:60px;
+    margin-left: calc( 50% - 40px);
 }

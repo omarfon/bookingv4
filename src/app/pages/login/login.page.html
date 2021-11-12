@@ -11,7 +11,7 @@
                 <ion-col size="6">
                   <ion-label position="stacked">Tipo de documento</ion-label>
                   <ion-item nolines>
-                      <ion-select name="typeDocument" [(ngModel)]="typeDocument" (ionChange)="selectTypeDocument($event)">
+                      <ion-select name="typeDocument" [(ngModel)]="typeDocument" (ionChange)="selectTypeDocument($event)" placeholder="Tipo de documento">
                         <ion-select-option value="{{doc.name}}" *ngFor="let doc of documents">{{doc.name}}</ion-select-option>
                       </ion-select>
                   </ion-item>

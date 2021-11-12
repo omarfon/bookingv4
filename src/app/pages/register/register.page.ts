@@ -32,6 +32,9 @@ export class RegisterPage implements OnInit {
   private resolve;
   private actual;
   public name;
+  public email;
+  public password;
+  public phone;
   public surname1;
   public surname2;
   public gender;
@@ -49,6 +52,10 @@ aprobed: boolean = false;
 public document;
 public _documenType;
   createOk: any;
+  digitoVa: boolean;
+  hideBox: boolean;
+  activateDocumentNumber: boolean;
+  documentId: any;
 
   constructor(
                 public alertCtrl: AlertController,
@@ -57,14 +64,7 @@ public _documenType;
                 public crudPvr: CrudparentService,
                 public dataPvr: DataBasicService,
                 public newsSrv: NewsEndpointsService,
-                public router: Router) {
-
-                  /* this.hora = this.navParams.get('hora');
-                  this.doctor = this.navParams.get('doctor');
-                  this.available = this.navParams.get('available');
-                  this.texto = this.navParams.get('texto'); */
-                  /* console.log(this.hora, this.available,this.doctor, this.texto); */
-                 }
+                public router: Router) {}
 
   ngOnInit() {
     this.actual = moment().format('YYYY-MM-DD');
@@ -108,9 +108,9 @@ public _documenType;
       this.surname2 = this.dataReniec.apellido_materno;
       this.sexo = this.dataReniec.sexo;
       this.birthdate = moment(this.dataReniec.fecha_nacimiento).format('D/MM/yyyy');
+      this.registerFormu = true;
         /* this.preloader = false;
         this.reservasService.dataPacienteReniec = this.dataReniec;
-        this.registerForm = true;
         this.nameValidate = true;
         this.lastNameValidate = true;
         this.lastNameMaternoValidate = true;
@@ -130,9 +130,7 @@ public _documenType;
   }
   
   validacion(){
-      
-    const valid = this.registerForm.value;
-    if(valid.password == valid.password_confirmation && valid.aprobed == true){
+    if(this.password && this.aprobed && this.name && this.surname1 && this.surname2 && this.email && this.phone && this.gender){
       return true;
     }else{
       return false;
@@ -143,10 +141,56 @@ public _documenType;
   cambioDocumento($event){
    this._documenType = this.document;
    console.log('this.document', this._documenType);
+   const documentType = $event.target.value;
+   if (documentType === 'No Tiene') {
+     this.hideBox = true;
+   } else if(documentType.name === 'D.N.I'){
+     this.registerFormu = false;
+     this.digitoVa = true;
+       this.hideBox = false;
+       this.documentNumber = '';
+       this.selectDocument = $event.target.value;
+       this.activateDocumentNumber = false;
+       this.documentId = $event.target.value;
+   }else if(documentType.name === 'C.E.'){
+     this.dataReniec = [];
+     this.registerFormu = true;
+     this.digitoVa = false;
+     this.hideBox = false;
+     this.documentNumber = '';
+     this.selectDocument = $event.target.value;
+     this.activateDocumentNumber = false;
+     this.documentId = 3;
+     console.log(this.documentId);
+   }else if(documentType.name === 'Pasaporte.'){
+    this.dataReniec = [];
+     this.registerFormu = true;
+     this.digitoVa = false;
+     this.hideBox = false;
+     this.documentNumber = '';
+     this.selectDocument = $event.target.value;
+     this.activateDocumentNumber = false;
+     this.documentId = 2;
+     console.log(this.documentId);
+   }else{
+    this.dataReniec = [];
+     this.registerFormu = true;
+     this.digitoVa = false;
+     this.hideBox = false;
+     this.documentNumber = '';
+     this.selectDocument = $event.target.value;
+     this.activateDocumentNumber = false;
+     this.documentId = $event.target.value;
+   }
+  }
+
+  selectDocument(event) {
+
   }
 
   aceptaCondiciones(aprobed){
     console.log('aprobed', aprobed);
+    this.aprobed = true;
   }
 
   async seeConditions(){
