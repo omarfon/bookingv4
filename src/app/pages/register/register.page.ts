@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { NewsEndpointsService } from 'src/app/services/news-endpoints.service';
 
-
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -135,6 +133,10 @@ public _documenType;
     }else{
       return false;
     }
+  }
+
+  cambiogenero(){
+    
   }
 
  

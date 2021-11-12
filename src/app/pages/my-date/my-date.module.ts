@@ -7,10 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { MyDatePageRoutingModule } from './my-date-routing.module';
 
 import { MyDatePage } from './my-date.page';
+import { QRCodeModule } from 'angular2-qrcode';
 
 @NgModule({
   imports: [
     CommonModule,
+    QRCodeModule,
     FormsModule,
     IonicModule,
     MyDatePageRoutingModule

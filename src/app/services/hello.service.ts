@@ -65,4 +65,17 @@ getSpecialtys() {
            )
   }
 
+  getAllDoctors(){
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({ "Authorization": authorization.authorization });
+    return this.http.get(this.SERVER + `ebooking/info-profesionales`, {headers}).pipe(
+      map( data => {
+        return data
+      }, err => {
+        return err
+      })
+    )
+  }
+
+
 }

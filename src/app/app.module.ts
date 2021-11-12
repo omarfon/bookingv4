@@ -27,6 +27,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ComponentsModule } from './components/components.module';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
+import { QRCodeModule } from 'angular2-qrcode';
 
 
 
@@ -43,6 +44,7 @@ import { OnboardingComponent } from './pages/onboarding/onboarding.component';
     ReactiveFormsModule,
     MatExpansionModule,
     ComponentsModule,
+    QRCodeModule,
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
     ],
   providers: [

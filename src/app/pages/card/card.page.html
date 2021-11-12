@@ -19,7 +19,7 @@
 
 
 <ion-content #mycontent fullscreen>
-  <div [scrollArea]="mycontent">
+  <div>
     <div id="busqueda">
       <ion-list padding>
         <ion-item >
@@ -51,7 +51,7 @@
     </div>
   </div>
   
-  <div *ngIf="doctors ; else nohay">
+  <div *ngIf="doctors">
     <ion-card *ngFor="let doctor of doctorsF " class="tarjeta">
       <div [ngStyle]="{'display': doctor.hasAvailable ? 'block' : 'none'}">
         <ion-row>

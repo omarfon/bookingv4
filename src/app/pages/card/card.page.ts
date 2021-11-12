@@ -195,6 +195,7 @@ export class CardPage implements OnInit {
       return isOk;
     });
 
+
   }
 
   async expandedItem(doctor, available) {

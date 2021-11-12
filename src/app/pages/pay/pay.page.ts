@@ -38,13 +38,13 @@ export class PayPage implements OnInit {
   ];
 
 
-  private doctor; //doctor seleccionado//
-  private available; //fecha seleccionada//
-  private hora; // fecha seleccionada
+  public doctor; //doctor seleccionado//
+  public available; //fecha seleccionada//
+  public hora; // fecha seleccionada
   /* private culqiData; */
-  private prestacion;
-  private SERVERImage = API_IMAGES;
-  private plan;
+  public prestacion;
+  public SERVERImage = API_IMAGES;
+  public plan;
   public desactivadoBoton = true;
   public desactivadoBotonLocal = true;
   public culqiReturn;
@@ -71,8 +71,6 @@ export class PayPage implements OnInit {
      
     this.desactivadoBoton = true;
     this.desactivadoBotonLocal = true;
-   /*  this.culqiData = JSON.parse(localStorage.getItem('culqiData')); */
-  /* console.log('culqi guardada en local', localStorage.getItem('culqiData')); */
 
   this.pago = 'enLocal';
 
@@ -80,28 +78,15 @@ export class PayPage implements OnInit {
   this.available = this.dataArmada.available;
   this.hora = this.dataArmada.hora;
   console.log('this.hora:',this.hora);
-  /* this.depe = this.navParams.get('depe'); */
   this.price = this.dataArmada.price;
   console.log('this.price:',this.price);
-  /* this.prestacion = this.navParams.get('prestacion'); */
   console.log('this.prestacion:', this.prestacion );
 
   this.subida = this.hora.listjson;
   this.plan = this.dataArmada.plan;
   console.log('la hora', this.plan, this.plan);
 
-
-
-  /* this.myForm = this.fb.group({
-    name: ['', [Validators.required]],
-    card: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
-    cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-    month: ['', [Validators.required]],
-    year: ['', [Validators.required]]
-  }, { validator: this.dateValid('month', 'year') }); */
-
-  /* window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb'; */
-  window['Culqi'].publicKey = 'pk_test_e85SD7RVrWlW0u7z';
+  window['Culqi'].publicKey = 'pk_test_f99df0fd7a83c0e0';
   }
 
   async culqi(){

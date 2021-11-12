@@ -4,11 +4,6 @@
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>Detalle Cita</ion-title>
-        <ion-buttons slot="secondary">
-            <ion-button slot="end" clear (click)="getpermissions()">
-                <ion-icon name="videocam" color="danger"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content has-header="true">
@@ -16,25 +11,20 @@
         <img id="profile-image" src="{{SERVERImage}}{{task.professional.id}}.png"
             onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
         <h3 class="nombreDoctor" text-center>{{ task.professional.fullName | lowercase }} </h3>
-
-
         <ion-item>
             <ion-icon item-start><i class="fa fa-hospital-o" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Sede:</ion-label>
             <ion-label *ngIf="task" class="blue"> {{ task.service.center.name | lowercase }}</ion-label>
         </ion-item>
-
         <ion-item>
             <ion-icon item-start><i class="fa fa-heartbeat" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Especialidad:</ion-label>
             <!-- <ion-label *ngIf="taskpa" class="blue"> {{ taskpa.service.basicService.description | lowercase }}</ion-label> -->
             <ion-label *ngIf="task" class="blue"> {{ task.service.basicService.description | lowercase }}</ion-label>
         </ion-item>
-
         <ion-item>
             <ion-icon item-start><i class="fa fa-calendar-check-o" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Fecha:</ion-label>
-            <!-- <ion-label *ngIf="taskpa" class="blue"> {{ taskpa.appointmentDateTime | date:'EEEE d , MMMM ' : 'es' }}</ion-label> -->
             <ion-label *ngIf="task" class="blue"> {{ task.appointmentDateTime | date:'EEEE d , MMMM ' : 'es' }}
             </ion-label>
         </ion-item>
@@ -42,17 +32,17 @@
         <ion-item>
             <ion-icon item-start><i class="fa fa-clock-o" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Hora:</ion-label>
-            <!-- <ion-label *ngIf="taskpa" class="blue"> {{ taskpa.appointmentDateTime | date: 'HH:mm' }}</ion-label> -->
             <ion-label *ngIf="task" class="blue"> {{ task.appointmentDateTime | date: 'HH:mm' }}</ion-label>
         </ion-item>
-
         <ion-item>
             <ion-icon item-start><i class="fa fa-universal-access" aria-hidden="true"></i></ion-icon>
             <ion-label class="heightNoventa">Seguro:</ion-label>
-            <!-- <ion-label *ngIf="taskpa" class="blue"> {{ taskpa.plan.description | lowercase }}</ion-label> -->
             <ion-label *ngIf="task" class="blue"> {{ task.plan.description | lowercase }}</ion-label>
         </ion-item>
     </ion-list>
+    <div class="centerQr">
+        <qr-code [value]="'https://www.aviva.pe'" [size]="150"></qr-code>
+    </div>
     <ion-row padding>
         <ion-col>
             <ion-button *ngIf="task" expand="full" color="warning" (click)='desactivateTask(task)'>ELIMINAR</ion-button>

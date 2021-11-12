@@ -25,10 +25,19 @@
 <ion-content >
 <ion-row>
   <ion-col class="padding">
-    <ion-searchbar placeholder="Busca un doctor"></ion-searchbar>
+    <ion-searchbar placeholder="Busca un doctor" (ionChange)="abrirModeloDoctors($event)" [(ngModel)]="search"></ion-searchbar>
   </ion-col>
 </ion-row>
-<h4 class="tituloSliderOpciones">Estas son tus opciones</h4>
+<ion-list lines="none" *ngIf="openDoctors == true">
+  <ion-item *ngFor="let doctor of doctors">
+    <ion-label class="ion-text-wrap">
+      <ion-text color="primary" (click)="goToDetailDoctor(doctor)">
+        <h3>{{ doctor.fullname }}</h3>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+</ion-list>
+<h4 class="tituloSliderOpciones" >Estas son tus opciones</h4>
 <ion-slides [options]="slideOpts">
   <ion-slide>
     <div class="cajaContenedora ion-activatable ripple-parent">

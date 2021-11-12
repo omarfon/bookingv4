@@ -43,6 +43,7 @@ export class HomePage implements OnInit {
   public diasFaltantes;
   public specialtyes;
   public urlBase = API_ENDPOINTIMG;
+  public doctores;
  /*  private SERVERImage = Constants.IMAGESDOCTORS; */
   public mensaje:boolean = false;
   dependens: any;
@@ -57,7 +58,9 @@ export class HomePage implements OnInit {
     }
   public consultas;
   public cantConsultas;
-
+  public doctors;
+  public search: string = '';
+  public openDoctors: boolean = false;
   constructor(
     public autho : AuthorizationPublicService,
     public alertCtrl: AlertController,
@@ -98,8 +101,42 @@ export class HomePage implements OnInit {
         this.obtenerUltimaFecha()
       }
   }
+  this.getAllDoctors();
 }
 
+abrirModeloDoctors(event){
+  if (this.search.length == 1) {
+    this.doctors = [];
+    return
+  }
+  console.log(this.search);
+  if(this.search.length == 0){
+    /*     console.log('no hay busqueda');
+    console.log(this.doctors); */
+    this.doctors = this.doctors;
+    return 
+  }
+  this.openDoctors = true;
+
+  this.doctors = this.doctors.filter(doctor => {
+    this.doctors = doctor.fullname.toLowerCase().indexOf((this.search).toLowerCase()) != -1;
+    return this.doctors;
+  });
+}
+
+getAllDoctors(){
+  this.helloSrv.getAllDoctors().subscribe((data:any) => {
+    this.doctors = data; 
+    console.log(this.doctors);
+  }, err => {
+    console.log(err)
+  })
+}
+
+goToDetailDoctor(doctor){
+  console.log('go to doctor:',doctor);
+  this.router.navigate(['detail-doctor'])
+}
 
     async nored(){
       const alert = await this.alertCtrl.create({

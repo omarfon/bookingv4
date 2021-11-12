@@ -4,11 +4,6 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title> Mi citas </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="openVideo()">
-        <ion-icon name="videocam" color="danger"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary">
     <ion-segment [(ngModel)]="citas" color="secondary">
@@ -29,7 +24,7 @@
   <div [ngSwitch]="citas">
     <div *ngSwitchCase="'miscitas'">
       <ion-list *ngFor='let task of tasks'>
-        <ion-card class="bordeDerecho" *ngIf="task; else notasks">
+        <ion-card class="bordeDerecho" *ngIf="task">
           <ion-row>
             <ion-col size="4">
               <ion-avatar item-start>

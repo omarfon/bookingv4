@@ -80,7 +80,7 @@
       <ion-col size="6">
         <ion-item class="outpadding" no-lines>
           <!-- <ion-label floating>Fecha de nacimiento:</ion-label> -->
-          <ion-datetime displayFormat="DD/MM/YYYY" formControlName="birthdate" name="birthdate" max="{{actual}}" placeholder="Fecha de nacimiento" [(ngModel)]="birthdate"></ion-datetime>
+          <ion-datetime displayFormat="DD/MM/YYYY" formControlName="birthdate" name="birthdate" placeholder="Fecha de nacimiento" [(ngModel)]="birthdate"></ion-datetime>
           <!-- <ion-input type="date" formControlName="birthdate" name="date_of_birth" placeholder="Fecha de nacimiento"></ion-input> -->
         </ion-item>
         <div *ngIf="registerForm.get('birthdate').errors && registerForm.get('birthdate').dirty || registerForm.get('birthdate').touched" no-lines>

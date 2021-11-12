@@ -14,7 +14,7 @@ export class MyDatePage implements OnInit {
   public task;
   public tasks;
   public SERVERImage = API_IMAGES;
-
+  public dataCita;
   constructor(
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
@@ -29,6 +29,7 @@ export class MyDatePage implements OnInit {
 
     let data = this.routes.snapshot.paramMap.get('datos');
     this.task = JSON.parse(data);
+    this.dataCita = JSON.stringify(this.task)
     /* console.log(this.dataArmada); */
     /* this.date = this.dataArmada.appointmentId; */
   }
