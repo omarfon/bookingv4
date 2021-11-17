@@ -13,8 +13,7 @@
     <div class="container-gris">
       <div class="containerResumen">
         <ion-card class="CardDatosServicio">
-            <h3 class="tituloConsulta" *ngIf="hora.params.provisionId[0] == 44">TELEORIENTACION</h3>
-            <h3 class="tituloTeleOri" *ngIf="hora.params.provisionId[0] == 838517">TELEORIENTACION</h3>
+            <!-- <h3 class="tituloConsulta" *ngIf="hora.params.provisionId[0] == 44">TELEORIENTACION</h3> -->
             <div>
                 <ion-row class="centrar">
                     <ion-col size="4">
@@ -41,7 +40,7 @@
                 </div>
                 <div  class="centrar">
                     <p class="izquierda">Especialidad:</p>
-                    <p item-end class="blue" disabled="true"> {{ doctor.service.description }}</p>
+                    <p item-end class="blue" disabled="true"> {{ doctor.fullName }}</p>
                 </div>
                 <div  class="centrar">
                     <p class="izquierda">Fecha:</p>
@@ -52,7 +51,7 @@
                 <div  class="centrar">
                     <p class="izquierda">Hora:</p>
                     <p class="blue" type="text" disabled="true">
-                        {{ hora.hour | slice:0:5}}
+                        {{ hora | slice:0:5}}
                     </p>
                 </div>
                 <div  class="centrar">

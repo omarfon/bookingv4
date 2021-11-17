@@ -15,7 +15,10 @@ export class HelloService {
  private apiUrl = `${this.SERVER}graphql`;
  private apiUrlOne = `${this.SERVER}`;
  public especialidad;
-
+ public dataEscogida;
+ public price;
+ public doctor;
+ public plan;
   constructor(public http: HttpClient) { }
 
   getServicios(){
@@ -75,6 +78,13 @@ getSpecialtys() {
         return err
       })
     )
+  }
+
+  getDoctorsDispo(specialty: any, profesional: any, date1: any,  date2: any) {
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({ "Authorization": authorization.authorization });
+    return this.http
+      .get(this.apiUrlOne + 'ebooking/fmt-centers/1/services/' + specialty + '/professionals/' + profesional +  '/availables?from_date=' + date1 + '&to_date=' + date2 , {headers});
   }
 
 

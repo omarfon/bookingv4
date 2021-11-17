@@ -17,7 +17,7 @@ export class AppoinmentService {
   createAppointment(subida, provisionId){
     const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
-    let params = JSON.parse(subida);
+    let params = subida;
     params.provisions = [{"default":false, "id":`${provisionId}`}]
 
     // console.log('appointment:',subida, params);

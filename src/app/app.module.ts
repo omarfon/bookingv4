@@ -28,14 +28,17 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ComponentsModule } from './components/components.module';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { QRCodeModule } from 'angular2-qrcode';
+import { DetailDoctorComponent } from './pages/detail-doctor/detail-doctor.component';
+import { UserprefComponent } from './components/userpref/userpref.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, OnboardingComponent],
+  declarations: [AppComponent, OnboardingComponent, DetailDoctorComponent,UserprefComponent,TabsComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
-    AppRoutingModule, 
+AppRoutingModule, 
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

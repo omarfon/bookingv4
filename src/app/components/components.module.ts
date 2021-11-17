@@ -4,18 +4,17 @@ import { ExpandableComponent } from './expandable/expandable.component';
 import { MenuComponent } from './menu/menu.component';
 import { IonicModule } from '@ionic/angular';
 
-
 @NgModule({
     declarations:[
         ExpandableComponent,
-        MenuComponent
+        MenuComponent,
     ],
     exports:[
         ExpandableComponent,
-        MenuComponent
+        MenuComponent,
     ],
     imports:[
-        CommonModule,
+    CommonModule,
         IonicModule
     ]
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthorizationPublicService } from './../../services/authorization-public.service';
 
 
 @Component({
@@ -8,9 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./onboarding.component.scss'],
 })
 export class OnboardingComponent implements OnInit {
-
-  constructor(public router: Router) { }
-
+  public authPublic
+  constructor(public router: Router, public authPvr: AuthorizationPublicService) {
+    const auto:any = localStorage.getItem('authorization');
+    if(!auto){
+      this.authPvr.getKey().subscribe(data =>{
+        this.authPublic = data;
+        localStorage.setItem('authorization', JSON.stringify(data));
+      });
+   }
+  }
   ngOnInit() {}
 
   goToLogin(){

@@ -6,6 +6,7 @@ import { AppoinmentService } from 'src/app/services/appoinment.service';
 import { DependensService } from 'src/app/services/dependens.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateparentPage } from '../createparent/createparent.page';
+import { HelloService } from 'src/app/services/hello.service';
 
 
 @Component({
@@ -68,33 +69,38 @@ export class FinancerPage implements OnInit {
   dataArmada: any;
   encuentro: any;
   financer: boolean;
-
+  public dataEscogida;
+  public listJson;
   constructor(
     public fb: FormBuilder,
     public alertCtrl: AlertController,
     public financierProvider: FinancerService,
     public modalCtrl: ModalController,
+    public helloSrv: HelloService,
     public appointmentProvider: AppoinmentService,
     public actionSheet: ActionSheetController,
     public loadingCtrl: LoadingController,
     public dependentsPvr: DependensService,
     public router: Router,
     public routes: ActivatedRoute) {
-      const data = this.routes.snapshot.paramMap.get('data');
+      /* const data = this.routes.snapshot.paramMap.get('data');
       this.dataArmada = JSON.parse(data);
-      console.log(data);
+      console.log(data); */
      }
 
   ngOnInit() {
-    
-      console.log('this.dataArmada:',this.dataArmada);
-    this.hora = this.dataArmada.hora;
-    this.doctor = this.dataArmada.doctor;
-    this.subida = this.dataArmada.hora.listjson;
-    this.encuentro = this.dataArmada.encuentro;
-    this.available = this.dataArmada.proposedate;
+    this.dataEscogida = this.helloSrv.dataEscogida;
+    console.log('dataEscogida:',this.dataEscogida);
+    console.log('this.dataArmada:',this.dataArmada);
+    const datosListJson = JSON.parse(this.dataEscogida.listjson);
+    console.log(datosListJson);
+    this.hora = this.dataEscogida.hours;
+    this.doctor = datosListJson.professional;
+    this.subida = this.dataEscogida.listjson;
+    this.available = datosListJson.appointmentDateTime; 
+   /*  this.encuentro = this.dataEscogida.encuentro;
+    this.available = this.dataEscogida.proposedate; */
     /* this.doctor = this.navParams.get('doctor');
-    this.available = this.navParams.get('available'); */
    /*  console.log('available y doctor:', this.available, this.doctor); */
     /* this.hora = this.navParams.get('hora'); */
 /*     this._hora = JSON.stringify(this.hora.listjson); */
@@ -114,7 +120,7 @@ export class FinancerPage implements OnInit {
 
         /* this.isAndroid = platform.is('android'); */
 
-        this.subida = this.hora.listjson;
+        this.subida = this.hora;
   let role = localStorage.getItem('role');
   if (role == 'guest') {
     let datos = 
@@ -141,9 +147,9 @@ evaluateEnsurance() {
 
 
 planesPaciente(){
-  let centerId = this.hora.params.centerId;
-  let servicio_id = this.hora.params.serviceId;
-  let prestacion_id = this.hora.params.provisionId;
+  let centerId = this.dataEscogida.params.centerId;
+  let servicio_id = this.dataEscogida.params.serviceId;
+  let prestacion_id = this.dataEscogida.params.provisionId;
   let medico_id = this.doctor.id;
   this.financierProvider.getPlanesPaciente(centerId, servicio_id, prestacion_id, medico_id, this.available).subscribe(data =>{
     this.planes = data;
@@ -190,8 +196,8 @@ passFinancerParent(depe){
   console.log('depe', depe);
 
   let paciente_id = depe.patientId;
-  let servicio_id = this.hora.params.serviceId;
-  let prestacion_id = this.hora.params.provisionId;
+  let servicio_id = this.dataEscogida.params.serviceId;
+  let prestacion_id = this.dataEscogida.params.provisionId;
   let medico_id = this.doctor.id;
 
 
@@ -253,8 +259,11 @@ async goToPay(){
       prestacion: this.prestacion,
       plan :this.plan
   };
+  this.helloSrv.price = this.price;
+  this.helloSrv.doctor = this.doctor;
+  this.helloSrv.plan = this.plan;
   const datos = JSON.stringify(data)
-  this.router.navigate(['pay',datos])
+  this.router.navigate(['pay'])
   console.log('el precio', this.price, this.prestacion);
   }else{
       if (this.currentAppointment == true) {

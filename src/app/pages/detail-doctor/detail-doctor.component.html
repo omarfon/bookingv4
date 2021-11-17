@@ -1,3 +1,49 @@
-<p>
-  detail-doctor works!
-</p>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">Doctor escogido</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <div class="containerDatosDoctor">
+  <ion-row *ngIf="datosDoctor" >
+      <ion-col size="5">
+        <img [src]="url + dataDoctor.imageUrl" alt="">
+      </ion-col>
+      <ion-col size="7">
+        <h3>{{datosDoctor.nombreDoctor}} {{datosDoctor.apellidomDoctor}}</h3>
+        <p class="dataEstudios"><span>{{dataDoctor.services[0].description}}</span></p>
+        <p class="dataEstudios">CMP: {{datosDoctor.cmp}}</p>
+        <p class="dataEstudios"> RNE: {{datosDoctor?.rne}}</p>
+        <p class="dataEstudios">{{datosDoctor.fraseCorta}}</p>
+      </ion-col>
+      <ion-col size="12">
+        <p class="fraseExtendida">{{datosDoctor.fraseExtendida}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-slides [scrollbar]="true">
+      <ion-slide *ngFor="let p of provisionsData">
+        <ion-row>
+          <ion-col size="12">
+            <div class="diaEncurso">
+              {{p.date}} {{p.newFormatDay}}
+            </div>
+          </ion-col>
+          <ion-col size="12">
+
+              <p class="textoHoras">Escoge la hora de la cita</p>
+              <ion-row>
+                <ion-col size="2" *ngFor="let h of p.hours">
+                  <p (click)="goToFinancer(h)" [ngClass]="{'active': h.isAvailable === true, 'desactive':h.isAvailable === false}">
+                    {{h.hour | slice:0:5}}
+                  </p>
+                </ion-col>
+              </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

@@ -1,42 +1,50 @@
 <ion-header color="light">
-  <ion-toolbar hideBackButton="true" persistent="true">
+  <ion-toolbar  persistent="true">
       <ion-buttons slot="start">
           <ion-menu-button menu="first"></ion-menu-button>
       </ion-buttons>
+      <ion-title></ion-title>
       <ion-buttons slot="end">
-        <ion-button>
-          <ion-icon slot="icon-only" name="contact"></ion-icon>
+        <ion-button fill="clear"  (click)="openDatosUser($event)">
+          <ion-icon name="person"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
-    <div class="contenedorDatos">
-      <div>
-        <ion-row class="containerDatos">
-          <ion-col size="7" class="nombreUsuario">
-            Bienvenido {{nombre}}
-          </ion-col>
-          <p class="textHelp">Como podemos ayudarte hoy?</p> 
-        </ion-row>  
-      </div>
+  </ion-header>
+  <div class="contenedorDatos">
+    <div>
+      <ion-row class="containerDatos">
+        <ion-col size="7" class="nombreUsuario">
+          Bienvenido {{nombre}}
+        </ion-col>
+        <p class="textHelp">Como podemos ayudarte hoy?</p> 
+      </ion-row>  
     </div>
-
-</ion-header>
-
+  </div>
 <ion-content >
 <ion-row>
   <ion-col class="padding">
-    <ion-searchbar placeholder="Busca un doctor" (ionChange)="abrirModeloDoctors($event)" [(ngModel)]="search"></ion-searchbar>
+    <ion-searchbar placeholder="Busca un doctor" animated (ionChange)="abrirModeloDoctors($event)" [(ngModel)]="search"></ion-searchbar>
   </ion-col>
 </ion-row>
-<ion-list lines="none" *ngIf="openDoctors == true">
-  <ion-item *ngFor="let doctor of doctors">
-    <ion-label class="ion-text-wrap">
-      <ion-text color="primary" (click)="goToDetailDoctor(doctor)">
-        <h3>{{ doctor.fullname }}</h3>
-      </ion-text>
-    </ion-label>
-  </ion-item>
-</ion-list>
+<div class="containerListEspecialist">
+  <ion-card>
+  <ion-list lines="none" *ngIf="openDoctors == true">
+      
+    <ion-item *ngFor="let doctor of doctors">
+      <ion-avatar>
+        <img [src]="urlBase + doctor.imageUrl" alt="">
+      </ion-avatar>
+      <ion-label class="ion-text-wrap">
+        <ion-text color="primary" (click)="goToDetailDoctor(doctor)">
+          <h4>{{ doctor.fullname }}</h4>
+        </ion-text>
+        <p>{{doctor.services[0].description}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card>
+</div>
 <h4 class="tituloSliderOpciones" >Estas son tus opciones</h4>
 <ion-slides [options]="slideOpts">
   <ion-slide>

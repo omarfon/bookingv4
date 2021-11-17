@@ -28,7 +28,7 @@
       }
   }
   .principal {
-      margin-top:80px;
+      margin-top:30px;
       border-top-right-radius: 45px!important;
       --background:url(../../assets/imgs/fondoOnboarding.svg);
       background-repeat: no-repeat;
@@ -101,7 +101,7 @@
       border-radius: 10%;
   }
   .down10 {
-      padding-top: 30px!important;
+      padding-top: 10px!important;
   }
   .tituloCitas {
       text-align: right;
@@ -318,5 +318,26 @@
         text-transform: lowercase;
         line-height: .9em;
         color:#000;
+    }
+}
+.containerListEspecialist{
+    width:90%;
+    margin-left:5%;
+}
+.ion-text-wrap{
+    h4{
+        margin-bottom:2px;
+        font-family: 'avenir-bold';
+        color:#287195;
+        font-size:.8em;
+        margin-left:5px;
+    }   
+    p{
+        color:#000;
+        font-size:.7em;
+        margin-bottom:2px;
+        text-transform: lowercase;
+        margin-left:5px;
+        margin-top:-5px;
     }
 }

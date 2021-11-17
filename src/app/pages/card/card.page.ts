@@ -66,6 +66,8 @@ export class CardPage implements OnInit {
   horasConsulta: any;
   horasTele: any;
   mostrar:boolean = true;
+  boxID: any;
+  boxCaID: any;
 
   constructor(
     public modalCtrl: ModalController,
@@ -77,30 +79,35 @@ export class CardPage implements OnInit {
     public router: Router) { }
 
   ngOnInit() {
-    this.hora = null;
+    this.fromDate = moment().format("YYYY-MM-DD");
+    this.toDate = moment().add(this.numDays, "day").format("YYYY-MM-DD");
+    this.disponibles = true;
+    this.id = this.helloPvr.especialidad.id;
+    console.log(this.id);
+    if(this.id){
+      this.getDoctorsList();
+    }else{
+      this.router.navigate(['options'])
+    }
     /* this.hora = this.navParams.get('hora');
     this.doctor = this.navParams.get('doctor');
     this.available = this.navParams.get('available'); */
 
-    if (this.hora) {
+    /* if (this.hora) {
       let datos = { hora: this.hora,
                     doctor: this.doctor,
                     available: this.available }
       this.router.navigate(['financer', datos])
     } else {
       console.log("no trae data, seguir con el proceso normal");
-    }
-    this.fromDate = moment().format("YYYY-MM-DD");
-    this.toDate = moment().add(this.numDays, "day").format("YYYY-MM-DD");
-    this.disponibles = true;
+    } */
     
     /*     llamada en la carga de la pagina para invocar a los servicios por defecto carga los doctores de medicina general*/
-    this.helloPvr.getServicios().subscribe((servicios:any) => {
+  /*   this.helloPvr.getServicios().subscribe((servicios:any) => {
       this.servicios = servicios.centers[0].services.filter(x => x.block == 'cura');
       console.log('this.servicios:',this.servicios);
       if (this.servicios.length > 0) {
-        this.id = this.helloPvr.especialidad;
-        this.getDoctorsList();
+        
       }
       if (servicios.length == 0) {
        this.sesionExpired();
@@ -108,8 +115,25 @@ export class CardPage implements OnInit {
     if(servicios.status == false){
       console.log('mostrar alert con error');
     }
-  });
+  }); */
+  this.getSpecialtyes();
+}
+
+getSpecialtyes(){
+  this.helloPvr.getServicios().subscribe((servicios:any) => {
+    this.servicios = servicios.centers[0].services.filter(x => x.block == 'cura');
+    console.log('this.servicios:',this.servicios);
+    if (this.servicios.length > 0) {
+      
+    }
+    if (servicios.length == 0) {
+     this.sesionExpired();
   }
+  if(servicios.status == false){
+    console.log('mostrar alert con error');
+  }
+})
+}
 
   async sesionExpired(){
     const alert = await this.alertContrl.create({
@@ -127,13 +151,24 @@ export class CardPage implements OnInit {
   await alert.present();
   }
 
+  stateShow(item: any, index, items) {
+    console.log(item, index, items);
+    this.boxID = item;
+    this.boxCaID = index;
+    this.selectedDay = items;
+  }
+
+  errorHandler(event) {
+    event.target.src = "assets/imgs/noimage.png"
+  }
+
   /*   AQUI OBTENEMOS LOS DOCTORES EN LA CARGA DE LA PAGINA, POR DEFECTO TENEMOS A LOS DOCTORES DE MEDICINA GENERAL */
   async getDoctorsList() {
-    this.doctors = "";
+    this.doctors = [];
     const loading = await this.loadingCtrl.create({
       message: 'Cargando Doctores...',
+      duration:6000,
       spinner: 'dots',
-      duration: 4000
     })
     await loading.present();
     /* const basicServiceId = this.id */
@@ -147,7 +182,7 @@ export class CardPage implements OnInit {
       console.log(doctors);
     
       this.doctors = doctors;
-      for(let doctor of doctors){
+        for(let doctor of doctors){
         this.helloPvr.getAvailablesPerDoctor(doctor.id, doctor.service.id, this.fromDate, this.toDate).subscribe((availables:any) => {
           if(availables && availables.length > 0){
             doctor.availables = availables;
@@ -156,13 +191,10 @@ export class CardPage implements OnInit {
           }
         })
       }
-      this.doctorsF = this.doctors;
-  
-      // console.log('filtro con horas', this.listDoctorsHoras);
-      // console.log('this._doctors',this._doctors);
-      // console.log('this.doctors', this.doctors);
-      console.log('this.doctors:', this.doctorsF);
+      this.doctorsF = this.doctors; 
+      /* console.log('this.doctors:', this.doctorsF); */
     });
+    await loading.dismiss();
     // loading.dismiss();
   }
 
@@ -278,48 +310,9 @@ export class CardPage implements OnInit {
     console.log('hora:', hora);
     console.log(this.selectedDay);
     let role = localStorage.getItem('role');
-    if (role === 'public') {
-      const datos = 
-        {
-            centerId : hora.params.centerId,
-            servicio_id: hora.params.serviceId,
-            prestacion: hora.params.provisionId,
-            medico_id: doctor.id,
-            proposedate: this.selectedDay.date,
-            hora: hora,
-           /*  encuentro: this.escogido, */
-            doctor: {
-              id:doctor.id,
-              fullname:doctor.fullName,
-              info: doctor.info,
-              service: doctor.service,
-              cmp: doctor.cmp
-            } 
-        };
-      const data = JSON.stringify(datos);
-      this.router.navigate(['login', data])
-      // datos.present();
-    } else {
-      const datos = 
-        {
-            centerId : hora.params.centerId,
-            servicio_id: hora.params.serviceId,
-            prestacion: hora.params.provisionId,
-            medico_id: doctor.id,
-            proposedate: this.selectedDay.date,
-            hora: hora,
-            /* encuentro: this.escogido, */
-            doctor: {
-              id:doctor.id,
-              fullname:doctor.fullName,
-              info: doctor.info,
-              service: doctor.service,
-              cmp: doctor.cmp
-            } 
-        };
-        const data = JSON.stringify(datos);
-      this.router.navigate(['financer', data])
-    }
+      this.helloPvr.dataEscogida = hora;
+      this.router.navigate(['financer'])
+    
   }
 
   nextSlide() {

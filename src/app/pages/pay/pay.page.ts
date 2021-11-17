@@ -6,7 +6,9 @@ import { CrudparentService } from 'src/app/services/crudparent.service';
 import { CulqiService } from 'src/app/services/culqi.service';
 import { API_IMAGES } from 'src/environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HelloService } from 'src/app/services/hello.service';
 declare var Culqi: any;
+
 
 
 @Component({
@@ -48,7 +50,7 @@ export class PayPage implements OnInit {
   public desactivadoBoton = true;
   public desactivadoBotonLocal = true;
   public culqiReturn;
-
+  public dataEscogida;
   constructor(
     public fb: FormBuilder,
     public alertCtrl: AlertController,
@@ -59,31 +61,30 @@ export class PayPage implements OnInit {
     public crudPvr: CrudparentService,
     public culqiPvr: CulqiService,
     public router: Router,
+    public helloSrv:HelloService,
     public routes: ActivatedRoute) {
-      const data = this.routes.snapshot.paramMap.get('datos');
+/*       const data = this.routes.snapshot.paramMap.get('datos');
       this.dataArmada = JSON.parse(data);
-      console.log(this.dataArmada);
+      console.log(this.dataArmada); */
      }
 
   ngOnInit() {
-
+    this.dataEscogida = this.helloSrv.dataEscogida;
+    const datosListJson = JSON.parse(this.dataEscogida.listjson);
+    console.log('this.dataEscogida:',this.dataEscogida);
+    console.log('datosListJson:',datosListJson);
     window['culqi']= this.culqi.bind(this);
      
     this.desactivadoBoton = true;
     this.desactivadoBotonLocal = true;
 
   this.pago = 'enLocal';
-
-  this.doctor = this.dataArmada.doctor;
-  this.available = this.dataArmada.available;
-  this.hora = this.dataArmada.hora;
-  console.log('this.hora:',this.hora);
-  this.price = this.dataArmada.price;
-  console.log('this.price:',this.price);
-  console.log('this.prestacion:', this.prestacion );
-
-  this.subida = this.hora.listjson;
-  this.plan = this.dataArmada.plan;
+  this.doctor = this.helloSrv.doctor;
+  this.available = datosListJson.appointmentDateTime;
+  this.hora = this.dataEscogida.hour;
+  this.price = this.helloSrv.price;
+  this.subida = datosListJson;
+  this.plan = this.helloSrv.plan;
   console.log('la hora', this.plan, this.plan);
 
   window['Culqi'].publicKey = 'pk_test_f99df0fd7a83c0e0';
@@ -408,7 +409,7 @@ async payClinic(){
   
 
   next() {
-    let provisionId = this.hora.params.provisionId;
+    const provisionId = this.plan.precio[0].prest_item_pk;
     this.desactivadoBotonLocal = false;
       this.appointmentProvider.createAppointment(this.subida , provisionId).subscribe(async (data:any) => {
         console.log('data devuelta:', data);
@@ -427,6 +428,7 @@ async payClinic(){
                          
     });  
   }
+
   async createCita(){
     const alert = await this.alertCtrl.create({
       header: "Creación de cita",

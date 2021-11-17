@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {}
 
   goToHome(){
-    this.router.navigate(['home']);
+    this.router.navigate(['/home']);
     this.menu.close();
   }
 

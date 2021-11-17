@@ -6,10 +6,13 @@ import { AuthorizationPublicService } from '../services/authorization-public.ser
 import { DependensService } from '../services/dependens.service';
 import { RecipesService } from '../services/recipes.service';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { GetDatesTeleService } from '../services/get-dates-tele.service';
 import { HelloService } from 'src/app/services/hello.service';
 import { API_ENDPOINTIMG } from 'src/environments/environment';
+import { DoctordataService } from './../services/doctordata.service';
+import { UserprefComponent } from './../components/userpref/userpref.component';
+
 
 
 
@@ -59,6 +62,7 @@ export class HomePage implements OnInit {
   public consultas;
   public cantConsultas;
   public doctors;
+  public _doctors;
   public search: string = '';
   public openDoctors: boolean = false;
   constructor(
@@ -69,6 +73,8 @@ export class HomePage implements OnInit {
     public dependensProvider: DependensService,
     public router: Router,
     public helloSrv: HelloService,
+    public doctorDataSrv:DoctordataService,
+    public popoverCtrl: PopoverController,
     public tcs: GetDatesTeleService) {}
 
      ngOnInit() {
@@ -107,14 +113,13 @@ export class HomePage implements OnInit {
 abrirModeloDoctors(event){
   if (this.search.length == 1) {
     this.doctors = [];
-    return
+    this.openDoctors = false;
   }
   console.log(this.search);
   if(this.search.length == 0){
-    /*     console.log('no hay busqueda');
-    console.log(this.doctors); */
-    this.doctors = this.doctors;
-    return 
+    this.openDoctors = false;
+    return this.doctors = this._doctors;
+    
   }
   this.openDoctors = true;
 
@@ -127,6 +132,7 @@ abrirModeloDoctors(event){
 getAllDoctors(){
   this.helloSrv.getAllDoctors().subscribe((data:any) => {
     this.doctors = data; 
+    this._doctors = data
     console.log(this.doctors);
   }, err => {
     console.log(err)
@@ -134,8 +140,12 @@ getAllDoctors(){
 }
 
 goToDetailDoctor(doctor){
+  this.doctorDataSrv.doctor = doctor;
   console.log('go to doctor:',doctor);
-  this.router.navigate(['detail-doctor'])
+  this.router.navigate(['detail-doctor']);
+  this.doctors = this._doctors;
+  this.openDoctors = false;
+  this.search = "";
 }
 
     async nored(){
@@ -244,7 +254,7 @@ goToTele(){
   goToData(){
     this.router.navigate(['profile']);
   }
-  getDatesTele(){
+ /*  getDatesTele(){
     let idUser = localStorage.getItem('idTokenUser');
     this.tcs.getDatesConsulta(idUser).subscribe(data => {
       this.consultas = data;
@@ -254,7 +264,7 @@ goToTele(){
         this.cantConsultas = 0;
       }
     })
-  }
+  } */
 
   async getAllSpecialtys(){
     this.helloSrv.getSpecialtys().subscribe((data:any) => {
@@ -262,5 +272,17 @@ goToTele(){
       console.log(this.specialtyes)
     })
   }
+
+  async openDatosUser(event:any){
+    const popover = await this.popoverCtrl.create({
+      component:UserprefComponent,
+      event:event
+    });
+    await popover.present();
+
+
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+}
 
 }

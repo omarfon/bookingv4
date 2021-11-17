@@ -52,11 +52,11 @@
   </div>
   
   <div *ngIf="doctors">
-    <ion-card *ngFor="let doctor of doctorsF " class="tarjeta">
-      <div [ngStyle]="{'display': doctor.hasAvailable ? 'block' : 'none'}">
+    <ion-card *ngFor="let doctor of doctorsF;  let itemDoctor = index" class="tarjeta">
+      <div class="box-main-content" [ngStyle]="{'display': doctor.hasAvailable ? 'block' : 'none'}">
         <ion-row>
           <ion-col size="4" class="imageDoctor">
-            <img src="{{SERVERImage}}{{doctor.id}}.png" alt="">
+            <img src="{{SERVERImage}}{{doctor.id}}.png" (error)="errorHandler($event)" alt="">
           </ion-col>
           <ion-col size="8" right>
             <p class="doctor">{{ doctor.fullName | lowercase}}</p>
@@ -68,11 +68,11 @@
           <ion-col size="12">
           </ion-col>
           <ion-col size="12">
-            <mat-accordion>
+          <!--   <mat-accordion>
               <mat-expansion-panel>
                       <mat-expansion-panel-header>
                               <ion-slides>
-                                      <ion-slide *ngFor="let available of doctor.availables">
+                                      <ion-slide *ngFor="let available of doctor.availables; let itemDoctor = index">
                                           <div class="centerItemsDays">
                                               <a class="dia" (click)="expandedItem(doctor, available)">{{ available.date | date:'fullDate' :'es' | slice:0:3}}</a>
                                               <p class="diasDoctor">{{ available.date | date:'dd':'es'}}</p>
@@ -100,7 +100,43 @@
                                   </div>
                         </div>
               </mat-expansion-panel> 
-          </mat-accordion>  
+          </mat-accordion>   -->
+          <div class="disponibles">
+            <div class="diasCitas">
+                <p class="diasDisponibles">Próximos días disponibles</p>
+                <ul>
+                    <ion-row>
+                        <ion-col size="2" *ngFor="let items of doctor.availables;  let index = index">
+                            <li (click)="stateShow(itemDoctor, index, items)"
+                                [ngClass]="{'active': boxCaID == index && itemDoctor === boxID}">
+                                <div class="box-day" id="{{index}}">
+                                    {{items.date | date:'fullDate' :'es' | slice:0:3}}</div>
+                            </li>
+                            <span class="day">{{items.date | date:'dd':'es'}}</span>
+                        </ion-col>
+                    </ion-row>
+                </ul>
+            </div>
+            <div class="horasCitas">
+                <div style="overflow: hidden;" *ngFor="let itemss of doctor.availables; let ii = index">
+                    <div *ngIf="itemDoctor === boxID && boxCaID === ii" id="{{ii}}" class="box-hour">
+                        <!-- <p class="p-hour-dispo">Horario disponible Consulta Externa</p> -->
+                        <div class="box-hour-main">
+                            <ion-row>
+                                <ion-col size="3" *ngFor="let items of itemss.hours; let indexxx = index">
+                                    <span id="{{'span-elegir-doctor-horaydia-'+doctor.service.idTraking}}">
+                                        <div [ngClass]="{'hourdispo': itemss.hours[indexxx].isAvailable === true, 'desactive': itemss.hours[indexxx].isAvailable === false}"
+                                            (click)="goToFinancer(doctor,items)">
+                                            {{items.hour | slice:0:5}}
+                                        </div>
+                                    </span>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
           </ion-col>
         </ion-row>
       </div>
