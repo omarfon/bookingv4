@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
         <ion-back-button menu="first"></ion-back-button>
     </ion-buttons>
@@ -17,7 +17,7 @@
             <div>
                 <ion-row class="centrar">
                     <ion-col size="4">
-                        <img id="profile-image" src="{{SERVERImage}}{{doctor.id}}.png" onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
+                        <img id="profile-image" src="{{SERVERImage}}{{doctor.id}}.png" (error)="errorHandler($event)">
                         
                     </ion-col>
                     <ion-col size="8">

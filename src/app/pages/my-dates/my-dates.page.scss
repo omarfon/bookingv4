@@ -11,14 +11,16 @@
           border-radius: 10%!important;
           margin-left:10px;
           display: block;
+          margin-top:20px;
       }
       h3 {
-          color: #00B6A3!important;
+          color: #A7A9AC!important;
           font-size: 1.1em;
           text-align: right;
           margin-right: 16px!important;
+          line-height: 1.2em;
           font-weight: 600;
-          margin-top: 1em!important;
+          margin-top: 20px!important;
       }
       .especialidad {
           color: #A7A9AC;
@@ -27,10 +29,7 @@
           font-size: .9em;
           text-align: right;
           margin-right:16px;
-           /*  span{
-              color:#062F51;
-              font-size:.8em;
-            } */
+          margin-bottom:2px;
       }
       .list-ios {
           margin: 0;
@@ -42,6 +41,7 @@
           margin-right: 16px;
           font-size: .9em;
           text-transform: capitalize;
+          margin-bottom:2px!important;
       }
       .bar-button-default-md:hover:not(.disable-hover),
       .bar-button-clear-md-default:hover:not(.disable-hover),
@@ -84,14 +84,15 @@
           }
       }
       .tituloCitas{
-          text-transform: capitalize;
-          font-size:1.1em;
+          text-transform: uppercase;
+          font-size:1em;
           margin-top:5px!important;
+          margin-bottom:0px;
       }
       .iconoDerecha{
         text-align:right;
       }
-      .centrado{
+/*       .centrado{
         display:flex;
         justify-content: flex-start;
         align-items: center;
@@ -99,7 +100,7 @@
             margin-left: 10px;
             color:#A7A9AC;
           }
-      }
+      } */
       .nombreFamiliarBox{
         margin:0!important;
         padding:0!important;
@@ -118,23 +119,19 @@
       .containerDepends{
         background: #F3F6F6;
         height: 80px;
-        margin-bottom:40px;
+        margin-top:10px;
         text-align: center;
         position: sticky    ;
       }
       .botonConImagen{
         width: 40px;
         height: 40px;
-        border-radius: 50%;
+        margin-top:30px;
+        border-radius:30px!important;
       }
       .nombreUsuarios{
         color:#A7A9AC;
-        font-size:.7em;
-        margin-top:0;
-      }
-      .principalName{
-        color:#A7A9AC;
-        font-size:.7em;
+        font-size:.6em;
         margin-top:0;
       }
       .nombrePrincipalBox{
@@ -179,11 +176,6 @@
     ion-button:active{
       background: red;
     }
-    // .botonConImagen {
-    //   p{
-    //     font-size:1.4em;
-    //   }
-    // }
     .contenedorSinCitas{
       margin-top:20vh;
     }
@@ -199,10 +191,38 @@
       color: #fff!important;
     }
     ion-segment-button:active{
-      color:#fff;
+      color:#062F51!important;
+      font-family: 'avenir';
     }
     .nopadding{
       padding:none;
       margin: none;
     }
 
+    ion-toolbar{
+      --background:url(../../../assets/imgs/fondoOnboarding.svg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100%;
+    }
+    ion-title{
+      color:#fff;
+      font-family: 'avenir';
+    }
+    .segment-button-checked{
+      p{
+        color:#062F51!important;
+        font-family: 'avenir';
+      }
+    }
+    .item-native{
+      padding-inline-end:0;
+      padding-left:0!important;
+      padding-right:0!important;
+    }
+    .item-inner{
+      padding-inline-end:0!important;
+    }
+    ion-menu-button{
+      color:#fff;
+    }

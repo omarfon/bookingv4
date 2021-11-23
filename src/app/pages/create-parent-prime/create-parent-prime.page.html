@@ -1,4 +1,4 @@
-<ion-content class="gris">
+<ion-content>
   <div class="cienPorCiento">
     <ion-row>
       <ion-col size="12">
@@ -11,7 +11,7 @@
       <ion-list>
   
           <ion-row padding>
-            <ion-col size="12">
+            <ion-col size="6">
               <ion-item>
                 <!-- <ion-label stacked>Nombres:</ion-label> -->
                 <ion-input formControlName="name" type="text" maxlength="40" position="floating" placeholder="Nombre">
@@ -35,7 +35,7 @@
             <ion-col size="6">
                 <ion-item>
                     <ion-label position="floating">Documento:</ion-label>
-                    <ion-select [(ngModel)]="change" formControlName="type_document" name="type_document" position="floating" >
+                    <ion-select name="change" [(ngModel)]="change" formControlName="type_document" name="type_document" position="floating" >
                       <ion-select-option value="D.N.I">DNI</ion-select-option>
                       <ion-select-option value="carne_extranjeria">Carne de Extranjeria</ion-select-option>
                       <ion-select-option value="pasaporte">Pasaporte</ion-select-option>
@@ -72,27 +72,27 @@
                     <!-- <ion-input type="date" formControlName="date_of_birth" name="date_of_birth"></ion-input> -->
                   </ion-item>
                 </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label position="floating">Parentesco:</ion-label>
+                    <ion-select formControlName="kindred" name="kindred" position="floating">
+                      <ion-select-option value="{id:1, name:padre}">Padre</ion-select-option>
+                      <ion-select-option value="madre">Madre</ion-select-option>
+                      <ion-select-option value="hijo/a">hijo/a</ion-select-option>
+                      <!-- <ion-option value="daughter">Hija</ion-option>
+                      <ion-option value="uncle">Tio</ion-option>
+                      <ion-option value="aunt">Tia</ion-option> -->
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
           </ion-row>
   
   
-    <ion-col size="12">
-      <ion-item>
-        <ion-label position="floating">Parentesco:</ion-label>
-        <ion-select formControlName="kindred" name="kindred" position="floating">
-          <ion-select-option value="{id:1, name:padre}">Padre</ion-select-option>
-          <ion-select-option value="madre">Madre</ion-select-option>
-          <ion-select-option value="hijo/a">hijo/a</ion-select-option>
-          <!-- <ion-option value="daughter">Hija</ion-option>
-          <ion-option value="uncle">Tio</ion-option>
-          <ion-option value="aunt">Tia</ion-option> -->
-        </ion-select>
-      </ion-item>
-    </ion-col>
         </ion-list>
         <ion-button type="submit"
-                [disabled]="!desabilitadobutton"
+                [disabled]="!desabilitadobutton()"
                 size="block"
-                color="secondary"
+                color="tertiary"
                 class="guardaryContinuar">Guardar y continuar
         </ion-button>
       </form>
@@ -102,7 +102,7 @@
         </ion-col> 
         <ion-col size="5" class="contenedorButton"  (click)="closeModal()">
           <ion-button fill="clear">
-            <p>cerrar</p>
+            <p class="close">cerrar</p>
           </ion-button>
         </ion-col>
       </ion-row>

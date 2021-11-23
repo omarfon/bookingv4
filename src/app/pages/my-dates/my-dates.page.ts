@@ -50,11 +50,12 @@ export class MyDatesPage implements OnInit {
      loading.present(); */
     /* this.viewCtrl.dismiss(); */
 
-    const nombrePatient = localStorage.getItem('patientName');
+    const dataLocal = JSON.parse(localStorage.getItem('authorization'));
+    const nombre = dataLocal.name;
     const separador = " ";
-    if (nombrePatient) {
-      this.nombre = nombrePatient.split(separador, 1);
-      this.nombreCortado = nombrePatient.slice(0, 1);
+    if (nombre) {
+      this.nombre = nombre.split(separador, 1);
+      this.nombreCortado = nombre.slice(0, 1);
     } else {
       console.log("seguir normal es invitado")
     }
@@ -78,6 +79,8 @@ export class MyDatesPage implements OnInit {
         console.error('algo fallo')
       });
 
+    
+
 
     // CON ESTA LLAMADA TENEMOS LAS CITAS PASADAS DE LOS DEPENDIENTES
     this.dependentsProvider.getOldDependetsDay().subscribe((data: any) => {
@@ -94,6 +97,10 @@ export class MyDatesPage implements OnInit {
       this.conCitas = this.tasksParents.filter(t => t.appointments.length > 0);
       console.log('conCitas', this.conCitas);
     });
+  }
+
+  errorHandler(event) {
+    event.target.src = "assets/imgs/noimage.png"
   }
 
 

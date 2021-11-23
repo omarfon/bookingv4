@@ -1,9 +1,18 @@
     ion-content {
-        --background: rgb(231, 231, 231)!important;
+        --background: #e7e7e7!important;
         height: 100vh;
     }
+    ion-header ion-toolbar{
+        --background:url(../../../assets/imgs/fondoOnboarding.svg);
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      ion-title{
+          color:#fff;
+      }
     .list-md {
-        background: #F9FBFB!important;
+        background: #e7e7e7!important;
     }
     .item-md {
         background: transparent!important;
@@ -14,6 +23,14 @@
         margin-left:2.5%;
         // border-radius:10px;
         height:200px;
+        h5{
+            color:#062F51;
+            margin-bottom: 5px;
+            font-family: 'avenir-bold';
+            text-align: center;
+            font-size: 1em;
+            margin-top: 10px;
+        }
     }
     .swiper-slide {
         width: 60px!important;
@@ -44,14 +61,14 @@
         font-weight: 200;
         width:90%;
         margin-left:5%;
-        color: #00B6A3;
-        font-size: 1.5em;
+        color: #287195;
+        font-size: 1.4em;
         text-align: right;
         margin-right: 15px;
         line-height: 1.2em;
         margin-top: 10px;
         text-transform: capitalize;
-        font-family: 'avenir-bold';
+        font-family: 'avenir';
     }
     .especialidad {
         text-align: right;
@@ -119,6 +136,11 @@
         border-radius: 15px;
         margin-top: 1em;
         margin-left: 1em;
+        img{
+            width:80%;
+            height: auto;
+            margin-left:10%;
+        }
         // box-shadow: 0px 2px 3px #A7A9AC;
     }
     .containerDays {
@@ -135,20 +157,6 @@
         color: #287195;
    
     }
-/*     .horas {
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 35px!important;
-        p {
-            color: #fff;
-            border-radius: 20px;
-            padding: .1em .7em;
-            background: #20668B;
-            font-weight: 400;
-        }
-    } */
     .horas {
         font-size: 1em;
         text-align: center;
@@ -191,16 +199,6 @@
         color:#20668B;
         margin-top:-10px;
     }
- /*    a:after{
-        content:'';
-        border-style: solid;
-        border-width:0 25px 25px 25px;
-        border-color:transparent transparent #519DB9 transparent;
-        position: absolute;
-        top: 75px;
-        display: none; 
-        z-index: 100;
-    } */
 
     a:hover:after{
         display:block;
@@ -208,8 +206,8 @@
     a:hover{
         background: #f74f35!important;
     }
-    a:active{
-        background: #f74f35!important;
+    .active{
+        background: #062F51!important;
     }
 
     .list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child,
@@ -248,7 +246,7 @@
     .tarjeta{
       border-top-right-radius: 20px;
       margin-top:0!important;
-      margin-bottom:3px;
+      margin-bottom:10px;
       /* background:#F7FBFB; */
     }
     .logoCura{
@@ -351,10 +349,6 @@
     }
     //stilos card nuevo
 .box-main-content {
-    width: 92%;
-    margin-left: 4%;
-    margin-bottom: 25px;
-
     .datosDoctor {
         background: #fff;
         border-top-right-radius: 20px;
@@ -365,8 +359,7 @@
         margin-top: -16px;
 
         .diasCitas {
-            background: #f6f6f6;
-            padding-bottom: 15px;
+            padding-bottom: 5px;
 
             p {
                 color: #052F51;
@@ -383,8 +376,8 @@
                 li {
                     list-style-type: none;
                     background: #16cff0;
-                    height: 35px;
-                    width: 35px;
+                    height: 30px;
+                    width: 30px;
                     border-radius: 15%;
                     display: flex;
                     justify-content: center;
@@ -408,15 +401,15 @@
     }
 
     .horasCitas {
-        margin-top: -16px;
-        background: #a7a9ab;
+        margin-top: -5px;
+        background: #E6E6E4;
 
         .box-hour {
             .p-hour-dispo {
                 text-align: center;
-                color: #fff;
+                color: #EB954D;
                 font-size: .9em;
-                margin-top: 10px;
+                margin-top: 5px;
             }
 
             .box-hour-main {
@@ -431,8 +424,8 @@
     }
 }
     .hourdispo {
-        background: #0f608b;
-        color: #fff;
+        border:1.5px solid #20668B;
+        color: #20668B;
         padding: .2em 0;
         width: 80%;
         margin-left: 10%;
@@ -452,6 +445,18 @@
     }
     .diasDisponibles {
         font-size: .7em !important;
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
+        margin-bottom:0!important;
+    }
+    .tituloEspecialidad{
+        color:#062F51;
+        text-align: center;
+        font-family: 'avenir-bold';
+        margin-top:10px;
+    }
+    .visible{
+        display: block;
+    }
+    .oculto{
+        display: none;
+        border-bottom: 0!important;
     }

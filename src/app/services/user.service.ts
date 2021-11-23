@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import { API_ENDPOINT } from 'src/environments/environment';
+import { API_ENDPOINT, REGISTERMICRO } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,8 @@ export class UserService {
   private SERVER = API_ENDPOINT;
   private apiUrl = `${this.SERVER}users/`;
   private apiUrlDatos = `${this.SERVER}ebooking/`;
-  private apiCreate = `${this.SERVER}users/register/`;
+  private apiCreate = `${REGISTERMICRO}users/newRegister/`;
+  
 
   constructor(public http: HttpClient) { }
 
@@ -64,12 +65,14 @@ export class UserService {
     )
   }
 
-  sendValidation(email){
-    let params = {email: email};
+  sendValidation(email, documentNumber, documentId, selectDocument){
+/*     let params = {email: email, documentType:{id:documentId,name:selectDocument},documentNumber:documentNumber}; */
     const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
-    console.log('params:', params);
-    return this.http.post(this.apiUrl + 'validate-email/recovery', params, {headers}).pipe(
+/*     console.log('params:', params); */
+    return this.http.post(this.apiUrl + 'validateemail/register', {"email": email, 
+                                                                  "documentType":{"id":documentId.toString(),"name":selectDocument},"documentNumber":documentNumber.toString()}, 
+                                                                  {headers}).pipe(
                     map(data =>{
                       return data
                     })
@@ -77,10 +80,12 @@ export class UserService {
   }
 
   recoveryLogin(datos){
-    let params = {code: datos.code, email: datos.email, id: datos.id, password: datos.password, app: 'ebooking'};
-    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    //CORREGIR LLAMADA DE RECUPERAción
+  /*   let params = {code: datos.code, email: datos.email, id: datos.id, password: datos.password, app: 'ebooking'}; */
+  let params = datos;  
+  const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
-    return this.http.post(this.apiUrl + 'login-recovery', params, {headers}).pipe(
+    return this.http.post(this.apiUrl + 'validate-email/recovery', params, {headers}).pipe(
                     map(data => {
                       return data
                     })
@@ -111,7 +116,7 @@ export class UserService {
     )
   }
   createNewUser(datos){
-    // console.log('los datos de register:', datos)
+    console.log('los datos de register:', datos);
     const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = datos;

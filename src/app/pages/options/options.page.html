@@ -1,11 +1,10 @@
 
 <ion-header>
-
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button ></ion-menu-button>
+      <ion-back-button></ion-back-button>
   </ion-buttons>
-    <ion-title>Cuida / Cura</ion-title>
+    <ion-title size="small">Especialidades</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -15,6 +14,9 @@
 
   <h3 class="tituloOptions">Escoge una de las opciones para poder listar los médicos</h3>
   <ion-row>
+    <ion-col size="12" class="logosBloques" *ngIf="scuida">
+      <img src="assets/imgs/logoCuida.png" alt="">
+    </ion-col>
     <ion-col size="4" *ngFor="let scui of scuida">
       <ion-card class="cuida" (click)="goToCardCuidaPage(scui)">
         <ion-row>
@@ -26,6 +28,9 @@
           </ion-col>
         </ion-row>
       </ion-card>
+    </ion-col>
+    <ion-col size="12" class="logosBloques" *ngIf="scura">
+      <img src="assets/imgs/logoCura.png" alt="">
     </ion-col>
     <ion-col size="4" *ngFor="let scur of scura">
       <ion-card class="cura" (click)="goToCardPage(scur)">

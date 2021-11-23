@@ -190,6 +190,10 @@ export class PayPage implements OnInit {
     }
   }
 
+  errorHandler(event) {
+    event.target.src = "assets/imgs/noimage.png"
+  }
+
   async openCulqi() {
     const loadingPago = await this.loadingCtrl.create({
       message: "Haciendo el cobro...",

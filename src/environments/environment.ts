@@ -26,6 +26,7 @@ export const API_IMAGES = "https://dappapache02.eastus.cloudapp.azure.com/middle
 
 export const API_IMAGES = "https://api.aviva.pe/middleware2/img/professionals/";
 export const API_ENDPOINTIMG = "https://api.aviva.pe/middleware2";
+export const REGISTERMICRO = "https://api.aviva.pe/micro-usu/api/v2/"
 export const API_ENDPOINT = "https://api.aviva.pe/middleware2/api/v2/";
 export const API_NOTAS = "https://api.aviva.pe/middleware2/api/v2/mama";
 

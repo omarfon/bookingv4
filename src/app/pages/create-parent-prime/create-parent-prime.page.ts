@@ -13,12 +13,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-parent-prime.page.scss'],
 })
 export class CreateParentPrimePage implements OnInit {
-  private desabilitadobutton = true;
+  private desabilitado = true;
   public formFamily: FormGroup;
   public createParents;
   public _parents;
   public actual;
-
+  public change;
+  public name;
+  public surname1;
+  public surname2;
+  public birthdate;
+  public documentNumber;
   constructor(public router: Router,
               public fb: FormBuilder,
               public dependentsPvr: DependensService,
@@ -57,7 +62,7 @@ export class CreateParentPrimePage implements OnInit {
 
 
   async saveData(){
-    this.desabilitadobutton = false;
+    this.desabilitado = false;
     if(this.formFamily.valid){
 
       const loading = await this.loadingCtrl.create({
@@ -97,7 +102,7 @@ export class CreateParentPrimePage implements OnInit {
       });
     }else{
       this.errorCreation();
-      this.desabilitadobutton = true;
+      this.desabilitado = true;
     }
    
   }
@@ -121,6 +126,14 @@ export class CreateParentPrimePage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  desabilitadobutton():boolean{
+    if(this.name && this.surname1 && this.surname2, this.birthdate, this.documentNumber){
+      return true
+    }else{
+      return false
+    }
   }
 
 }

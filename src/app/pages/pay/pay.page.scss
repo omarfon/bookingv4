@@ -1,6 +1,15 @@
-    ion-content{
-        background-color: #F3F6F6!important;
-    }
+ion-content{
+    --background: #e7e7e7!important;
+}
+ion-header ion-toolbar{
+    --background:url(../../../assets/imgs/fondoOnboarding.svg);
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+ion-title{
+    color:#fff;
+}
   .visa {
     background-repeat: no-repeat;
     background-position: center;
@@ -94,7 +103,7 @@
     margin-top:0!important;
 }
 .container-gris {
-    background-color: #F3F6F6;
+/*     background-color: #F3F6F6; */
     height: 100%;
     padding-bottom: 1.5em;
 }
@@ -133,10 +142,13 @@
     border-bottom: 1px solid #00B6A3;
 }
 .nombreDoctor{
-    color:#00B6A3;
+    color:#9B9B9B;
     font-size:1.3em;
     text-align: right!important;
     margin-right:20px;
+    font-family:'avenir';
+    line-height: 1.3em;
+    margin-top:10px;
 }
 .blue{
     color:#979797;
@@ -181,9 +193,10 @@ img{
   text-align: right;
 }
 .sede{
-  color:#062F51;
-  font-size:1.4em;
+  color:#9B9B9B;
+  font-size:1.2em;
   margin-right: 20px;
+  font-family: 'avenir';
 }
 .containerResumen{
   margin-top:25px;
@@ -240,4 +253,7 @@ img{
     margin-bottom:10px;
     padding:.5em 0;
     }
+.mat-typography p{
+    margin-bottom:5px;
+}
 

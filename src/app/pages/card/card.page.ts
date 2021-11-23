@@ -25,7 +25,7 @@ export class CardPage implements OnInit {
   doctors: any = [];
   professionals;
   allprofessionals;
-  id;
+  public id;
   public sede;
   public especialidad;
 
@@ -68,7 +68,10 @@ export class CardPage implements OnInit {
   mostrar:boolean = true;
   boxID: any;
   boxCaID: any;
-
+  public nameSpecialty;
+  datesCalendar: any;
+  public manyBoxes;
+  
   constructor(
     public modalCtrl: ModalController,
     public helloPvr: HelloService,
@@ -76,53 +79,31 @@ export class CardPage implements OnInit {
     public render: Renderer2,
     public alertContrl: AlertController,
     public loadingCtrl: LoadingController,
-    public router: Router) { }
+    public router: Router) { 
+     
+    }
 
-  ngOnInit() {
+  ngOnInit() {}
+  ionViewDidEnter (){
+    this.getSpecialtyes();
     this.fromDate = moment().format("YYYY-MM-DD");
     this.toDate = moment().add(this.numDays, "day").format("YYYY-MM-DD");
     this.disponibles = true;
-    this.id = this.helloPvr.especialidad.id;
-    console.log(this.id);
-    if(this.id){
-      this.getDoctorsList();
+    if(!this.helloPvr.especialidad){
+      this.router.navigate(['/options']);
+      console.log('se va hasta options');
     }else{
-      this.router.navigate(['options'])
+      this.id = this.helloPvr.especialidad.id;
+      this.getDoctorsList();
+      this.nameSpecialty = this.helloPvr.especialidad.description;
+      console.log(this.helloPvr.especialidad,this.id);
     }
-    /* this.hora = this.navParams.get('hora');
-    this.doctor = this.navParams.get('doctor');
-    this.available = this.navParams.get('available'); */
-
-    /* if (this.hora) {
-      let datos = { hora: this.hora,
-                    doctor: this.doctor,
-                    available: this.available }
-      this.router.navigate(['financer', datos])
-    } else {
-      console.log("no trae data, seguir con el proceso normal");
-    } */
-    
-    /*     llamada en la carga de la pagina para invocar a los servicios por defecto carga los doctores de medicina general*/
-  /*   this.helloPvr.getServicios().subscribe((servicios:any) => {
-      this.servicios = servicios.centers[0].services.filter(x => x.block == 'cura');
-      console.log('this.servicios:',this.servicios);
-      if (this.servicios.length > 0) {
-        
-      }
-      if (servicios.length == 0) {
-       this.sesionExpired();
-    }
-    if(servicios.status == false){
-      console.log('mostrar alert con error');
-    }
-  }); */
-  this.getSpecialtyes();
-}
+  }
 
 getSpecialtyes(){
   this.helloPvr.getServicios().subscribe((servicios:any) => {
-    this.servicios = servicios.centers[0].services.filter(x => x.block == 'cura');
-    console.log('this.servicios:',this.servicios);
+    this.servicios = servicios.centers[0].services;
+    console.log('this.servicios:',this.servicios, servicios);
     if (this.servicios.length > 0) {
       
     }
@@ -162,40 +143,27 @@ getSpecialtyes(){
     event.target.src = "assets/imgs/noimage.png"
   }
 
-  /*   AQUI OBTENEMOS LOS DOCTORES EN LA CARGA DE LA PAGINA, POR DEFECTO TENEMOS A LOS DOCTORES DE MEDICINA GENERAL */
-  async getDoctorsList() {
-    this.doctors = [];
+  
+
+  async getDoctorsList(){
+    this.doctorsF = [];
     const loading = await this.loadingCtrl.create({
-      message: 'Cargando Doctores...',
-      duration:6000,
-      spinner: 'dots',
-    })
-    await loading.present();
-    /* const basicServiceId = this.id */
-    /* console.log('basicServiceId' ,basicServiceId); */
-    this.helloPvr.getDoctorsPerId(this.id).subscribe(doctors => {
-      this.disponibles = false;
-      if(doctors.length == 0){
-        this.disponibles = true;
-        return null;
-      }
-      console.log(doctors);
-    
-      this.doctors = doctors;
-        for(let doctor of doctors){
-        this.helloPvr.getAvailablesPerDoctor(doctor.id, doctor.service.id, this.fromDate, this.toDate).subscribe((availables:any) => {
-          if(availables && availables.length > 0){
-            doctor.availables = availables;
-            doctor.hasAvailable = true;
-            doctor.expanded = false;
-          }
-        })
-      }
-      this.doctorsF = this.doctors; 
-      /* console.log('this.doctors:', this.doctorsF); */
+      message:"cargando especialistas"
     });
-    await loading.dismiss();
-    // loading.dismiss();
+    await loading.present();
+    this.helloPvr.getDoctorsSpecialty(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
+      const docts = doctors.centers[0].services[0].professionals.filter((element) => {
+        return element.availables.length > 0;
+      })
+      this.manyBoxes = docts.length;
+      docts.forEach(element => {
+        const fech = element.availables;
+        this.datesCalendar = fech;
+      });
+      this.doctorsF = docts;
+      loading.dismiss();
+    })
+    console.log(this.doctorsF);
   }
 
   onChangueSpecialty(specialty: any) {
@@ -216,8 +184,6 @@ getSpecialtyes(){
     }
     console.log(this.search);
     if(this.search.length == 0){
-  /*     console.log('no hay busqueda');
-      console.log(this.doctors); */
       this.doctorsF = this.doctors;
       return 
     }
@@ -273,7 +239,6 @@ getSpecialtyes(){
         loading.dismiss();
         console.log('las horas:', this.horas);
         this.dia = available.date;
-        // console.log('dias', this.dias);
       })
     }else{
       console.log('doctor:', doctor, available);

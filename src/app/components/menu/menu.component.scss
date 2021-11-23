@@ -11,12 +11,32 @@ ion-list{
 .list-md{
     background:transparent!important;
 }
-ion-title{
-    color:#fff;
-     font-family:'avenir-bold';
-     font-size:1.6em;
-     margin-top:20px;
-     margin-left:30px;
+ion-toolbar{
+    --border-color:transparent!important;
+}
+ion-header{
+    ion-title{
+        color:#fff;
+         font-family:'avenir-bold';
+         font-size:1.6em;
+         margin-top:20px;
+         margin-left:30px;
+    }
+    &.ios{
+        ion-title{
+            font-size:1.2em;
+            margin-top:0;
+            margin-left: 0;
+        }
+    }
+}
+.header-ios {
+    ion-toolbar:last-of-type{
+        --border-width:0!important;
+    }
+}
+.list-ios{
+    background:transparent!important;
 }
 ion-menu{
     --background:url(../../../assets/imgs/fondoOnboarding.svg);

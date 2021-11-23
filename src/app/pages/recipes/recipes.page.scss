@@ -1,23 +1,25 @@
-ion-header{
-    height: 180px!important;
-    background: #2E4C6D!important;
-    border-bottom-right-radius: 45px;
-    border-bottom-left-radius: 25px;
-    box-shadow:none ;
-    background: none;
-    margin-bottom:20px;
-  }
+ion-header ion-toolbar{
+  height: 180px!important;
+  --background:url('../../../assets/imgs/fondoOnboarding.svg') ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-bottom-right-radius: 45px;
+  border-bottom-left-radius: 25px;
+  box-shadow:none ;
+  margin-bottom:20px;
+}
   .toolbar-background{
     background: #2E4C6D!important;
   }
 .NombreBienvenida{
   font-size: 1.4em;
   color: #fff;
-  font-weight: 600;
+  font-family: 'avenir';
   width:70%;
   float: right;
   margin-right:10%;
-  margin-top:10px;
+  margin-top:50px;
   text-align: right;
 }
   ion-content{
@@ -245,9 +247,9 @@ ion-card{
 }
 .cantidadRecetas{
     color:#fff;
-    font-size: 1.2em;
+    font-size: 1em;
     float: right;
-    width:80%;
+    width:90%;
     margin-right: 10%;
     text-align: right;
     font-weight: 200;
@@ -255,7 +257,12 @@ ion-card{
 .containerDatosBasicos{
   margin-bottom:20px;
 }
-ion-toolbar{
-  background: #2E4C6D!important;
+ion-menu-button{
+  margin-top:-100px;
+  color:#fff;
+}
+ion-title{
+  margin-top:20px;
+  color:#fff;
 }
 

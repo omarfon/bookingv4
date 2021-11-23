@@ -1,6 +1,18 @@
     ion-content{
         --background: rgb(231, 231, 231)!important;
     }
+    ion-header ion-toolbar{
+        --background:url('../../../assets/imgs/fondoOnboarding.svg') ;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+    }
+    ion-back-button{
+        color:#fff;
+    }
+    ion-title{
+        color:#fff;
+    }
     .visa {
         background-repeat: no-repeat;
         background-position: center;
@@ -145,6 +157,8 @@
     ion-label{
         margin-top:5px!important;
         margin-bottom:5px!important;
+        font-size:.8em!important;
+        color:#062F51!important;
     }
     img{
         width:100px;
@@ -190,9 +204,9 @@
       margin-top:5vh;
     }
     .buttonAddFamily{
-        width:90%;
+      width:90%;
       margin-top:20px;
-      height: 50px;
+      height: 40px;
     }
     .botonPagar{
       width:90%;
@@ -313,4 +327,10 @@
 }
 ion-list{
     background:transparent!important;
+}
+.item-right{
+    p{
+        margin-top:10px!important;
+        color:#062F51;
+    }
 }

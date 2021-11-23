@@ -8,19 +8,22 @@
 </ion-header>
 <ion-content >
   <div class="containerDatosDoctor">
-  <ion-row *ngIf="datosDoctor" >
+  <ion-row *ngIf="dataDoctor" >
       <ion-col size="5">
         <img [src]="url + dataDoctor.imageUrl" alt="">
       </ion-col>
       <ion-col size="7">
-        <h3>{{datosDoctor.nombreDoctor}} {{datosDoctor.apellidomDoctor}}</h3>
+        <h3>{{dataDoctor.apellido1}} {{dataDoctor.apellido2}} {{dataDoctor.nombre}}</h3>
         <p class="dataEstudios"><span>{{dataDoctor.services[0].description}}</span></p>
-        <p class="dataEstudios">CMP: {{datosDoctor.cmp}}</p>
-        <p class="dataEstudios"> RNE: {{datosDoctor?.rne}}</p>
-        <p class="dataEstudios">{{datosDoctor.fraseCorta}}</p>
+        <p class="dataEstudios">CMP: {{dataDoctor.cmp}}</p>
+        <p class="dataEstudios"> RNE: {{dataDoctor?.rne}}</p>
+        <p class="dataEstudios" *ngIf="datosDoctor">{{datosDoctor.fraseCorta}}</p>
       </ion-col>
       <ion-col size="12">
-        <p class="fraseExtendida">{{datosDoctor.fraseExtendida}}</p>
+        <p class="fraseExtendida" *ngIf="datosDoctor">{{datosDoctor.fraseExtendida}}</p>
+      </ion-col>
+      <ion-col size="12">
+        <p class="fraseExtendida" *ngIf="!datosDoctor">El doctor, esta próximo a cargar información importante para ti.</p>
       </ion-col>
     </ion-row>
     <ion-slides [scrollbar]="true">
@@ -43,6 +46,11 @@
               </ion-row>
           </ion-col>
         </ion-row>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides>
+      <ion-slide>
+        
       </ion-slide>
     </ion-slides>
   </div>

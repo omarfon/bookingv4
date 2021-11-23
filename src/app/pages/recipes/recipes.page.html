@@ -1,12 +1,12 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
   </ion-buttons>
     <ion-title>Recetas</ion-title>
+      <p class="NombreBienvenida" *ngIf="nameUser">Hola {{nameUser}}</p> 
+      <p class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas de consulta presencial</p>
   </ion-toolbar>
-  <p margin class="NombreBienvenida" *ngIf="nameUser">Hola {{nameUser}}</p> 
-  <p  margin class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas de consulta presencial</p>
 </ion-header>
 <ion-content>
     <div class="containerCards" *ngIf="recipes; else norecipes">

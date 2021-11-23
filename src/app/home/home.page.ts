@@ -115,11 +115,9 @@ abrirModeloDoctors(event){
     this.doctors = [];
     this.openDoctors = false;
   }
-  console.log(this.search);
   if(this.search.length == 0){
     this.openDoctors = false;
     return this.doctors = this._doctors;
-    
   }
   this.openDoctors = true;
 

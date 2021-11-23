@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DataBasicService } from 'src/app/services/data-basic.service';
 import { FormGroup, FormControl, Validators, FormBuilder, FormsModule } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { CrudparentService } from 'src/app/services/crudparent.service';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { NewsEndpointsService } from 'src/app/services/news-endpoints.service';
+
 
 @Component({
   selector: 'app-register',
@@ -49,11 +50,15 @@ cambio:boolean = false;
 aprobed: boolean = false;
 public document;
 public _documenType;
+public _gender;
   createOk: any;
   digitoVa: boolean;
   hideBox: boolean;
   activateDocumentNumber: boolean;
   documentId: any;
+  public datos;
+  public idgender;
+  public namegender;
 
   constructor(
                 public alertCtrl: AlertController,
@@ -62,11 +67,11 @@ public _documenType;
                 public crudPvr: CrudparentService,
                 public dataPvr: DataBasicService,
                 public newsSrv: NewsEndpointsService,
+                public loadingCtrl:LoadingController,
                 public router: Router) {}
 
   ngOnInit() {
     this.actual = moment().format('YYYY-MM-DD');
-    // console.log('fecha actual:',this.actual);
     this.dataPvr.getGenders().subscribe(datagenders=>{
         this.genders = datagenders;
         console.log( 'this.genders:', this.genders );
@@ -88,15 +93,17 @@ public _documenType;
       phone: ['',  [ Validators.required, Validators.minLength(9), Validators.maxLength(9) ]],
       email: ['',  [ Validators.required, Validators.email ]],
       password: ['',  [ Validators.required, Validators.minLength(8) ]],
-      password_confirmation: ['',  [ Validators.required, Validators.minLength(8)]],
       aprobed: ['', [ Validators.required]],
-      documentDigit: ['', [Validators.required]]
+      documentDigit: ['']
     });
   }
 
 
-  reniecValidateDatos(){
-    /* this.preloader = true; */
+  async reniecValidateDatos(){
+    const loading = await this.loadingCtrl.create({
+      message:'estamos buscando los datos...'
+    });
+    await loading.present();
     console.log(this.documentNumber, this.documentDigit , this.document);
     this.newsSrv.getPublicKey(this.documentNumber).subscribe((data:any) => {
       this.dataReniec = data.data;
@@ -107,15 +114,9 @@ public _documenType;
       this.sexo = this.dataReniec.sexo;
       this.birthdate = moment(this.dataReniec.fecha_nacimiento).format('D/MM/yyyy');
       this.registerFormu = true;
-        /* this.preloader = false;
-        this.reservasService.dataPacienteReniec = this.dataReniec;
-        this.nameValidate = true;
-        this.lastNameValidate = true;
-        this.lastNameMaternoValidate = true;
-        this.sexoValidate = true;
-        this.birthdayValidate = true; */
         if(this.documentNumber == this.dataReniec.numero  && this.documentDigit == this.dataReniec.codigo_verificacion){
           this.registerFormu = true;
+        loading.dismiss();  
         }else{
           this.dniInvalid = true;
           this.registerFormu = false;
@@ -128,15 +129,18 @@ public _documenType;
   }
   
   validacion(){
-    if(this.password && this.aprobed && this.name && this.surname1 && this.surname2 && this.email && this.phone && this.gender){
+    if(this.password && this.aprobed == true && this.name && this.surname1 && this.surname2 && this.email && this.phone ){
       return true;
     }else{
       return false;
     }
   }
 
-  cambiogenero(){
-    
+  cambiogenero(g){
+    console.log(this.gender);
+    console.log(g)
+    this.document.id = g;
+    this.document.name = this.gender;
   }
 
  
@@ -208,108 +212,100 @@ public _documenType;
   changue(){
     this.cambio = true;
   }
- 
 
-  /*   registerNewUser(){
-      let data = this.registerForm.value;
-      let datos:any ={
-        email          : data.email,
-        password       : data.password,
-        name           : data.name,
-        surname1       : data.surname1,
-        surname2       : data.surname2,
-        birthdate      : data.birthdate,
-        gender         :{
-            id         : this._gender.id,
-            name       :this._gender.name
-        },
-        documentType   :{
-            id         : this._documenType.id,
-            name       : this._documenType.name
-        },
-        documentNumber : data.documentNumber,
-        phone          : data.phone
-        // code           : "123"
-      }
-
-      let email = {email:datos.email}
-      this.crudPvr.validateEmail(email).subscribe(data =>{
-        this.resolve = data;
-        console.log(this.resolve);
-        if(this.resolve.result == "ok"){
-          let data = {
-            datos: datos , hora : this.hora , available: this.available , doctor: this.doctor, resolve: this.resolve
-          }
-          let datosObj = JSON.stringify(data);
-          this.router.navigate(['code', datosObj])
-        }else {
-            this.mailExisting();
-        }
-      });
-    } */
 
     registerNewUser(){
-      let data = this.registerForm.value;
-      let datos:any ={
-        email          : data.email,
-        password       : data.password,
-        name           : data.name,
-        surname1       : data.surname1,
-        surname2       : data.surname2,
-        birthdate      : data.birthdate,
-     /*    gender         :{
-            id         : this._gender.id,
-            name       :this._gender.name
-        }, */
-        documentType   :{
-            id         : this._documenType.id,
-            name       : this._documenType.name
-        },
-        documentNumber : data.documentNumber,
-        phone          : data.phone
-        // code           : "123"
-      }
-       data.code = 1234;
-       data.id = "sendbooking" ;
-
-      data.birthdate = moment(data.birthdate).format('YYYY-MM-DD');
-      console.log('this.data: ',data.birthdate);
-      console.log('this.data: ',data);
-      console.log('data armada:', data);
-      this.userProvider.createNewUser(data).subscribe(async (data:any) =>{
-        this.createOk = data;
-        console.log('la vuelta de this.createOK:', this.createOk);
-          
-          /* this.createOk = data; */
-             console.log('datos que vienen del logueo: por registro:', this.createOk);
-               localStorage.setItem('idTokenUser', this.createOk.patientId);
-               localStorage.setItem('emailUser', this.createOk.userEmail);
-               localStorage.setItem('authorization', this.createOk.authorization); 
-               localStorage.setItem('role', this.createOk.role);
-               localStorage.setItem('photoUrl', this.createOk.photoUrl);
-               localStorage.setItem('name', this.createOk.name);
-               localStorage.setItem('patientName', this.createOk.patientName);
-               localStorage.setItem('token', this.createOk.firebaseToken);
-               localStorage.setItem('token', data.firebaseToken);
-              localStorage.setItem('uid', data.userId);
-              localStorage.setItem('sigIn', 'completo');
-               this.router.navigate(['/login']);
-               console.log("pasó!!!");
-               console.log('pasó logeado', this.createOk);
-               if(localStorage.getItem('token')){
-                const token = localStorage.getItem('token');
-              }
-        }, async err=>{
+      this.userProvider.sendValidation(this.email,this.documentNumber, this.document.id, this.document.name).subscribe((resp:any)=>{
+        if(resp.result == 'ok'){
+          let data = this.registerForm.value;
+          if(this.dataReniec){
+            if(this.sexo === 'MASCULINO'){
+              this.idgender = 2;
+              this.namegender = 'HOMBRE';
+            }else if(this.sexo === 'FEMENINO'){
+              this.idgender = 3;
+              this.namegender = 'MUJER';
+            }else{
+              this.idgender= 1;
+              this.namegender = 'INDISTINTO';
+            }
+          }else{
+            this.datos.gender.id = this._gender.id;
+            this.datos.gender.name = this._gender.name;
+          }
+          this.datos ={
+            email          : this.email,
+            password       : this.password,
+            name           : this.name,
+            surname1       : this.surname1,
+            surname2       : this.surname2,
+            birthdate      : this.birthdate,
+            gender         :{
+                id         : this.idgender,
+                name       : this.namegender
+            },
+            documentType   :{
+                id         : this.document.id,
+                name       : this.document.name
+            },
+            documentNumber : this.documentNumber,
+            phone          : this.phone
+          }
+           this.datos.code = 1234;
+           this.datos.id = resp.id ;
+          this.datos.birthdate = moment(this.birthdate).format('YYYY-MM-DD');
+          console.log('this.data: ',this.birthdate);
+          console.log('this.data: ',this.datos);
+          this.userProvider.createNewUser(this.datos).subscribe(data =>{
+            this.createOk = data;
+            console.log('la vuelta de this.createOK:', this.createOk);
+                 console.log('datos que vienen del logueo: por registro:', this.createOk);
+                   localStorage.setItem('authorization', JSON.stringify(this.createOk));
+                   this.router.navigate(['/login']);
+                   console.log("pasó!!!");
+                   console.log('pasó logeado', this.createOk);
+                   if(localStorage.getItem('authorization')){
+                    const token = localStorage.getItem('authorization.authorization');
+                  }
+          }, err => {
+            console.log('error de creación');
+          })
+        }
+      }, async err=>{
           console.log('err',err);
-        const alert = await this.alertCtrl.create({
-          header:'Error en el envio del código',
-          message:`${err.error.message}`,
-          buttons:[{
-            text:'Intentar de nuevo',
-            role: 'cancel'
-          }]
-        });
-        await alert.present();
+          if(err.error.result === 'error'){
+            if(err.error.message == 'Ya tienes historia y usuario web'){
+              const alert = await this.alertCtrl.create({
+                header:'Error de login',
+                subHeader:'Ya tienes una cuenta',
+                backdropDismiss:false,
+                buttons:[
+                  {
+                    text:'Recuperar o loguear',
+                    handler:() =>{
+                      this.router.navigate(['login']);
+                    }
+                  }
+                ]
+              });
+              await alert.present();
+            }else{
+              const alert = await this.alertCtrl.create({
+                header:'Error de login',
+                subHeader:'Ya tienes una cuenta',
+                backdropDismiss:false,
+                buttons:[
+                  {
+                    text:'Recuperar o loguear',
+                    handler:() =>{
+                      this.router.navigate(['login']);
+                    }
+                  }
+                ]
+              });
+              await alert.present();
+            }
+          }
       });
     }
       

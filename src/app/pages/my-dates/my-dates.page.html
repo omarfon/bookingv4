@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-toolbar color="primary" hideBackButton="true">
+  <ion-toolbar hideBackButton="true">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title> Mi citas </ion-title>
   </ion-toolbar>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-segment [(ngModel)]="citas" color="secondary">
       <ion-segment-button value="miscitas">
         <p>Proximas citas</p>
@@ -28,8 +28,7 @@
           <ion-row>
             <ion-col size="4">
               <ion-avatar item-start>
-                <img src="{{SERVERImage}}{{task.professional.id}}.png"
-                  onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
+                <img src="{{SERVERImage}}{{task.professional.id}}.png" (error)="errorHandler($event)">
               </ion-avatar>
             </ion-col>
             <ion-col size="8" (click)="goToDetailsTask(task)">
@@ -117,24 +116,33 @@
     <div *ngSwitchCase="'citaspasadas'">
       <ion-slides class="containerDepends">
         <ion-slide>
-          <ion-button class="botonConImagen" (click)="getDatesUser()">
-            <img src="" alt="">
-            {{nombreCortado}}
-          </ion-button>
-          <p class="principalName">{{nombre}}</p>
+          <div class="row">
+            <ion-col>
+              <ion-button class="botonConImagen" (click)="getDatesUser()">
+                {{nombreCortado}}
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <p class="principalName">{{nombre}}</p>
+            </ion-col>
+          </div>
         </ion-slide>
 
         <ion-slide *ngFor="let dep of dependens">
-          <ion-button color="secondary" class="botonConImagen" (click)="getDatesDepends(dep)">
-            <p>{{dep.name | slice:0:1}}</p>
-            <img src="" alt="">
-          </ion-button>
-          <p class="nombreUsuarios">{{dep.name}}</p>
+          <div class="row">
+            <ion-col size="12">
+              <ion-button color="secondary" class="botonConImagen" (click)="getDatesDepends(dep)">
+                <p>{{dep.name | slice:0:1}}</p>
+              </ion-button>
+            </ion-col>
+            <ion-col size="12">
+              <p class="nombreUsuarios">{{dep.name}}</p>
+            </ion-col>
+          </div>
         </ion-slide>
       </ion-slides>
       <ion-list *ngFor='let citaspa of citaspasadas'>
         <ion-card class="bordeDerecho" *ngIf="citaspasadas ">
-          <ion-item>
             <ion-row>
               <ion-col size="4">
                 <ion-avatar item-start>
@@ -156,8 +164,8 @@
                     <p>receta para esta cita:</p>
                   </ion-col>
                   <ion-col size="2">
-                    <ion-button clear class="iconoDerecha">
-                      <ion-icon name="attach" (click)="goToRecipe(citaspa)">
+                    <ion-button class="iconoDerecha" size="small" color="light">
+                      <ion-icon slot="icon-only" name="attach" (click)="goToRecipe(citaspa)">
                       </ion-icon>
                     </ion-button>
                   </ion-col>
@@ -174,7 +182,6 @@
                 </ion-row>
               </ion-col>
             </ion-row>
-          </ion-item>
         </ion-card>
         <div *ngIf="!citaspasadas.encuentros && !citaspasadas">
           <!-- <div class="imagenSinCitas">

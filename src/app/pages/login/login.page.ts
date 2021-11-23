@@ -85,6 +85,8 @@ export class LoginPage implements OnInit {
         console.log('data:', data);
         this.msg = "";
         localStorage.setItem('authorization', JSON.stringify(data));
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('visto', 'ok');
         this.router.navigate(['home']);
         this.documentId = null;
         this.dni = "";
@@ -112,12 +114,12 @@ export class LoginPage implements OnInit {
   async goToRecovery(){
     const alert = await this.alertCtrl.create({
       header:"Olvidaste tu contraseña...?",
-      message:'Ingresa tu correo electronico',
+      message:'Ingresa tu N° de documento para recuperar',
       inputs :[
         {
-          name:'email',
-          placeholder:'email',
-          type: 'email'
+          name:'documento',
+          placeholder:'Ingresa tu n° de documento',
+          type: 'text'
         }
       ],
       buttons :[
@@ -125,9 +127,17 @@ export class LoginPage implements OnInit {
             text:'Enviar',
             handler: data => {
               console.log('enviando correo electronico');
-              let email = data.email;
-              console.log('lo que se almacena en correo:', email);
-              this.userService.sendValidation(email).subscribe(data =>{
+              let document = data.documento;
+              console.log('lo que se almacena en correo:', document);
+              const dataSend = {
+                documentNumber:  data.documento,
+                documentType: {
+                  id:"1",
+                  name:"D.N.I"
+                },
+                app: 'ebooking'
+              }
+              this.userService.recoveryLogin(dataSend).subscribe(data =>{
                   this.datos = data;
                   console.log('this.datos:', this.datos);
                   if(this.datos.result == 'ok'){

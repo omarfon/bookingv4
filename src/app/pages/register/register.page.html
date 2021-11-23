@@ -99,8 +99,8 @@
         </ion-col>
       <ion-col size="6" *ngIf="!dataReniec">
         <ion-item no-lines>
-          <ion-select formControlName="gender" name="gender" placeholder="Sexo" [(ngModel)]="gender" (ionChange)="cambiogenero($event)">
-            <ion-select-option *ngFor="let gender of genders" [value]="gender" >{{gender.name}}</ion-select-option>
+          <ion-select formControlName="gender" name="gender" placeholder="Sexo" [(ngModel)]="sexo" (ionChange)="cambiogenero($event)">
+            <ion-select-option *ngFor="let gender of genders" [value]="gender.id" >{{gender.name}}</ion-select-option>
           </ion-select>
         </ion-item>
         <div *ngIf="registerForm.get('gender').errors && registerForm.get('gender').dirty || registerForm.get('gender').touched" no-lines>
@@ -109,7 +109,7 @@
       </ion-col>
       <ion-col size="12">
           <ion-item no-lines>
-            <ion-input type="email" formControlName="email" name="email" placeholder="Email:"></ion-input>
+            <ion-input type="email" formControlName="email" name="email" [(ngModel)]="email" placeholder="Email:"></ion-input>
           </ion-item>
           <div *ngIf="registerForm.get('email').errors && registerForm.get('email').dirty || registerForm.get('email').touched" no-lines>
               <p *ngIf="registerForm.get('email').hasError('required')" class="error">Email requerido</p>
@@ -119,7 +119,7 @@
       
       <ion-col size="12">
           <ion-item no-lines>
-            <ion-input type="tel" formControlName="phone" name="phone" placeholder="Telefono"></ion-input>
+            <ion-input type="tel" formControlName="phone" name="phone" placeholder="Telefono" [(ngModel)]="phone"></ion-input>
           </ion-item>
           <div *ngIf="registerForm.get('phone').errors && registerForm.get('phone').dirty || registerForm.get('phone').touched" no-lines>
               <p *ngIf="registerForm.get('phone').hasError('required')" class="error">Teléfono requerida</p>
@@ -128,7 +128,7 @@
         </ion-col>
     <ion-col size="12">
       <ion-item no-lines>
-        <ion-input type="password" required name="password" formControlName="password" placeholder="Contraseña, mínima 8 caracteres"></ion-input>
+        <ion-input type="password" required name="password" formControlName="password" placeholder="Contraseña, mínima 8 caracteres" [(ngModel)]="password"></ion-input>
       </ion-item >
       <div *ngIf="registerForm.get('password').errors && registerForm.get('password').dirty || registerForm.get('password').touched" no-lines>
           <p *ngIf="registerForm.get('password').hasError('required')" class="error">La contraseña es requerida caracteres</p>

@@ -1,11 +1,14 @@
     ion-content{
-        height: 85vh;
         margin-top:15vh;
         border-top-left-radius: 45px;
-        background:rgba(0,0,0,.5);
+        --background:url(../../../assets/imgs/fondoOnboarding.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        color:#fff;
       }
         .tituloFamiliar{
-          color:#00B6A3;
+          color:#fff;
           text-align: left;
           margin-bottom:10px;
           font-size:1.4em;
@@ -36,7 +39,10 @@
           padding-top:15px!important;
         } */
         .guardaryContinuar{
-          margin-top:-25px;
+          margin-top:15px;
+          background:#336E81;
+          width:90%;
+          margin-left:5%;
         }
         ion-scroll{
           min-height: 80%;
@@ -52,6 +58,16 @@
       .list-md .item-block .item-inner{
         border-bottom:none;
       }
+      .list-md{
+        background:none!important;
+      }
       .colorIcon{
         color:#336E81;
+      }
+      .close{
+        color:#fff;
+      }
+      form{
+        width:90%;
+          margin-left:5%;
       }

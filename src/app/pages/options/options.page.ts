@@ -32,13 +32,13 @@ export class OptionsPage implements OnInit {
   goToCardCuidaPage(scui){
     console.log(scui);
     this.helloSrv.especialidad = scui;
-    this.router.navigate(['card-cuida']);
+    this.router.navigate(['card']);
   }
 
   async getAllSpecialtys(){
     const loading = await this.loadingCtrl.create({
       message: 'Cargando las especialidades',
-      duration:3000,
+      duration:2000,
       translucent:true,
       backdropDismiss:true
     });

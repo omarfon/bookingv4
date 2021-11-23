@@ -3,12 +3,19 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { DetailDoctorComponent } from './pages/detail-doctor/detail-doctor.component';
+import { NologinGuard } from './nologin.guard';
 
 const routes: Routes = [
   {
     path: '',
     component:OnboardingComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    /* canActivate: [NologinGuard]  */
+  },
+  {
+    path: 'onboarding',
+    component:OnboardingComponent,
+    canActivate: [NologinGuard] 
   },
   {
     path: 'home',

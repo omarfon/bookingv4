@@ -24,6 +24,10 @@ export class DetailDoctorComponent implements OnInit {
   public idDoctor;
   public dateFirst = moment().format('YYYY-MM-DD');
   public dateSecond = moment().add(6, 'days').format('YYYY-MM-DD');
+  public otherDoctors;
+  public _doctorsSpecialty;
+  public datesCalendar;
+  public doctorsSpecialty;
    constructor(public doctorDataSrv: DoctordataService,
               public loadingCtrl: LoadingController,
               public router: Router,
@@ -94,5 +98,28 @@ export class DetailDoctorComponent implements OnInit {
     this.router.navigate(['financer']);
     console.log('datos escogido',h);
   }
+
+
+/*   getAllDoctorsSpecialty(){
+    this.specialidadesServices.getAllDoctorsSpecialty(this.specialty, this.dateFirst, this.dateSecond).subscribe((data:any) =>{
+      console.log('todos los especialistas:',data);
+      this.otherDoctors = data.centers[0].services[0].professionals;
+      this._doctorsSpecialty = this.otherDoctors.filter( x => x.availables.length > 0);
+      this._doctorsSpecialty.forEach(element => {
+        const fech = element.availables;
+        this.datesCalendar = fech;
+
+        fech.forEach(dat => {
+          dat.hours.hour = dat.hours.map((element: any) => {
+            return element.hour.slice(0, 5);
+          });
+          dat.newFormatDay = moment(dat.date).locale('es').format('DD');
+          dat.date = moment(dat.date).locale('es').format('dddd').slice(0, 3);
+        });
+      })
+      this.doctorsSpecialty = this._doctorsSpecialty;
+      console.log('doctores disponibles:',this.doctorsSpecialty);
+  })
+} */
 
 }

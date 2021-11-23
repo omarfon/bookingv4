@@ -54,6 +54,13 @@ getSpecialtys() {
             )
   }
 
+  getDoctorsSpecialty(id, date1: any, date2: any) {
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({ "Authorization": authorization.authorization });
+    return this.http
+      .get(this.apiUrlOne + 'ebooking/fmt-centers/1/services/' + id + '/professionals/all/availables?from_date=' + date1 + '&to_date=' + date2, {headers});
+  }
+
   getAvailablesPerDoctor(id, serviceId, fromDate, toDate){
  /*    console.log('datos en el provider:', id ,serviceId, fromDate); */
  const authorization = JSON.parse(localStorage.getItem('authorization'));

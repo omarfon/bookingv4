@@ -40,8 +40,9 @@ export class MenuComponent implements OnInit {
   }
 
   closeSesion(){
-    localStorage.clear();
-    this.router.navigate(['login']);
+    localStorage.removeItem('authorization');
+    localStorage.removeItem('name');
+    this.router.navigate(['onboarding']);
     this.menu.close();
   }
 

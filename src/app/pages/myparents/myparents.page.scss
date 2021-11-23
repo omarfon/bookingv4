@@ -1,21 +1,38 @@
+ion-header ion-toolbar{
+  --background:url(../../../assets/imgs/fondoOnboarding.svg);
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+ion-content{
+  --background: #e7e7e7!important;
+}
+ion-menu-button{
+  color:#fff;
+}
+ion-title{
+  color:#fff;
+}
     .nombrePariente{
       color:#336E81;
       font-size:1.1em;
-      font-weight: 400;
-      text-align: left;
-      margin-left: 10px;
-      margin-top:10px;
-      margin-bottom:-10px;
+      line-height: 1.1em;
+      text-align: right;
+      margin-right: 10px;
+      margin-top:15px;
+      margin-bottom:10px;
+      font-family: 'avenir';
     }
     .parentesco{
       color:#336E81;
       font-weight: 600;
-      text-align: left;
-      margin-left:10px;
+      text-align: right;
+      margin-right:10px;
     }
     .edad{
-      text-align: left;
-      margin-left:10px;
+      margin-top:-15px;
+      text-align: right;
+      margin-right:10px;
       color:#336E81;
     }
     .center{
@@ -41,9 +58,9 @@
       margin-top:0;
       height: 28px;
       width: 25px;
-        ion-icon{
-          color:#fff;
-        }
+    }
+    ion-icon{
+      color:#336e815b;
     }
     .contenedorButton{
       text-align: left;
@@ -59,14 +76,19 @@
     .guardaryContinuar{
       margin-top:-25px;
     }
-    ion-avatar img{
-      width: 70px;
+    ion-avatar {
+      img{
+        margin-top:10px;
+        margin-left:10px;
+        width: 55px;
+        height: 55px;
+      }
     }
     .cardParent{
       height: 160px;
       border-top-left-radius: 20px;
-      background:#f5f5f5;
-      width:100%;
+      background:#fff;
+      width:90%;
     }
     .botonEliminarParent{
       color:#fff;

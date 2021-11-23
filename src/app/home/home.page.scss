@@ -91,6 +91,7 @@
       margin-bottom: 15px;
       ion-icon {
           font-size: 1.5em!important;
+          color:#000;
       }
   }
   .mat-expansion-indicator {
@@ -339,5 +340,13 @@
         text-transform: lowercase;
         margin-left:5px;
         margin-top:-5px;
+    }
+}
+ion-header{
+    ion-icon{
+        color:#000!important;
+    }
+    ion-menu-button{
+        color:#000;
     }
 }

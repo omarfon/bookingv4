@@ -2,15 +2,28 @@
      ion-content{
       --background:#F6F9FE;
   }
+  ion-header ion-toolbar{
+    --background:url(../../../assets/imgs/fondoOnboarding.svg);
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  ion-title{
+    color:#FFF;
+  }
+  ion-back-button{
+    color:#fff;
+  }
     .tituloOptions{
        color:#20668B;
        font-size:1.2em;
+       line-height: 1.2em;
        text-align: center;
        width: 70%;
        margin-left:15%;
-       margin-bottom:20px;
-       margin-top:20px;
+       margin-top:10px;
        font-weight: 200;
+       font-family: 'avenir-bold';
     }
     .contenedorCura{
      /*  background-image: url(../assets/imgs/options/cura.png); */
@@ -113,14 +126,14 @@
       margin-bottom: 10px;
     }
     .textoCura{
-      text-align: center;
+      text-align: left;
       color:#20668B;
       font-size:.9em;
       width: 90%;
       margin-left:5%;
     }
     .textoCuida{
-      text-align: center;
+      text-align: left;
       color:#20668B;
       font-size:.9em;
       width: 90%;
@@ -128,29 +141,31 @@
     }
     ion-card{
       margin-inline:5px;
-      box-shadow: none;
-      width:100%;
       background:#fff;
-      height: 35px;
+      height: 45px;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top:0;
+      margin-bottom:0;
       ion-row{
         p{
-          font-size:.7em;
+          font-size:.8em;
           line-height:1em;
-          font-family: 'avenir-bold';
           text-transform: lowercase;
+          text-align: left;
+          font-family: 'avenir';
         }
       }
     }
 
-/*     .imagenEspecialidad{
+    .imagenEspecialidad{
       img{
-        width:22px!important;
-        height: 22px;
+        width:100%!important;
+        padding:none;
+        height: auto;
       }
-    } */
+    }
     .textoEspecialidad{
       display: flex;
       justify-content: start;
@@ -164,4 +179,12 @@
     }
     p{
       margin-bottom:0!important;
+    }
+    .logosBloques{
+      text-align: center;
+      img{
+        width:100px;
+        margin-top:20px;
+        margin-bottom:5px;
+      }
     }
