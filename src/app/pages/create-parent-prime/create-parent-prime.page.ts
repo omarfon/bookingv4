@@ -5,6 +5,7 @@ import { DependensService } from 'src/app/services/dependens.service';
 import * as moment from 'moment';
 import { AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { DataBasicService } from 'src/app/services/data-basic.service';
 
 
 @Component({
@@ -24,12 +25,25 @@ export class CreateParentPrimePage implements OnInit {
   public surname2;
   public birthdate;
   public documentNumber;
+  selectParentesco: any;
+  parentescoId: any;
+  public relations
+  public documents;
+  public document;
+  parentesco: (event: any) => void;
+  selectdocument: any;
+  documentId: any;
+  selectSexo: any;
+  sexoID: any;
+  public genders;
+  public gender;
   constructor(public router: Router,
               public fb: FormBuilder,
               public dependentsPvr: DependensService,
               public loadingCtrl: LoadingController,
               public crudPvr: CrudparentService,
               public alertCtrl: AlertController,
+              public dataBasicSrv:DataBasicService,
               public modalCtrl: ModalController) {
                 this.actual = moment().format('YYYY-MM-DD');
     
@@ -47,10 +61,34 @@ export class CreateParentPrimePage implements OnInit {
       // password        : [ String(Math.floor(Math.random() * 9e15)) ]
     });
 
-    console.log('la data de formulario:', this.formFamily);
+  /*   console.log('la data de formulario:', this.formFamily); */
               }
 
   ngOnInit() {
+
+      this.dataBasicSrv.getDocuments()
+      .subscribe(data => {
+        this.documents = data;
+        console.log('documents:', this.documents);
+      }, error => {
+        console.log(error)
+      })
+
+      this.dataBasicSrv.getGenders()
+    .subscribe(data => {
+      this.genders = data;
+      console.log('genders:', this.genders, data);
+    }, error => {
+      console.log(error)
+    })
+
+    this.dataBasicSrv.userRelations()
+    .subscribe(data => {
+      this.relations = data;
+      console.log('relaciones:', this.relations);
+    }, error => {
+      console.log(error)
+    })
   }
 
   closeModal(){
@@ -59,9 +97,21 @@ export class CreateParentPrimePage implements OnInit {
     });
   }
 
+  selectDocument(event) {
+    const documentType = event.target.selectedOptions[0].textContent;
+      this.documentNumber = '';
+      this.selectdocument = event.target.selectedOptions[0].textContent;
+      this.documentId = event.target.value;
+      console.log(documentType, this.selectDocument, this.documentId);
+  }
 
+  selecGender(event) {
+    this.selectSexo = event.target.selectedOptions[0].textContent;
+    this.sexoID = event.target.value;
+    console.log(this.selectSexo, this.sexoID)
+  }
 
-  async saveData(){
+  async saveData(form){
     this.desabilitado = false;
     if(this.formFamily.valid){
 
@@ -97,7 +147,7 @@ export class CreateParentPrimePage implements OnInit {
            /* this.navCtrl.push(MyparentsPage) */
           });
           loading.dismiss();
-          this.router.navigate(['home']);
+          this.router.navigate(['myparents']);
           this.closeModal();
       });
     }else{
@@ -105,6 +155,11 @@ export class CreateParentPrimePage implements OnInit {
       this.desabilitado = true;
     }
    
+  }
+
+  selecParentesco(event) {
+    this.selectParentesco = event.target.selectedOptions[0].textContent;
+    this.parentescoId = event.target.value;
   }
 
   async errorCreation(){

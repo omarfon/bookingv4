@@ -15,14 +15,13 @@ export class DataBasicService {
 
   getGenders(){
     const authorization = JSON.parse(localStorage.getItem('authorization'));
-    let headers = new HttpHeaders({"Authorization": authorization.autorization});
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.get(this.apiUrl + 'genders', {headers}).pipe(
                      map(data =>{
                       return data;
                     })
-
                )
-  }
+            }
 
   getDocuments(){
     const authorization = JSON.parse(localStorage.getItem('authorization'));
@@ -34,5 +33,17 @@ export class DataBasicService {
                   })
              )
           }
+
+    // GET RELATIONS
+  userRelations() {
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
+    return this.http
+      .get(this.apiUrl + 'relations', {headers}).pipe(
+        map(data =>{
+          return data
+        })
+      );
+  } 
           
 }

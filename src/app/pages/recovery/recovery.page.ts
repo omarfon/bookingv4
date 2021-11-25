@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CrudparentService } from 'src/app/services/crudparent.service';
+import { HelloService } from 'src/app/services/hello.service';
 
 
 @Component({
@@ -17,21 +18,20 @@ export class RecoveryPage implements OnInit {
   public formCode: FormGroup;
   public code;
   public logeo;
-
+  public recoveryData;
+  public dataSend;
+  public primero;
+  public segundo;
+  public tercero;
+  public cuarto;
   constructor(public router: Router,
               public crudPvr:     CrudparentService,
               public form:        FormBuilder,
               public userService: UserService,
+              public helloSrv: HelloService,
               public alertCtrl: AlertController,
               public loadingCtrl : LoadingController,
-              public routes: ActivatedRoute) {
-
-                const data = this.routes.snapshot.paramMap.get('data');
-                this.datos = JSON.parse(data);
-                console.log(data);
-                /* this.datos = this.navParams.get('datos'); */
-                console.log(this.datos);
-        
+              public routes: ActivatedRoute) {      
                 this.formCode = this.form.group({
                   primero : [],
                   segundo : [],
@@ -43,6 +43,9 @@ export class RecoveryPage implements OnInit {
                }
 
   ngOnInit() {
+    this.recoveryData = this.helloSrv.recoveryData;
+    this.dataSend = this.helloSrv.dataSend;
+    console.log(this.recoveryData, this.dataSend);
   }
 
   validacion(){
@@ -54,38 +57,25 @@ export class RecoveryPage implements OnInit {
     }
   }
 
-  saveData(){
-    let codigo = this.formCode.value;
-    // console.log('codigo:', codigo);
-    let uno = codigo.primero;
-    let dos = codigo.segundo;
-    let tres = codigo.tercero;
-    let cuatro = codigo.cuarto;
-    let code = uno + dos + tres + cuatro;
-    // console.log(code);
-    this.datos.code = code;
-    this.datos.password = this.formCode.value.password;
-    console.log('datos.code:', this.datos);
-    // this.datos.id = this.code.id;
-    // console.log('data armada:', this.datos);
-
-  this.userService.recoveryLogin(this.datos).subscribe(data => {
+  saveData(form){
+    console.log(form)
+    let datos = {
+      code:`${this.primero}${this.segundo}${this.tercero}${this.cuarto}`,
+      documentType: this.dataSend.documentType,
+      dni:this.dataSend.documentNumber,
+      id:this.recoveryData.id,
+      password:this.formCode.value.password
+    }
+  this.userService.loginRecovery(datos).subscribe(data => {
         this.logeo = data;
         if(data){
-          localStorage.setItem('usuario', this.logeo.userEmail);
-           localStorage.setItem('email', this.logeo.userEmail);
-           localStorage.setItem('authorization', this.logeo.authorization);
-           localStorage.setItem('id', this.logeo.patientId);
-           localStorage.setItem('role', this.logeo.role);
-           localStorage.setItem('photoUrl', this.logeo.photoUrl);
-           localStorage.setItem('patientName', this.logeo.patientName);
               console.log('this.logeo:', this.logeo);
               this.recoverySuccess();
               this.router.navigate(['login']);
         }
-            /* this.navCtrl.setRoot(LoginPage); */
       },err =>{
-        console.log('el logeo:', this.logeo);
+        console.log('el logeo:', this.logeo, err);
+        this.logeo = err;
           this.erroCode();
       });
 }
@@ -93,7 +83,7 @@ export class RecoveryPage implements OnInit {
 async recoverySuccess(){
   const alert = await this.alertCtrl.create({
     header:"Cuenta recuperada",
-    message:"su cuenta se ha recuperado exitosamente",
+    message:"su cuenta se ha recuperado exitosamente, ahora haga login",
     buttons: [
       {
         text:'ok'

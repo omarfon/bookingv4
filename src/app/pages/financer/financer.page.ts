@@ -7,6 +7,7 @@ import { DependensService } from 'src/app/services/dependens.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreateparentPage } from '../createparent/createparent.page';
 import { HelloService } from 'src/app/services/hello.service';
+import { CreateParentPrimePage } from './../create-parent-prime/create-parent-prime.page';
 
 
 @Component({
@@ -220,17 +221,17 @@ cleanDepe(){
 
 // mostrar el modal de la creación de familiares
 async showDetailCreateParents(){
-    const data =  {
+/*     const data =  {
       doctor : this.doctor,
       available : this.available,
       hora : this.hora,
       depe : this.depe,
       price : this.price,
       prestacion : this.prestacion
-      };
+      }; */
     const modal = await this.modalCtrl.create({
-      component: CreateparentPage,
-      componentProps: data
+      component: CreateParentPrimePage,
+      cssClass: 'my-custom-class'
     })
     await modal.present();
 }

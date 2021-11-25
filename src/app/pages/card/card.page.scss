@@ -14,9 +14,18 @@
     .list-md {
         background: #e7e7e7!important;
     }
+    .list-ios{
+        background: transparent;
+    }
     .item-md {
         background: transparent!important;
     }
+    .toolbar-background{
+        border-width:none;
+    }
+    ion-back-button{
+        color:#fff;
+      }
     #busqueda {
         margin-top:10px;
         width: 95%;

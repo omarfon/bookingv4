@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { API_ENDPOINT } from 'src/environments/environment';
+import { DOCTORSRMICRO } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,14 @@ export class HelloService {
  private SERVER = API_ENDPOINT;
  private apiUrl = `${this.SERVER}graphql`;
  private apiUrlOne = `${this.SERVER}`;
+ private apiDoctores = DOCTORSRMICRO;
  public especialidad;
  public dataEscogida;
  public price;
  public doctor;
  public plan;
+ public recoveryData;
+ public dataSend;
   constructor(public http: HttpClient) { }
 
   getServicios(){
@@ -41,6 +45,7 @@ getSpecialtys() {
 }
 
 
+//TRAE A UN GRUPO DE DOCTORES DE LA MISMA ESPECIALIDAD
   getDoctorsPerId(id){
     const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
@@ -54,11 +59,19 @@ getSpecialtys() {
             )
   }
 
+  //TRAE A UN GRUPO DE DOCTORES CON LA MISMA ESPECIALIDAD CON AVAILABLES
   getDoctorsSpecialty(id, date1: any, date2: any) {
     const authorization = JSON.parse(localStorage.getItem('authorization'));
-    let headers = new HttpHeaders({ "Authorization": authorization.authorization });
+    let headers = new HttpHeaders({ "Authorization": authorization.authorization});
     return this.http
       .get(this.apiUrlOne + 'ebooking/fmt-centers/1/services/' + id + '/professionals/all/availables?from_date=' + date1 + '&to_date=' + date2, {headers});
+  }
+
+  getDoctorsSpecialtyCard(id, date1: any, date2: any) {
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({ "Authorization": authorization.authorization});
+    return this.http
+      .get(this.apiDoctores + 'ebooking/fmt-centers/1/services/' + id + '/professionals/all/availables?from_date=' + date1 + '&to_date=' + date2, {headers});
   }
 
   getAvailablesPerDoctor(id, serviceId, fromDate, toDate){
@@ -87,6 +100,7 @@ getSpecialtys() {
     )
   }
 
+  //TRAE LA DISPONIBILIDAD DE UN DOCTOR ESPECIFICO
   getDoctorsDispo(specialty: any, profesional: any, date1: any,  date2: any) {
     const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({ "Authorization": authorization.authorization });

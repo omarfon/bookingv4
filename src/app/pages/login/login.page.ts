@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { DataBasicService } from 'src/app/services/data-basic.service';
 import { NewsEndpointsService } from './../../services/news-endpoints.service';
+import { HelloService } from 'src/app/services/hello.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class LoginPage implements OnInit {
     public modalCtrl: ModalController,
     public dataPvr: DataBasicService,
     public newsSrv: NewsEndpointsService,
+    public helloSrv: HelloService,
     public router: Router) { 
      
         
@@ -141,8 +143,9 @@ export class LoginPage implements OnInit {
                   this.datos = data;
                   console.log('this.datos:', this.datos);
                   if(this.datos.result == 'ok'){
-                    let data = JSON.stringify(this.datos)
-                    this.router.navigate(['recovery', data]);
+                    this.helloSrv.recoveryData = this.datos;
+                    this.helloSrv.dataSend = dataSend;
+                    this.router.navigate(['recovery']);
                   }else{
 
                   console.log('correo no valido levantar un alert o pintar un mensaje')

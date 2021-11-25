@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<ion-header ion-no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -26,7 +26,23 @@
         <p class="fraseExtendida" *ngIf="!datosDoctor">El doctor, esta próximo a cargar información importante para ti.</p>
       </ion-col>
     </ion-row>
-    <ion-slides [scrollbar]="true">
+    <div class="containerIcons" *ngIf="provisionsData">
+      <ion-row>
+        <ion-col size="8"></ion-col>
+        <ion-col size="4">
+          <ion-row>
+            <ion-col>
+              <ion-icon name="code"
+                        (click)="activeCode()"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <ion-icon name="apps" (click)="activeBloque()"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-slides [scrollbar]="true" *ngIf="slider == true">
       <ion-slide *ngFor="let p of provisionsData">
         <ion-row>
           <ion-col size="12">
@@ -35,10 +51,9 @@
             </div>
           </ion-col>
           <ion-col size="12">
-
               <p class="textoHoras">Escoge la hora de la cita</p>
-              <ion-row>
-                <ion-col size="2" *ngFor="let h of p.hours">
+              <ion-row class="completo">
+                <ion-col class="col-2" size="2" *ngFor="let h of p.hours">
                   <p (click)="goToFinancer(h)" [ngClass]="{'active': h.isAvailable === true, 'desactive':h.isAvailable === false}">
                     {{h.hour | slice:0:5}}
                   </p>
@@ -48,9 +63,65 @@
         </ion-row>
       </ion-slide>
     </ion-slides>
-    <ion-slides>
-      <ion-slide>
-        
+    <ion-row>
+      <ion-col size="12" *ngIf="enbloque == true">
+          <div class="box-main-content">
+            <ion-row>
+              <ion-col size="12">
+              <div class="disponibles">
+                <p class="diasDisponibles">Próximos días disponibles</p>
+                <div class="diasCitas">
+                    <ul>
+                        <ion-row>
+                            <ion-col size="2" *ngFor="let items of provisionsData;  let index = index">
+                                <li (click)="stateShow(index, items)"
+                                    [ngClass]="{'active': boxCaID == index}">
+                                    <div class="box-day" id="{{index}}">
+                                        {{items.date }}</div>
+                                </li>
+                                <span class="day">{{items.newFormatDay}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ul>
+                </div>
+                <div class="horasCitas">
+                    <div style="overflow: hidden;" *ngFor="let itemss of provisionsData; let ii = index">
+                        <div *ngIf="boxCaID === ii" class="box-hour" >
+                            <p class="p-hour-dispo">Selecciona una hora</p>
+                            <div class="box-hour-main">
+                                <ion-row>
+                                    <ion-col size="3" *ngFor="let items of itemss.hours; let indexxx = index">
+                                        <span>
+                                            <div [ngClass]="{'hourdispo': itemss.hours[indexxx].isAvailable === true, 'desactive': itemss.hours[indexxx].isAvailable === false}"
+                                                (click)="goToFinancer(items)">
+                                                {{items.hour | slice:0:5}}
+                                            </div>
+                                        </span>
+                                    </ion-col>
+                                </ion-row>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              </ion-col>
+            </ion-row>
+          </div>
+      </ion-col>
+    </ion-row>
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let d of doctorsSpecialty" >
+        <ion-card class="containerOtherSpecialist">
+          <ion-row>
+            <ion-col size="3">
+              <img class="avatar" [src]="url + d.info.imageUrl" alt="">
+            </ion-col>
+            <ion-col size="9">
+              <h3>{{d.surname1}} {{d.name}}</h3> 
+              <p>{{d.service.description}}</p> 
+            </ion-col> 
+          </ion-row>
+        </ion-card>
       </ion-slide>
     </ion-slides>
   </div>

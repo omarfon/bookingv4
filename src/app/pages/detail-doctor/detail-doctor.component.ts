@@ -28,6 +28,21 @@ export class DetailDoctorComponent implements OnInit {
   public _doctorsSpecialty;
   public datesCalendar;
   public doctorsSpecialty;
+  public slider: boolean = true;
+  public enbloque: boolean = false;
+  boxID: any;
+  boxCaID: any;
+  public selectedDay;
+  slideOpts = {
+    slidesPerView: 1.7,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    }
+  }
    constructor(public doctorDataSrv: DoctordataService,
               public loadingCtrl: LoadingController,
               public router: Router,
@@ -35,12 +50,12 @@ export class DetailDoctorComponent implements OnInit {
 
                 if( this.doctorDataSrv.doctor){
                   this.dataDoctor = this.doctorDataSrv.doctor;
-                  console.log(this.dataDoctor);
                   this.idoctor = this.dataDoctor.id;
+                  this.getDataDoctor();
                   this.bloque = this.dataDoctor.bloque;
+                  console.log(this.dataDoctor, this.bloque);
                   this.specialty = this.dataDoctor.services[0].id;
                   this.idDoctor = this.dataDoctor.id;
-                  this.getDataDoctor();
                 }else{
                   this.loadingCtrl.dismiss();
                   this.router.navigate(['home']);
@@ -48,15 +63,18 @@ export class DetailDoctorComponent implements OnInit {
                }
 
   async ngOnInit() {
-      this.getDatesDoctor();
+       this.getDatesDoctor();
+       this.getAllDoctorsSpecialty();
   }
 
-  async getDatesDoctor(){
-    const loading = await this.loadingCtrl.create({
-      message:'Cargando info del especialista',
-    });
-    await loading.present();
 
+  async getDatesDoctor(){
+    if(this.dataDoctor){
+      const loading = await this.loadingCtrl.create({
+        message:'Cargando info del especialista',
+      });
+      await loading.present();
+    }
     if(this.idoctor !== ''){
       this.helloSrv.getDoctorsDispo(this.specialty, this.idDoctor, this.dateFirst, this.dateSecond).subscribe((data: any) => {
         this.provisionsData = data.centers[0].services[0].professionals[0].availables;
@@ -99,9 +117,24 @@ export class DetailDoctorComponent implements OnInit {
     console.log('datos escogido',h);
   }
 
+  activeCode(){
+    this.enbloque = false;
+    this.slider = true;
+  }
 
-/*   getAllDoctorsSpecialty(){
-    this.specialidadesServices.getAllDoctorsSpecialty(this.specialty, this.dateFirst, this.dateSecond).subscribe((data:any) =>{
+  activeBloque(){
+    this.slider = false;
+    this.enbloque = true;
+  }
+
+  stateShow(index, items) {
+/*     this.boxID = item;
+ */    this.boxCaID = index;
+    this.selectedDay = items;
+  }
+
+  getAllDoctorsSpecialty(){
+    this.helloSrv.getDoctorsSpecialty(this.specialty, this.dateFirst, this.dateSecond).subscribe((data:any) =>{
       console.log('todos los especialistas:',data);
       this.otherDoctors = data.centers[0].services[0].professionals;
       this._doctorsSpecialty = this.otherDoctors.filter( x => x.availables.length > 0);
@@ -120,6 +153,6 @@ export class DetailDoctorComponent implements OnInit {
       this.doctorsSpecialty = this._doctorsSpecialty;
       console.log('doctores disponibles:',this.doctorsSpecialty);
   })
-} */
+}
 
 }

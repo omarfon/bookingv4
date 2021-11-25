@@ -92,6 +92,19 @@ export class UserService {
     )
   }
 
+  loginRecovery(datos){
+    //CORREGIR LLAMADA DE RECUPERAción
+  /*   let params = {code: datos.code, email: datos.email, id: datos.id, password: datos.password, app: 'ebooking'}; */
+  let params = datos;  
+  const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
+    return this.http.post(this.apiUrl + 'login-recovery', params, {headers}).pipe(
+                    map(data => {
+                      return data
+                    })
+    )
+  }
+
 
   changePassword(password, passwordNew){
     let params = {password: password, passwordNew: passwordNew };

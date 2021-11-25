@@ -45,7 +45,8 @@ export class MyDatePage implements OnInit {
         {
           text: 'SI',
           handler: data => {
-            const idPrin = localStorage.getItem('idTokenUser');
+            const dataId = JSON.parse(localStorage.getItem('authorization'))
+            const idPrin = dataId.patientId;
             console.log(localStorage.getItem('idTokenUser'));
             if (this.task.patient.id == idPrin) {
               this.appointmentProvider.destroyAppointment(task).subscribe(data => {

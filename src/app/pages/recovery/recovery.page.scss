@@ -1,4 +1,13 @@
-    .codigoValida{
+ion-header ion-toolbar{
+  --background:url(../../../assets/imgs/fondoOnboarding.svg);
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+ion-title{
+  color:#fff;
+}
+.codigoValida{
       color: #96999C;
       text-align: center;
       // margin-bottom: 2em;

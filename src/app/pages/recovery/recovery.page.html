@@ -1,13 +1,12 @@
 <ion-header>
-
-  <ion-toolbar color="primary">
-    <ion-title>Código de Recuperación</ion-title>
-    <!-- <ion-buttons left> 
-      <button ion-button clear
+  <ion-toolbar >
+    <ion-title size="small">Código de Recuperación</ion-title>
+    <ion-buttons slot="start"> 
+      <ion-button clear
               click="goToLogin()">
         <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons> -->
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>
@@ -15,7 +14,7 @@
 
 <ion-content>
 
-  <p class="codigoValida">hemos enviado al correo el código de validación con el que podrás recuperar tu cuenta....</p>
+  <p class="codigoValida">hemos enviado el código de validación al correo {{recoveryData.emailHash}} con el que podrás recuperar tu cuenta....</p>
  <ion-row>
    <form [formGroup]="formCode" (ngSubmit)="saveData(formCode.value)" novalidate>
    <div size="12">
@@ -24,6 +23,7 @@
            <ion-input type="tel"
                         minlength="1"
                         maxlength="1"
+                        name="primero"
                        [(ngModel)]="primero"
                        formControlName="primero"
                         ></ion-input>
@@ -42,7 +42,7 @@
                       maxlength="1"
                       tercero="tercero"
                       formControlName="tercero"
-                      ngModel></ion-input>
+                      [(ngModel)]="tercero"></ion-input>
           </ion-col>
           <ion-col class="rectanguloInput">
               <ion-input type="tel"
@@ -50,7 +50,7 @@
                       maxlength="1"
                          tercero="cuarto"
                          formControlName="cuarto"
-                         ngModel></ion-input>
+                         [(ngModel)]="cuarto"></ion-input>
              </ion-col>
             </ion-row>
             <div class="containerInputs">

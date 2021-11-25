@@ -1,5 +1,6 @@
 ion-toolbar{
     --background:#60B5B8; 
+    border:none;
  }
 ion-content{
    --background:#60B5B8; 
@@ -81,4 +82,148 @@ h3{
     color:#fff;
     font-family: 'avenir-light';
     font-size:.9em;
+}
+
+//ESTILOS NUEVO CARD
+.box-main-content {
+    .datosDoctor {
+        background: #fff;
+        border-top-right-radius: 20px;
+        padding-bottom: 10px;
+    }
+
+    .disponibles {
+        margin-top: -16px;
+
+        .diasCitas {
+            padding-bottom: 5px;
+
+            p {
+                color: #052F51;
+                text-align: right;
+                font-size: .9em;
+                margin-right: 16px;
+                padding-top: 8px;
+            }
+
+            ul {
+                margin: 0 !important;
+                padding: 0 10px !important;
+
+                li {
+                    list-style-type: none;
+                    background: #16cff0;
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 15%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .box-day {
+                        color: #fff;
+                    }
+
+                }
+
+                span {
+                    color: #052F51;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+
+    .horasCitas {
+        margin-top: -5px;
+        .box-hour {
+            .p-hour-dispo {
+                text-align: center;
+                color: #fff;
+                font-size: .9em;
+                margin-top: 5px;
+            }
+
+            .box-hour-main {
+                margin-bottom: 10px;
+            }
+
+            ion-col {
+                height: 40px;
+            }
+
+        }
+    }
+}
+    .hourdispo {
+        border:1.5px solid #20668B;
+        color: #20668B;
+        padding: .2em 0;
+        width: 80%;
+        margin-left: 10%;
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    .desactive {
+        background: #919191;
+        color: #fff;
+        padding: .2em 0;
+        width: 80%;
+        margin-left: 10%;
+        border-radius: 5px;
+        text-align: center;
+        pointer-events: none;
+    }
+    .diasDisponibles {
+        font-size: .7em !important;
+        margin-bottom:0!important;
+        text-align: left;
+        margin-left:16px;
+        color:#fff;
+        font-family: 'avenir';
+    }
+    .tituloEspecialidad{
+        color:#062F51;
+        text-align: center;
+        font-family: 'avenir-bold';
+        margin-top:10px;
+    }
+    .visible{
+        display: block;
+    }
+    .oculto{
+        display: none;
+        border-bottom: 0!important;
+    }
+    .completo{
+        min-width:100%
+    }
+    .containerIcons{
+        margin-bottom:20px;
+        ion-icon{
+            color:#fff;
+            font-size:1.2em;
+        }
+    }
+    .avatar{
+        width:35px;
+        height: auto;
+    }
+.containerOtherSpecialist{
+    h3{
+        font-size:.8em;
+        font-family: 'avenir';
+        text-align: left;
+        color:#052F51
+    }
+    p{
+        color:#919191;
+        font-size:.7em;
+        text-align: left;
+        text-transform: lowercase;
+    }
 }

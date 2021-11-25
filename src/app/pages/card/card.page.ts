@@ -151,9 +151,8 @@ getSpecialtyes(){
       message:"cargando especialistas"
     });
     await loading.present();
-    this.helloPvr.getDoctorsSpecialty(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
+    this.helloPvr.getDoctorsSpecialtyCard(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
       const docts = doctors.centers[0].services[0].professionals.filter((element) => {
-        return element.availables.length > 0;
       })
       this.manyBoxes = docts.length;
       docts.forEach(element => {
