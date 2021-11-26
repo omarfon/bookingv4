@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
   </ion-buttons>
-    <ion-title>Recetas</ion-title>
+    <ion-title size="small">Recetas</ion-title>
       <p class="NombreBienvenida" *ngIf="nameUser">Hola {{nameUser}}</p> 
       <p class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas de consulta presencial</p>
   </ion-toolbar>
@@ -65,73 +65,74 @@
                             </p>
                               <p class="inicio"><b>Inicio:</b> {{rec.inicio_prescripcion | date: "dd MMMM yyyy"}}</p>
                               <p class="inicio"><b>Fin:</b> {{rec.fin_prescripcion | date: "dd MMMM yyyy" }}</p>
+                              <p class="inicio"><b>Via:</b> {{rec.nombre_via}}</p>
                         </ion-col>
                       </ion-row>
     
               <div *ngIf="rec && rec.cada_x_horas == 8"
                   class="down">
-              <h4 class="tituloDeLasTomas"> tomas de 3 veces por día</h4>
+              <h4 class="tituloDeLasTomas"> 3 veces por día</h4>
               <ion-row padding>
                 <ion-col class="cuadrados">
                   <p> 6-9 am</p>
-                  <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                   </ion-col>
                 <ion-col class="cuadrados">
                   <p> 2-4 pm</p>
-                  <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                  <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                 </ion-col>
                 <ion-col class="cuadrados">
                   <p>10-12 m</p>
-                  <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                  <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                 </ion-col>
               </ion-row>
           </div>
     
           <div *ngIf="rec && rec.cada_x_horas == 12"
                 class="down">
-            <p class="tituloDeLasTomas"> tomas de 2 veces por día</p>
+            <p class="tituloDeLasTomas"> 2 veces por día</p>
             <ion-row padding>
               <ion-col class="cuadrados">
                 <p> 6-7 am</p>
-                <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
               </ion-col>
               <ion-col class="cuadrados">
                 <p>6-7 pm</p>
-                <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
               </ion-col>
             </ion-row>
           </div>
     
           <div *ngIf="rec && rec.cada_x_horas == 6"
           class="down">
-              <p class="tituloDeLasTomas"> tomas de 4 veces por día</p>
+              <p class="tituloDeLasTomas"> 4 veces por día</p>
               <ion-row padding>
                 <ion-col class="cuadrados">
                   <p> 6-7 am</p>
-                  <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                 </ion-col>
                 <ion-col class="cuadrados">
                     <p> 12-1 pm</p>
-                    <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                    <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                   </ion-col>
                   <ion-col class="cuadrados">
                       <p> 6-7 pm</p>
-                      <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                      <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                     </ion-col>
                 <ion-col class="cuadrados">
                   <p>12-1 m</p>
-                  <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                  <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                 </ion-col>
               </ion-row>
             </div>
     
             <div *ngIf="rec && rec.cada_x_horas == 24"
             class="down">
-                <p class="tituloDeLasTomas"> toma de 1 vez por día</p>
+                <p class="tituloDeLasTomas"> 1 vez por día</p>
                 <ion-row padding>
                   <ion-col class="cuadrados">
                     <p> 6-7 am</p>
-                    <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                    <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                   </ion-col>
     
                 </ion-row>
@@ -139,27 +140,27 @@
   
               <div *ngIf="rec && rec.cada_x_horas == 2"
             class="down">
-                <p class="tituloDeLasTomas"> toma de 12 veces por día</p>
+                <p class="tituloDeLasTomas"> 12 veces por día</p>
                 <ion-row padding>
                   <ion-col class="cuadrados">
                     <p> 6-7 am</p>
-                    <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                    <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                   </ion-col>
                   <ion-col class="cuadrados">
                       <p> 8-9 pm</p>
-                      <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                      <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                     </ion-col>
                     <ion-col class="cuadrados">
                         <p> 10-11 pm</p>
-                        <p class="cantidad">{{rec.cantidad_pau}} {{rec.unidad_desc_corta}}</p>
+                        <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                       </ion-col>
                   <ion-col class="cuadrados">
                     <p>12-1 m</p>
-                    <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                    <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                   </ion-col>
                   <ion-col class="cuadrados">
                     <p>2-3 m</p>
-                    <p class="cantidad"> {{rec.cantidad_pau}} {{rec.unidad_desc_corta}} </p>
+                    <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                   </ion-col>
                 </ion-row>
               </div>

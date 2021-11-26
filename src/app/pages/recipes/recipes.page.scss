@@ -15,7 +15,7 @@ ion-header ion-toolbar{
 .NombreBienvenida{
   font-size: 1.4em;
   color: #fff;
-  font-family: 'avenir';
+  font-family: 'avenir-bold';
   width:70%;
   float: right;
   margin-right:10%;
@@ -44,6 +44,7 @@ ion-header ion-toolbar{
    font-size:3.5em;
    font-weight: 600;
    color:#00B6A3;
+   font-family: 'avenir-bold';
  }
  .mes{
   margin-top:20px;
@@ -97,6 +98,7 @@ ion-header ion-toolbar{
 .cantidadDeDias, .inicio{
   color:#444D4D;
   font-size:.8em;
+  margin-top:-10px;
 }
 .tituloDeLasTomas{
   color:#444D4D;
@@ -138,6 +140,7 @@ img{
   font-size:1.2em;
   margin-top:-5px;
   margin-left:10px;
+  font-family: 'avenir-bold';
 }
 .medicina{
   color:#BABCC2;
@@ -227,6 +230,7 @@ ion-card-header{
 }
 .textoVerReceta{
   color:#007198;
+  font-family: 'avenir-bold';
 }
 
 mat-expansion-panel{

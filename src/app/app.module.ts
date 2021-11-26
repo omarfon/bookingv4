@@ -31,11 +31,12 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { DetailDoctorComponent } from './pages/detail-doctor/detail-doctor.component';
 import { UserprefComponent } from './components/userpref/userpref.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { MenuDoctorsComponent } from './components/menu-doctors/menu-doctors.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, OnboardingComponent, DetailDoctorComponent,UserprefComponent,TabsComponent],
+  declarations: [AppComponent, OnboardingComponent, DetailDoctorComponent,UserprefComponent,TabsComponent, MenuDoctorsComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
 AppRoutingModule, 

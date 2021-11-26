@@ -17,7 +17,7 @@ img{
     border-radius: 10px;
 }
 h3{
-    color:#000;
+    color:#052F51;
     font-weight: 400;
     font-size:1.2em;
     width:90%;
@@ -26,16 +26,19 @@ h3{
     line-height: 1.2em;
 }
 .dataEstudios{
-    color:#fff;
+    color:#052F51;
     margin-top:-5px;
     font-size:.9em;
     margin-bottom:5px;
     span{
         font-size:1.1em;
-        color:#000;
+        color:#052F51;
         text-transform:lowercase;
         margin-top:-10px;
         font-weight: 400;
+        font-family: 'avenir-bold';
+        text-align: justify;
+        line-height: 1.1em;
     }
 }
 .containerDatosDoctor{
@@ -45,6 +48,7 @@ h3{
     color:#fff;
     width:90%;
     margin-left:5%;
+    text-align: justify;
 }
 .diaEncurso{
     border: 1px solid #fff;
@@ -224,6 +228,23 @@ h3{
         color:#919191;
         font-size:.7em;
         text-align: left;
+        margin-top:-10px;
+        margin-bottom:0!important;
         text-transform: lowercase;
     }
+}
+.tituloOthersEspecialist{
+    text-align: center;
+    color: #fff;
+
+}
+.especialist{
+    h6{
+        color:#fff;
+        text-align: center;
+    }
+}
+ion-spinner{
+    margin-left:calc(50% - 15px);
+    color:#fff;
 }

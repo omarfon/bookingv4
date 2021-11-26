@@ -19,7 +19,7 @@ export class RecipesPage implements OnInit {
     public router: Router) { }
 
   ngOnInit() {
-    let data = JSON.parse(localStorage.getItem('PacienteData'));
+    let data = JSON.parse(localStorage.getItem('authorization'));
     if(data){
       this.nameUser = data.name;
     }else{

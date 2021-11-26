@@ -71,6 +71,7 @@ export class CardPage implements OnInit {
   public nameSpecialty;
   datesCalendar: any;
   public manyBoxes;
+  public hours;
   
   constructor(
     public modalCtrl: ModalController,
@@ -151,8 +152,9 @@ getSpecialtyes(){
       message:"cargando especialistas"
     });
     await loading.present();
-    this.helloPvr.getDoctorsSpecialtyCard(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
+    this.helloPvr.getDoctorsSpecialty(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
       const docts = doctors.centers[0].services[0].professionals.filter((element) => {
+        return element.availables.length > 0;
       })
       this.manyBoxes = docts.length;
       docts.forEach(element => {
@@ -163,7 +165,20 @@ getSpecialtyes(){
       loading.dismiss();
     })
     console.log(this.doctorsF);
-  }
+  } 
+
+ /*  async getDoctorsList(){
+    this.doctorsF = [];
+    const loading = await this.loadingCtrl.create({
+      message:"cargando especialistas"
+    });
+    await loading.present();
+    this.helloPvr.getDoctorsSpecialtyCard(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
+      this.doctorsF = doctors.centers[0].services[0].professionals;
+      loading.dismiss(); 
+    })
+    console.log(this.doctorsF);
+  } */
 
   onChangueSpecialty(specialty: any) {
     console.log('specialty en onChangueSpecialty:', specialty);
@@ -174,6 +189,25 @@ getSpecialtyes(){
   getDoctorsPerDay() {
     this.toDate = moment(this.fromDate).add(this.numDays, "day").format("YYYY-MM-DD");
     this.getDoctorsList();
+  }
+
+  getHoursPerDay(doctor,dia){
+    console.log(doctor, dia);
+    let data = {
+        "centerId": dia.hours.params.centerId,
+        "basicServiceId": dia.hours.params.basicServiceId,
+        "professionalId":doctor.id,
+        "provisions": [
+          dia.hours.params.provisionId[0]
+        ],
+        "fromDateString":   dia.date + 'T00:00:00.000',
+        "toDateString":   dia.date + 'T00:00:00.000'
+    
+    }
+    this.helloPvr.getHoursPerDay(data).subscribe(data =>{
+      this.hours = data[0].appointmentDateTimes;
+      console.log(this.hours)
+    })
   }
 
   buscarDoctor() {

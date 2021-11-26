@@ -3,21 +3,21 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title size="small">Doctor escogido</ion-title>
+    <ion-title size="small">volver a home</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content >
   <div class="containerDatosDoctor">
   <ion-row *ngIf="dataDoctor" >
-      <ion-col size="5">
+      <ion-col size="4">
         <img [src]="url + dataDoctor.imageUrl" alt="">
       </ion-col>
-      <ion-col size="7">
+      <ion-col size="8">
         <h3>{{dataDoctor.apellido1}} {{dataDoctor.apellido2}} {{dataDoctor.nombre}}</h3>
         <p class="dataEstudios"><span>{{dataDoctor.services[0].description}}</span></p>
         <p class="dataEstudios">CMP: {{dataDoctor.cmp}}</p>
         <p class="dataEstudios"> RNE: {{dataDoctor?.rne}}</p>
-        <p class="dataEstudios" *ngIf="datosDoctor">{{datosDoctor.fraseCorta}}</p>
+        <p class="dataEstudios" *ngIf="datosDoctor"> <span>{{datosDoctor.fraseCorta}}</span></p>
       </ion-col>
       <ion-col size="12">
         <p class="fraseExtendida" *ngIf="datosDoctor">{{datosDoctor.fraseExtendida}}</p>
@@ -42,7 +42,7 @@
         </ion-col>
       </ion-row>
     </div>
-    <ion-slides [scrollbar]="true" *ngIf="slider == true">
+    <ion-slides [scrollbar]="true" *ngIf="slider == true && provisionsData">
       <ion-slide *ngFor="let p of provisionsData">
         <ion-row>
           <ion-col size="12">
@@ -64,7 +64,7 @@
       </ion-slide>
     </ion-slides>
     <ion-row>
-      <ion-col size="12" *ngIf="enbloque == true">
+      <ion-col size="12" *ngIf="enbloque == true && provisionsData">
           <div class="box-main-content">
             <ion-row>
               <ion-col size="12">
@@ -109,20 +109,30 @@
           </div>
       </ion-col>
     </ion-row>
-    <ion-slides [options]="slideOpts">
-      <ion-slide *ngFor="let d of doctorsSpecialty" >
-        <ion-card class="containerOtherSpecialist">
-          <ion-row>
-            <ion-col size="3">
-              <img class="avatar" [src]="url + d.info.imageUrl" alt="">
-            </ion-col>
-            <ion-col size="9">
-              <h3>{{d.surname1}} {{d.name}}</h3> 
-              <p>{{d.service.description}}</p> 
-            </ion-col> 
-          </ion-row>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
+    <div class="especialist">
+      <div *ngIf="!doctorsSpecialty">
+        <ion-spinner name="bubbles" ></ion-spinner >
+          <h6>Cargando otros especialistas</h6>
+        </div>
+        <h4 class="tituloOthersEspecialist" *ngIf="doctorsSpecialty">Otros especialistas con horario disponibles</h4>
+          <ion-slides [options]="slideOpts">
+        <ion-slide *ngFor="let d of doctorsSpecialty" (click)="goToDetailDoctor(d)">
+          <ion-card class="containerOtherSpecialist">
+            <ion-row>
+              <ion-col size="3">
+                <img class="avatar" [src]="url + d.info.imageUrl" alt="">
+              </ion-col>
+              <ion-col size="9">
+                <h3>{{d.surname1}} {{d.name}}</h3> 
+                <p>{{d.service.description}}</p> 
+              </ion-col> 
+            </ion-row>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
   </div>
 </ion-content>
+<ion-footer>
+  <ion-menu-button menu="secondary"></ion-menu-button>
+</ion-footer>

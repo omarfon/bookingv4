@@ -108,5 +108,12 @@ getSpecialtys() {
       .get(this.apiUrlOne + 'ebooking/fmt-centers/1/services/' + specialty + '/professionals/' + profesional +  '/availables?from_date=' + date1 + '&to_date=' + date2 , {headers});
   }
 
+  getHoursPerDay(data){
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({ "Authorization": authorization.authorization});
+    let params = data
+    return this.http.post(this.apiDoctores + 'ebooking/slots/availables-hour', params, {headers})
+  }
+
 
 }

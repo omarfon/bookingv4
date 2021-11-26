@@ -102,8 +102,9 @@ export class HomePage implements OnInit {
           this.nored();
     });
   }else{
-    let rol = localStorage.getItem("role");
-    if(rol && rol == 'user' ){
+    let data = JSON.parse(localStorage.getItem("authorization"));
+    let role = data.role;
+    if(role && role === 'user' ){
         this.obtenerUltimaFecha()
       }
   }
@@ -173,7 +174,7 @@ goToDetailDoctor(doctor){
 
       //llamadas en la carga las recetas mas recientes
           this.recipesPvr.getAllRecipes().subscribe((data:any) =>{
-            
+            console.log('todas las recetas', data);
             if(data.ok == false){
               this.recipes = [];
               return
@@ -185,7 +186,7 @@ goToDetailDoctor(doctor){
                 }
             this.recipes = data;
             this.recipendiente = this.recipes.length;
-            console.log('this._recipes:', this.recipes);
+            console.log('this._recipes:', this.recipes, this.recipendiente);
             const diaOne = moment(this.recipes.inicio_prescripcion);
             const diaTwo = moment(this.recipes.fin_prescripcion)
             this.diasFaltantes = diaOne.diff(diaTwo);
@@ -219,6 +220,7 @@ goToDetailDoctor(doctor){
       this.dependens = data
       if(this.dependens.length > 0){
         this.dependens = this.dependens.length;
+        console.log(this.dependens);
       }else{
         this.dependens = 0;
       }
@@ -277,8 +279,6 @@ goToTele(){
       event:event
     });
     await popover.present();
-
-
     const { role } = await popover.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
 }

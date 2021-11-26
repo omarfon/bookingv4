@@ -32,9 +32,10 @@ export class DetailDoctorComponent implements OnInit {
   public enbloque: boolean = false;
   boxID: any;
   boxCaID: any;
+  public noSpecialty: boolean = false;
   public selectedDay;
   slideOpts = {
-    slidesPerView: 1.7,
+    slidesPerView: 1.9,
     coverflowEffect: {
       rotate: 50,
       stretch: 0,
@@ -99,6 +100,10 @@ export class DetailDoctorComponent implements OnInit {
          this.loadingCtrl.dismiss();
         /*  this.dataDoctors = docts[0];
         console.log(this.dataDoctors); */
+      }, err => {
+        console.log(err);
+        this.loadingCtrl.dismiss();
+        this.noSpecialty = true;
       })
     }
   }
@@ -106,9 +111,29 @@ export class DetailDoctorComponent implements OnInit {
 
   getDataDoctor(){
     this.doctorDataSrv.getDatesDoctor(this.idoctor.toString()).subscribe((res:any) =>{
-      this.datosDoctor = res.data;
-      console.log(this.datosDoctor);
+      if(res){
+        this.datosDoctor = res.data;
+        console.log(this.datosDoctor);
+      }else{
+        this.datosDoctor = null;
+      }
+    }, err => {
+      this.dataDoctor = null;
     })
+  }
+
+  goToDetailDoctor(doctor){
+    this.dataDoctor = false;
+    this.provisionsData = false;
+    this.doctorDataSrv.doctor = doctor;
+    console.log('go to doctor:',doctor);
+    this.idDoctor = doctor.id;
+    this.dataDoctor = doctor.info;
+    this.idoctor = this.dataDoctor.id;
+    this.getDataDoctor();
+/*     this.getDatesDoctor(); */
+    this.provisionsData = doctor.availables;
+    this.specialty = doctor.service[0].id;
   }
 
   goToFinancer(h){
@@ -137,7 +162,8 @@ export class DetailDoctorComponent implements OnInit {
     this.helloSrv.getDoctorsSpecialty(this.specialty, this.dateFirst, this.dateSecond).subscribe((data:any) =>{
       console.log('todos los especialistas:',data);
       this.otherDoctors = data.centers[0].services[0].professionals;
-      this._doctorsSpecialty = this.otherDoctors.filter( x => x.availables.length > 0);
+     const doctors = this.otherDoctors.filter( x => x.availables.length > 0);
+      this._doctorsSpecialty = doctors.filter( x => x.id !== this.idoctor);
       this._doctorsSpecialty.forEach(element => {
         const fech = element.availables;
         this.datesCalendar = fech;
@@ -152,6 +178,8 @@ export class DetailDoctorComponent implements OnInit {
       })
       this.doctorsSpecialty = this._doctorsSpecialty;
       console.log('doctores disponibles:',this.doctorsSpecialty);
+  }, err =>{
+    this.doctorsSpecialty = [];
   })
 }
 
