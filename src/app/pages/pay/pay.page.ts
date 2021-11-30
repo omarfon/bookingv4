@@ -7,6 +7,7 @@ import { CulqiService } from 'src/app/services/culqi.service';
 import { API_IMAGES } from 'src/environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HelloService } from 'src/app/services/hello.service';
+import * as moment from 'moment';
 declare var Culqi: any;
 
 
@@ -85,6 +86,7 @@ export class PayPage implements OnInit {
   this.price = this.helloSrv.price;
   this.subida = datosListJson;
   this.plan = this.helloSrv.plan;
+  this.depe = this.helloSrv.depe;
   console.log('la hora', this.plan, this.plan);
 
   window['Culqi'].publicKey = 'pk_test_f99df0fd7a83c0e0';
@@ -244,6 +246,10 @@ export class PayPage implements OnInit {
     }, 1000);
     loadingPago.dismiss();
     }
+  }
+
+  upFirebaseSave(){
+
   }
 
 async payClinic(){
@@ -414,23 +420,27 @@ async payClinic(){
 
   next() {
     const provisionId = this.plan.precio[0].prest_item_pk;
-    this.desactivadoBotonLocal = false;
-      this.appointmentProvider.createAppointment(this.subida , provisionId).subscribe(async (data:any) => {
-        console.log('data devuelta:', data);
-        if(data.ok == false){
-          this.problemReserva(data);
-        }else{
-          const loading = await this.loadingCtrl.create({
-            message: "creando cita"
-          });
-            await loading.present();  
-            this.createCita();
-            loading.dismiss();
-          this.router.navigate(['home']);
-          /* this.navCtrl.setRoot(HomePage); */
-        }        
-                         
-    });  
+      this.desactivadoBotonLocal = false;
+        this.appointmentProvider.createAppointment(this.subida , provisionId).subscribe(async (data:any) => {
+          console.log('data devuelta:', data);
+          data.app = "booking";
+          data.fechaCreate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+          data.horaCreate = moment().format("h:mm:ss a");
+          this.crudPvr.saveDataCreate(data).then(resp => {
+            console.log('guardado en firebase:',resp);
+          })
+          if(data.ok == false){
+            this.problemReserva(data);
+          }else{
+            const loading = await this.loadingCtrl.create({
+              message: "creando cita"
+            });
+              await loading.present();  
+              this.createCita();
+              loading.dismiss();
+            this.router.navigate(['home']);
+          }               
+      });  
   }
 
   async createCita(){
@@ -477,13 +487,17 @@ async payClinic(){
 
   async nextDepe() {
     this.desactivadoBotonLocal = false;
-    let id = this.depe._id;
-    let provisionId = this.hora.params.provisionId;
+    const id = this.depe._id;
+    const provisionId = this.plan.precio[0].prest_item_pk;
     console.log('el id que va para creacion de familiar:', id)
     this.crudPvr.createParentDate(this.subida, id, provisionId).subscribe(data => {
-      this.waitingCreate();
+      console.log(data)
+/*       this.waitingCreate(); */
       this.createCita();
+      this.loadingCtrl.dismiss();
       this.router.navigate(['home']);
+    }, err => {
+      console.log(err)
     });
     // queda pendiente el error, sino crea la cita
   }

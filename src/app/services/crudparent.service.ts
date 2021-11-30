@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { API_ENDPOINT } from 'src/environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +16,12 @@ export class CrudparentService {
   private apiCreate = `${this.SERVER}users/register`;
   private apiValidate = `${this.SERVER}users/validate-email/register`;
 
-  constructor(public http: HttpClient) { } 
+  constructor(public http: HttpClient, public afs: AngularFirestore) { } 
 
   createParentDate(subida, id, provisionId){
     const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
-    let params = JSON.parse(subida);
+    let params = subida;
     params.provisions = [{"default":false, "id":provisionId}]
 
     return this.http.post(this.apiUrl + `${id}`, params , {headers}).pipe(
@@ -65,5 +67,39 @@ export class CrudparentService {
                     })
               )
        }
+
+       saveDataCreate(data){
+        const id = data.appointmentId;
+        console.log('servicio',data,id);
+        return this.afs.collection('citasBooking').doc(id.toString()).set({
+          data
+        },{merge: true})
+      }
+
+      searchDoctor(data){
+        const authorization = JSON.parse(localStorage.getItem('authorization'));
+        const ids = authorization.patientId;
+        const id = ids + new Date();
+        return this.afs.collection('doctorSearch').doc(id.toString()).set({
+          data
+        },{merge: true})
+      }
+
+      goToReserve(data){
+        const authorization = JSON.parse(localStorage.getItem('authorization'));
+        const ids = authorization.patientId;
+        const id = ids + new Date().getDay;
+        return this.afs.collection('especialidadReserva').doc(id.toString()).set({
+          data
+        },{merge: true})
+      }
+
+      goToRSpecialist(data){
+        const authorization = JSON.parse(localStorage.getItem('authorization'));
+        let id = authorization.patientId;
+        return this.afs.collection('doctorSearch').doc(id.toString()).set({
+          data
+        },{merge: true})
+      }
 
 }

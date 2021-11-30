@@ -13,7 +13,7 @@ export class DependensService {
   private apiDelete = `${this.SERVER}users/removecontact?userId=`;
   private apiDatesParents = `${this.SERVER}ebooking/appointments/patientContacts`;
   private apiOldDates = `${this.SERVER}ebooking/encuentrosPaciente`;
-  private apiDatesParentsv2 = `${this.SERVER}/ebooking/encuentros-paciente-contacto`;
+  private apiDatesParentsv2 = `${this.SERVER}ebooking/encuentros-paciente-contacto`;
 
   constructor(public http: HttpClient) { }
 

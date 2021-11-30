@@ -152,6 +152,7 @@ public _gender;
      this.hideBox = true;
    } else if(documentType.name === 'D.N.I'){
      this.registerFormu = false;
+     this.dataReniec = [];
      this.digitoVa = true;
        this.hideBox = false;
        this.documentNumber = '';

@@ -147,7 +147,7 @@ export class CreateParentPrimePage implements OnInit {
            /* this.navCtrl.push(MyparentsPage) */
           });
           loading.dismiss();
-          this.router.navigate(['myparents']);
+/*           this.router.navigate(['myparents']); */
           this.closeModal();
       });
     }else{

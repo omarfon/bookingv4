@@ -82,7 +82,21 @@
                                              <p>Pago en Local</p> 
                                          </ion-col>
                                      </ion-row>
-                                    </ion-button>                        
+                                    </ion-button> 
+                                    <ion-button *ngIf="depe"
+                                    color="primary"
+                                    class="botonAccept"
+                                    block
+                                    (click)="nextDepe()">
+                                   <ion-row>
+                                       <ion-col size="12" class="botonEfectivo">
+                                           <img class="iconosImagenes" src="assets/imgs/cobro/efectivo.png" alt="">
+                                       </ion-col>
+                                       <ion-col size="12">
+                                           <p>Pago en Local</p> 
+                                       </ion-col>
+                                   </ion-row>
+                                  </ion-button>                            
                           </ion-col>
                                 <ion-col size="6">
                        <ion-button  *ngIf="payCulqiCharges == true "

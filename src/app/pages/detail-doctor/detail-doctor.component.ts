@@ -182,5 +182,9 @@ export class DetailDoctorComponent implements OnInit {
     this.doctorsSpecialty = [];
   })
 }
+goToHome(){
+  this.router.navigate(['home']);
+}
+
 
 }

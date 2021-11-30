@@ -107,10 +107,7 @@ export class FinancerPage implements OnInit {
 /*     this._hora = JSON.stringify(this.hora.listjson); */
     /* console.log('this.hora:', this.hora); */
 
-    this.dependentsPvr.getDependens().subscribe(data =>{
-      this.parents = data
-      /* console.log('this.parents:', this.parents); */
-    });
+    this.getDependens();
 
     this.financierProvider.getFinanciers().subscribe(data =>
       { this.items = data;
@@ -135,6 +132,16 @@ export class FinancerPage implements OnInit {
   } else {
     console.log("si hay constraseña. que pase");
   }
+}
+
+ionViewDidEnter(){
+  this.getDependens();
+}
+
+getDependens(){
+  this.dependentsPvr.getDependens().subscribe(data =>{
+    this.parents = data
+  });
 }
 
 evaluateEnsurance() {
@@ -263,6 +270,7 @@ async goToPay(){
   this.helloSrv.price = this.price;
   this.helloSrv.doctor = this.doctor;
   this.helloSrv.plan = this.plan;
+  this.helloSrv.depe = this.depe;
   const datos = JSON.stringify(data)
   this.router.navigate(['pay'])
   console.log('el precio', this.price, this.prestacion);

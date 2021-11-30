@@ -12,9 +12,7 @@ import { HelloService } from 'src/app/services/hello.service';
 import { API_ENDPOINTIMG } from 'src/environments/environment';
 import { DoctordataService } from './../services/doctordata.service';
 import { UserprefComponent } from './../components/userpref/userpref.component';
-
-
-
+import { CrudparentService } from 'src/app/services/crudparent.service';
 
 
 @Component({
@@ -75,6 +73,7 @@ export class HomePage implements OnInit {
     public helloSrv: HelloService,
     public doctorDataSrv:DoctordataService,
     public popoverCtrl: PopoverController,
+    public crudSrv: CrudparentService,
     public tcs: GetDatesTeleService) {}
 
      ngOnInit() {
@@ -142,6 +141,12 @@ goToDetailDoctor(doctor){
   this.doctorDataSrv.doctor = doctor;
   console.log('go to doctor:',doctor);
   this.router.navigate(['detail-doctor']);
+  doctor.app = "booking";
+  doctor.fechaCreate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+  doctor.horaCreate = moment().format("h:mm:ss a");
+  this.crudSrv.searchDoctor(doctor).then(resp =>{
+    console.log(resp);
+  })
   this.doctors = this._doctors;
   this.openDoctors = false;
   this.search = "";
@@ -254,17 +259,6 @@ goToTele(){
   goToData(){
     this.router.navigate(['profile']);
   }
- /*  getDatesTele(){
-    let idUser = localStorage.getItem('idTokenUser');
-    this.tcs.getDatesConsulta(idUser).subscribe(data => {
-      this.consultas = data;
-      if(this.consultas.length > 0){
-          this.cantConsultas = this.consultas.length;
-      }else{
-        this.cantConsultas = 0;
-      }
-    })
-  } */
 
   async getAllSpecialtys(){
     this.helloSrv.getSpecialtys().subscribe((data:any) => {

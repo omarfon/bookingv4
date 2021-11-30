@@ -52,6 +52,10 @@ export class OptionsPage implements OnInit {
         console.log(this.scura, this.scuida);
     })
   }
+
+  goToHome(){
+    this.router.navigate(['home']);
+  }
   
 
 }

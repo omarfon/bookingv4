@@ -23,6 +23,7 @@ export class HelloService {
  public plan;
  public recoveryData;
  public dataSend;
+ public depe;
   constructor(public http: HttpClient) { }
 
   getServicios(){
