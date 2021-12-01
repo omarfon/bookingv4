@@ -324,7 +324,7 @@ doSubmitData(){
   /* this.viewCtrl.dismiss(data); */
   console.log('la data pasado por el modal:',data);
 }
-acceptFinancerPaquete(){
+acceptFinancerPaquete(plan){
 
 }
 

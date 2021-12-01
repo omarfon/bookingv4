@@ -14,17 +14,19 @@ export const environment = {
   }
 };
 
-export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2/";
+/* export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2/";
 export const API_ENDPOINTIMG = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2";   
 export const REGISTERMICRO = "https://api.aviva.pe/micro-usu/api/v2/"
 export const API_NOTAS = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2/mama/"; 
 export const API_IMAGES = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/img/professionals/";
-
-
-/* export const API_IMAGES = "https://api.aviva.pe/middleware2/img/professionals/";
-export const API_ENDPOINT = "https://api.aviva.pe/middleware2/api/v2/";
-export const API_NOTAS = "https://api.aviva.pe/middleware2/api/v2/mama";    
  */
+
+export const API_IMAGES = "https://api.aviva.pe/middleware2/img/professionals/";
+export const API_ENDPOINTIMG = "https://api.aviva.pe/middleware2";
+export const REGISTERMICRO = "https://api.aviva.pe/micro-usu/api/v2/"
+export const DOCTORSRMICRO = "https://api.aviva.pe/micro-book/api/v2/"
+export const API_ENDPOINT = "https://api.aviva.pe/middleware2/api/v2/";
+export const API_NOTAS = "https://api.aviva.pe/middleware2/api/v2/mama";
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
