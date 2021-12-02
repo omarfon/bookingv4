@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { RecipePage } from './recipe.page';
 import { RecipePageRoutingModule } from './recipe-routing.module';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { RecipePageRoutingModule } from './recipe-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    RecipePageRoutingModule
+    RecipePageRoutingModule,
+    MatExpansionModule
   ],
   declarations: [RecipePage]
 })

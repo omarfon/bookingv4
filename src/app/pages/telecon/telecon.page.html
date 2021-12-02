@@ -17,7 +17,6 @@
         <ion-card-title >
             <h3>{{c.nombreUsuario}} {{c.apellidopUsuario}} {{c.apellidomUsuario}}</h3>
         </ion-card-title>
-        <ion-card-body>
           <ion-row>
             <ion-col size="12">
              <p class="anamnesis"> {{c.datosConsulta.anamnesis}}</p>
@@ -70,7 +69,6 @@
               </ion-col>
          
           </ion-row> 
-        </ion-card-body>
       </ion-card>
       <p *ngIf="consultas == []" class="sinConsultas">
         Aún no tienes ninguna cita realizada por Teleorientación, cuando tengas alguna aparecera aquí...

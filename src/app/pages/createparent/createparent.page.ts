@@ -36,11 +36,6 @@ export class CreateparentPage implements OnInit {
             public modalCtrl: ModalController) { }
 
   ngOnInit() {
-/*     this.doctor = this.navParams.get('doctor');
-    this.available = this.navParams.get('available');
-    this.hora = this.navParams.get('hora');
-    this.price = this.navParams.get('price');
-    this.depe = this.navParams.get('depe'); */
     this.actual = moment().format('YYYY-MM-DD');
 
     this.dependentsPvr.getDependens().subscribe(data =>{

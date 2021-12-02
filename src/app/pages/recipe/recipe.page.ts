@@ -12,7 +12,8 @@ export class RecipePage implements OnInit {
 
   itemExpanded: boolean = false;
   itemExpandHeight: number = 250;
-
+  public nameUser;
+  public recipes;
   constructor(
               public recipesPvr: RecipesService,
               public router: Router) { }
