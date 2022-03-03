@@ -5,6 +5,7 @@ import { API_IMAGES } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ExpandableComponent } from 'src/app/components/expandable/expandable.component';
+import { DoctordataService } from '../../services/doctordata.service';
 
 
 @Component({
@@ -28,6 +29,8 @@ export class CardPage implements OnInit {
   public id;
   public sede;
   public especialidad;
+  public color: any = 'warn';
+  public mode: any = 'indeterminate';
 
   specialty_id;
 
@@ -72,6 +75,7 @@ export class CardPage implements OnInit {
   datesCalendar: any;
   public manyBoxes;
   public hours;
+  public chargeHours = false;
   
   constructor(
     public modalCtrl: ModalController,
@@ -80,26 +84,59 @@ export class CardPage implements OnInit {
     public render: Renderer2,
     public alertContrl: AlertController,
     public loadingCtrl: LoadingController,
+    public doctorSrv: DoctordataService,
     public router: Router) { 
      
     }
 
   ngOnInit() {}
   ionViewDidEnter (){
-    this.getSpecialtyes();
     this.fromDate = moment().format("YYYY-MM-DD");
     this.toDate = moment().add(this.numDays, "day").format("YYYY-MM-DD");
     this.disponibles = true;
-    if(!this.helloPvr.especialidad){
-      this.router.navigate(['/options']);
-      console.log('se va hasta options');
-    }else{
+    const especialidad = this.helloPvr.especialidad;
+    if(especialidad){
+      this.getSpecialtyes();
       this.id = this.helloPvr.especialidad.id;
-      this.getDoctorsList();
+      this.getDoctorWDates();
       this.nameSpecialty = this.helloPvr.especialidad.description;
       console.log(this.helloPvr.especialidad,this.id);
+    }else{
+      this.router.navigate(['/options']);
+      console.log('se va hasta options');
     }
+    this.updateSession();
   }
+
+  updateSession(){
+    const datosUser = JSON.parse(localStorage.getItem('authorization'));
+    let data = {
+      userId: datosUser.patientId,
+      app:'mi aviva',
+      date: new Date(),
+      role: datosUser.role,
+      session: datosUser.sessionId
+    }
+    this.doctorSrv.upSession(data).subscribe(resp => {
+      console.log('devuelta guardada.',resp);
+    })
+  }
+
+  
+
+  async getDoctorWDates(){
+    /* const loading = await this.loadingCtrl.create({
+      message:"Buscando Especialistas..."
+    });
+    await loading.present(); */
+    this.helloPvr.getDoctorsSpecialtyBD(this.id).subscribe((data:any) => {
+      console.log('data recibida de nuevo endpoint:',data);
+      this.doctorsF = data;
+      console.log('todos los especialistas:',this.doctorsF);
+
+    }); 
+  }
+
 
 getSpecialtyes(){
   this.helloPvr.getServicios().subscribe((servicios:any) => {
@@ -135,9 +172,28 @@ getSpecialtyes(){
 
   stateShow(item: any, index, items) {
     console.log(item, index, items);
+    this.hours = [];
+    this.chargeHours = true;
     this.boxID = item;
     this.boxCaID = index;
     this.selectedDay = items;
+    const dataDate = items;
+    console.log('llamado de horas para el dia', item, index, items);
+    let data = {
+      fromDateString: items.fecha + 'T00:00:00.000',
+      toDateString: items.fecha + 'T00:00:00.000',
+      centerId: items.cod_centro,
+      basicServiceId: items.serv_bas_pk,
+      professionalId: items.codigo_personal,
+      provisions : [
+        items.prest_item_pk
+      ]
+    } 
+    this.helloPvr.getDoctorsSlotsPerDay(data).subscribe((resp:any) => {
+      this.hours = resp[0].appointmentDateTimes;
+        console.log('horas solicitadas:',resp, this.hours);
+      this.chargeHours = false;
+    })
   }
 
   errorHandler(event) {
@@ -146,7 +202,7 @@ getSpecialtyes(){
 
   
 
-  async getDoctorsList(){
+ /*  async getDoctorsList(){
     this.doctorsF = [];
     const loading = await this.loadingCtrl.create({
       message:"cargando especialistas"
@@ -165,30 +221,20 @@ getSpecialtyes(){
       loading.dismiss();
     })
     console.log(this.doctorsF);
-  } 
+  }  */
 
- /*  async getDoctorsList(){
-    this.doctorsF = [];
-    const loading = await this.loadingCtrl.create({
-      message:"cargando especialistas"
-    });
-    await loading.present();
-    this.helloPvr.getDoctorsSpecialtyCard(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
-      this.doctorsF = doctors.centers[0].services[0].professionals;
-      loading.dismiss(); 
-    })
-    console.log(this.doctorsF);
-  } */
 
   onChangueSpecialty(specialty: any) {
     console.log('specialty en onChangueSpecialty:', specialty);
+    this.doctorsF = [];
     this.id = specialty;
-    this.getDoctorsList();
+    this.getDoctorWDates();
   }
 
   getDoctorsPerDay() {
+    this.doctorsF = [];
     this.toDate = moment(this.fromDate).add(this.numDays, "day").format("YYYY-MM-DD");
-    this.getDoctorsList();
+    this.getDoctorWDates();
   }
 
   getHoursPerDay(doctor,dia){

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorizationPublicService } from 'src/app/services/authorization-public.service';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { DataBasicService } from 'src/app/services/data-basic.service';
@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public authPvr: AuthorizationPublicService,
     public modalCtrl: ModalController,
+    public loading: LoadingController,
     public dataPvr: DataBasicService,
     public newsSrv: NewsEndpointsService,
     public helloSrv: HelloService,
@@ -43,24 +44,30 @@ export class LoginPage implements OnInit {
     }
 
   ngOnInit() {
-    const auto:any = localStorage.getItem('authorization');
-    if(!auto){
-      this.authPvr.getKey().subscribe(data =>{
-        this.authPublic = data;
-        localStorage.setItem('authorization', JSON.stringify(data));
-      });
-  
-      localStorage.removeItem('idTokenUser');
-      localStorage.removeItem('emailUser');
-    }else{
-      this.getDocuments();
-    }
-/*     this.getDocuments(); */
+
   }
 
-  public getDocuments(){
+  ionViewWillEnter(){
+    const authorization:any = localStorage.getItem('authorization');
+      if(!authorization) {
+        this.authPvr.getKey().subscribe((data: any) => {
+          localStorage.setItem('authorization', JSON.stringify(data));
+          this.getDocuments();
+        })
+      }else{
+        this.getDocuments();
+      }
+      console.log('constructor');
+  }
+
+  async getDocuments(){
+    const loading = await this.loading.create({
+      message : "Espere un segundo"
+    })
+    await loading.present();
     this.dataPvr.getDocuments().subscribe((documents:any) => {
          this.documents = documents;
+         loading.dismiss();
          /* console.log('this.documents:', this.documents); */
      });
   }

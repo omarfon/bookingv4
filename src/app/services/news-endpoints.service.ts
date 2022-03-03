@@ -17,8 +17,8 @@ export class NewsEndpointsService {
 
 
   newLoginWithDni(documentType:number, documentNumber: string, password: string){
-    const session = JSON.parse(localStorage.getItem('authorization'));
-    let headers = new HttpHeaders({ "Authorization": session.authorization });
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     const app = "ebooking"
     let params = {documentType, documentNumber, password, app};
      return this.http.post(this.newLogin, params, {headers}).pipe(

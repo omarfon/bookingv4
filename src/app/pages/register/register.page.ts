@@ -72,15 +72,7 @@ public _gender;
 
   ngOnInit() {
     this.actual = moment().format('YYYY-MM-DD');
-    this.dataPvr.getGenders().subscribe(datagenders=>{
-        this.genders = datagenders;
-        console.log( 'this.genders:', this.genders );
-    });
-
-    this.dataPvr.getDocuments().subscribe(documents => {
-        this.documents = documents;
-        console.log('this.documents:', this.documents);
-    });
+   
 
     this.registerForm = this.fb.group({
       name: ['',  [ Validators.required ]],
@@ -96,6 +88,18 @@ public _gender;
       aprobed: ['', [ Validators.required]],
       documentDigit: ['']
     });
+  }
+
+  ionViewWillEnter(){
+    this.dataPvr.getGenders().subscribe(datagenders=>{
+      this.genders = datagenders;
+      console.log( 'this.genders:', this.genders );
+  });
+
+  this.dataPvr.getDocuments().subscribe(documents => {
+      this.documents = documents;
+      console.log('this.documents:', this.documents);
+  });
   }
 
 
@@ -250,7 +254,8 @@ public _gender;
                 name       : this.document.name
             },
             documentNumber : this.documentNumber,
-            phone          : this.phone
+            phone          : this.phone,
+            origin         : "miaviva"
           }
            this.datos.code = 1234;
            this.datos.id = resp.id ;

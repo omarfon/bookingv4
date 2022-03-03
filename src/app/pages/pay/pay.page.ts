@@ -90,6 +90,7 @@ export class PayPage implements OnInit {
   console.log('la hora', this.plan, this.plan);
 
   window['Culqi'].publicKey = 'pk_test_f99df0fd7a83c0e0';
+/*   window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb'; */
   }
 
   async culqi(){
@@ -233,6 +234,7 @@ export class PayPage implements OnInit {
       const culqiObj = window['Culqi'];
       console.log(culqiObj);
       if (culqiObj['closeEvent'] != null) {
+        this.payClinic();
         loadingPago.dismiss();
         console.log('Formulario culqi cerrado', culqiObj['closeEvent']);
         clearInterval(i);
@@ -255,7 +257,7 @@ export class PayPage implements OnInit {
 async payClinic(){
   let alert = await this.alertCtrl.create({
     header:'error al hacer cargo',
-    message:'hubo un error alhacer cargo con la tarjeta',
+    message:'Tu cita ya fue reservada, solo tienes que pagar en clínica',
     buttons:[
       {
         text:'reintentar',
@@ -354,7 +356,7 @@ async payClinic(){
             }
           });
     } else {
-      let provisionId = this.hora.params.provisionId;
+      let provisionId = this.plan.precio[0].prest_item_pk;
       this.appointmentProvider.createAppointment(this.subida, provisionId)
         .subscribe((data: any) => {
           this.currentAppointment = data;

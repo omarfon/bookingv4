@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CardPageRoutingModule } from './card-routing.module';
 
 import { CardPage } from './card.page';
@@ -13,7 +13,8 @@ import { CardPage } from './card.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CardPageRoutingModule
+    CardPageRoutingModule,
+    MatProgressSpinnerModule
   ],
   declarations: [CardPage]
 })

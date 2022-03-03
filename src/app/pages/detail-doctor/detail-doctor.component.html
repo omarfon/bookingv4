@@ -8,32 +8,39 @@
 </ion-header>
 <ion-content >
   <div class="containerDatosDoctor">
-  <ion-row *ngIf="dataDoctor" >
-      <ion-col size="4">
-        <img [src]="url + dataDoctor.imageUrl" alt="">
-      </ion-col>
-      <ion-col size="8">
-        <h3>{{dataDoctor.apellido1}} {{dataDoctor.apellido2}} {{dataDoctor.nombre}}</h3>
-        <p class="dataEstudios"><span>{{dataDoctor.services[0].description}}</span></p>
-        <p class="dataEstudios">CMP: {{dataDoctor.cmp}}</p>
-        <p class="dataEstudios"> RNE: {{dataDoctor?.rne}}</p>
-        <p class="dataEstudios" *ngIf="datosDoctor"> <span>{{datosDoctor.fraseCorta}}</span></p>
-      </ion-col>
-      <ion-col size="12">
-        <p class="fraseExtendida" *ngIf="datosDoctor">{{datosDoctor.fraseExtendida}}</p>
-      </ion-col>
-      <ion-col size="12">
-        <p class="fraseExtendida" *ngIf="!datosDoctor">El doctor, esta próximo a cargar información importante para ti.</p>
-      </ion-col>
-    </ion-row>
+    <ion-card>
+      <ion-card-content>
+        <ion-row *ngIf="dataDoctor" >
+            <ion-col size="4">
+              <img [src]="url + dataDoctor.imageUrl" alt="">
+            </ion-col>
+            <ion-col size="8">
+              <h3>{{dataDoctor.apellido1}} {{dataDoctor.apellido2}} {{dataDoctor.nombre}}</h3>
+              <p class="dataEstudios"><span>{{dataDoctor.services[0].description}}</span></p>
+              <p class="dataEstudios">CMP: {{dataDoctor.cmp}}</p>
+              <p class="dataEstudios"> RNE: {{dataDoctor?.rne}}</p>
+              <div class="dataEstudios" *ngIf="datosDoctor"> 
+                <ul>
+                  <li *ngFor="let e of datosDoctor.professionalTrainings">{{e.nameCenter}}</li>
+                </ul>
+              </div>
+            </ion-col>
+            <ion-col size="12">
+              <p class="fraseExtendida" *ngIf="datosDoctor">{{datosDoctor.longSpeach}}</p>
+            </ion-col>
+            <ion-col size="12">
+              <p class="fraseExtendida" *ngIf="!datosDoctor">El doctor, esta próximo a cargar información importante para ti.</p>
+            </ion-col>
+          </ion-row>
+      </ion-card-content>
+    </ion-card>
     <div class="containerIcons" *ngIf="provisionsData">
       <ion-row>
         <ion-col size="8"></ion-col>
         <ion-col size="4">
           <ion-row>
             <ion-col>
-              <ion-icon name="code"
-                        (click)="activeCode()"></ion-icon>
+              <ion-icon name="code" (click)="activeCode()"></ion-icon>
             </ion-col>
             <ion-col>
               <ion-icon name="apps" (click)="activeBloque()"></ion-icon>

@@ -92,7 +92,7 @@ export class FinancerPage implements OnInit {
   ngOnInit() {
     this.dataEscogida = this.helloSrv.dataEscogida;
     console.log('dataEscogida:',this.dataEscogida);
-    console.log('this.dataArmada:',this.dataArmada);
+    /* console.log('this.dataArmada:',this.dataArmada); */
     const datosListJson = JSON.parse(this.dataEscogida.listjson);
     console.log(datosListJson);
     this.hora = this.dataEscogida.hours;

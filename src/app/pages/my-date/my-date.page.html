@@ -40,8 +40,8 @@
             <ion-label *ngIf="task" class="blue"> {{ task.plan.description | lowercase }}</ion-label>
         </ion-item>
     </ion-list>
-    <div class="centerQr">
-        <qr-code [value]="'https://www.aviva.pe'" [size]="150"></qr-code>
+    <div class="centerQr" *ngIf="task.pagado !== 'no'">
+        <qr-code value="{{task.appointmentId}}" [size]="150"></qr-code>
     </div>
     <ion-row padding>
         <ion-col>

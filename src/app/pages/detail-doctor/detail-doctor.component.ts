@@ -48,26 +48,29 @@ export class DetailDoctorComponent implements OnInit {
               public loadingCtrl: LoadingController,
               public router: Router,
               public helloSrv: HelloService) {
-
-                if( this.doctorDataSrv.doctor){
-                  this.dataDoctor = this.doctorDataSrv.doctor;
-                  this.idoctor = this.dataDoctor.id;
-                  this.getDataDoctor();
-                  this.bloque = this.dataDoctor.bloque;
-                  console.log(this.dataDoctor, this.bloque);
-                  this.specialty = this.dataDoctor.services[0].id;
-                  this.idDoctor = this.dataDoctor.id;
-                }else{
-                  this.loadingCtrl.dismiss();
-                  this.router.navigate(['home']);
-                }
+               
                }
 
   async ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    const doctorData = this.doctorDataSrv.doctor
+       if( doctorData){
+         this.dataDoctor = this.doctorDataSrv.doctor;
+         this.idoctor = this.dataDoctor.id;
+           this.getDataDoctor();
+         this.bloque = this.dataDoctor.bloque;
+         console.log(this.dataDoctor, this.bloque);
+         this.specialty = this.dataDoctor.services[0].id;
+         this.idDoctor = this.dataDoctor.id;
+       }else{
+         this.loadingCtrl.dismiss();
+         this.goToHome();
+       }
        this.getDatesDoctor();
        this.getAllDoctorsSpecialty();
   }
-
 
   async getDatesDoctor(){
     if(this.dataDoctor){
@@ -110,15 +113,15 @@ export class DetailDoctorComponent implements OnInit {
 
 
   getDataDoctor(){
-    this.doctorDataSrv.getDatesDoctor(this.idoctor.toString()).subscribe((res:any) =>{
+    this.doctorDataSrv.getDoctorInfo(this.idoctor).subscribe((res:any) =>{
       if(res){
-        this.datosDoctor = res.data;
+        this.datosDoctor = res;
         console.log(this.datosDoctor);
       }else{
         this.datosDoctor = null;
       }
     }, err => {
-      this.dataDoctor = null;
+      /* this.dataDoctor = null; */
     })
   }
 
@@ -133,7 +136,7 @@ export class DetailDoctorComponent implements OnInit {
     this.getDataDoctor();
 /*     this.getDatesDoctor(); */
     this.provisionsData = doctor.availables;
-    this.specialty = doctor.service[0].id;
+    this.specialty = doctor.service.id;
   }
 
   goToFinancer(h){
@@ -183,6 +186,7 @@ export class DetailDoctorComponent implements OnInit {
   })
 }
 goToHome(){
+  this.doctorDataSrv.doctor = [];
   this.router.navigate(['home']);
 }
 

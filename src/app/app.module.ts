@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 //locale
 import { LOCALE_ID } from '@angular/core';
@@ -47,6 +48,7 @@ AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
     ComponentsModule,
     QRCodeModule,
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId })

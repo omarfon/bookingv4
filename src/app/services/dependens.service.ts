@@ -11,7 +11,8 @@ export class DependensService {
   private SERVER = API_ENDPOINT;
   private apiUrl = `${this.SERVER}users/dependents`;
   private apiDelete = `${this.SERVER}users/removecontact?userId=`;
-  private apiDatesParents = `${this.SERVER}ebooking/appointments/patientContacts`;
+  /* private apiDatesParents = `${this.SERVER}ebooking/appointments/patientContacts`; */
+  private apiDatesParents = `${this.SERVER}ebooking/citas-paciente-contactos`;
   private apiOldDates = `${this.SERVER}ebooking/encuentrosPaciente`;
   private apiDatesParentsv2 = `${this.SERVER}ebooking/encuentros-paciente-contacto`;
 

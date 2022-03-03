@@ -32,14 +32,14 @@
       </ion-col>
       <ion-col size="6" *ngIf="registerFormu == false">
         <ion-item no-lines>
-          <ion-input  formControlName="documentType" name="documentDigit" [(ngModel)]="documentDigit"  placeholder="código validador">
+          <ion-input  formControlName="documentDigit" name="documentDigit" [(ngModel)]="documentDigit"  placeholder="código validador">
             </ion-input>
         </ion-item>
         <div *ngIf="registerForm.get('documentDigit').errors && registerForm.get('documentDigit').dirty || registerForm.get('documentDigit').touched" no-lines>
             <p  *ngIf="registerForm.get('documentDigit').hasError('required')" class="error">Tipo de documento requerido</p>
         </div>
       </ion-col>
-      <ion-col size="6" *ngIf="!dataReniec">
+      <ion-col size="6" *ngIf="registerFormu == false ">
         <ion-button *ngIf="documentNumber && documentDigit && document" (click)="reniecValidateDatos()" fill="full" class="botonBusquedaDatos">
           Buscar datos
         </ion-button>

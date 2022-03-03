@@ -60,6 +60,21 @@ getSpecialtys() {
             )
   }
 
+  getDoctorsSpecialtyBD(params: any) {
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
+    return this.http
+      .get(this.apiUrlOne + 'ebooking/fmt-centers/1/basicservices/' + params + '/professionals/1/info-for-availables', {headers});
+  }
+
+  getDoctorsSlotsPerDay(data: any) {
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
+    let params = data;
+    return this.http
+      .post(this.apiUrlOne + 'ebooking/slots/availables-extra', params, {headers});
+  }
+
   //TRAE A UN GRUPO DE DOCTORES CON LA MISMA ESPECIALIDAD CON AVAILABLES
   getDoctorsSpecialty(id, date1: any, date2: any) {
     const authorization = JSON.parse(localStorage.getItem('authorization'));

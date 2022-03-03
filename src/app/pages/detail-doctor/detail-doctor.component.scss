@@ -3,8 +3,8 @@ ion-toolbar{
     border:none;
  }
 ion-content{
-   --background:#60B5B8; 
-}
+  --background:#60B5B8;  
+} 
 ion-back-button{
     color:#fff;
 }
@@ -42,12 +42,11 @@ h3{
     }
 }
 .containerDatosDoctor{
+    --background: #60B5B8;
     padding-top:20px;
 }
 .fraseExtendida{
-    color:#fff;
-    width:90%;
-    margin-left:5%;
+    color:#052F51;
     text-align: justify;
 }
 .diaEncurso{
@@ -56,7 +55,7 @@ h3{
     width:60%;
     margin-left:20%;
     padding:5px;
-    color:#fff;
+    color: #052F51;
     font-size:1.2em;
     font-family: 'avenir-bold';
 }
@@ -83,7 +82,7 @@ h3{
     pointer-events: none;
 }
 .textoHoras{
-    color:#fff;
+    color:#052F51;
     font-family: 'avenir-light';
     font-size:.9em;
 }
@@ -127,9 +126,7 @@ h3{
                     .box-day {
                         color: #fff;
                     }
-
                 }
-
                 span {
                     color: #052F51;
                     display: flex;
@@ -191,7 +188,7 @@ h3{
         font-family: 'avenir';
     }
     .tituloEspecialidad{
-        color:#062F51;
+        color:#fff;
         text-align: center;
         font-family: 'avenir-bold';
         margin-top:10px;
@@ -209,7 +206,7 @@ h3{
     .containerIcons{
         margin-bottom:20px;
         ion-icon{
-            color:#fff;
+            color:#052F51;
             font-size:1.2em;
         }
     }
@@ -235,7 +232,7 @@ h3{
 }
 .tituloOthersEspecialist{
     text-align: center;
-    color: #fff;
+    color: #052F51;
 
 }
 .especialist{
@@ -254,4 +251,11 @@ ion-buttons{
       font-size:1.4em;
       margin-left:10px;
     }
+  }
+
+  ul{
+      padding-left:0!important;
+  }
+  .card-content-md{
+      padding:8px!important;
   }
