@@ -46,7 +46,7 @@
                   <p class="day">{{ task.appointmentDateTime | date:'EEEE d , MMMM ' : 'es-ES' }} </p>
                 </ion-col>
                 <ion-col size="5" class="hourCita">
-                  <p class="hour">{{ task.appointmentDateTime | date: 'HH:mm' }}</p>
+                  <p class="hour">{{ task.appointmentDateTime | date: 'h:mm' }}</p>
                 </ion-col>
                 <ion-col size="1"></ion-col>
                 <!--     <ion-col size="1">
@@ -66,21 +66,21 @@
                 <ion-row class="nopadding">
                   <ion-col size="4">
                     <ion-avatar item-start>
-                      <img src="{{SERVERImage}}{{task.appointments[0].professional.id}}.png"
+                      <img src="{{SERVERImage}}{{task.appointments[0].professionalId}}.png"
                         onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
                     </ion-avatar>
                   </ion-col>
                   <ion-col size="8" (click)="gotoDetails(task.appointments[0])">
                     <ion-row>
                       <ion-col size="12" class="nombreFamiliarBox">
-                        <p class="nombreFamiliar">Cita para: {{task.appointments[0].patient.name}}</p>
+                        <p class="nombreFamiliar">Cita para: {{task.appointments[0].patientName}}</p>
                       </ion-col>
                       <ion-col size="12">
                         <h3 class="tituloCitas" text-wrap>
-                          {{task.appointments[0].professional.fullName  }}</h3>
-                        <p class="especialidad">{{ task.appointments[0].service.basicService.description | lowercase }}
+                          {{task.appointments[0].professionalLastName1}} {{task.appointments[0].professionalLastName2}} {{task.appointments[0].professionalName}}</h3>
+                        <p class="especialidad">{{ task.appointments[0].basicServiceDescription | lowercase }}
                         </p>
-                        <p class="sede">{{ task.appointments[0].service.center.name | lowercase }}</p>
+                        <p class="sede">{{ task.appointments[0].centerName | lowercase }}</p>
                       </ion-col>
                     </ion-row>
                   </ion-col>
@@ -91,7 +91,7 @@
                         </p>
                       </ion-col>
                       <ion-col size="5" class="hourCita">
-                        <p class="hour">{{ task.appointments[0].appointmentDateTime | date: 'HH:mm' }}</p>
+                        <p class="hour">{{ task.appointments[0].appointmentDateTime | date:'h:mm' }}</p>
                       </ion-col>
                       <ion-col size="1"></ion-col>
                       <!-- <ion-col size="1">

@@ -51,7 +51,7 @@
                 <div  class="centrar">
                     <p class="izquierda">Hora:</p>
                     <p class="blue" type="text" disabled="true">
-                        {{ hora | slice:0:5}}
+                        {{ dataEscogida.datetime | date:'h:mm'}}
                     </p>
                 </div>
                 <div  class="centrar">

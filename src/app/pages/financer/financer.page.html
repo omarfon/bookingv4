@@ -173,8 +173,8 @@
           center
           class="botonPagar"
           (click)="goToPay()"
-          [disabled]="!desabilitado == true">
-      Reservar
+          [disabled]="desabilitado == true">
+      Reservar Cita
 </ion-button>
 
    <ion-button *ngIf="paquete == true" 
@@ -183,8 +183,8 @@
   center
   class="botonPagar"
   (click)="next()"
-  [disabled]="!desabilitado == true">
-  Reservar Cita
+  [disabled]="desabilitado == false">
+  Reservar
 </ion-button> 
 
 </ion-content>

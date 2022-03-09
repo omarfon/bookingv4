@@ -77,7 +77,7 @@
         </div>
       </ion-col>
       
-      <ion-col size="6">
+      <ion-col size="6" *ngIf="!dataReniec">
         <ion-item class="outpadding" no-lines>
           <!-- <ion-label floating>Fecha de nacimiento:</ion-label> -->
           <ion-datetime displayFormat="DD/MM/YYYY" formControlName="birthdate" name="birthdate" placeholder="Fecha de nacimiento" [(ngModel)]="birthdate"></ion-datetime>
@@ -85,6 +85,14 @@
         </ion-item>
         <div *ngIf="registerForm.get('birthdate').errors && registerForm.get('birthdate').dirty || registerForm.get('birthdate').touched" no-lines>
           <p *ngIf="registerForm.get('birthdate').hasError('required')" class="error">La fecha de nacimiento es requerida</p>
+        </div>
+      </ion-col>
+      <ion-col size="6" *ngIf="dataReniec">
+        <ion-item no-lines>
+          <ion-input type="text" formControlName="birthdate" name="birthdate">{{birthdate}}</ion-input>
+        </ion-item>
+        <div *ngIf="registerForm.get('birthdate').errors && registerForm.get('birthdate').dirty || registerForm.get('birthdate').touched" no-lines>
+            <p *ngIf="registerForm.get('birthdate').hasError('required')" class="error">edad es  requerido</p>
         </div>
       </ion-col>
 

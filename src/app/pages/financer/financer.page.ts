@@ -241,9 +241,9 @@ acceptFinancer(plan){
   this.nomark = true;
   this.financer = true; 
   this.paquete = false;
-  this.desabilitado = true;
+  this.desabilitado = false;
   this.plan = plan;
-  if(this.price){
+  if(this.plan){
     this.price =  plan.precio[0].total ;
   }else{
     this.price = 0;
@@ -254,7 +254,7 @@ acceptFinancer(plan){
 // función para ir a pagos
 async goToPay(){
   console.log(this.price)
-  if(this.price < 1){
+  if(this.price > 0){
     console.log('precio y plan',this.price, this.plan);
     let data = {
       doctor:this.doctor,
