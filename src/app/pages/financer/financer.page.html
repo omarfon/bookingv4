@@ -130,14 +130,14 @@
                   <ion-card *ngIf="plan.es_paquete_propio == 0 && plan.es_plan_propio == 0 && plan.siteds == 1 ">
                     <ion-item >
                         <ion-radio slot="start" (click)="acceptFinancer(plan)"></ion-radio>
-                        <ion-label>{{plan.Financiador}}</ion-label>
                         <!-- <span item-right>
                           <p>S/. {{plan.precio[0].total}}</p>
                         </span> -->
-                        <span item-right>
-                          <p>tu precio será el copago de tu financiador</p>
-                        </span>
-                    </ion-item>
+                        <ion-label>{{plan.Financiador}}</ion-label>
+                      </ion-item>
+                      <span item-right>
+                        <p>tu precio será el copago de tu financiador</p>
+                      </span>
                   </ion-card> 
   
                       <ion-list  *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0" no-lines>
@@ -174,7 +174,7 @@
           class="botonPagar"
           (click)="goToPay()"
           [disabled]="!desabilitado == true">
-      Ir a Pago
+      Reservar
 </ion-button>
 
    <ion-button *ngIf="paquete == true" 

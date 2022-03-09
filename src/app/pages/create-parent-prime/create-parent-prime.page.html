@@ -35,7 +35,7 @@
             <ion-col size="6">
                 <ion-item>
                     <ion-label position="floating">Tipo documento:</ion-label>
-                    <ion-select name="document" [(ngModel)]="document" formControlName="type_document" position="floating" (IonChange)="selectDocument($event)">
+                    <ion-select name="document" [(ngModel)]="document" formControlName="type_document" position="floating" (ionChange)="selectDocument($event)">
                       <option value=""></option>
                       <option value="tipo de documento">Tipo de documento</option>
                       <ion-select-option *ngFor="let item of documents" value="{{ item.id }}">{{ item.name }}</ion-select-option>
@@ -51,7 +51,7 @@
             <ion-col size="6">
                 <ion-item>
                   <ion-label position="floating">Sexo:</ion-label>
-                  <ion-select formControlName="gender" name="gender" [(ngModel)]="gender" (IonChange)="selecGender($event)">
+                  <ion-select formControlName="gender" name="gender" [(ngModel)]="gender" (ionChange)="selecGender($event)">
                     <option value=""></option>
                       <option value="escoge genero">Escoge genero</option>
                     <ion-select-option value="{{ge.id}}" *ngFor="let ge of genders">{{ge.name}}</ion-select-option>
@@ -71,7 +71,7 @@
                 <ion-col size="6">
                   <ion-item>
                     <ion-label position="floating">Parentesco:</ion-label>
-                    <ion-select formControlName="kindred" name="kindred" [(ngModel)]="parentesco" position="floating" (IonChange)="selecParentesco($event)">
+                    <ion-select formControlName="kindred" name="kindred" [(ngModel)]="parentesco" position="floating" (ionChange)="selecParentesco($event)">
                       <option value=""></option>
                       <option value="tipo de documento">Selecciona parentesco</option>
                       <ion-select-option value="{{r.id}}" *ngFor="let r of relations">{{r.name}}</ion-select-option>

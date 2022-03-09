@@ -25,7 +25,7 @@
       <h5>Filtros de busqueda</h5>
       <ion-list padding>
         <ion-row>
-          <ion-col size="6">
+          <ion-col size="12">
             <ion-item >
               <ion-label position="floating">Busca por especialidad</ion-label>
               <ion-select [(ngModel)]="id"
@@ -35,16 +35,16 @@
               </ion-select>
             </ion-item>
           </ion-col>
-          <ion-col size="6">
+<!--           <ion-col size="6">
             <ion-item>
               <ion-label position="floating">Busca por fecha</ion-label>
               <ion-input type="date" (ionChange)="getDoctorsPerDay()" [(ngModel)]="fromDate"></ion-input>
             </ion-item>
-          </ion-col>
+          </ion-col> -->
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Busca por doctor</ion-label>
-              <ion-input type="text" (click)="buscarDoctor()" [(ngModel)]="search"></ion-input>
+              <ion-input type="text" (ionChange)="buscarDoctor()" [(ngModel)]="search"></ion-input>
             </ion-item> 
           </ion-col>
         </ion-row>
@@ -61,7 +61,7 @@
             <img src="{{SERVERImage}}{{doctor.id}}.png" (error)="errorHandler($event)" alt="">
           </ion-col>
           <ion-col size="8" right>
-            <p class="doctor">{{ doctor.fullName | lowercase}}</p>
+            <p class="doctor">{{ doctor.apellido1 | lowercase}} {{ doctor.nombre | lowercase}}</p>
             <p class="especialidad">{{doctor.serv_bas_desc | lowercase}}</p>
             <!-- <p>{{doctor.cmp}}</p> -->
             <p class="centro">Centro: Mendiola</p>

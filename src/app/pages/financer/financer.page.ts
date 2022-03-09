@@ -99,13 +99,6 @@ export class FinancerPage implements OnInit {
     this.doctor = datosListJson.professional;
     this.subida = this.dataEscogida.listjson;
     this.available = datosListJson.appointmentDateTime; 
-   /*  this.encuentro = this.dataEscogida.encuentro;
-    this.available = this.dataEscogida.proposedate; */
-    /* this.doctor = this.navParams.get('doctor');
-   /*  console.log('available y doctor:', this.available, this.doctor); */
-    /* this.hora = this.navParams.get('hora'); */
-/*     this._hora = JSON.stringify(this.hora.listjson); */
-    /* console.log('this.hora:', this.hora); */
 
     this.getDependens();
 
@@ -250,13 +243,18 @@ acceptFinancer(plan){
   this.paquete = false;
   this.desabilitado = true;
   this.plan = plan;
-  this.price =  plan.precio[0].total ;
+  if(this.price){
+    this.price =  plan.precio[0].total ;
+  }else{
+    this.price = 0;
+  }
   console.log('el plan:', plan);
 }
 
 // función para ir a pagos
 async goToPay(){
-  if(this.price > 0 ){
+  console.log(this.price)
+  if(this.price < 1){
     console.log('precio y plan',this.price, this.plan);
     let data = {
       doctor:this.doctor,

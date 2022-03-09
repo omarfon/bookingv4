@@ -125,13 +125,10 @@ export class CardPage implements OnInit {
   
 
   async getDoctorWDates(){
-    /* const loading = await this.loadingCtrl.create({
-      message:"Buscando Especialistas..."
-    });
-    await loading.present(); */
     this.helloPvr.getDoctorsSpecialtyBD(this.id).subscribe((data:any) => {
       console.log('data recibida de nuevo endpoint:',data);
       this.doctorsF = data;
+      this.doctors = data;
       console.log('todos los especialistas:',this.doctorsF);
 
     }); 
@@ -200,30 +197,6 @@ getSpecialtyes(){
     event.target.src = "assets/imgs/noimage.png"
   }
 
-  
-
- /*  async getDoctorsList(){
-    this.doctorsF = [];
-    const loading = await this.loadingCtrl.create({
-      message:"cargando especialistas"
-    });
-    await loading.present();
-    this.helloPvr.getDoctorsSpecialty(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
-      const docts = doctors.centers[0].services[0].professionals.filter((element) => {
-        return element.availables.length > 0;
-      })
-      this.manyBoxes = docts.length;
-      docts.forEach(element => {
-        const fech = element.availables;
-        this.datesCalendar = fech;
-      });
-      this.doctorsF = docts;
-      loading.dismiss();
-    })
-    console.log(this.doctorsF);
-  }  */
-
-
   onChangueSpecialty(specialty: any) {
     console.log('specialty en onChangueSpecialty:', specialty);
     this.doctorsF = [];
@@ -233,7 +206,8 @@ getSpecialtyes(){
 
   getDoctorsPerDay() {
     this.doctorsF = [];
-    this.toDate = moment(this.fromDate).add(this.numDays, "day").format("YYYY-MM-DD");
+    this.toDate = moment(this.fromDate).format("YYYY-MM-DD");
+    console.log(this.toDate);
     this.getDoctorWDates();
   }
 
@@ -268,10 +242,11 @@ getSpecialtyes(){
     }
 
     this.doctorsF = this.doctors.filter(doctor => {
-      const isOk = doctor.fullName.toLowerCase().indexOf((this.search).toLowerCase()) != -1;
+      const isOk = doctor.nombreCompleto.toLowerCase().indexOf((this.search).toLowerCase()) != -1;
+      console.log(isOk)
+      this.doctorsF = isOk;
       return isOk;
     });
-
 
   }
 

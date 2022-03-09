@@ -67,6 +67,7 @@ export class CreateparentPage implements OnInit {
 
   saveData(){
     this.desabilitadobutton = false;
+    console.log('datos del formulario:',this.formFamily.value);
     if(this.formFamily.valid){
       let datos = this.formFamily.value;
       let data:any ={

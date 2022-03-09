@@ -106,15 +106,15 @@ export class CreateParentPrimePage implements OnInit {
   }
 
   selecGender(event) {
+    console.log(this.selectSexo, this.sexoID, event)
     this.selectSexo = event.target.selectedOptions[0].textContent;
     this.sexoID = event.target.value;
-    console.log(this.selectSexo, this.sexoID)
   }
 
   async saveData(form){
     this.desabilitado = false;
     if(this.formFamily.valid){
-
+      console.log('datos del formulario:',this.formFamily.value);
       const loading = await this.loadingCtrl.create({
         message: 'Guardando datos de familiar.'
       });
@@ -130,7 +130,7 @@ export class CreateParentPrimePage implements OnInit {
           birthdate : moment(datos.date_of_birth).format('YYYY-MM-DD'),
           gender : {
             id :2,
-            name: datos.gender
+            name: this.gender
           },
           documentType : {
             id: 1,

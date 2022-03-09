@@ -52,6 +52,7 @@ export class PayPage implements OnInit {
   public desactivadoBotonLocal = true;
   public culqiReturn;
   public dataEscogida;
+  public especialidad;
   constructor(
     public fb: FormBuilder,
     public alertCtrl: AlertController,
@@ -86,11 +87,12 @@ export class PayPage implements OnInit {
   this.price = this.helloSrv.price;
   this.subida = datosListJson;
   this.plan = this.helloSrv.plan;
+  this.especialidad = datosListJson.service;
   this.depe = this.helloSrv.depe;
-  console.log('la hora', this.plan, this.plan);
+  console.log('la hora', this.plan, this.doctor, this.especialidad);
 
-  window['Culqi'].publicKey = 'pk_test_f99df0fd7a83c0e0';
-/*   window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb'; */
+  /* window['Culqi'].publicKey = 'pk_test_f99df0fd7a83c0e0'; */
+  window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb';
   }
 
   async culqi(){
@@ -142,7 +144,7 @@ export class PayPage implements OnInit {
                   {
                     text:'ver mis citas',
                     handler: async ()=>{
-                      this.router.navigate(['mydates']);
+                      this.router.navigate(['home']);
                       /* this.navCtrl.push(MyDatesPage); */
                       const alert = await this.alertCtrl.create({
                         header:"Pago en Clínica",
@@ -278,7 +280,7 @@ async payClinic(){
             ]
           });
           await alert.present();
-          this.router.navigate(['mydates']);
+          this.router.navigate(['home']);
   /*         this.navCtrl.setRoot(MyDatesPage); */
         }
         }
@@ -421,7 +423,7 @@ async payClinic(){
   
 
   next() {
-    const provisionId = this.plan.precio[0].prest_item_pk;
+    const provisionId = this.dataEscogida.params.provisionId[0];
       this.desactivadoBotonLocal = false;
         this.appointmentProvider.createAppointment(this.subida , provisionId).subscribe(async (data:any) => {
           console.log('data devuelta:', data);
