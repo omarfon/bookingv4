@@ -8,18 +8,18 @@
   <ion-toolbar>
     <ion-segment [(ngModel)]="citas" color="secondary">
       <ion-segment-button value="miscitas">
-        <p>Proximas citas</p>
+        <p>Citas próximas</p>
       </ion-segment-button>
       <ion-segment-button value="citaspasadas">
         <p>Citas Pasadas</p>
       </ion-segment-button>
-      <!-- <ion-segment-button value="citasfamiliares">
-        <p>citas familiares</p>
-      </ion-segment-button> -->
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-
+<!-- 
+  COMPONENTE QUE MUESTRA EL RESUMEN DE LAS CITAS PENDFIENTES PARA UN USUARIO PRINCIPAL O PARA SUS DEPENDIENTES, ADEMÁS MUESTRA UNA
+  LISTA CON LAS CITAS PASADAS Y SI LA CITA PASADA TUVO RECETA SE MUESTRA UN ICONO QUE COMPRUEBA LA MISMA
+ -->
 <ion-content>
   <div [ngSwitch]="citas">
     <div *ngSwitchCase="'miscitas'">
@@ -28,17 +28,17 @@
           <ion-row>
             <ion-col size="4">
               <ion-avatar item-start>
-                <img src="{{SERVERImage}}{{task.professional.id}}.png" (error)="errorHandler($event)">
+                <img src="{{SERVERImage}}{{task.professionalId}}.png" (error)="errorHandler($event)">
               </ion-avatar>
             </ion-col>
             <ion-col size="8" (click)="goToDetailsTask(task)">
               <ion-col size="12" class="nombrePrincipalBox">
-                <p>Cita para: {{task.patient.name}}</p>
+                <p>Cita para: {{task.patientName}}</p>
               </ion-col>
-              <h3 class="tituloCitas" text-wrap>{{task.professional.fullName | lowercase}}</h3>
+              <h3 class="tituloCitas" text-wrap>{{task.professionalName | lowercase}} {{task.professionalLastName1 | lowercase}}</h3>
               <p class="especialidad" text-wrap> <span>Especialidad:</span>
-                {{ task.service.basicService.description | lowercase }}</p>
-              <p class="sede">Sede: {{ task.service.center.name | lowercase }}</p>
+                {{ task.basicServiceDescription | lowercase }}</p>
+              <p class="sede">Sede: {{ task.centerName | lowercase }}</p>
             </ion-col>
             <ion-col size="12" class="gris">
               <ion-row>
@@ -66,8 +66,7 @@
                 <ion-row class="nopadding">
                   <ion-col size="4">
                     <ion-avatar item-start>
-                      <img src="{{SERVERImage}}{{task.appointments[0].professionalId}}.png"
-                        onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
+                      <img src="{{SERVERImage}}{{task.professionalId}}.png">
                     </ion-avatar>
                   </ion-col>
                   <ion-col size="8" (click)="gotoDetails(task.appointments[0])">
@@ -147,7 +146,7 @@
               <ion-col size="4">
                 <ion-avatar item-start>
                   <img src="{{SERVERImage}}{{citaspa.codigo_personal}}.png"
-                    onerror="this.src= window['aviva'].baseUrl + '/img/professionals/default.png';">
+                    onerror="this.src= window['aviva'].SERVERImage + '/img/professionals/default.png';">
 
                 </ion-avatar>
               </ion-col>
@@ -161,13 +160,11 @@
               <ion-grid>
                 <ion-row *ngIf="citaspa.tiene_receta == 1">
                   <ion-col size="10" class="centrado">
-                    <p>receta para esta cita:</p>
+                    <p>Esta consulta tiene receta</p>
                   </ion-col>
                   <ion-col size="2">
-                    <ion-button class="iconoDerecha" size="small" color="light">
-                      <ion-icon slot="icon-only" name="attach" (click)="goToRecipe(citaspa)">
+                      <ion-icon slot="icon-only" name="attach" >
                       </ion-icon>
-                    </ion-button>
                   </ion-col>
                 </ion-row>
               </ion-grid>

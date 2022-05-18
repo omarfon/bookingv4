@@ -69,6 +69,7 @@ export class CreateParentPrimePage implements OnInit {
       this.dataBasicSrv.getDocuments()
       .subscribe(data => {
         this.documents = data;
+        this.documents = this.documents.filter(x =>x.name !== 'No Tiene');
         console.log('documents:', this.documents);
       }, error => {
         console.log(error)
@@ -97,6 +98,8 @@ export class CreateParentPrimePage implements OnInit {
     });
   }
 
+  /* 
+  FUNCIÓN PARA SELECCIONAR DOCUMENTOS ESTO DEFINE EL TIPO DE DATO QUE SE INGRESA EN EL INPUT NUMERO DE DOCUMENTO */
   selectDocument(event) {
     const documentType = event.target.selectedOptions[0].textContent;
       this.documentNumber = '';
@@ -105,12 +108,16 @@ export class CreateParentPrimePage implements OnInit {
       console.log(documentType, this.selectDocument, this.documentId);
   }
 
+  /* 
+  METODO PARA SELECDCIONAR GENERO */
   selecGender(event) {
     console.log(this.selectSexo, this.sexoID, event)
     this.selectSexo = event.target.selectedOptions[0].textContent;
     this.sexoID = event.target.value;
   }
 
+  /* 
+  FUNCIÓN QUE GUARDA LA DATA DEL FORMULARIO */
   async saveData(form){
     this.desabilitado = false;
     if(this.formFamily.valid){
@@ -157,11 +164,15 @@ export class CreateParentPrimePage implements OnInit {
    
   }
 
+  /* 
+  SELECCIONA PARENTESCO  QUE ES UNO DE LOS CAMPOS DEL FORMULARIO*/
   selecParentesco(event) {
     this.selectParentesco = event.target.selectedOptions[0].textContent;
     this.parentescoId = event.target.value;
   }
 
+  /* 
+  ALERTA DE ERROR DE CREACIÓN DE REGISTRO DE USUARIO */
   async errorCreation(){
     const alert = await this.alertCtrl.create({
       header:'Error en Creación',
@@ -174,7 +185,6 @@ export class CreateParentPrimePage implements OnInit {
           text: 'salir',
           handler:()=>{
             this.router.navigate(['myparents']);
-            /* this.navCtrl.setRoot(MyparentsPage); */
           }
         }
       
@@ -183,6 +193,8 @@ export class CreateParentPrimePage implements OnInit {
     await alert.present();
   }
 
+  /* 
+  FUNCIÓN PARA HABILITAR EL BOTON DE ENVIO DE FORMULARIO */
   desabilitadobutton():boolean{
     if(this.name && this.surname1 && this.surname2, this.birthdate, this.documentNumber){
       return true

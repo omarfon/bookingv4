@@ -73,7 +73,8 @@ public _gender;
   ngOnInit() {
     this.actual = moment().format('YYYY-MM-DD');
    
-
+/* 
+INICIALIZACIÓN DE FORMULARIO PARA CAPTACIÓN DE DATOS */
     this.registerForm = this.fb.group({
       name: ['',  [ Validators.required ]],
       surname1: ['',  [ Validators.required ]],
@@ -90,6 +91,8 @@ public _gender;
     });
   }
 
+  /* 
+  OBTENCIÓN DE GENEROS Y TAMBIEN TIPOD DE DOCUMENTOS DESDE EL XHIS */
   ionViewWillEnter(){
     this.dataPvr.getGenders().subscribe(datagenders=>{
       this.genders = datagenders;
@@ -103,6 +106,9 @@ public _gender;
   }
 
 
+  /* 
+  SI EL USUARIO NO EXISTE EN CHIS SE VALIDAN LOS DATOS CON LA RENIEC SI EL USUARIO NO EXISTE SE COMPLETAN LOS DATOS CON
+  LOS OBTENIDOS EN LA RENIEC*/
   async reniecValidateDatos(){
     const loading = await this.loadingCtrl.create({
       message:'estamos buscando los datos...'
@@ -132,6 +138,8 @@ public _gender;
   })
   }
   
+  /* 
+  VALIDACIÓN PARA HABILITAR EL BOTON DE REGISTRO */
   validacion(){
     if(this.password && this.aprobed == true && this.name && this.surname1 && this.surname2 && this.email && this.phone ){
       return true;
@@ -140,6 +148,8 @@ public _gender;
     }
   }
 
+  /* 
+  FUNCIÓN PARA EL CAMBIO DE GENERO */
   cambiogenero(g){
     console.log(this.gender);
     console.log(g)
@@ -147,7 +157,8 @@ public _gender;
     this.document.name = this.gender;
   }
 
- 
+ /* 
+ METODO PARA EL CAMBIO DE DOCUMENTO */
   cambioDocumento($event){
    this._documenType = this.document;
    console.log('this.document', this._documenType);
@@ -198,12 +209,14 @@ public _gender;
   selectDocument(event) {
 
   }
-
+/*  
+VALIDACIÓN DE LA VARIABLE CONDICIONES CON LO CUAL SE SABE QUE USUARIO LEYO  */
   aceptaCondiciones(aprobed){
     console.log('aprobed', aprobed);
     this.aprobed = true;
   }
-
+/* 
+MODAL QUE MUESTRA LOS TERMINO Y CONDICIONES */
   async seeConditions(){
     let terminos = await this.alertCtrl.create({
       header:'TÉRMINOS Y CONDICIONES',
@@ -218,7 +231,8 @@ public _gender;
     this.cambio = true;
   }
 
-
+/* 
+CUNCION PARA LA CREACIÓN DE UN NUEVO USUARIOS */
     registerNewUser(){
       this.userProvider.sendValidation(this.email,this.documentNumber, this.document.id, this.document.name).subscribe((resp:any)=>{
         if(resp.result == 'ok'){
@@ -315,7 +329,9 @@ public _gender;
       });
     }
       
-
+/* 
+ALERTA QUE RESPONDE SI EL MAIL YA EXISTE O NO
+ */
     async mailExisting(){
       const alert = await this.alertCtrl.create({
         header:"Correo Utilizado",
@@ -330,7 +346,8 @@ public _gender;
       await alert.present();
     }
 
-    
+    /* ROUTER AL LOGIN
+     */
     goToLogin(){
       this.router.navigate(['login']);
       /* this.navCtrl.push(LoginPage); */

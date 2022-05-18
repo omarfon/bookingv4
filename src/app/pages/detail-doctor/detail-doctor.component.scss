@@ -4,6 +4,8 @@ ion-toolbar{
  }
 ion-content{
   --background:#60B5B8;  
+  min-height: 100vh;
+  height: auto;
 } 
 ion-back-button{
     color:#fff;

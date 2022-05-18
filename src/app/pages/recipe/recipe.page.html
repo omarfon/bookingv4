@@ -4,8 +4,10 @@
   </ion-toolbar>
   <p margin class="NombreBienvenida">Hola {{nameUser}}</p> 
   <p  margin class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas</p>
-  
 </ion-header>
+<!-- 
+  PAGINA PARA MOSTRAR EL RESUMEN DE UNA RECETA Y LOS DATOS DE LA MISMA
+ -->
 <ion-content>
     <div class="containerCards" *ngIf="recipes; else norecipes">
       <ion-card *ngFor="let recipe of recipes" >

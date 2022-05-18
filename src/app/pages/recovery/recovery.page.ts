@@ -48,6 +48,8 @@ export class RecoveryPage implements OnInit {
     console.log(this.recoveryData, this.dataSend);
   }
 
+  /* 
+  VALIDACIÓN DE QUE LOS PASSWORDS INGRESADOS SEAN IGUALES */
   validacion(){
     const valid = this.formCode.value;
     if(valid.password == valid.passwordRepeat){
@@ -57,6 +59,8 @@ export class RecoveryPage implements OnInit {
     }
   }
 
+  /* 
+  FUNCIÓN PARA SALVAR LOS DATOS DE RECUPERACIÓN SE COMBINAN CON LOS DATOS OBTENIDOS EN LA SOLICITUD */
   saveData(form){
     console.log(form)
     let datos = {
@@ -93,6 +97,8 @@ async recoverySuccess(){
   await alert.present();
 }
 
+/* 
+MANEJO DE ERROR DE PROBLEMA DE RECUPERACION */
 async erroCode(){
   const alert = await this.alertCtrl.create({
     header:`Error en la recuperación`,

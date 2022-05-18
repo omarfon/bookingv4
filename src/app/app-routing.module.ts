@@ -22,10 +22,6 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'appoinment',
-    loadChildren: () => import('./pages/appoinment/appoinment.module').then(m => m.AppoinmentPageModule)
-  },
-  {
     path: 'card',
     loadChildren: () => import('./pages/card/card.module').then(m => m.CardPageModule)
   },
@@ -34,28 +30,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/card/card.module').then(m => m.CardPageModule)
   },
   {
-    path: 'card-cuida',
-    loadChildren: () => import('./pages/card-cuida/card-cuida.module').then(m => m.CardCuidaPageModule)
-  },
-  {
-    path: 'charge',
-    loadChildren: () => import('./pages/charge/charge.module').then(m => m.ChargePageModule)
-  },
-  {
-    path: 'code',
-    loadChildren: () => import('./pages/code/code.module').then(m => m.CodePageModule)
-  },
-  {
     path: 'financer',
     loadChildren: () => import('./pages/financer/financer.module').then(m => m.FinancerPageModule)
   },
   {
     path: 'financer/:data',
     loadChildren: () => import('./pages/financer/financer.module').then(m => m.FinancerPageModule)
-  },
-  {
-    path: 'master-detail',
-    loadChildren: () => import('./pages/master-detail/master-detail.module').then(m => m.MasterDetailPageModule)
   },
   {
     path: 'pay',
@@ -78,32 +58,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/createparent/createparent.module').then(m => m.CreateparentPageModule)
   },
   {
-    path: 'datos',
-    loadChildren: () => import('./pages/datos/datos.module').then(m => m.DatosPageModule)
-  },
-  {
-    path: 'detail-recipe',
-    loadChildren: () => import('./pages/detail-recipe/detail-recipe.module').then(m => m.DetailRecipePageModule)
-  },
-  {
-    path: 'form-register',
-    loadChildren: () => import('./pages/form-register/form-register.module').then(m => m.FormRegisterPageModule)
-  },
-  {
     path: 'myparents',
     loadChildren: () => import('./pages/myparents/myparents.module').then(m => m.MyparentsPageModule)
   },
   {
     path: 'options',
     loadChildren: () => import('./pages/options/options.module').then(m => m.OptionsPageModule)
-  },
-  {
-    path: 'page-faceform',
-    loadChildren: () => import('./pages/page-faceform/page-faceform.module').then(m => m.PageFaceformPageModule)
-  },
-  {
-    path: 'page-formpre',
-    loadChildren: () => import('./pages/page-formpre/page-formpre.module').then(m => m.PageFormprePageModule)
   },
   {
     path: 'page-video/:data',
@@ -134,10 +94,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule), canActivate: [AuthGuard]
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
-  },
-  {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
@@ -148,10 +104,6 @@ const routes: Routes = [
   {
     path: 'recipes',
     loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesPageModule)
-  },
-  {
-    path: 'recomendations',
-    loadChildren: () => import('./pages/recomendations/recomendations.module').then(m => m.RecomendationsPageModule)
   },
   {
     path: 'my-date',

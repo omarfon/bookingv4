@@ -17,7 +17,7 @@
         Reservar cita</ion-item>
       <ion-item button (click)="goToMydates()">
         <ion-icon name="medkit-outline" slot="start"></ion-icon>
-        Citas Pendientes</ion-item>
+        Todas las citas</ion-item>
       <ion-item button (click)="goToRecipes()">
         <ion-icon name="reader-outline" slot="start"></ion-icon>
         Recetas</ion-item>
@@ -31,6 +31,7 @@
 
     <ion-col>
       <img src="assets/imgs/login/logoWhite.svg" alt="">
+      <p class="center">versión: {{version}}</p>
     </ion-col>
   </ion-content>
 </ion-menu>

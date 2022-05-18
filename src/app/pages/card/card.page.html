@@ -18,7 +18,10 @@
 
 </ion-header>
 
-
+<!-- 
+  COMPOENENTE QUE SE ENCARGA DE RENDERIZAR LOS ESPECIALISTAS DE UNA ESPECIALIDAD PREVIAMENTE ESCOGIDA, ADEMAS DE MOSTRAS LOS DÍAS 
+  Y LAS HORAS A DEMANDA POR CADA DÍA ESCOGIDO.
+ -->
 <ion-content #mycontent fullscreen>
   <div>
     <div id="busqueda">
@@ -29,7 +32,7 @@
             <ion-item >
               <ion-label position="floating">Busca por especialidad</ion-label>
               <ion-select [(ngModel)]="id"
-                          #specialty (ionChange)="onChangueSpecialty(specialty.value)">
+                          #specialty (ionChange)="onChangueSpecialty(specialty.value)" placeholder="{{nameSpecialty}}">
                 <ion-select-option [value]="specialty.id" *ngFor="let specialty of servicios">{{specialty.description}}
                 </ion-select-option>
               </ion-select>
@@ -91,12 +94,18 @@
                     <div *ngIf="itemDoctor === boxID && boxCaID === ii" id="{{ii}}" class="box-hour">
                         <p class="p-hour-dispo" *ngIf="hours.length > 0">Selecciona una hora</p>
                         <div class="box-hour-main">
-                            <ion-row>
+                            <ion-row ion-class="center">
                               <div class="preloader" *ngIf="chargeHours === true" >
-                                <mat-progress-spinner [color]="color" [mode]="mode" [diameter]="25">
-                                </mat-progress-spinner>
+                                <div class="row">
+                                  <ion-col size="12" class="ion-text-center">
+                                    <mat-progress-spinner color="#287195" [mode]="mode" [diameter]="25" style="margin-left: 120px;">
+                                    </mat-progress-spinner>
+                                  </ion-col>
+                                  <ion-col size="12" class="ion-text-center">
+                                    <p class="text-small">Estamos cargando las horas disponibles</p>
+                                  </ion-col>
+                                </div>
                                 <br>
-                                <p class="text-small">Estamos cargando las horas disponibles</p>
                               </div>
                                 <ion-col size="3" *ngFor="let items of hours; let indexxx = index">
                                     <span>

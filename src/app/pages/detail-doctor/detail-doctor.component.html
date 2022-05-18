@@ -6,6 +6,9 @@
     <ion-title size="small">volver a home</ion-title>
   </ion-toolbar>
 </ion-header>
+<!-- 
+  COMPONENTE QUE MUESTRA LA INFORMACIÓN Y LAS CITAS DISPONIBLES PARA UN DOCTOR ESPECIFICO, ADEMÁS DE RENDERIZAR DATA QUE EL DOCTOR PREVIAMENTE HA LLENADO EN UN GESTOR DE CONTENIDO
+ -->
 <ion-content >
   <div class="containerDatosDoctor">
     <ion-card>
@@ -21,7 +24,7 @@
               <p class="dataEstudios"> RNE: {{dataDoctor?.rne}}</p>
               <div class="dataEstudios" *ngIf="datosDoctor"> 
                 <ul>
-                  <li *ngFor="let e of datosDoctor.professionalTrainings">{{e.nameCenter}}</li>
+                  <li *ngFor="let e of datosDoctor.professionalTrainings">{{e?.nameCenter}}</li>
                 </ul>
               </div>
             </ion-col>

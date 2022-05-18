@@ -104,13 +104,7 @@ export class FinancerPage implements OnInit {
 
     this.financierProvider.getFinanciers().subscribe(data =>
       { this.items = data;
-        /* console.log('los financiadores:', data); */
-        // this.items.shift();
       });
-
-
-        /* this.isAndroid = platform.is('android'); */
-
         this.subida = this.hora;
   let role = localStorage.getItem('role');
   if (role == 'guest') {
@@ -127,16 +121,22 @@ export class FinancerPage implements OnInit {
   }
 }
 
+/* 
+EN LA CARGA INICIAL SE OBTIENEN LOS DEPENDIENTES PARA CADA USUARIO LOGUEADO */
 ionViewDidEnter(){
   this.getDependens();
 }
 
+/* 
+FUNCIÓN PARA OBTENER LOS DEPENDIENTES */
 getDependens(){
   this.dependentsPvr.getDependens().subscribe(data =>{
     this.parents = data
   });
 }
 
+/* 
+EVALUACIÓN DE FINANCIADOR */
 evaluateEnsurance() {
   this.firtClick = !this.firtClick;
   this.isInsurance = false;
@@ -146,7 +146,9 @@ evaluateEnsurance() {
   this.isCard = false;
 }
 
-
+/* 
+FUNCIÓN PARA OBTENER LOS FINANCIADORES PARA UN USUARIO ESPECIFICO, ESTO CONTEMPLA VIVA+, PLANES MATERNOS, FINANCIDORES COMO EPS
+Y TODOS LOS QUE SE HAYAN DESIGNADO PREVIAMENTE A UN USUARIO */
 planesPaciente(){
   let centerId = this.dataEscogida.params.centerId;
   let servicio_id = this.dataEscogida.params.serviceId;
@@ -186,6 +188,8 @@ openParents(){
   this.planes = [];
 }
 
+ /* 
+ PASE A FINANCIADOR SI LO QUE SE HA SELEECCIONADO ES A UN DEPENDIENTE */
 passFinancerParent(depe){
   this.addFamily = false;
   this.personOk = true;
@@ -193,9 +197,6 @@ passFinancerParent(depe){
   this.vcolor = false;
   this.ccolor = true;
   this.desabilitado = false;
-
-  console.log('depe', depe);
-
   let paciente_id = depe.patientId;
   let servicio_id = this.dataEscogida.params.serviceId;
   let prestacion_id = this.dataEscogida.params.provisionId;
@@ -208,27 +209,18 @@ this.financierProvider.getplanesContacto(paciente_id, servicio_id, prestacion_id
 })
 }
 
+/* 
+LIMPIA A LOS DEPENDIENTES SELECCIONADOS SI QUEREMOS CAMBIAR AL DEPENDIENTE */
 cleanDepe(){
   this.secureOk = false;
   this.depe = {};
   this.openParents()
-  // console.log(this.depe);
-  // this.personOk = false;
-  // this.vcolor = false;
-  // this.ccolor = false;
+
   this.nomark = false;
 }
 
 // mostrar el modal de la creación de familiares
 async showDetailCreateParents(){
-/*     const data =  {
-      doctor : this.doctor,
-      available : this.available,
-      hora : this.hora,
-      depe : this.depe,
-      price : this.price,
-      prestacion : this.prestacion
-      }; */
     const modal = await this.modalCtrl.create({
       component: CreateParentPrimePage,
       cssClass: 'my-custom-class'
@@ -236,6 +228,8 @@ async showDetailCreateParents(){
     await modal.present();
 }
 
+/* 
+AL HACER CLICK SE ACEPTA EL FINANCIADOR PARA UN PLAN ESPECIFICO */
 acceptFinancer(plan){
   this.plan = plan;
   this.nomark = true;
@@ -251,7 +245,7 @@ acceptFinancer(plan){
   console.log('el plan:', plan);
 }
 
-// función para ir a pagos
+// FUNCIÓN PARA IR A PAGOS
 async goToPay(){
   console.log(this.price)
   if(this.price > 0){
@@ -284,7 +278,6 @@ async goToPay(){
           this.createCita();
           loading.dismiss();
           this.router.navigate(['home']);
-          /* this.navCtrl.setRoot(HomePage); */
         });
       } else {
         const alert = await this.alertCtrl.create({
@@ -300,7 +293,6 @@ async goToPay(){
         await alert.present();
       }
       this.router.navigate(['home']);
-      /* this.navCtrl.setRoot(HomePage); */
   }
 }
  async createCita(){
@@ -319,7 +311,6 @@ async goToPay(){
 
 doSubmitData(){
   let data = this.parents
-  /* this.viewCtrl.dismiss(data); */
   console.log('la data pasado por el modal:',data);
 }
 acceptFinancerPaquete(plan){

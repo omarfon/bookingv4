@@ -64,11 +64,7 @@ export class PayPage implements OnInit {
     public culqiPvr: CulqiService,
     public router: Router,
     public helloSrv:HelloService,
-    public routes: ActivatedRoute) {
-/*       const data = this.routes.snapshot.paramMap.get('datos');
-      this.dataArmada = JSON.parse(data);
-      console.log(this.dataArmada); */
-     }
+    public routes: ActivatedRoute) {}
 
   ngOnInit() {
     this.dataEscogida = this.helloSrv.dataEscogida;
@@ -76,10 +72,8 @@ export class PayPage implements OnInit {
     console.log('this.dataEscogida:',this.dataEscogida);
     console.log('datosListJson:',datosListJson);
     window['culqi']= this.culqi.bind(this);
-     
     this.desactivadoBoton = true;
     this.desactivadoBotonLocal = true;
-
   this.pago = 'enLocal';
   this.doctor = this.helloSrv.doctor;
   this.available = datosListJson.appointmentDateTime;
@@ -91,10 +85,12 @@ export class PayPage implements OnInit {
   this.depe = this.helloSrv.depe;
   console.log('la hora', this.plan, this.doctor, this.especialidad);
 
-  /* window['Culqi'].publicKey = 'pk_test_f99df0fd7a83c0e0'; */
-  window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb';
+/*   window['Culqi'].publicKey = 'pk_test_e85SD7RVrWlW0u7z'; */
+ window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb'; 
   }
 
+  /* 
+  CARGA DE CULQI DATOS TIPOS DE DATOS MONTO Y TIPO DE MONEDA */
   async culqi(){
     console.log('culqi del componente', this);
     if(window['Culqi'].token){
@@ -124,9 +120,8 @@ export class PayPage implements OnInit {
           console.log('data', vuelta);
           loading.dismiss();
           this.payCulqiCharges = true;
-          if(vuelta.message == "ok"){
-            this.router.navigate(['pagesformpre']);
-            /* this.navCtrl.setRoot(PagesFormprePage); */
+          if(vuelta.message === "ok"){
+            this.router.navigate(['home']);
             this.formPre();
           }else{
             console.log('data', vuelta);
@@ -145,7 +140,6 @@ export class PayPage implements OnInit {
                     text:'ver mis citas',
                     handler: async ()=>{
                       this.router.navigate(['home']);
-                      /* this.navCtrl.push(MyDatesPage); */
                       const alert = await this.alertCtrl.create({
                         header:"Pago en Clínica",
                         message:'Tu pago no pudo ser realizado pero no te preocupes paga en la clínica tu cita fue reservada ...',
@@ -169,6 +163,8 @@ export class PayPage implements OnInit {
     }
   }
 
+  /* 
+  ALERTA PARA CREACIÓN DE CITA SATISFACTORIA */
   async formPre(){
     const alert = await this.alertCtrl.create({
       header: "Creación de cita",
@@ -182,7 +178,8 @@ export class PayPage implements OnInit {
     });
     await alert.present();
   }
-
+/* 
+VALIDACIÓN DE EL STATUS DE LA CITA */
   dateValid(month: string, year: string) {
     return (group: FormGroup) => {
       let date = new Date();
@@ -194,11 +191,13 @@ export class PayPage implements OnInit {
           return monthInput.setErrors({ notEquivalent: true })
     }
   }
-
+/* 
+MANEJO DE ERROR PARA MOSTRAR OTRA IMAGEN SI EL DOCTOR NO TIENE IMAGEN */
   errorHandler(event) {
     event.target.src = "assets/imgs/noimage.png"
   }
-
+/* 
+ACTIVACIÓN PARA LA APEERTURA DE CULQI */
   async openCulqi() {
     const loadingPago = await this.loadingCtrl.create({
       message: "Haciendo el cobro...",
@@ -222,7 +221,7 @@ export class PayPage implements OnInit {
       }) 
     window['Culqi'].settings(settings);
 
-    console.log("open CUlqi", settings);
+    console.log("open Culqi", settings);
     const metadata = {
       patientId:this.currentAppointment.patient.id,
       appointmentId:this.currentAppointment.appointmentId,
@@ -236,7 +235,6 @@ export class PayPage implements OnInit {
       const culqiObj = window['Culqi'];
       console.log(culqiObj);
       if (culqiObj['closeEvent'] != null) {
-        this.payClinic();
         loadingPago.dismiss();
         console.log('Formulario culqi cerrado', culqiObj['closeEvent']);
         clearInterval(i);
@@ -256,6 +254,8 @@ export class PayPage implements OnInit {
 
   }
 
+  /* 
+  CREACIÓN DE UNA CITA CON PAGO EN LOCAL */
 async payClinic(){
   let alert = await this.alertCtrl.create({
     header:'error al hacer cargo',
@@ -281,7 +281,6 @@ async payClinic(){
           });
           await alert.present();
           this.router.navigate(['home']);
-  /*         this.navCtrl.setRoot(MyDatesPage); */
         }
         }
     ]
@@ -289,6 +288,8 @@ async payClinic(){
   alert.present();
 }
 
+/* 
+PAGO EN CULQI DESPUES DE EL LEVANTADO DEL MODAL */
   payCulqi() {
     this.desactivadoBoton = false;
       console.log('this.price:', this.plan);
@@ -300,7 +301,6 @@ async payClinic(){
     if (this.depe) {
       let id = this.depe._id;
       let provisionId = this.hora.params.provisionId;
-      // console.log('lo que mando al proivider:', this.subida, id);
       this.crudPvr.createParentDate(this.subida, id, provisionId)
         .subscribe((data: any) => {
           this.currentAppointment = data;
@@ -318,7 +318,6 @@ async payClinic(){
             let alert;
             switch (code) {
               case 15006:
-                // case 15035:
                 alert = this.alertCtrl.create({
                   header: 'Aviso al Cliente',
                   message: 'Ya tienes una cita en una hora cercana a esta.',
@@ -327,14 +326,12 @@ async payClinic(){
                       text: 'Buscar otra hora',
                       handler: data => {
                         this.router.navigate(['card']);
-                        /* this.navCtrl.setRoot(CardPage); */
                       }
                     }
                   ]
                 });
                 alert.present();
                 break;
-
               case 15009:
               case 15035:
                 alert = this.alertCtrl.create({
@@ -345,7 +342,6 @@ async payClinic(){
                       text: 'Buscar otra hora',
                       handler: data => {
                         this.router.navigate(['card']);
-/*                         this.navCtrl.setRoot(CardPage); */
                       }
                     }
                   ],
@@ -378,7 +374,6 @@ async payClinic(){
             let alert;
             switch (code) {
               case 15006:
-                // case 15035:
                 alert = this.alertCtrl.create({
                   header: 'Aviso al Cliente',
                   message: 'Ya tienes una cita en una hora cercana a esta.',
@@ -387,7 +382,6 @@ async payClinic(){
                       text: 'Buscar otra hora',
                       handler: data => {
                         this.router.navigate(['card']);
-                        /* this.navCtrl.setRoot(CardPage); */
                       }
                     }
                   ]
@@ -405,7 +399,6 @@ async payClinic(){
                       text: 'Buscar otra hora',
                       handler: data => {
                         this.router.navigate(['card']);
-                        /* this.navCtrl.setRoot(CardPage); */
                       }
                     }
                   ],
@@ -421,7 +414,8 @@ async payClinic(){
   }
 
   
-
+/* 
+PAGO DE TARJETA EN LOCAL */
   next() {
     const provisionId = this.dataEscogida.params.provisionId[0];
       this.desactivadoBotonLocal = false;
@@ -447,6 +441,8 @@ async payClinic(){
       });  
   }
 
+  /* 
+  CREACIÓN DE CITA */
   async createCita(){
     const alert = await this.alertCtrl.create({
       header: "Creación de cita",
@@ -461,6 +457,7 @@ async payClinic(){
     await alert.present();
   }
   
+  /* MANEJO DE EERRORES PARA EL ERROR DE CREACIÓN */
   async problemReserva(data){
     const alert = await this.alertCtrl.create({
       header:"Problema de reserva",
@@ -470,13 +467,11 @@ async payClinic(){
         text: 'Buscar otro horario',
         handler: ()=>{
           this.router.navigate(['card']);
-          /* this.navCtrl.push(CardPage); */
         }
       },{
         text: 'cancelar',
         handler: ()=>{
           this.router.navigate(['home']);
-          /* this.navCtrl.push(HomePage); */
         }
       }
     ]
@@ -484,11 +479,8 @@ async payClinic(){
   await alert.present();
   }
 
- /*  async loadingWaiting(){
-      
-  } */
-
-
+/* 
+CREACIÓN DE CITA CON PAGO EN LOCAL PARA DEPENDIENTES*/
   async nextDepe() {
     this.desactivadoBotonLocal = false;
     const id = this.depe._id;
@@ -496,15 +488,15 @@ async payClinic(){
     console.log('el id que va para creacion de familiar:', id)
     this.crudPvr.createParentDate(this.subida, id, provisionId).subscribe(data => {
       console.log(data)
-/*       this.waitingCreate(); */
       this.createCita();
       this.loadingCtrl.dismiss();
       this.router.navigate(['home']);
     }, err => {
       console.log(err)
     });
-    // queda pendiente el error, sino crea la cita
   }
+  /* 
+  LOADING PARA LA ESPERA DE LA CREACIÓN DE CITA */
   async waitingCreate(){
     const loading = await this.loadingCtrl.create({
       message: "creando cita"
@@ -512,6 +504,8 @@ async payClinic(){
     await loading.present();
   }
 
+  /* 
+  ALERTA PARA EL RESUMEN DE LA CREACIÓN DE CITA */
   async createDate(){
     const alert = await this.alertCtrl.create({
       header: "Creación de cita",

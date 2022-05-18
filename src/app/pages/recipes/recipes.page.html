@@ -5,9 +5,12 @@
   </ion-buttons>
     <ion-title size="small">Recetas</ion-title>
       <p class="NombreBienvenida" *ngIf="nameUser">Hola {{nameUser}}</p> 
-      <p class="cantidadRecetas"*ngIf="recipes">tienes: {{recipes.length}} recetas de consulta presencial</p>
+      <p class="cantidadRecetas"*ngIf="recipes">Tienes: {{recipes.length}} recetas de consulta presencial</p>
   </ion-toolbar>
 </ion-header>
+<!-- 
+  LISTA DE RESUMEN DE LAS RECETAS ALMACENADAS EN XHIS HASTA ESE MOMENTO, PUERTA DE ENLACE PARA EL DETALLE DE LAS MISMAS
+ -->
 <ion-content>
     <div class="containerCards" *ngIf="recipes; else norecipes">
       <ion-card *ngFor="let recipe of recipes" >
@@ -19,7 +22,7 @@
               </div>
             </ion-col>
             <ion-col size="8" id="cajaDatosCita">
-              <!-- <p class="especialidad doctor">Doctor:</p> -->
+              <p class="especialidad doctor">Doctor:</p>
               <p class="resultado top">{{recipe.prescripciones[0].nombre_personal}} {{recipe.prescripciones[0].apellidop_personal}} {{recipe.prescripciones[0].apellidom_personal}}</p>
               <p class="especialidad"> Medicinas:</p> 
               <p class="medicina" *ngIf="recipe.prescripciones.length == 1">{{recipe.prescripciones.length}} medicamento</p>
@@ -32,11 +35,6 @@
                   <mat-panel-title>
                     <p class="textoVerReceta">ver receta</p> 
                   </mat-panel-title>
-                  <!-- <mat-panel-description>
-                        <p class="nutritionTitle">
-                          leer mas
-                        </p>
-                    </mat-panel-description> -->
               </mat-expansion-panel-header>
               
                 <div *ngFor="let rec of recipe.prescripciones">
@@ -75,14 +73,17 @@
               <ion-row padding>
                 <ion-col class="cuadrados">
                   <p> 6-9 am</p>
-                  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+                 <!--  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
                   </ion-col>
                 <ion-col class="cuadrados">
                   <p> 2-4 pm</p>
-                  <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
+                  <!-- <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p> -->
                 </ion-col>
                 <ion-col class="cuadrados">
                   <p>10-12 m</p>
+                 <!--  <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p> -->
+                </ion-col>
+                <ion-col size="12" class="center">
                   <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                 </ion-col>
               </ion-row>
@@ -94,12 +95,15 @@
             <ion-row padding>
               <ion-col class="cuadrados">
                 <p> 6-7 am</p>
-                <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+               <!--  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
               </ion-col>
               <ion-col class="cuadrados">
                 <p>6-7 pm</p>
-                <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
+               <!--  <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p> -->
               </ion-col>
+               <ion-col size="12" class="center">
+                    <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
+                  </ion-col>
             </ion-row>
           </div>
     
@@ -109,18 +113,21 @@
               <ion-row padding>
                 <ion-col class="cuadrados">
                   <p> 6-7 am</p>
-                  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+                  <!-- <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
                 </ion-col>
                 <ion-col class="cuadrados">
                     <p> 12-1 pm</p>
-                    <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+                   <!--  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
                   </ion-col>
                   <ion-col class="cuadrados">
                       <p> 6-7 pm</p>
-                      <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+                     <!--  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
                     </ion-col>
                 <ion-col class="cuadrados">
                   <p>12-1 m</p>
+                 <!--  <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p> -->
+                </ion-col>
+                <ion-col size="12" class="center">
                   <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                 </ion-col>
               </ion-row>
@@ -130,8 +137,10 @@
             class="down">
                 <p class="tituloDeLasTomas"> 1 vez por día</p>
                 <ion-row padding>
-                  <ion-col class="cuadrados">
+                  <ion-col size="12" class="cuadrados">
                     <p> 6-7 am</p>
+                  </ion-col>
+                  <ion-col size="12" class="center">
                     <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
                   </ion-col>
     
@@ -144,24 +153,27 @@
                 <ion-row padding>
                   <ion-col class="cuadrados">
                     <p> 6-7 am</p>
-                    <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+                    <!-- <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
                   </ion-col>
                   <ion-col class="cuadrados">
                       <p> 8-9 pm</p>
-                      <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+                     <!--  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
                     </ion-col>
                     <ion-col class="cuadrados">
                         <p> 10-11 pm</p>
-                        <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p>
+                       <!--  <p class="cantidad">{{rec.cantidad_dosis}} {{rec.formasfar_nom}}</p> -->
                       </ion-col>
                   <ion-col class="cuadrados">
                     <p>12-1 m</p>
-                    <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
+                    <!-- <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p> -->
                   </ion-col>
                   <ion-col class="cuadrados">
                     <p>2-3 m</p>
+                  </ion-col>
+                  <ion-col size="12" class="center">
                     <p class="cantidad"> {{rec.cantidad_dosis}} {{rec.formasfar_nom}} </p>
                   </ion-col>
+                    
                 </ion-row>
               </div>
                 </div>

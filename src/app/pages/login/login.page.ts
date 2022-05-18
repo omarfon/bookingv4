@@ -59,7 +59,8 @@ export class LoginPage implements OnInit {
       }
       console.log('constructor');
   }
-
+/* 
+OBTENER LOS TIPOS DE DOCUMENTOS */
   async getDocuments(){
     const loading = await this.loading.create({
       message : "Espere un segundo"
@@ -72,6 +73,8 @@ export class LoginPage implements OnInit {
      });
   }
 
+  /* 
+  FUNCIÓN PARA SELECCIONAR EL TIPO DE DOCUMENTO, CON ESTO CAMBIA EL LABEL DE NUMERO DE DOCUMENTO Y LENGTH DEL MISMO */
   selectTypeDocument(event){
     this.typeDocument = event.detail.value;
     console.log(event, this.typeDocument);
@@ -89,6 +92,8 @@ export class LoginPage implements OnInit {
       }
   }
 
+  /* 
+  FUNCIÓN PARA LOGIN */
   startSesion(){
     this.newsSrv.newLoginWithDni( this.documentId,this.dni, this.password).subscribe((data:any) => {
         console.log('data:', data);
@@ -112,14 +117,21 @@ export class LoginPage implements OnInit {
       });
   }
 
+  /* 
+  NAVEGACION QUE ME ENVIA A LA PAGINA DE REGISTRO */
   registrarUsuario(){
     this.router.navigate(['register']);
   }
+
 
   goToHome(){
     this.router.navigate(['home']);
   }
 
+  /* 
+  FUNCIÓN QUE LEVANTA UN MODAL DONDE SE INTRODUCE EL TIPO DE DOCUMENTO EL CUAL HACE UN LLAMADO AL XHIS SI EL DOCUMENTO EXISTE 
+  EN HISTORIA CLINICA SE ENVIA UN CORREO AL MAIL CON EL QUE SE CREO LA CUENTA Y PASA A LA SIGUIENTE PANTALLA DONDE SE ADMINISTRA LA NUEVA CONTRASEÑA Y EL
+  CODIGO DE 4 DIGITOS ENVIADO AL CORREO*/
   async goToRecovery(){
     const alert = await this.alertCtrl.create({
       header:"Olvidaste tu contraseña...?",
@@ -163,11 +175,6 @@ export class LoginPage implements OnInit {
       ]
     });
    await alert.present(); 
-  }
-
-
-  registrarUsuarioFacebook(){
-    this.router.navigate(['faceform']);
   }
 
 

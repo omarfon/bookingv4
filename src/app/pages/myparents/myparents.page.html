@@ -8,7 +8,9 @@
   
 </ion-header>
 
-
+<!-- 
+  COMPONENTE QUE SE ENCARGA DE RENDERIZAR LOS DEPENDIENTES Y ADEMÁS ES PUERTA DE ENTRADA PARA LA CREACIÓN DE UN NUEVO DEPENDIENTE CON LA CARGA DE UN MODAL.
+ -->
 <ion-content class="padding">
   <ion-grid>
     <ion-row>
@@ -42,14 +44,17 @@
         </ion-col>
     </ion-row>
   </ion-grid>
-  <div class="center">
-    <ion-button
-            color="tertiary"
-            size="full"
-            (click)="showForm()"
-            class="botonCrear">
-     Agregar familiar
-    </ion-button>
-  </div>
+  <ion-footer>
+      <div class="center">
+        <ion-button
+                color="tertiary"
+                size="full"
+                (click)="showForm()"
+                class="botonCrear">
+         Agregar familiar
+        </ion-button>
+      </div>
+  
+  </ion-footer>
   
 </ion-content>

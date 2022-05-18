@@ -25,18 +25,16 @@ export class MyDatePage implements OnInit {
     public routes: ActivatedRoute,
     public permissionSrv: PermissionsVideoService) {
 
-
-
     let data = this.routes.snapshot.paramMap.get('datos');
     this.task = JSON.parse(data);
     this.dataCita = JSON.stringify(this.task)
-    /* console.log(this.dataArmada); */
-    /* this.date = this.dataArmada.appointmentId; */
   }
 
   ngOnInit() {
   }
 
+  /* 
+  ESTA FUNCIÓN SIRVE PARA LA ELIMINACIÓN DE LA CITA, ENVIANDOLE SOLO EL PARAMETRO DE APPOINTMENTID */
   async desactivateTask(task) {
     const confirm = await this.alertCtrl.create({
       header: 'ANULAR CITA',
@@ -48,15 +46,13 @@ export class MyDatePage implements OnInit {
             const dataId = JSON.parse(localStorage.getItem('authorization'))
             const idPrin = dataId.patientId;
             console.log(localStorage.getItem('idTokenUser'));
-            if (this.task.patient.id == idPrin) {
+            if (this.task.patientId == idPrin) {
               this.appointmentProvider.destroyAppointment(task).subscribe(data => {
                 this.router.navigate(['my-dates']);
-                /* this.navCtrl.push(MyDatesPage); */
               });
             } else {
               this.appointmentProvider.destroyAppointmentContact(task).subscribe(data => {
                 this.router.navigate(['my-dates']);
-                /* this.navCtrl.push(MyDatesPage); */
               });
             }
           }
@@ -68,11 +64,12 @@ export class MyDatePage implements OnInit {
           }
         }
       ],
-      /* enableBackdropDismiss: false */
     });
     confirm.present();
   }
 
+  /* 
+  ESTA FUNCIÍON ESTABA REALIZADA PARA LA ESPERA EN UNA TELECONSULTA */
   getpermissions() {
     const appointmentid = this.task.appointmentId;
     this.permissionSrv.getPermissionsVideo(appointmentid).subscribe((data: any) => {
@@ -88,6 +85,8 @@ export class MyDatePage implements OnInit {
     })
   }
 
+  /* 
+  FUNCIÓN PARA REGRESAR A LA PAGINA DE TODAS LAS CITAS */
   back() {
     this.router.navigate(['my-dates']);
   }

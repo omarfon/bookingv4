@@ -32,7 +32,7 @@ export class AppoinmentService {
     const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
-    return this.http.get(this.apiUrl + 'appointments/patient', {headers}).pipe(
+    return this.http.get(this.apiUrl + 'citas-paciente?minutos=60', {headers}).pipe(
       map((resp:any) =>{
           return resp;
       })

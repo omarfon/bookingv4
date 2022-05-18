@@ -9,7 +9,7 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-
+  public version:string = "2.1.2"
   constructor(public router: Router, public menu: MenuController) { }
 
   ngOnInit() {}

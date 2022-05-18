@@ -71,10 +71,10 @@
         width:90%;
         margin-left:5%;
         color: #287195;
-        font-size: 1.4em;
+        font-size: 20px;
         text-align: right;
         margin-right: 15px;
-        line-height: 1.2em;
+        line-height: 22px;
         margin-top: 10px;
         text-transform: capitalize;
         font-family: 'avenir';
@@ -83,20 +83,20 @@
         text-align: right;
         color: grey;
         margin-right: 15px;
-        font-size: 1em;
+        font-size: 16px;
         font-weight: lighter;
         margin-top: 0!important;
         text-transform: capitalize;
-        font-family: 'avenir-light';
+        font-family: 'avenir';
         margin-bottom:2px
     }
     .centro {
         text-align: right;
         margin-right: 15px;
-        font-size:1em;
+        font-size:14px;
         color: grey;
         font-weight: 300;
-        font-family: 'avenir';
+        font-family: 'avenir-light';
     }
     .diasLibres {
         // margin-bottom: 0!important;
@@ -411,13 +411,13 @@
 
     .horasCitas {
         margin-top: -5px;
-        background: #E6E6E4;
+        background: #f9f9f9;
 
         .box-hour {
             .p-hour-dispo {
                 text-align: center;
-                color: #052F51;
-                font-size: .9em;
+                color: #063962;
+                font-size: 11px;
                 margin-top: 5px;
             }
 

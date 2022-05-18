@@ -31,7 +31,8 @@ export class MyparentsPage implements OnInit {
               public crudPvr: CrudparentService,
               public alertCtrl: AlertController,
               public modalCtrl: ModalController) {
-          
+          /* 
+          INICIALIZACIÓN DEL FORMULARIO PARA LOS DATOS DE ENTRADA DE UN NUEVO DEPENDIENTE */
                 this.getDependens();
                 this.formFamily = this.fb.group({
                   name            : ['', [ Validators.required ]],
@@ -51,10 +52,14 @@ export class MyparentsPage implements OnInit {
   ngOnInit() {
   }
   
+  /* 
+  ESTA CARGA INICIAL EN LA PAGINA TRAE A LOS DEPENDIENTES */
   ionViewDidEnter(){
     this.getDependens();
   }
 
+  /* 
+  FUNCIÓN PARA OBTENER A LOS DEPENDIENTES */
   getDependens(){
     this.actual = moment().format('y');
 
@@ -63,12 +68,15 @@ export class MyparentsPage implements OnInit {
        dependend.edad = moment().diff(dependend.birthdate , 'years') ;
        return dependend;
      });
+     this._dependens = this._dependens.filter(x => x.name)
      this.dependens = this._dependens;
 
      console.log('los dependientes:', this._dependens);
     });
   }
 
+  /* 
+  FUNCIÓN PARA SALVAR LOS DATOS DE UN DEPENDIENTE */
   saveData(){
     let datos = this.formFamily.value;
     let data:any ={
@@ -107,6 +115,8 @@ export class MyparentsPage implements OnInit {
     console.log('botom slider');
   }
 
+  /* 
+  FUNCIÓN PARA ELIMINAR A UN DEPENDIENTE DE LA LISTA DE DEPDENDIENTES, MAS NO DE LAS HISTORIAS CLINICAS, EL DEPENDEIENTE SIGUE EXISTIENDO EN XHIS */
   async deleteParent(depe){
     console.log('lo que me trae depe', depe);
     let id = depe._id;
@@ -141,6 +151,8 @@ export class MyparentsPage implements OnInit {
     await alert.present();
   }
 
+  /* 
+  MOSTRAR FORMULARIO DE CREACIÓN DE DEPENDIENTES */
   async showForm(){
     let modal = await this.modalCtrl.create({
         component:CreateParentPrimePage,

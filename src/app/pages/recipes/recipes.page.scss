@@ -1,5 +1,5 @@
 ion-header ion-toolbar{
-  height: 180px!important;
+  height: 170px!important;
   --background:url('../../../assets/imgs/fondoOnboarding.svg') ;
   background-size: cover;
   background-repeat: no-repeat;
@@ -13,7 +13,7 @@ ion-header ion-toolbar{
     background: #2E4C6D!important;
   }
 .NombreBienvenida{
-  font-size: 1.4em;
+  font-size: 24px;
   color: #fff;
   font-family: 'avenir-bold';
   width:70%;
@@ -52,7 +52,7 @@ ion-header ion-toolbar{
    font-size:1.1em;
  }
  .cuadrados{
-  height: 60px;
+  height: 30px;
   background:#007198;
   width:90%;
   margin-left:5%;
@@ -72,7 +72,8 @@ ion-header ion-toolbar{
     .cantidad{
       color:#fff;
       font-weight:400;
-      font-size:.9em;
+      font-size:12px;
+      text-align: center;
       margin-top:0;
 
     }
@@ -137,7 +138,7 @@ img{
 .resultado{
   color:#444D4D;
   font-weight: 400;
-  font-size:1.2em;
+  font-size:22pxem;
   margin-top:-5px;
   margin-left:10px;
   font-family: 'avenir-bold';
@@ -251,7 +252,7 @@ ion-card{
 }
 .cantidadRecetas{
     color:#fff;
-    font-size: 1em;
+    font-size: 16px;
     float: right;
     width:90%;
     margin-right: 10%;
@@ -268,5 +269,8 @@ ion-menu-button{
 ion-title{
   margin-top:20px;
   color:#fff;
+}
+.center{
+  text-align: center;
 }
 

@@ -22,19 +22,23 @@ export class OptionsPage implements OnInit {
   ngOnInit() {
     this.getAllSpecialtys();
   }
-
+/* 
+RUTEO A LA PAGINA DE ESPECIALIDA */
   goToCardPage(scur){
     console.log(scur);
     this.helloSrv.especialidad = scur;
     this.router.navigate(['/card']);
-   /*  this.navCtrl.push(CardPage); */
   }
+
+  /* FUNCIÓN ANTIGUA QUE ERA CUANDO ESTABAN DIVIDIDAS LA APP EN CURA Y CUIDA ESTA DEPRECADO */
   goToCardCuidaPage(scui){
     console.log(scui);
     this.helloSrv.especialidad = scui;
     this.router.navigate(['card']);
   }
 
+  /* 
+  OBTENER TODAS LAS ESPECIALIDADES PARA PODER REENDERIZARLA EN PANTALLA */
   async getAllSpecialtys(){
     const loading = await this.loadingCtrl.create({
       message: 'Cargando las especialidades',

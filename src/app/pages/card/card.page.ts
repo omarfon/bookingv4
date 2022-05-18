@@ -15,7 +15,6 @@ import { DoctordataService } from '../../services/doctordata.service';
 })
 export class CardPage implements OnInit {
 
-  /* @ViewChild('slides') slides: Slides; */
   @ViewChild('MyDays') MyDays: ElementRef;
 
   loading: boolean;
@@ -31,7 +30,7 @@ export class CardPage implements OnInit {
   public especialidad;
   public color: any = 'warn';
   public mode: any = 'indeterminate';
-
+  public specialty;
   specialty_id;
 
   search: string = '';
@@ -85,9 +84,7 @@ export class CardPage implements OnInit {
     public alertContrl: AlertController,
     public loadingCtrl: LoadingController,
     public doctorSrv: DoctordataService,
-    public router: Router) { 
-     
-    }
+    public router: Router) {}
 
   ngOnInit() {}
   ionViewDidEnter (){
@@ -96,10 +93,10 @@ export class CardPage implements OnInit {
     this.disponibles = true;
     const especialidad = this.helloPvr.especialidad;
     if(especialidad){
+      this.nameSpecialty = this.helloPvr.especialidad.description;
       this.getSpecialtyes();
       this.id = this.helloPvr.especialidad.id;
       this.getDoctorWDates();
-      this.nameSpecialty = this.helloPvr.especialidad.description;
       console.log(this.helloPvr.especialidad,this.id);
     }else{
       this.router.navigate(['/options']);
@@ -108,6 +105,8 @@ export class CardPage implements OnInit {
     this.updateSession();
   }
 
+  /* 
+  OBTENCIÓN DEL AUTHORIZATION PARA LAS DIVERSAS ACTIVIDADES A REALIZAR EN EL APP */
   updateSession(){
     const datosUser = JSON.parse(localStorage.getItem('authorization'));
     let data = {
@@ -123,18 +122,24 @@ export class CardPage implements OnInit {
   }
 
   
-
+/* 
+SE OBTIENEN LOS DOCTORES DE UNA ESPECIALIDAD SOLICITADA CON EL NUEVO METODO QUE JALA DESDE BASE DE DATOS, ES MAS EFICIENTE PERO TIENE QUE HACERSE AHORA EN DOS PASOS */
   async getDoctorWDates(){
     this.helloPvr.getDoctorsSpecialtyBD(this.id).subscribe((data:any) => {
       console.log('data recibida de nuevo endpoint:',data);
-      this.doctorsF = data;
-      this.doctors = data;
+      if(data.length > 0){
+        this.doctorsF = data;
+        this.doctors = data;
+      }else{
+        this.doctorsF = null;
+        this.doctors = null; 
+      }
       console.log('todos los especialistas:',this.doctorsF);
 
     }); 
   }
 
-
+//OBTENCIÓN DE ESPECIALIDADES,CONSIDERANDO QUE SE PUEDE CAMBIAR LAS ESPECIALIDADES DESDE ESTA PESTAÑA Y RENDERIZAR NUEVAMENTE LOS ESPECIALISTAS DE LA ESPECIALIDAD ESCOGIDA
 getSpecialtyes(){
   this.helloPvr.getServicios().subscribe((servicios:any) => {
     this.servicios = servicios.centers[0].services;
@@ -151,6 +156,7 @@ getSpecialtyes(){
 })
 }
 
+//FUNCIÓN QUE SE CREO PARA CERRAR LA SESIÓN PARA FORZAR AL LOGUEO Y OBTENER NUEVAS CARACTERISTICAS DE LA SESSION
   async sesionExpired(){
     const alert = await this.alertContrl.create({
       header: 'Sesión expirada',
@@ -167,6 +173,8 @@ getSpecialtyes(){
   await alert.present();
   }
 
+  /* 
+  OBTENCIÓN DE LAS HORAS DE UN DÍA DETERMINADO PARA UN ESPECIALISTA ESPECIFICO. */
   stateShow(item: any, index, items) {
     console.log(item, index, items);
     this.hours = [];
@@ -193,10 +201,12 @@ getSpecialtyes(){
     })
   }
 
+  // METODO QUE CAMBIA LA IMAGEN SI NO LLEGA LA FOTO DE UN ESPECIALISTA SELECCIONADO, ME TRAE UN AVATAR QUE SE REPRESENTA HASTA QUE EL ESPECIALISTA TENGA UNA IMAGEN
   errorHandler(event) {
     event.target.src = "assets/imgs/noimage.png"
   }
 
+  // METODO PARA EL CAMBIO DE ESPECIALIDAD
   onChangueSpecialty(specialty: any) {
     console.log('specialty en onChangueSpecialty:', specialty);
     this.doctorsF = [];
@@ -204,6 +214,7 @@ getSpecialtyes(){
     this.getDoctorWDates();
   }
 
+  // OBTENER DOCTORES PARA UN DÍA ESPECIFICO
   getDoctorsPerDay() {
     this.doctorsF = [];
     this.toDate = moment(this.fromDate).format("YYYY-MM-DD");
@@ -211,6 +222,7 @@ getSpecialtyes(){
     this.getDoctorWDates();
   }
 
+  //OBTENER LAS HORAS POR DÍA
   getHoursPerDay(doctor,dia){
     console.log(doctor, dia);
     let data = {
@@ -230,6 +242,8 @@ getSpecialtyes(){
     })
   }
 
+  /* 
+  BUSQUEDA DE UN DOCTOR ESPECIFICO DENTRO DE LA ESPECIALIDAD SELECCIONADA */
   buscarDoctor() {
     if (this.search.length == 1) {
       this.doctorsF = [];
@@ -250,6 +264,8 @@ getSpecialtyes(){
 
   }
 
+  /* 
+  METODO ANTIGUO PARA LA OBTENCIÓN DE HORAS => ESTA FUNCION SE UTILIZABA CUANDO TENIAMOS EL LLAMADO ANTIGUO */
   async expandedItem(doctor, available) {
     if(!this.hora){
       const loading = await this.loadingCtrl.create({
@@ -324,6 +340,8 @@ getSpecialtyes(){
     }
   }
 
+
+  // METODO PARA IR A FINANCIADOR, DESPUES DE HABER ESCOGIDO LOS DATOS DE UN ESPECIALISTA
   goToFinancer(doctor, hora) {
     console.log('doctor:', doctor);
     console.log('hora:', hora);
@@ -334,19 +352,8 @@ getSpecialtyes(){
     
   }
 
-  nextSlide() {
-    console.log('slideNext');
-    /* this.slides.slideNext(); */
-  }
-  
-  slidePrev(){
-    console.log('slidePrev');
-    /* this.slides.slidePrev(); */
-  }
-
-  goToCuida(){
+/*   goToCuida(){
     this.router.navigate(['card-cuida']);
-    /* this.navCtrl.push(CardCuidaPage); */
-  }
+  } */
 
 }

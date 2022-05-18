@@ -72,6 +72,8 @@ export class DetailDoctorComponent implements OnInit {
        this.getAllDoctorsSpecialty();
   }
 
+  /* 
+  OBTENER LOS DIAS DISPONIBLES DE UN ESPECIALISTA */
   async getDatesDoctor(){
     if(this.dataDoctor){
       const loading = await this.loadingCtrl.create({
@@ -111,7 +113,8 @@ export class DetailDoctorComponent implements OnInit {
     }
   }
 
-
+/* 
+OBTENER LOS DATOS GUARDADOS EN EL MONGO, DATOS DE FORMACIÓN Y ADICIONALES DEL ESPECIALISTA */
   getDataDoctor(){
     this.doctorDataSrv.getDoctorInfo(this.idoctor).subscribe((res:any) =>{
       if(res){
@@ -125,6 +128,8 @@ export class DetailDoctorComponent implements OnInit {
     })
   }
 
+  /* 
+  FUNCIÓN PARA CARGAR NUEVA DATA DE OTROS ESPECIALISTAS */
   goToDetailDoctor(doctor){
     this.dataDoctor = false;
     this.provisionsData = false;
@@ -139,6 +144,8 @@ export class DetailDoctorComponent implements OnInit {
     this.specialty = doctor.service.id;
   }
 
+  /* 
+  DESPUES DE HABER SELECCIONADO UN DÍA Y HORA DE UN ESPECIALISTA ESTE LLAMADO LO INTEGRA AL FLUJO DE RESERVA */
   goToFinancer(h){
     this.helloSrv.dataEscogida = h;
     this.router.navigate(['financer']);
@@ -155,12 +162,16 @@ export class DetailDoctorComponent implements OnInit {
     this.enbloque = true;
   }
 
+  /* 
+  PARAMETROS PARA OBTENER IDENTIFICAR EL DIA SELECCIONADO  */
   stateShow(index, items) {
 /*     this.boxID = item;
  */    this.boxCaID = index;
     this.selectedDay = items;
   }
 
+  /* 
+  OBTENER A TODOS LOS ESPECIALISTAS PARA UNA FUTURA BUSQUEDA */
   getAllDoctorsSpecialty(){
     this.helloSrv.getDoctorsSpecialty(this.specialty, this.dateFirst, this.dateSecond).subscribe((data:any) =>{
       console.log('todos los especialistas:',data);
@@ -185,6 +196,7 @@ export class DetailDoctorComponent implements OnInit {
     this.doctorsSpecialty = [];
   })
 }
+// VOLVER A HOME
 goToHome(){
   this.doctorDataSrv.doctor = [];
   this.router.navigate(['home']);

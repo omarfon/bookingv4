@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./recipe.page.scss'],
 })
 export class RecipePage implements OnInit {
-
+/* 
+AQUI SE OBTIENEN LOS DATOS DE UNA RECETA DEL SERVICIO */
   itemExpanded: boolean = false;
   itemExpandHeight: number = 250;
   public nameUser;

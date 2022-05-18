@@ -44,12 +44,7 @@ export class MyDatesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    /*   let loading = this.loadingCtrl.create({
-       content:'actualiando datos...'
-     })
-     loading.present(); */
-    /* this.viewCtrl.dismiss(); */
-
+ 
     const dataLocal = JSON.parse(localStorage.getItem('authorization'));
     const nombre = dataLocal.name;
     const separador = " ";
@@ -106,12 +101,6 @@ export class MyDatesPage implements OnInit {
 
 
   ionViewWillEnter() {
-    /*   let loading = this.loadingCtrl.create({
-                  content:'actualiando datos...'
-                })
-                loading.present(); */
-    /* this.viewCtrl.dismiss(); */
-
     const nombrePatient = localStorage.getItem('patientName');
     const separador = " ";
     if (nombrePatient) {
@@ -124,6 +113,7 @@ export class MyDatesPage implements OnInit {
     // CON ESTA LLAMADA JALAMOS A LOS FAMILIARES
     this.dependentsPvr.getDependens().subscribe(data => {
       this.dependens = data;
+      this.dependens = this.dependens.filter(x => x.name)
       console.log('los dependientes:', this.dependens);
     });
 
@@ -164,13 +154,6 @@ export class MyDatesPage implements OnInit {
     let datos = JSON.stringify(task);
     this.router.navigate(['my-date', datos]);
     console.log(task.appointmentId);
-    /*   console.log('task de familiar  que van a details:', task);
-      let modal = this.modalCtrl.create(MyDateModalPage, {
-        task:task
-      },
-      {showBackdrop:true, enableBackdropDismiss: true}
-      );
-      modal.present(); */
   }
 
   goToDetailsTask(task) {
@@ -178,12 +161,6 @@ export class MyDatesPage implements OnInit {
     let datos = JSON.stringify(task);
     this.router.navigate(['my-date', datos]);
     console.log(task.appointmentId);
-    /* this.navCtrl.push(MyDateModalPage, {task:task}); */
-    /*  let modal = this.modalCtrl.create(MyDateModalPage, 
-       {task:task},
-       {showBackdrop:true, enableBackdropDismiss: true}
-     );
-     modal.present(); */
   }
 
   goToRecipe(citaspa) {
@@ -195,12 +172,11 @@ export class MyDatesPage implements OnInit {
       const datos = JSON.stringify(this.recipe);
       console.log('this.recipe:', this.recipe);
       this.router.navigate(['recipe', datos])
-      /* this.navCtrl.push (RecipePage, {recipe: this.recipe}) */
     });
   }
 
+  // traer nuevamente las citas de el usuario pincipal y renderizarlas
   getDatesUser() {
-    // traer nuevamente las citas de el usuario pincipal y renderizarlas
     this.dependentsProvider.getOldDependetsDay().subscribe((data: any) => {
       this._citaspasadas = data;
       this.citaspasadas = this._citaspasadas;
@@ -209,6 +185,8 @@ export class MyDatesPage implements OnInit {
     });
   }
 
+  /* 
+  OBTIENE LOS DATES DE LOS DEPENDIENTES , ADEMÁS DE LAS CITAS PASADAS DE LOS DEPENDIENTES */
   getDatesDepends(dep) {
     const id = dep.patientId;
     this.dependentsProvider.getDependentDay(id).subscribe(data => {
@@ -216,7 +194,6 @@ export class MyDatesPage implements OnInit {
       console.log('citas de dependientes jalada:', this.$citaspasadas);
       this.citaspasadas = this.$citaspasadas[0].encuentros;
     })
-    // console.log('conseguir los datos del los dependientes', this.citaspasadas);
   }
 
   openVideo() {

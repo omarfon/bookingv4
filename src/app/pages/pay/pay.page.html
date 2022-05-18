@@ -7,13 +7,15 @@
   </ion-toolbar>
 </ion-header>
 
-
+<!-- 
+    COMPONENTE QUE SE ENCARGA DE MOSTRAR EL RESUMEN DE LA CITA ESCOGIDA HASTA ESE MOMENTO Y  
+    ADEMAS LOS TIPOS DE PAGO QUE PUEDE SER EN LOCAL O CON TARJETA QUE ES CULQI
+ -->
 <ion-content >
         <h3 class="titleCardPago">Lo que has escogido hasta el momento</h3>
     <div class="container-gris">
       <div class="containerResumen">
         <ion-card class="CardDatosServicio">
-            <!-- <h3 class="tituloConsulta" *ngIf="hora.params.provisionId[0] == 44">TELEORIENTACION</h3> -->
             <div>
                 <ion-row class="centrar">
                     <ion-col size="4">
@@ -25,7 +27,6 @@
                             {{ doctor.fullName }}
                         </h3>
                         <div class="sedeContainer">
-                            <!-- <p bold class="izquierda">Sede:</p> -->
                             <p class="sede" type="text" disabled="true">Mendiola</p>
                         </div>
                     </ion-col>
